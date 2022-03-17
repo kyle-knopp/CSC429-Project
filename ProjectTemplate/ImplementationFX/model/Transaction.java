@@ -22,7 +22,7 @@ import userinterface.WindowPosition;
 //==============================================================
 abstract public class Transaction implements IView, IModel
 {
-
+	/*
 	// For Impresario
 	protected Properties dependencies;
 	protected ModelRegistry myRegistry;
@@ -35,16 +35,16 @@ abstract public class Transaction implements IView, IModel
 	protected Vector myAccountIDs;
 	// GUI Components
 
-	/**
+
 	 * Constructor for this class.
 	 *
 	 * Transaction remembers all the account IDs for this customer.
 	 * It uses AccountCatalog to create this list of account IDs.
-	 *
-	 */
+
+
 	//----------------------------------------------------------
-	protected Transaction(AccountHolder cust) throws Exception
-	{
+	/*protected Transaction(AccountHolder cust) throws Exception*/
+	/*{
 
 		myStage = MainStageContainer.getInstance();
 		myViews = new Hashtable<String, Scene>();
@@ -71,7 +71,7 @@ abstract public class Transaction implements IView, IModel
 	 *
 	 */
 	//---------------------------------------------------------
-	protected void doYourJob()
+	/*protected void doYourJob()
 	{
 		AccountCatalog catalog = null;
 
@@ -104,14 +104,14 @@ abstract public class Transaction implements IView, IModel
 	 * Re-define in sub-class, if necessary
 	 */
 	//----------------------------------------------------------
-	public void updateState(String key, Object value)
+	/*public void updateState(String key, Object value)
 	{
 		stateChangeRequest(key, value);
 	}
 
 	/** Register objects to receive state updates. */
 	//----------------------------------------------------------
-	public void subscribe(String key, IView subscriber)
+	/*public void subscribe(String key, IView subscriber)
 	{
 		// DEBUG: System.out.println("Cager[" + myTableName + "].subscribe");
 		// forward to our registry
@@ -120,7 +120,7 @@ abstract public class Transaction implements IView, IModel
 
 	/** Unregister previously registered objects. */
 	//----------------------------------------------------------
-	public void unSubscribe(String key, IView subscriber)
+	/*public void unSubscribe(String key, IView subscriber)
 	{
 		// DEBUG: System.out.println("Cager.unSubscribe");
 		// forward to our registry
@@ -131,7 +131,7 @@ abstract public class Transaction implements IView, IModel
 	 * Create an account (based on account number passed to you from the view)
 	 */
 	//----------------------------------------------------------
-	protected Account createAccount(String accountNumber) throws
+	/*protected Account createAccount(String accountNumber) throws
 		InvalidPrimaryKeyException
 	{
 		return new Account(accountNumber);
@@ -164,6 +164,6 @@ abstract public class Transaction implements IView, IModel
 		WindowPosition.placeCenter(myStage);
 
 	}
-
+*/
 }
 

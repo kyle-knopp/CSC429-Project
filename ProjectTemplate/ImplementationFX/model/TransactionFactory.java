@@ -16,7 +16,7 @@ public class TransactionFactory
 	 *
 	 */
 	//----------------------------------------------------------
-	public static Transaction createTransaction(String transType,
+	/*public static Transaction createTransaction(String transType,
 		AccountHolder cust)
 		throws Exception
 	{
@@ -48,5 +48,5 @@ public class TransactionFactory
 		}
 
 		return retValue;
-	}
+	}*/
 }

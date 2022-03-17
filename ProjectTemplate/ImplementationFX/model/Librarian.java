@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 
 // project imports
 import impresario.IModel;
-import impresario.ISlideShow;
 import impresario.IView;
 import impresario.ModelRegistry;
 import exception.InvalidPrimaryKeyException;
@@ -29,12 +28,14 @@ public class Librarian implements IView, IModel
     private Properties dependencies;
     private ModelRegistry myRegistry;
 
+    private SystemWorker systemUser;
 
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
 
     private String transactionErrorMessage = "";
+    private String loginErrorMessage= "";
 
     // constructor for this class
     //----------------------------------------------------------
@@ -56,7 +57,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -100,11 +102,21 @@ public class Librarian implements IView, IModel
     //----------------------------------------------------------------
     public void stateChangeRequest(String key, Object value)
     {
-        // STEP 4: Write the sCR method component for the key you
-        // just set up dependencies for
-        // DEBUG System.out.println("Teller.sCR: key = " + key);
 
+        if (key.equals("Login") == true)
+        {
+            if (value != null)
+            {
+                loginErrorMessage = "";
 
+                boolean flag = loginSystemUser((Properties)value);
+                if (flag == true)
+                {
+                    createAndShowLibrarianView();
+                }
+            }
+        }
+        else
         if (key.equals("CancelTransaction") == true)
         {
              createAndShowLibrarianView();
@@ -160,10 +172,31 @@ public class Librarian implements IView, IModel
         stateChangeRequest(key, value);
     }
 
+
     /**
      * Login AccountHolder corresponding to user name and password.
      */
     //----------------------------------------------------------
+    public boolean loginSystemUser(Properties props)
+    {
+        try
+        {
+            systemUser = new SystemWorker(props);
+            // DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
+            return true;
+        }
+        catch (InvalidPrimaryKeyException ex)
+        {
+            loginErrorMessage = "ERROR: " + ex.getMessage();
+            return false;
+        }
+        catch (PasswordMismatchException exec)
+        {
+
+            loginErrorMessage = "ERROR: " + exec.getMessage();
+            return false;
+        }
+    }
 
 
     /**
@@ -209,7 +242,22 @@ public class Librarian implements IView, IModel
         swapToView(currentScene);
 
     }*/
+    //------------------------------------------------------------
+    private void createAndShowLoginView()
+    {
+        Scene currentScene = (Scene)myViews.get("LoginView");
 
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("LoginView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("LoginView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
     //------------------------------------------------------------
     private void createAndShowLibrarianView()
     {

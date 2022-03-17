@@ -57,8 +57,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        createAndShowLoginView();
-        //createAndShowLibrarianView();
+        //createAndShowLoginView();
+        createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -141,6 +141,9 @@ public class Librarian implements IView, IModel
         }
         else if(key.equals("Insert Patron") == true){
             createAndShowPatronView();
+        }
+        else if(key.equals("Login View") == true){
+            createAndShowLoginView();
         }
         else if(key.equals("PatronData")){
             Properties p = (Properties)value;

@@ -1,2 +1,27 @@
 [3/17/22, 2:20 PM]|ProjectDriver|Assign2driver.<init>|Error|NOTAG|null<Unable to create Librarian object>
 [3/17/22, 2:22 PM]|ProjectDriver|Assign2driver.<init>|Error|NOTAG|null<Unable to create Librarian object>
+[3/21/22, 5:21 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:24 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:24 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:25 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:25 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:31 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:31 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:40 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:40 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:41 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:41 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:42 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:42 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:43 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:43 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:44 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:44 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:48 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:49 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:52 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 5:57 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 6:03 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 6:04 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 6:04 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/21/22, 6:08 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>

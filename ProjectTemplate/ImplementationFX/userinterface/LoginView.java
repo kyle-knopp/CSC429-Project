@@ -176,6 +176,7 @@ public class LoginView extends View
         {
             String passwordEntered = password.getText();
             processUserIDAndPassword(useridEntered, passwordEntered);
+            displayErrorMessage("Could not find user");
         }
 
     }

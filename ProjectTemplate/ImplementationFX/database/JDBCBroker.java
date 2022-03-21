@@ -134,7 +134,7 @@ public class JDBCBroker
 				}
 			}   
 		}	
-		//System.out.println("JDBCBroker.getConnection() with connection " + theDBConnection);
+		//DEBUG System.out.println("JDBCBroker.getConnection() with connection " + theDBConnection);
 	       	return theDBConnection;
     }
     

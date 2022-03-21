@@ -57,8 +57,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -110,6 +110,7 @@ public class Librarian implements IView, IModel
                 loginErrorMessage = "";
 
                 boolean flag = loginSystemUser((Properties)value);
+                System.out.println("flag is:" +flag);
                 if (flag == true)
                 {
                     createAndShowLibrarianView();
@@ -182,10 +183,12 @@ public class Librarian implements IView, IModel
     //----------------------------------------------------------
     public boolean loginSystemUser(Properties props)
     {
+        System.out.println(props);
         try
         {
+            System.out.println("made it here");
             systemUser = new SystemWorker(props);
-            // DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
+            System.out.println("made it here");
             return true;
         }
         catch (InvalidPrimaryKeyException ex)

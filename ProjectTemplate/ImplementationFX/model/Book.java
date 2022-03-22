@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class Book extends EntityBase{
 
-    private static final String myTableName = "Book";
+    private static final String myTableName = "book";
 
     protected Properties dependencies;
 

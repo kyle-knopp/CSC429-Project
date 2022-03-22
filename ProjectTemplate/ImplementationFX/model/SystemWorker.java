@@ -26,11 +26,7 @@ public class SystemWorker extends EntityBase implements IView {
 
         String query = "SELECT * FROM " + myTableName + " WHERE (bannerID = " + idToQuery + ")";
 
-        System.out.println(query);
-
         Vector allDataRetrieved =  getSelectQueryResult(query);
-
-        System.out.println("all data: " +allDataRetrieved);
 
         // You must get one account at least
         if (allDataRetrieved != null)

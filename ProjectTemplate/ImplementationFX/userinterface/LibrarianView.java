@@ -167,7 +167,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Add a Student Borrower", null);
+                myModel.stateChangeRequest("AddStudentBorrowerView", null);
             }
         });
         dCont.getChildren().add(addStudentBorrowerButton);
@@ -182,7 +182,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Modify a Student Borrower", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
         eCont.getChildren().add(modifyStudentBorrowerButton);
@@ -197,58 +197,12 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Delete a Student Borrower", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
         fCont.getChildren().add(deleteStudentBorrowerButton);
 
         container.getChildren().add(fCont);
-
-        // create the buttons, listen for events, add them to the container
-        HBox gCont = new HBox(10);
-        gCont.setAlignment(Pos.CENTER);
-        addBookButton = new Button("Add a Book");
-        addBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        addBookButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Add a Book", null);
-            }
-        });
-        gCont.getChildren().add(addBookButton);
-
-        container.getChildren().add(gCont);
-
-        HBox hCont = new HBox(10);
-        hCont.setAlignment(Pos.CENTER);
-        deleteBookButton = new Button("Delete a Book");
-        deleteBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        deleteBookButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Delete a Book", null);
-            }
-        });
-        hCont.getChildren().add(deleteBookButton);
-
-        container.getChildren().add(hCont);
-
-        HBox iCont = new HBox(10);
-        iCont.setAlignment(Pos.CENTER);
-        modifyBookButton = new Button("Modify a Book");
-        modifyBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        modifyBookButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Modify a Book", null);
-            }
-        });
-        iCont.getChildren().add(modifyBookButton);
-
-        container.getChildren().add(iCont);
 
 
         HBox doneCont = new HBox(10);

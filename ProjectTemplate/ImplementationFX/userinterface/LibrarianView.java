@@ -36,7 +36,7 @@ public class LibrarianView extends View
     private Button addStudentBorrowerButton;
     private Button deleteStudentBorrowerButton;
     private Button modifyStudentBorrowerButton;
-    private Button addWorkerBorrowerButton;
+    private Button addWorkerButton;
     private Button deleteWorkerButton;
     private Button modifyWorkerButton;
 
@@ -122,27 +122,13 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Add a Book", null);
+                myModel.stateChangeRequest("AddBook", null);
             }
         });
         aCont.getChildren().add(addBookButton);
 
         container.getChildren().add(aCont);
 
-        HBox bCont = new HBox(10);
-        bCont.setAlignment(Pos.CENTER);
-        deleteBookButton = new Button("Delete a Book");
-        deleteBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        deleteBookButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Delete a Book", null);
-            }
-        });
-        bCont.getChildren().add(deleteBookButton);
-
-        container.getChildren().add(bCont);
 
         HBox cCont = new HBox(10);
         cCont.setAlignment(Pos.CENTER);
@@ -159,6 +145,21 @@ public class LibrarianView extends View
 
         container.getChildren().add(cCont);
 
+        HBox bCont = new HBox(10);
+        bCont.setAlignment(Pos.CENTER);
+        deleteBookButton = new Button("Delete a Book");
+        deleteBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        deleteBookButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("Delete a Book", null);
+            }
+        });
+        bCont.getChildren().add(deleteBookButton);
+
+        container.getChildren().add(bCont);
+
         HBox dCont = new HBox(10);
         dCont.setAlignment(Pos.CENTER);
         addStudentBorrowerButton = new Button("Add a Student Borrower");
@@ -167,7 +168,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Add a Student Borrower", null);
+                myModel.stateChangeRequest("AddStudentBorrowerView", null);
             }
         });
         dCont.getChildren().add(addStudentBorrowerButton);
@@ -182,7 +183,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Modify a Student Borrower", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
         eCont.getChildren().add(modifyStudentBorrowerButton);
@@ -197,58 +198,60 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Delete a Student Borrower", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
         fCont.getChildren().add(deleteStudentBorrowerButton);
 
         container.getChildren().add(fCont);
 
+
         // create the buttons, listen for events, add them to the container
         HBox gCont = new HBox(10);
         gCont.setAlignment(Pos.CENTER);
-        addBookButton = new Button("Add a Book");
-        addBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        addBookButton.setOnAction(new EventHandler<ActionEvent>() {
+        addWorkerButton = new Button("Add a Worker");
+        addWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        addWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Add a Book", null);
+                myModel.stateChangeRequest("Add a Worker", null);
             }
         });
-        gCont.getChildren().add(addBookButton);
+        gCont.getChildren().add(addWorkerButton);
 
         container.getChildren().add(gCont);
 
         HBox hCont = new HBox(10);
         hCont.setAlignment(Pos.CENTER);
-        deleteBookButton = new Button("Delete a Book");
-        deleteBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        deleteBookButton.setOnAction(new EventHandler<ActionEvent>() {
+        modifyWorkerButton = new Button("Modify a Worker");
+        modifyWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        modifyWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Delete a Book", null);
+                myModel.stateChangeRequest("Modify a Worker", null);
             }
         });
-        hCont.getChildren().add(deleteBookButton);
+        hCont.getChildren().add(modifyWorkerButton);
 
         container.getChildren().add(hCont);
 
         HBox iCont = new HBox(10);
         iCont.setAlignment(Pos.CENTER);
-        modifyBookButton = new Button("Modify a Book");
-        modifyBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        modifyBookButton.setOnAction(new EventHandler<ActionEvent>() {
+        deleteWorkerButton = new Button("Delete a Worker");
+        deleteWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        deleteWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Modify a Book", null);
+                myModel.stateChangeRequest("Delete a Worker", null);
             }
         });
-        iCont.getChildren().add(modifyBookButton);
+        iCont.getChildren().add(deleteWorkerButton);
 
         container.getChildren().add(iCont);
+
 
 
         HBox doneCont = new HBox(10);

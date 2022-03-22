@@ -72,7 +72,7 @@ public class LibrarianView extends View
 
         populateFields();
 
-        myModel.subscribe("TransactionError", this);
+        myModel.subscribe("LoginError", this);
     }
 
     // Create the labels and fields
@@ -86,21 +86,6 @@ public class LibrarianView extends View
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
         container.getChildren().add(titleText);
-
-        /*String accountHolderGreetingName = (String)myModel.getState("Name");
-        Text welcomeText = new Text("Welcome, " + accountHolderGreetingName + "!");
-        welcomeText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        welcomeText.setWrappingWidth(300);
-        welcomeText.setTextAlignment(TextAlignment.CENTER);
-        welcomeText.setFill(Color.DARKGREEN);
-        container.getChildren().add(welcomeText);
-
-        Text inquiryText = new Text("What do you wish to do today?");
-        inquiryText.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        inquiryText.setWrappingWidth(300);
-        inquiryText.setTextAlignment(TextAlignment.CENTER);
-        inquiryText.setFill(Color.BLACK);
-        container.getChildren().add(inquiryText);*/
 
         return container;
     }
@@ -262,7 +247,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Login View", null);
+                myModel.stateChangeRequest("LoginView", null);
             }
         });
         doneCont.getChildren().add(doneButton);

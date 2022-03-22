@@ -32,6 +32,11 @@ public class SystemWorker extends EntityBase implements IView {
         if (allDataRetrieved != null)
         {
             int size = allDataRetrieved.size();
+            System.out.println(size);
+            if(size==0){
+                throw new InvalidPrimaryKeyException("No account matching banner id : "
+                        + idToQuery + " found.");
+            }
 
             // There should be EXACTLY one account. More than that is an error
             if (size != 1)

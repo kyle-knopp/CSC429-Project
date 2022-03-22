@@ -57,8 +57,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -69,6 +69,7 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("PatronData", "TransactionError");
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
+        dependencies.setProperty("Login", "LoginError");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -87,6 +88,12 @@ public class Librarian implements IView, IModel
         if (key.equals("TransactionError") == true)
         {
             return transactionErrorMessage;
+        }
+        else
+        if (key.equals("LoginError") == true)
+        {
+            System.out.println(loginErrorMessage);
+            return loginErrorMessage;
         }
         else
             return "";
@@ -116,7 +123,7 @@ public class Librarian implements IView, IModel
                 }
             }
         }
-        else if(key.equals("Login View") == true){
+        else if(key.equals("LoginView") == true){
             createAndShowLoginView();
         }
         else
@@ -178,17 +185,20 @@ public class Librarian implements IView, IModel
         try
         {
             systemUser = new SystemWorker(props);
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return true;
         }
         catch (InvalidPrimaryKeyException ex)
         {
-            loginErrorMessage = "ERROR: " + ex.getMessage();
+            loginErrorMessage = ex.getMessage();
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return false;
         }
         catch (PasswordMismatchException exec)
         {
 
-            loginErrorMessage = "ERROR: " + exec.getMessage();
+            loginErrorMessage = exec.getMessage();
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return false;
         }
     }
@@ -213,25 +223,7 @@ public class Librarian implements IView, IModel
             new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
-/*
-    //----------------------------------------------------------
-    private void createAndShowTransactionChoiceView()
-    {
-        Scene currentScene = (Scene)myViews.get("TransactionChoiceView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("TransactionChoiceView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("TransactionChoiceView", currentScene);
-        }
-
-
-        // make the view visible by installing it into the frame
-        swapToView(currentScene);
-
-    }*/
     //------------------------------------------------------------
     private void createAndShowLoginView()
     {

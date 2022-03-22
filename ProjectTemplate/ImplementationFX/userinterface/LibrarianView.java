@@ -168,7 +168,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Add a Student Borrower", null);
+                myModel.stateChangeRequest("AddStudentBorrowerView", null);
             }
         });
         dCont.getChildren().add(addStudentBorrowerButton);
@@ -183,7 +183,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Modify a Student Borrower", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
         eCont.getChildren().add(modifyStudentBorrowerButton);
@@ -198,12 +198,13 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Delete a Student Borrower", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
         fCont.getChildren().add(deleteStudentBorrowerButton);
 
         container.getChildren().add(fCont);
+
 
         // create the buttons, listen for events, add them to the container
         HBox gCont = new HBox(10);
@@ -250,6 +251,7 @@ public class LibrarianView extends View
         iCont.getChildren().add(deleteWorkerButton);
 
         container.getChildren().add(iCont);
+
 
 
         HBox doneCont = new HBox(10);

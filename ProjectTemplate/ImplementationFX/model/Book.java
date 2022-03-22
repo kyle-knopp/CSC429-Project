@@ -14,11 +14,11 @@ public class Book extends EntityBase{
 
     private String updateStatusMessage = "";
 
-    public Book(String bookID) throws exception.InvalidPrimaryKeyException {
+    public Book(String barcode) throws exception.InvalidPrimaryKeyException {
         super(myTableName);
         setDependencies();
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (bookID = " + bookID + ")";
+        String query = "SELECT * FROM " + myTableName + " WHERE (barcode = " + barcode + ")";
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
@@ -30,8 +30,8 @@ public class Book extends EntityBase{
             // There should be EXACTLY one account. More than that is an error
             if (size != 1)
             {
-                throw new exception.InvalidPrimaryKeyException("Multiple accounts matching id : "
-                        + bookID + " found.");
+                throw new exception.InvalidPrimaryKeyException("Multiple accounts matching barcodes : "
+                        + barcode + " found.");
             }
             else
             {
@@ -56,15 +56,14 @@ public class Book extends EntityBase{
         // If no book found for this id, throw an exception
         else
         {
-            throw new exception.InvalidPrimaryKeyException("No book matching id : "
-                    + bookID + " found.");
+            throw new exception.InvalidPrimaryKeyException("No book matching barcode : "
+                    + barcode + " found.");
         }
     }
     public Book(Properties props)
     {
         super(myTableName);
 
-        setDependencies();
         persistentState = new Properties();
         Enumeration allKeys = props.propertyNames();
         while (allKeys.hasMoreElements() == true)
@@ -79,19 +78,6 @@ public class Book extends EntityBase{
         }
     }
 
-    public Book(){
-
-        super(myTableName);
-
-        setDependencies();
-        persistentState = new Properties();
-
-        persistentState.setProperty("bookTitle", "");
-        persistentState.setProperty("author", "");
-        persistentState.setProperty("pubYear", "");
-        persistentState.setProperty("status", "Active");
-    }
-
     public void save()
     {
         updateStateInDatabase();
@@ -101,28 +87,28 @@ public class Book extends EntityBase{
     {
         try
         {
-            if (persistentState.getProperty("bookID") != null)
+            if (persistentState.getProperty("barcode") != null)
             {
                 Properties whereClause = new Properties();
-                whereClause.setProperty("bookID",
-                        persistentState.getProperty("bookID"));
+                whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
                 updatePersistentState(mySchema, persistentState, whereClause);
-                updateStatusMessage = "Book data for bookID number : " + persistentState.getProperty("bookID") + " updated successfully in database!";
+                updateStatusMessage = "Book data updated successfully in database!";
             }
             else
             {
-                Integer bookID =
-                        insertAutoIncrementalPersistentState(mySchema, persistentState);
-                persistentState.setProperty("bookID", "" + bookID.intValue());
-                updateStatusMessage = "Book data for new book : " +  persistentState.getProperty("bookID")
-                        + " installed successfully in database!";
+                Integer barcode = insertAutoIncrementalPersistentState(mySchema, persistentState);
+                persistentState.setProperty("barcode", "" + barcode.intValue());
+                updateStatusMessage = "Book data for new book installed successfully in database!";
             }
         }
         catch (SQLException ex)
         {
             updateStatusMessage = "Error in installing account data in database!";
-            System.out.println(ex.toString());
+            //System.out.println(ex.toString());
             ex.printStackTrace();
+        }
+        catch (Exception excep) {
+            System.out.println(excep);
         }
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
     }
@@ -140,7 +126,7 @@ public class Book extends EntityBase{
     public String toString() {
         return "Title: " + persistentState.getProperty("bookTitle") + "; Author: " +
                 persistentState.getProperty("author")  + "; Year: " +
-                persistentState.getProperty("pubYear") ;
+                persistentState.getProperty("pubYear");
     }
 
     public void display() {
@@ -149,17 +135,13 @@ public class Book extends EntityBase{
 
     public static int compare(Book a, Book b)
     {
-        String aNum = (String)a.getState("bookID");
-        String bNum = (String)b.getState("bookID");
+        String aNum = (String)a.getState("barcode");
+        String bNum = (String)b.getState("barcode");
 
         return aNum.compareTo(bNum);
     }
 
     public Object getState(String key) {
-        if (key.equals("UpdateStatusMessage") == true)
-        {
-            return updateStatusMessage;
-        }
         return persistentState.getProperty(key);
     }
 
@@ -168,32 +150,32 @@ public class Book extends EntityBase{
             persistentState.setProperty(key, (String)value);
         }
     }
+    public Vector<String> getEntryListView() {
+        Vector<String> v = new Vector<String>();
+
+        v.addElement(persistentState.getProperty("barcode")); //need to enter
+        v.addElement(persistentState.getProperty("title"));
+        v.addElement(persistentState.getProperty("author1"));
+        v.addElement(persistentState.getProperty("author2")); //need to enter
+        v.addElement(persistentState.getProperty("author3")); //need to enter
+        v.addElement(persistentState.getProperty("author4")); //need to enter
+        v.addElement(persistentState.getProperty("publisher")); //need to enter
+        v.addElement(persistentState.getProperty("yearOfPublication"));
+        v.addElement(persistentState.getProperty("ISBN")); //may need to check name
+        v.addElement(persistentState.getProperty("suggestedPrice")); //need to enter
+        v.addElement(persistentState.getProperty("notes")); //need to enter
+        v.addElement(persistentState.getProperty("Condition")); // gotta enter
+        v.addElement(persistentState.getProperty("Status"));
+
+
+        return v;
+    }
+
     protected void initializeSchema(String tableName)
     {
         if (mySchema == null)
         {
             mySchema = getSchemaInfo(tableName);
         }
-    }
-    public Vector<String> getEntryListView()
-    {
-        Vector<String> v = new Vector<String>();
-
-        v.addElement(persistentState.getProperty("bookTitle"));
-        v.addElement(persistentState.getProperty("author"));
-        v.addElement(persistentState.getProperty("pubYear"));
-        v.addElement(persistentState.getProperty("status"));
-
-        return v;
-    }
-
-    public void processNewBook(Properties p){
-        /*
-        persistentState.setProperty("bookTitle", );
-        persistentState.setProperty("author", );
-        persistentState.setProperty("pubYear", );
-        persistentState.setProperty("status", );
-        this.save();
-        */
     }
 }

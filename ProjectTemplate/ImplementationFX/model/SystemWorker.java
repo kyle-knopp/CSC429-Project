@@ -24,7 +24,7 @@ public class SystemWorker extends EntityBase implements IView {
 
         String idToQuery = props.getProperty("bannerID");
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (ID = " + idToQuery + ")";
+        String query = "SELECT * FROM " + myTableName + " WHERE (bannerID = " + idToQuery + ")";
 
         Vector allDataRetrieved =  getSelectQueryResult(query);
 

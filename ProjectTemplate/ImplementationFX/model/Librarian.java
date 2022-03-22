@@ -57,8 +57,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -125,9 +125,16 @@ public class Librarian implements IView, IModel
              createAndShowLibrarianView();
         }
 
+
         else if (key.equals("AddStudentBorrowerView") == true)
         {
             createAndShowAddStudentBorrowerView();
+        }
+        else if (key.equals("AddBook") == true)
+        {
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
         }
         else if (key.equals("StudentBorrowerData") == true)
         {
@@ -171,7 +178,6 @@ public class Librarian implements IView, IModel
         try
         {
             systemUser = new SystemWorker(props);
-            // DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
             return true;
         }
         catch (InvalidPrimaryKeyException ex)
@@ -194,25 +200,20 @@ public class Librarian implements IView, IModel
      * create.
      */
     //----------------------------------------------------------
-   /* public void doTransaction(String transactionType)
-    {
-        try
-        {
-            Transaction trans = TransactionFactory.createTransaction(
-                    transactionType, myAccountHolder);
+    public void doTransaction(String transactionType){
+        try{
+            Transaction trans = TransactionFactory.createTransaction(transactionType);
 
             trans.subscribe("CancelTransaction", this);
+
             trans.stateChangeRequest("DoYourJob", "");
         }
-        catch (Exception ex)
-        {
-            transactionErrorMessage = "FATAL ERROR: TRANSACTION FAILURE: Unrecognized transaction!!";
-            new Event(Event.getLeafLevelClassName(this), "createTransaction",
-                    "Transaction Creation Failure: Unrecognized transaction " + ex.toString(),
-                    Event.ERROR);
+        catch (Exception e){
+            transactionErrorMessage = "ERROR";
+            new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
-
+/*
     //----------------------------------------------------------
     private void createAndShowTransactionChoiceView()
     {

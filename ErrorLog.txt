@@ -25,3 +25,13 @@
 [3/21/22, 6:04 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
 [3/21/22, 6:04 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
 [3/21/22, 6:08 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'ID' in 'where clause'>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>

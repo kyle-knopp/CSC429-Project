@@ -49,7 +49,7 @@ public class ProjectDriver extends Application{
         System.out.println("Copyright 2022 Kyle Knopp, Padraic Darby, Kedar Timsina, Jacob Thibault, Davis Le");
 
         // Create the top-level container (main frame) and add contents to it.
-        MainStageContainer.setStage(primaryStage, "Library");
+        MainStageContainer.setStage(primaryStage, "Library System 1.0");
         mainStage = MainStageContainer.getInstance();
 
         // Finish setting up the stage (ENABLE THE GUI TO BE CLOSED USING THE TOP RIGHT

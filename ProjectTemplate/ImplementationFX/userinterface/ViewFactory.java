@@ -14,7 +14,14 @@ public class ViewFactory {
 		{
 			return new LibrarianView(model);
 		}
-
+		else if(viewName.equals("AddStudentBorrowerView") == true)
+		{
+			return new addStudentBorrowerView(model);
+		}
+		else if(viewName.equals("SearchStudentBorrowerView") == true)
+		{
+			return new SearchStudentBorrower(model);
+		}
 		else
 			return null;
 	}

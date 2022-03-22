@@ -2,6 +2,8 @@
 package model;
 
 // system imports
+
+
 import java.util.Vector;
 import javax.swing.JFrame;
 
@@ -9,44 +11,27 @@ import javax.swing.JFrame;
 
 /** The class containing the TransactionFactory for the ATM application */
 //==============================================================
-public class TransactionFactory
-{
+public class TransactionFactory {
 
 	/**
 	 *
 	 */
 	//----------------------------------------------------------
-	/*public static Transaction createTransaction(String transType,
-		AccountHolder cust)
-		throws Exception
-	{
+	public static Transaction createTransaction(String transType)
+			throws Exception {
 		Transaction retValue = null;
 
-		if (transType.equals("Deposit") == true)
-		{
-			retValue = new DepositTransaction(cust);
+		/*if (transType.equals("InsertNewBook")) {
+			retValue = new InsertBookTransaction();
+		} else if (transType.equals("InsertNewPatron")) {
+			retValue = new InsertPatronTransaction();
+		} else if (transType.equals("SearchBooks")) {
+			retValue = new BookSearchTransaction();
+		} else if (transType.equals("SearchPatrons")) {
+			retValue = new PatronSearchTransaction();
+		} else */if (transType.equals("AddBook")) {
+			retValue = new AddBookTransaction();
 		}
-		else
-		if (transType.equals("Withdraw") == true)
-		{
-			retValue = new WithdrawTransaction(cust);
-		}
-		else
-		if (transType.equals("Transfer") == true)
-		{
-			retValue = new TransferTransaction(cust);
-		}
-		else
-		if (transType.equals("BalanceInquiry") == true)
-		{
-			retValue = new BalanceInquiryTransaction(cust);
-		}
-		else
-		if (transType.equals("ImposeServiceCharge") == true)
-		{
-			retValue = new ImposeServiceChargeTransaction(cust);
-		}
-
 		return retValue;
-	}*/
+	}
 }

@@ -309,12 +309,13 @@ public class AddBookView extends View{
         p2.setProperty("ISBN", isb);
         p2.setProperty("suggestedPrice", sugPric);
         p2.setProperty("notes", no);
-        p2.setProperty("Condition", condi);
+        p2.setProperty("bookCondition", condi);
         p2.setProperty("Status", sta);
 
         if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
             databaseErrorYear();
         }else {
+            System.out.println(p2);
             myModel.stateChangeRequest("AddBook", p2);
         }
 

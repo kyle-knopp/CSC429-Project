@@ -39,7 +39,7 @@ public class AddBookTransaction extends Transaction
     protected void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("BookData", "TransactionError");
+        dependencies.setProperty("AddBook", "TransactionError");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -51,6 +51,7 @@ public class AddBookTransaction extends Transaction
     //----------------------------------------------------------
     public void processTransaction(Properties props)
     {
+        System.out.println("Inside Add Book");
         try
         {
             myBook = new Book(props);
@@ -89,7 +90,7 @@ public class AddBookTransaction extends Transaction
             doYourJob();
         }
         else
-        if ((key.equals("BookData") == true))
+        if ((key.equals("AddBook") == true))
         {
             processTransaction((Properties)value);
         }

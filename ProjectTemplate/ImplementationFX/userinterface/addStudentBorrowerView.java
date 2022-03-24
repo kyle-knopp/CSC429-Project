@@ -236,7 +236,7 @@ public class addStudentBorrowerView extends View
 
                 Properties p = new Properties();
 
-                p.put("BannerId", BannerId.getText());
+                //p.put("BannerId", BannerId.getText());
                 p.put("FirstName", FirstName.getText());
                 p.put("LastName", LastName.getText());
                 p.put("ContactPhone", ContactPhone.getText());
@@ -244,7 +244,6 @@ public class addStudentBorrowerView extends View
                 p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
                 p.put("DateOfRegistration", DateOfRegistration.getText());
                 p.put("Notes", Notes.getText());
-
 
                 clearText();
                 myModel.stateChangeRequest("StudentBorrowerData", p);

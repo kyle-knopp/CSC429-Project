@@ -28,8 +28,8 @@ public class ViewFactory {
 			return new AddBookView(model);
 		}
 
-		else
-			return null;
+		System.out.println("no View created");
+		return null;
 	}
 
 
@@ -39,6 +39,10 @@ public class ViewFactory {
 		if(viewName.equals("SOME VIEW NAME") == true)
 		{
 			//return [A NEW VECTOR VIEW OF THAT NAME TYPE]
+		}
+		else if(viewName.equals("StudentBorrowerCollectionsDeleteView") == true)
+		{
+			return null; //new StudentBorrowerCollectionsDeleteView(model);
 		}
 		else
 			return null;

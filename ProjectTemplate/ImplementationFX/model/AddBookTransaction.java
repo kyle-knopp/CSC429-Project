@@ -21,6 +21,7 @@ public class AddBookTransaction extends Transaction
 {
 
     private Book myBook;
+    private Book oldBook;
 
     private String transactionErrorMessage = "";
 
@@ -54,15 +55,19 @@ public class AddBookTransaction extends Transaction
         System.out.println("Inside Add Book");
         try
         {
-            myBook = new Book(props);
-            myBook.save();
-            transactionErrorMessage = (String)myBook.getState("UpdateStatusMessage");
-
+            try {
+                oldBook = new Book((String) props.getProperty("barcode"));
+            }catch (Exception e){
+                myBook = new Book(props);
+                myBook.save("add");
+                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");
+            }
         } catch (Exception e) {
             transactionErrorMessage = "Error in saving book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error in saving book " + e.toString(), Event.ERROR);
         }
+
     }
 
     //-----------------------------------------------------------

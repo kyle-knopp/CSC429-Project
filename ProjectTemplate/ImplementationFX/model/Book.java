@@ -78,25 +78,28 @@ public class Book extends EntityBase{
         }
     }
 
-    public void save()
+    public void save(String trans)
     {
-        updateStateInDatabase();
+        updateStateInDatabase(trans);
     }
 
-    private void updateStateInDatabase() // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
+    private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
     {
+        System.out.println("Inside updateStateInDatbase");
+        System.out.println(persistentState.getProperty("barcode"));
         try
         {
-            if (persistentState.getProperty("barcode") != null)
+            if (trans=="update")
             {
                 Properties whereClause = new Properties();
                 whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Book data updated successfully in database!";
             }
-            else
+            else if (trans=="add")
             {
-                Integer barcode = insertAutoIncrementalPersistentState(mySchema, persistentState);
+                System.out.println("Inside else in save book.");
+                Integer barcode = insertPersistentState(mySchema, persistentState);
                 persistentState.setProperty("barcode", "" + barcode.intValue());
                 updateStatusMessage = "Book data for new book installed successfully in database!";
             }

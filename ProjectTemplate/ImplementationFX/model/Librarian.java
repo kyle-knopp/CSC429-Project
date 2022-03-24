@@ -102,7 +102,7 @@ public class Librarian implements IView, IModel
 
     public void createNewBook(Properties props){
          Book book = new Book(props);
-         book.save();
+         book.save("add");
         transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
 
     }

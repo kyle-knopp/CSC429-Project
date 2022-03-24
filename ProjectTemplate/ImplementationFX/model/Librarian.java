@@ -57,8 +57,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -116,52 +116,45 @@ public class Librarian implements IView, IModel
                 }
             }
         }
+        else if(key.equals("Login View") == true){
+            createAndShowLoginView();
+        }
         else
         if (key.equals("CancelTransaction") == true)
         {
              createAndShowLibrarianView();
         }
 
-        else if (key.equals("Insert New Book") == true)
-        {
-            createAndShowBookView();
-        }
-        else if (key.equals("BookData") == true)
-        {
-            Properties p = (Properties)value;
-            createNewBook(p);
-        }
-        else if (key.equals("Search Books") == true)
-        {
-            createAndShowSearchBooksView();
-        }
-        else if (key.equals("Search Patrons") == true)
-        {
-            createAndShowSearchPatronsView();
-        }
-        else if(key.equals("Insert Patron") == true){
-            createAndShowPatronView();
-        }
-        else if(key.equals("Login View") == true){
-            createAndShowLoginView();
-        }
-        else if(key.equals("PatronData")){
-            Properties p = (Properties)value;
 
+        else if (key.equals("AddStudentBorrowerView") == true)
+        {
+            createAndShowAddStudentBorrowerView();
         }
-        else if(key.equals("BookCollection")){
-            createAndShowBookCollectionView();
-        }
-        else if(key.equals("PatronCollection")){
-            createAndShowPatronCollectionView();
-        }
-        /*if ((key.equals("Insert Book") == true) || (key.equals("Insert Patron") == true) ||
-                (key.equals("Search Books") == true) || (key.equals("Search Patrons") == true))
+        else if (key.equals("AddBook") == true)
         {
             String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
+        }
+        else if (key.equals("StudentBorrowerData") == true)
+        {
+            Properties p = (Properties)value;
+            System.out.println(p);
+            System.out.println();
 
-         //   doTransaction(transType);
-        } */
+        }
+        else if (key.equals("SearchStudentBorrowerView") == true)
+        {
+            createAndShowSearchStudentBorrowerView();
+
+        }
+        else if (key.equals("StudentBorrowerCollectionView") == true)
+        {
+            System.out.println("Collection");
+
+        }
+
+
 
         myRegistry.updateSubscribers(key, this);
     }
@@ -185,7 +178,6 @@ public class Librarian implements IView, IModel
         try
         {
             systemUser = new SystemWorker(props);
-            // DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
             return true;
         }
         catch (InvalidPrimaryKeyException ex)
@@ -208,25 +200,20 @@ public class Librarian implements IView, IModel
      * create.
      */
     //----------------------------------------------------------
-   /* public void doTransaction(String transactionType)
-    {
-        try
-        {
-            Transaction trans = TransactionFactory.createTransaction(
-                    transactionType, myAccountHolder);
+    public void doTransaction(String transactionType){
+        try{
+            Transaction trans = TransactionFactory.createTransaction(transactionType);
 
             trans.subscribe("CancelTransaction", this);
+
             trans.stateChangeRequest("DoYourJob", "");
         }
-        catch (Exception ex)
-        {
-            transactionErrorMessage = "FATAL ERROR: TRANSACTION FAILURE: Unrecognized transaction!!";
-            new Event(Event.getLeafLevelClassName(this), "createTransaction",
-                    "Transaction Creation Failure: Unrecognized transaction " + ex.toString(),
-                    Event.ERROR);
+        catch (Exception e){
+            transactionErrorMessage = "ERROR";
+            new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
-
+/*
     //----------------------------------------------------------
     private void createAndShowTransactionChoiceView()
     {
@@ -275,94 +262,43 @@ public class Librarian implements IView, IModel
         }
 
         swapToView(currentScene);
-
     }
 
-    private void createAndShowBookView()
+    //------------------------------------------------------------
+    private void createAndShowAddStudentBorrowerView()
     {
-        Scene currentScene = (Scene)myViews.get("BookView");
+        Scene currentScene = (Scene)myViews.get("AddStudentBorrowerView");
 
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("BookView", this); // USE VIEW FACTORY
+            View newView = ViewFactory.createView("AddStudentBorrowerView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
-            myViews.put("BookView", currentScene);
+            myViews.put("AddStudentBorrowerView", currentScene);
         }
 
         swapToView(currentScene);
 
     }
-    private void createAndShowPatronView()
+
+    //------------------------------------------------------------
+    private void createAndShowSearchStudentBorrowerView()
     {
-        Scene currentScene = (Scene)myViews.get("PatronView");
+        Scene currentScene = (Scene)myViews.get("SearchStudentBorrowerView");
 
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("PatronView", this); // USE VIEW FACTORY
+            View newView = ViewFactory.createView("SearchStudentBorrowerView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
-            myViews.put("PatronView", currentScene);
+            myViews.put("SearchStudentBorrowerView", currentScene);
         }
 
         swapToView(currentScene);
 
     }
 
-    private void createAndShowSearchBooksView(){
-        Scene currentScene = (Scene)myViews.get("SearchBooksView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("SearchBooksView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("SearchBooksView", currentScene);
-        }
-
-        swapToView(currentScene);
-    }
-
-    private void createAndShowSearchPatronsView(){
-        Scene currentScene = (Scene)myViews.get("SearchPatronsView");
-
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("SearchPatronsView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("SearchPatronsView", currentScene);
-        }
-
-        swapToView(currentScene);
-    }
-
-    private void createAndShowBookCollectionView(){
-        Scene currentScene = (Scene)myViews.get("BookCollectionView");
-
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("BookCollectionView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("BookCollectionView", currentScene);
-        }
-
-        swapToView(currentScene);
-    }
-    private void createAndShowPatronCollectionView(){
-        Scene currentScene = (Scene)myViews.get("PatronCollectionView");
-
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("PatronCollectionView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("PatronCollectionView", currentScene);
-        }
-
-        swapToView(currentScene);
-    }
 
     /** Register objects to receive state updates. */
     //----------------------------------------------------------

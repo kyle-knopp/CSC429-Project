@@ -23,6 +23,14 @@ public class ViewFactory {
 		{
 			return new SearchStudentBorrower(model);
 		}
+		else if(viewName.equals("StudentBorrowerCollectionDeleteView") == true)
+		{
+			return new StudentBorrowerCollectionDeleteView(model);
+		}
+		else if(viewName.equals("DeleteStudentBorrowerView") == true)
+		{
+			return new DeleteStudentBorrowerView(model);
+		}
 		else if(viewName.equals("AddBookView") == true)
 		{
 			return new AddBookView(model);
@@ -40,9 +48,9 @@ public class ViewFactory {
 		{
 			//return [A NEW VECTOR VIEW OF THAT NAME TYPE]
 		}
-		else if(viewName.equals("StudentBorrowerCollectionsDeleteView") == true)
+		else if(viewName.equals("DeleteStudentBorrowerView") == true)
 		{
-			return null; //new StudentBorrowerCollectionsDeleteView(model);
+			return null; //new DeleteStudentBorrowerView(model);
 		}
 		else
 			return null;

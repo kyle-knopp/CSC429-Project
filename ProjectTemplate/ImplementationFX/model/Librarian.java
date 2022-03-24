@@ -30,6 +30,7 @@ public class Librarian implements IView, IModel
 
     private SystemWorker systemUser;
 
+    private StudentBorrowerCollection myStudentBorrowers;
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -148,12 +149,26 @@ public class Librarian implements IView, IModel
             createAndShowSearchStudentBorrowerView();
 
         }
-        else if (key.equals("StudentBorrowerCollectionView") == true)
+        else if (key.equals("StudentBorrowerCollectionDeleteView") == true) //Creates new collection
         {
-            System.out.println("Collection");
+
+            Properties p = (Properties)value;
+            String zipCode = p.getProperty("FirstName");
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(zipCode);
+            createAndShowStudentBorrowerCollectionDeleteView();
 
         }
+        else if (key.equals("StudentBorrowerCollectionDeleteViewNo") == true) //goes back to old collection
+        {
+            createAndShowStudentBorrowerCollectionDeleteNoView();
 
+        }
+        else if (key.equals("DeleteStudentBorrowerView") == true) //*****************************
+        {
+            createAndShowDeleteStudentBorrowerView();
+
+        }
 
 
         myRegistry.updateSubscribers(key, this);
@@ -298,8 +313,51 @@ public class Librarian implements IView, IModel
 
     }
 
+    //------------------------------------------------------------
+    private void createAndShowStudentBorrowerCollectionDeleteView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionDeleteView");
 
 
+        // create our initial view
+        View newView = ViewFactory.createView("StudentBorrowerCollectionDeleteView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("StudentBorrowerCollectionDeleteView", currentScene);
+
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowStudentBorrowerCollectionDeleteNoView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionDeleteView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("StudentBorrowerCollectionDeleteView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("StudentBorrowerCollectionDeleteView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowDeleteStudentBorrowerView()
+    {
+        Scene currentScene = (Scene)myViews.get("DeleteStudentBorrowerView");
+
+            // create our initial view
+        View newView = ViewFactory.createView("DeleteStudentBorrowerView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("DeleteStudentBorrowerView", currentScene);
+
+        swapToView(currentScene);
+
+    }
     /** Register objects to receive state updates. */
     //----------------------------------------------------------
     public void subscribe(String key, IView subscriber)

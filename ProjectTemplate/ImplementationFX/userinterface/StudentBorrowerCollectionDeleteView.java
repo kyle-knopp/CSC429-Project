@@ -84,9 +84,9 @@ public class StudentBorrowerCollectionDeleteView extends View{
             while (entries.hasMoreElements() == true)
             {
                 System.out.println("loop");
-                StudentBorrower nextPatron = (StudentBorrower)entries.nextElement();
-                System.out.println("Next patron for table: " + nextPatron);
-                Vector<String> view = nextPatron.getEntryListView();
+                StudentBorrower nextStudentBorrower = (StudentBorrower)entries.nextElement();
+                System.out.println("Next Student Borrower for table: " + nextStudentBorrower);
+                Vector<String> view = nextStudentBorrower.getEntryListView();
 
                 // add this list entry to the list
                 StudentBorrowerTableModel nextTableRowData = new StudentBorrowerTableModel(view);
@@ -132,7 +132,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Patrons");
+        Text prompt = new Text("List of Student Borrowers");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -196,7 +196,8 @@ public class StudentBorrowerCollectionDeleteView extends View{
             public void handle(MouseEvent event)
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
-                    //processAccountSelected();
+                    clearErrorMessage();
+                    myModel.stateChangeRequest("DeleteStudentBorrowerView", null);
                 }
             }
         });
@@ -220,7 +221,8 @@ public class StudentBorrowerCollectionDeleteView extends View{
                  */
                 //----------------------------------------------------------
                 clearErrorMessage();
-                myModel.stateChangeRequest("back", null);
+                myModel.stateChangeRequest("DeleteStudentBorrowerView", null);
+                //DeleteStudentBorrowerView CancelTransaction
             }
         });
 

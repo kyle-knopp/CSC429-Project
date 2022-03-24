@@ -132,7 +132,7 @@ public class SearchStudentBorrower extends View
                 Properties p = new Properties();
                 p.setProperty("FirstName", input);
                 clearText();
-                myModel.stateChangeRequest("StudentBorrowerCollectionView", p);
+                myModel.stateChangeRequest("StudentBorrowerCollectionDeleteView", p);
             }
         });
         doneCont.getChildren().add(submitButton);

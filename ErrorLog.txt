@@ -36,3 +36,5 @@
 [3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [3/22/22, 12:13 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [3/22/22, 6:14 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'sad' in 'where clause'>
+[3/24/22, 1:33 PM]|AddBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 1234 found.>
+[3/24/22, 1:34 PM]|AddBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 1234 found.>

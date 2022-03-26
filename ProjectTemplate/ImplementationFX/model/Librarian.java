@@ -127,7 +127,32 @@ public class Librarian implements IView, IModel
         {
             createAndShowBookView();
         }
+<<<<<<< Updated upstream
         else if (key.equals("BookData") == true)
+=======
+        else if (key.equals("AddBook") == true)
+        {
+            String transType = key;
+            System.out.println(key);
+            System.out.println(transType);
+
+            transType =transType.trim();
+            System.out.println(transType);
+
+            doTransaction(transType);
+        }
+        else if (key.equals("ModifyBook") == true)
+        {
+            String transType = key;
+            System.out.println(transType);
+
+            transType =transType.trim();
+            System.out.println(transType);
+
+            doTransaction(transType);
+        }
+        else if (key.equals("StudentBorrowerData") == true)
+>>>>>>> Stashed changes
         {
             Properties p = (Properties)value;
             createNewBook(p);
@@ -211,12 +236,19 @@ public class Librarian implements IView, IModel
      * create.
      */
     //----------------------------------------------------------
+<<<<<<< Updated upstream
    /* public void doTransaction(String transactionType)
     {
         try
         {
             Transaction trans = TransactionFactory.createTransaction(
                     transactionType, myAccountHolder);
+=======
+    public void doTransaction(String transactionType){
+        try{
+            Transaction trans = TransactionFactory.createTransaction(transactionType);
+            System.out.println("creating transcation");
+>>>>>>> Stashed changes
 
             trans.subscribe("CancelTransaction", this);
             trans.stateChangeRequest("DoYourJob", "");
@@ -251,14 +283,14 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowLoginView()
     {
-        Scene currentScene = (Scene)myViews.get("LoginView");
+        Scene currentScene = (Scene)myViews.get("LibrarianView");
 
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("LoginView", this); // USE VIEW FACTORY
+            View newView = ViewFactory.createView("LibrarianView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
-            myViews.put("LoginView", currentScene);
+            myViews.put("LibrarianView", currentScene);
         }
 
         swapToView(currentScene);
@@ -366,6 +398,9 @@ public class Librarian implements IView, IModel
 
         swapToView(currentScene);
     }
+
+
+
 
     /** Register objects to receive state updates. */
     //----------------------------------------------------------

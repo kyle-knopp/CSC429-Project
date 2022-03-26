@@ -22,6 +22,7 @@ public class TransactionFactory
 	{
 		Transaction retValue = null;
 
+<<<<<<< Updated upstream
 		if (transType.equals("Deposit") == true)
 		{
 			retValue = new DepositTransaction(cust);
@@ -47,6 +48,28 @@ public class TransactionFactory
 			retValue = new ImposeServiceChargeTransaction(cust);
 		}
 
+=======
+		/*if (transType.equals("InsertNewBook")) {
+			retValue = new InsertBookTransaction();
+		} else if (transType.equals("InsertNewPatron")) {
+			retValue = new InsertPatronTransaction();
+		} else if (transType.equals("SearchBooks")) {
+			retValue = new BookSearchTransaction();
+		} else if (transType.equals("SearchPatrons")) {
+			retValue = new PatronSearchTransaction();
+		} else */if (transType.equals("AddBook")) {
+			System.out.println("creating transcation add");
+
+			retValue = new AddBookTransaction();
+		}
+		else if(transType.equals("ModifyBook"))
+		{
+			System.out.println("creating transcation modify");
+
+			retValue = new ModifyBookTransaction();
+
+		}
+>>>>>>> Stashed changes
 		return retValue;
 	}*/
 }

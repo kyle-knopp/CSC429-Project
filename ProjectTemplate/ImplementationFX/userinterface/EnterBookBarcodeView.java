@@ -1,0 +1,143 @@
+package userinterface;
+
+import impresario.IModel;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
+import java.util.EventObject;
+import java.util.Properties;
+
+
+public class EnterBookBarcodeView extends View {
+    // GUI components
+    protected TextField barcode;
+
+    protected Button cancelButton;
+    protected Button submitButton;
+
+    // For showing error message
+    protected MessageView statusLog;
+
+    public EnterBookBarcodeView(IModel model) {
+        super(model, "EnterTreeBarcodeView");
+
+        myModel.subscribe("UpdateStatusMessage", this);
+    }
+
+    private VBox createFormContent(){
+
+    VBox vbox = new VBox(10);
+
+    GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
+    Text prompt = new Text("BOOK INFORMATION");
+        prompt.setWrappingWidth(400);
+        prompt.setTextAlignment(TextAlignment.CENTER);
+        prompt.setFill(Color.BLACK);
+        grid.add(prompt, 0, 0, 2, 1);
+
+    Text bcode = new Text(" Book's Barcode : ");
+    Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
+        bcode.setFont(myFont);
+        bcode.setWrappingWidth(150);
+        bcode.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(bcode, 0, 1);
+
+        barcode = new TextField();
+        barcode.setEditable(true);
+        grid.add(barcode, 1, 1);;
+
+        submitButton = new Button("Submit");
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
+
+        cancelButton = new Button("Back");
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("CancelTransaction", null);
+            }
+        });
+        // consider using GridPane.setHgap(10); instead of label space
+        HBox buttonCont = new HBox(10);
+        buttonCont.setAlignment(Pos.CENTER);
+        buttonCont.getChildren().add(submitButton);
+        Label space = new Label("               ");
+        buttonCont.setAlignment(Pos.CENTER);
+        buttonCont.getChildren().add(space);
+        buttonCont.setAlignment(Pos.CENTER);
+        buttonCont.getChildren().add(cancelButton);
+        vbox.getChildren().add(grid);
+        vbox.getChildren().add(buttonCont);
+
+        return vbox;
+    }
+
+    protected void processAction(Event event) {
+        Object sender = event.getSource();
+        if (sender == cancelButton) {
+            myModel.stateChangeRequest("Cancel", "");
+        }
+        else if (sender == barcode) {
+            if (true) {
+                myModel.stateChangeRequest("SubmitBarcode", barcode.getText());
+                barcode.clear();
+            }
+        }
+    }
+    //----------------------------------------------------------
+    public void displayErrorMessage(String message)
+    {
+        statusLog.displayErrorMessage(message);
+    }
+
+    /**
+     * Display info message
+     */
+    //----------------------------------------------------------
+    public void displayMessage(String message)
+    {
+        statusLog.displayMessage(message);
+    }
+
+    /**
+     * Clear error message
+     */
+    //----------------------------------------------------------
+    public void clearErrorMessage()
+    {
+        statusLog.clearErrorMessage();
+    }
+
+    @Override
+    public void updateState(String key, Object value) {
+        clearErrorMessage();
+
+        if (key.equals("PopulateBarCodeMessage") == true)
+        {
+            displayMessage((String)value);
+        }
+    }
+
+}

@@ -265,12 +265,12 @@ public class AddBookView extends View{
         // consider using GridPane.setHgap(10); instead of label space
         HBox buttonCont = new HBox(10);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
+        buttonCont.getChildren().add(cancelButton);
         Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(submitButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 

@@ -123,7 +123,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Modify a Book", null);
+                myModel.stateChangeRequest("ModifyBook", null);
             }
         });
         cCont.getChildren().add(modifyBookButton);

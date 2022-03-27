@@ -60,8 +60,7 @@ public class AddBookTransaction extends Transaction
             }catch (Exception e){
                 myBook = new Book(props);
                 myBook.save("add");
-                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");
-            }
+                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");            }
         } catch (Exception e) {
             transactionErrorMessage = "Error in saving book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",

@@ -45,3 +45,8 @@
 [3/27/22, 3:20 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
 [3/27/22, 3:20 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 234 found.>
 [3/27/22, 3:20 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 3 found.>
+[3/27/22, 4:41 PM]|AddBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book java.lang.NullPointerException>
+[3/27/22, 4:42 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[3/27/22, 4:42 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '' , 'Good' , '0.00' , '' , '' , '' , '' , '' ,  , 'Active' , '' , 1234 )' at line 1>
+[3/27/22, 4:48 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 'Active' , '' , 1234 )' at line 1>
+[3/27/22, 4:48 PM]|AddBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 234 found.>

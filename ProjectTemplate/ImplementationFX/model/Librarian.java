@@ -58,8 +58,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -71,6 +71,7 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
         dependencies.setProperty("Login", "LoginError");
+        dependencies.setProperty("AddBook", "PopulateAddBookMessage");
 
         myRegistry.setDependencies(dependencies);
     }

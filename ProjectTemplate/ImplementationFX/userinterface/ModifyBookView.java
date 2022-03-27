@@ -64,6 +64,7 @@ public class ModifyBookView extends View{
 
         populateFields();
 
+
     }
 
 
@@ -104,6 +105,15 @@ public class ModifyBookView extends View{
 
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
+        /*Text bar= new Text("Barcode : ");
+        bar.setFont(myFont);
+        bar.setWrappingWidth(150);
+        bar.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(bar, 0, 1);
+
+        barcode = new TextField();
+        title.setEditable(false);
+        grid.add(title, 1, 1);*/
 
         Text tit = new Text(" Title : ");
         tit.setFont(myFont);
@@ -277,6 +287,7 @@ public class ModifyBookView extends View{
         p2.setProperty("author1", au1);
         p2.setProperty("author2", au2);
         p2.setProperty("author3", au3);
+        p2.setProperty("author3", au3);
         p2.setProperty("author4", au4);
         p2.setProperty("publisher", publi);
         p2.setProperty("yearOfPublication", yeaO);
@@ -286,14 +297,14 @@ public class ModifyBookView extends View{
         p2.setProperty("bookCondition", condi);
 
 
-        if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
+        /*if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
             databaseErrorYear();
-        }else {
+        }else {*/
             System.out.println(p2);
             myModel.stateChangeRequest("ModifyBook", p2);
-        }
+        //}
 
-        barcode.clear();
+        //barcode.clear();
         title.clear();
         author1.clear();
         author2.clear();

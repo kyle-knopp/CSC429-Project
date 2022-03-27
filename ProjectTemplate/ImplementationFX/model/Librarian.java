@@ -104,7 +104,7 @@ public class Librarian implements IView, IModel
     public void createNewBook(Properties props){
          Book book = new Book(props);
          book.save("add");
-        transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
+         transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
 
     }
     //----------------------------------------------------------------

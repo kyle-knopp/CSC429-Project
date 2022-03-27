@@ -55,12 +55,17 @@ public class ModifyBookTransaction extends Transaction
     public void processTransaction(Properties props)
     {
         System.out.println("Inside Modify Book");
+        System.out.println(props.getProperty(("barcode")));
         try
         {
             try {
                 oldBook = new Book((String) props.getProperty("barcode"));
+                System.out.println("old book"+oldBook);
             }catch (Exception e){
+                System.out.println(e);
                 myBook = new Book(props);
+                System.out.println("new book: "+myBook);
+                System.out.println("Selected book: "+selectedBook);
                 myBook.save("modify");
                 transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");
             }
@@ -139,7 +144,10 @@ public class ModifyBookTransaction extends Transaction
     protected void processBarcode(String bc) {
         try {
             selectedBook = new Book(bc);
+            System.out.println("Just Selected Book: "+selectedBook);
+            selectedBook.display();
             createAndShowBookView();
+            System.out.println("Seeing if selected book prints after create and show:"+selectedBook);
         } catch (InvalidPrimaryKeyException e) {
             transactionErrorMessage = "Book Not Found." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",

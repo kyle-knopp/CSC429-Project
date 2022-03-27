@@ -49,6 +49,7 @@ public class Book extends EntityBase{
                     {
                         persistentState.setProperty(nextKey, nextValue);
                     }
+                    System.out.println(nextKey+" : "+nextValue);
                 }
 
             }
@@ -85,11 +86,11 @@ public class Book extends EntityBase{
 
     private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
     {
-        System.out.println("Inside updateStateInDatbase");
+        System.out.println("Inside updateStateInDatabase");
         System.out.println(persistentState.getProperty("barcode"));
         try
         {
-            if (trans=="update")
+            if (trans=="modify")
             {
                 Properties whereClause = new Properties();
                 whereClause.setProperty("barcode", persistentState.getProperty("barcode"));

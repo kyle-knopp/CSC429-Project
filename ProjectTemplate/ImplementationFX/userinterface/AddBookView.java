@@ -65,7 +65,8 @@ public class AddBookView extends View{
         populateFields();
 
         // myModel.subscribe("ServiceCharge", this);
-        //myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("AddBookErrorMessage", this);
+        myModel.subscribe("AddBookSuccessMessage",this);
     }
 
 
@@ -317,23 +318,10 @@ public class AddBookView extends View{
         }else {
             System.out.println(p2);
             myModel.stateChangeRequest("AddBook", p2);
+
         }
 
-        barcode.clear();
-        title.clear();
-        author1.clear();
-        author2.clear();
-        author3.clear();
-        author4.clear();
-        publisher.clear();
-        yearOfPublication.clear();
-        ISBN.clear();
-        suggestedPrice.clear();
-        notes.clear();
 
-        quality.setValue("Good");
-        status.setValue("Active");
-        suggestedPrice.setText("0.00");
 
     }
 
@@ -364,9 +352,14 @@ public class AddBookView extends View{
     public void updateState(String key, Object value)
     {
         clearErrorMessage();
+        System.out.println(key);
 
-        if (key.equals("PopulateAddBookMessage") == true)
+        if (key.equals("AddBookErrorMessage") == true)
         {
+            displayErrorMessage((String)value);
+        }else if(key.equals("AddBookSuccessMessage")==true)
+        {
+            System.out.println((String)value);
             displayMessage((String)value);
         }
     }
@@ -386,6 +379,24 @@ public class AddBookView extends View{
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
+        System.out.println("Message: "+message);
+        if(message.equals("Book data for new book installed successfully in database!")){
+            barcode.clear();
+            title.clear();
+            author1.clear();
+            author2.clear();
+            author3.clear();
+            author4.clear();
+            publisher.clear();
+            yearOfPublication.clear();
+            ISBN.clear();
+            suggestedPrice.clear();
+            notes.clear();
+
+            quality.setValue("Good");
+            status.setValue("Active");
+            suggestedPrice.setText("0.00");
+        }
         statusLog.displayMessage(message);
     }
 

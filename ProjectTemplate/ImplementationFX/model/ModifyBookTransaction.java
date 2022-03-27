@@ -62,12 +62,12 @@ public class ModifyBookTransaction extends Transaction
                 oldBook = new Book((String) props.getProperty("barcode"));
                 System.out.println("old book"+oldBook);
             }catch (Exception e){
-                System.out.println(e);
+                /*System.out.println(e);
                 myBook = new Book(props);
                 System.out.println("new book: "+myBook);
                 System.out.println("Selected book: "+selectedBook);
                 myBook.save("modify");
-                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");
+                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");*/
             }
         } catch (Exception e) {
             transactionErrorMessage = "Error in saving book." + e.toString();

@@ -37,7 +37,7 @@ public class Book extends EntityBase{
             {
                 // copy all the retrieved data into persistent state
                 Properties retrievedAccountData = (Properties)allDataRetrieved.elementAt(0);
-                persistentState = new Properties();
+                this.persistentState = new Properties();
 
                 Enumeration allKeys = retrievedAccountData.propertyNames();
                 while (allKeys.hasMoreElements() == true)
@@ -47,7 +47,7 @@ public class Book extends EntityBase{
 
                     if (nextValue != null)
                     {
-                        persistentState.setProperty(nextKey, nextValue);
+                        this.persistentState.setProperty(nextKey, nextValue);
                     }
                     System.out.println(nextKey+" : "+nextValue);
                 }
@@ -107,9 +107,10 @@ public class Book extends EntityBase{
         }
         catch (SQLException ex)
         {
-            updateStatusMessage = "Error in installing account data in database!";
+            updateStatusMessage = "Error in adding book to database! Check format of inputs.";
             //System.out.println(ex.toString());
             ex.printStackTrace();
+            System.out.println(updateStatusMessage);
         }
         catch (Exception excep) {
             System.out.println(excep);
@@ -120,8 +121,8 @@ public class Book extends EntityBase{
     private void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("Update", "UpdateStatusMessage");
-        dependencies.setProperty("ServiceCharge", "UpdateStatusMessage");
+        dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -146,6 +147,10 @@ public class Book extends EntityBase{
     }
 
     public Object getState(String key) {
+        System.out.println("In get Stat in book: "+key);
+        if(key.equals("UpdateStatusMessage")) {
+            return updateStatusMessage;
+        }else
         return persistentState.getProperty(key);
     }
 

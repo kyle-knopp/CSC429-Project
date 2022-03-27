@@ -27,7 +27,7 @@ import impresario.IModel;
 
 /** The class containing the Account View  for the ATM application */
 //==============================================================
-public class addStudentBorrowerView extends View
+public class AddStudentBorrowerView extends View
 {
 
     // GUI components
@@ -50,9 +50,9 @@ public class addStudentBorrowerView extends View
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public addStudentBorrowerView(IModel StudentBorrower)
+    public AddStudentBorrowerView(IModel StudentBorrower)
     {
-        super(StudentBorrower, "addStudentBorrowerView");
+        super(StudentBorrower, "AddStudentBorrowerView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -214,7 +214,7 @@ public class addStudentBorrowerView extends View
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
 
-        backButton = new Button("back");
+        backButton = new Button("Back");
         backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         backButton.setOnAction(new EventHandler<ActionEvent>() {
 

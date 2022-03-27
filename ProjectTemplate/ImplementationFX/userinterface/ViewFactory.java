@@ -17,7 +17,7 @@ public class ViewFactory {
 
 		else if(viewName.equals("AddStudentBorrowerView") == true)
 		{
-			return new addStudentBorrowerView(model);
+			return new AddStudentBorrowerView(model);
 		}
 		else if(viewName.equals("SearchStudentBorrowerView") == true)
 		{

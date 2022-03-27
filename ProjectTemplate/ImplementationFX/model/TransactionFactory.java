@@ -32,6 +32,11 @@ public class TransactionFactory {
 		} else */if (transType.equals("AddBook")) {
 			retValue = new AddBookTransaction();
 		}
+		else if(transType.equals("ModifyBook"))
+		{
+			retValue = new ModifyBookTransaction();
+
+		}
 		return retValue;
 	}
 }

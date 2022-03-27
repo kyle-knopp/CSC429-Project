@@ -144,6 +144,12 @@ public class Librarian implements IView, IModel
             transType =transType.trim();
             doTransaction(transType);
         }
+        else if (key.equals("ModifyBook") == true)
+        {
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
+        }
         else if (key.equals("StudentBorrowerData") == true)
         {
             Properties p = (Properties)value;

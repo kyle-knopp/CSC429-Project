@@ -110,7 +110,7 @@ public class Book extends EntityBase{
             updateStatusMessage = "Error in adding book to database! Check format of inputs.";
             //System.out.println(ex.toString());
             ex.printStackTrace();
-            System.out.println(updateStatusMessage);
+            //  DEBUG System.out.println(updateStatusMessage);
         }
         catch (Exception excep) {
             System.out.println(excep);
@@ -147,7 +147,7 @@ public class Book extends EntityBase{
     }
 
     public Object getState(String key) {
-        System.out.println("In get Stat in book: "+key);
+        //  DEBUG System.out.println("In get State in book: "+key);
         if(key.equals("UpdateStatusMessage")) {
             return updateStatusMessage;
         }else

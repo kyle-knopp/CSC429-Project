@@ -352,14 +352,14 @@ public class AddBookView extends View{
     public void updateState(String key, Object value)
     {
         clearErrorMessage();
-        System.out.println(key);
+        //  DEBUG System.out.println(key);
 
         if (key.equals("AddBookErrorMessage") == true)
         {
             displayErrorMessage((String)value);
         }else if(key.equals("AddBookSuccessMessage")==true)
         {
-            System.out.println((String)value);
+            //  DEBUG System.out.println((String)value);
             displayMessage((String)value);
         }
     }
@@ -379,7 +379,7 @@ public class AddBookView extends View{
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
-        System.out.println("Message: "+message);
+        //  DEBUG System.out.println("Message: "+message);
         if(message.equals("Book data for new book installed successfully in database!")){
             barcode.clear();
             title.clear();

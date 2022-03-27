@@ -54,7 +54,7 @@ public class AddBookTransaction extends Transaction
     //----------------------------------------------------------
     public void processTransaction(Properties props)
     {
-        System.out.println("Inside Add Book");
+        //  DEBUG System.out.println("Inside Add Book");
         try
         {
             try {

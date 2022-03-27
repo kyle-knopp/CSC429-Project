@@ -265,12 +265,12 @@ public class AddBookView extends View{
         // consider using GridPane.setHgap(10); instead of label space
         HBox buttonCont = new HBox(10);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
+        buttonCont.getChildren().add(cancelButton);
         Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(submitButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 
@@ -300,7 +300,6 @@ public class AddBookView extends View{
 
         p2.setProperty("barcode", bar);
         p2.setProperty("title", titl);
-        p2.setProperty("discipline", disi);
         p2.setProperty("author1", au1);
         p2.setProperty("author2", au2);
         p2.setProperty("author3", au3);
@@ -308,16 +307,16 @@ public class AddBookView extends View{
         p2.setProperty("publisher", publi);
         p2.setProperty("yearOfPublication", yeaO);
         p2.setProperty("ISBN", isb);
-        p2.setProperty("quality", condi);
         p2.setProperty("suggestedPrice", sugPric);
         p2.setProperty("notes", no);
-        p2.setProperty("status", sta);
+        p2.setProperty("bookCondition", condi);
+        p2.setProperty("Status", sta);
 
-        if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ||
-                bar.length() != 6){
+        if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
             databaseErrorYear();
         }else {
-            myModel.stateChangeRequest("InsertBook", p2);
+            System.out.println(p2);
+            myModel.stateChangeRequest("AddBook", p2);
         }
 
         barcode.clear();

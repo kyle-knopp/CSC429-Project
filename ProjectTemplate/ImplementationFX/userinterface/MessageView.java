@@ -43,7 +43,7 @@ public class MessageView extends Text
 	public MessageView(String initialMessage)
 	{
 		super(initialMessage);
-		setFont(Font.font("Helvetica", FontWeight.BOLD, 16));
+		setFont(Font.font("Helvetica", FontWeight.BOLD, 10));
 		setFill(Color.BLUE);
 		setTextAlignment(TextAlignment.LEFT);
 	}

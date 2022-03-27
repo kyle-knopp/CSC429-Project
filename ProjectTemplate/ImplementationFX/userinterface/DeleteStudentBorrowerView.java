@@ -1,3 +1,5 @@
+//DeleteStudentBorrowerView
+
 // specify the package
 package userinterface;
 
@@ -27,22 +29,24 @@ import impresario.IModel;
 
 /** The class containing the Account View  for the ATM application */
 //==============================================================
-public class SearchStudentBorrower extends View
+public class DeleteStudentBorrowerView extends View
 {
 
     // GUI components
-    protected TextField SearchStudentBorrower;
+    protected TextField SearchPatrons;
 
-    protected Button doneButton;
+    protected Button searchButton;
+
+    protected Button backButton;
     protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public SearchStudentBorrower(IModel StudentBorrower)
+    public DeleteStudentBorrowerView(IModel StudentBorrower)
     {
-        super(StudentBorrower, "StudentBorrower");
+        super(StudentBorrower, "DeleteStudentBorrowerView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -72,7 +76,7 @@ public class SearchStudentBorrower extends View
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
 
-        Text titleText = new Text(" Brockport Library System");
+        Text titleText = new Text(" Library System ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -94,33 +98,33 @@ public class SearchStudentBorrower extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text searchLabel = new Text(" Search For Student Borrowers: ");
+        Text searchLabel = new Text(" Do you want to Delete: ");
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
         searchLabel.setFont(myFont);
         searchLabel.setWrappingWidth(150);
         searchLabel.setTextAlignment(TextAlignment.RIGHT);
         grid.add(searchLabel, 0, 1);
 
-        SearchStudentBorrower = new TextField();
-        SearchStudentBorrower.setEditable(true);
-        grid.add(SearchStudentBorrower, 1, 1);
+        SearchPatrons = new TextField();
+        SearchPatrons.setEditable(true);
+        //grid.add(SearchPatrons, 1, 1);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
 
-        doneButton = new Button("Back");
-        doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton = new Button("No");
+        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
-                myModel.stateChangeRequest("CancelTransaction", null);
+                myModel.stateChangeRequest("StudentBorrowerCollectionDeleteViewNo", null);
             }
         });
-        doneCont.getChildren().add(doneButton);
+        doneCont.getChildren().add(backButton);
 
-        submitButton = new Button("submit");
+        submitButton = new Button("Yes");
         submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -128,12 +132,8 @@ public class SearchStudentBorrower extends View
             public void handle(ActionEvent e) {
                 clearErrorMessage();
 
-                String input = SearchStudentBorrower.getText();
-                Properties p = new Properties();
-                p.setProperty("FirstName", input);
                 clearText();
 
-                myModel.stateChangeRequest("StudentBorrowerCollectionDeleteView", p);
             }
         });
         doneCont.getChildren().add(submitButton);
@@ -214,7 +214,7 @@ public class SearchStudentBorrower extends View
     //----------------------------------------------------------
     public void clearText()
     {
-        SearchStudentBorrower.clear();
+        SearchPatrons.clear();
     }
 }
 

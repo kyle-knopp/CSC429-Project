@@ -30,6 +30,7 @@ public class Librarian implements IView, IModel
 
     private SystemWorker systemUser;
 
+    private StudentBorrowerCollection myStudentBorrowers;
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -69,6 +70,7 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("PatronData", "TransactionError");
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
+        dependencies.setProperty("Login", "LoginError");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -89,13 +91,19 @@ public class Librarian implements IView, IModel
             return transactionErrorMessage;
         }
         else
+        if (key.equals("LoginError") == true)
+        {
+            System.out.println(loginErrorMessage);
+            return loginErrorMessage;
+        }
+        else
             return "";
     }
 
 
     public void createNewBook(Properties props){
          Book book = new Book(props);
-         book.save();
+         book.save("add");
         transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
 
     }
@@ -116,7 +124,7 @@ public class Librarian implements IView, IModel
                 }
             }
         }
-        else if(key.equals("Login View") == true){
+        else if(key.equals("LoginView") == true){
             createAndShowLoginView();
         }
         else
@@ -148,12 +156,26 @@ public class Librarian implements IView, IModel
             createAndShowSearchStudentBorrowerView();
 
         }
-        else if (key.equals("StudentBorrowerCollectionView") == true)
+        else if (key.equals("StudentBorrowerCollectionDeleteView") == true) //Creates new collection
         {
-            System.out.println("Collection");
+
+            Properties p = (Properties)value;
+            String zipCode = p.getProperty("FirstName");
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(zipCode);
+            createAndShowStudentBorrowerCollectionDeleteView();
 
         }
+        else if (key.equals("StudentBorrowerCollectionDeleteViewNo") == true) //goes back to old collection
+        {
+            createAndShowStudentBorrowerCollectionDeleteNoView();
 
+        }
+        else if (key.equals("DeleteStudentBorrowerView") == true) //*****************************
+        {
+            createAndShowDeleteStudentBorrowerView();
+
+        }
 
 
         myRegistry.updateSubscribers(key, this);
@@ -178,17 +200,20 @@ public class Librarian implements IView, IModel
         try
         {
             systemUser = new SystemWorker(props);
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return true;
         }
         catch (InvalidPrimaryKeyException ex)
         {
-            loginErrorMessage = "ERROR: " + ex.getMessage();
+            loginErrorMessage = ex.getMessage();
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return false;
         }
         catch (PasswordMismatchException exec)
         {
 
-            loginErrorMessage = "ERROR: " + exec.getMessage();
+            loginErrorMessage = exec.getMessage();
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return false;
         }
     }
@@ -213,25 +238,7 @@ public class Librarian implements IView, IModel
             new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
-/*
-    //----------------------------------------------------------
-    private void createAndShowTransactionChoiceView()
-    {
-        Scene currentScene = (Scene)myViews.get("TransactionChoiceView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("TransactionChoiceView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("TransactionChoiceView", currentScene);
-        }
-
-
-        // make the view visible by installing it into the frame
-        swapToView(currentScene);
-
-    }*/
     //------------------------------------------------------------
     private void createAndShowLoginView()
     {
@@ -298,8 +305,51 @@ public class Librarian implements IView, IModel
 
     }
 
+    //------------------------------------------------------------
+    private void createAndShowStudentBorrowerCollectionDeleteView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionDeleteView");
 
 
+        // create our initial view
+        View newView = ViewFactory.createView("StudentBorrowerCollectionDeleteView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("StudentBorrowerCollectionDeleteView", currentScene);
+
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowStudentBorrowerCollectionDeleteNoView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionDeleteView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("StudentBorrowerCollectionDeleteView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("StudentBorrowerCollectionDeleteView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowDeleteStudentBorrowerView()
+    {
+        Scene currentScene = (Scene)myViews.get("DeleteStudentBorrowerView");
+
+            // create our initial view
+        View newView = ViewFactory.createView("DeleteStudentBorrowerView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("DeleteStudentBorrowerView", currentScene);
+
+        swapToView(currentScene);
+
+    }
     /** Register objects to receive state updates. */
     //----------------------------------------------------------
     public void subscribe(String key, IView subscriber)

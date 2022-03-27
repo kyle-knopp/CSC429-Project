@@ -21,6 +21,7 @@ public class AddBookTransaction extends Transaction
 {
 
     private Book myBook;
+    private Book oldBook;
 
     private String transactionErrorMessage = "";
 
@@ -39,7 +40,7 @@ public class AddBookTransaction extends Transaction
     protected void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("BookData", "TransactionError");
+        dependencies.setProperty("AddBook", "TransactionError");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -51,17 +52,22 @@ public class AddBookTransaction extends Transaction
     //----------------------------------------------------------
     public void processTransaction(Properties props)
     {
+        System.out.println("Inside Add Book");
         try
         {
-            myBook = new Book(props);
-            myBook.save();
-            transactionErrorMessage = (String)myBook.getState("UpdateStatusMessage");
-
+            try {
+                oldBook = new Book((String) props.getProperty("barcode"));
+            }catch (Exception e){
+                myBook = new Book(props);
+                myBook.save("add");
+                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");
+            }
         } catch (Exception e) {
             transactionErrorMessage = "Error in saving book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error in saving book " + e.toString(), Event.ERROR);
         }
+
     }
 
     //-----------------------------------------------------------
@@ -89,7 +95,7 @@ public class AddBookTransaction extends Transaction
             doYourJob();
         }
         else
-        if ((key.equals("BookData") == true))
+        if ((key.equals("AddBook") == true))
         {
             processTransaction((Properties)value);
         }

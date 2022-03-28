@@ -84,6 +84,19 @@ public class Book extends EntityBase{
         updateStateInDatabase(trans);
     }
 
+    public void update() {
+        try {
+            Properties whereClause = new Properties();
+            whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
+            updatePersistentState(mySchema, persistentState, whereClause);
+            updateStatusMessage = "Book data updated successfully in database!";
+        }catch (SQLException ex){
+            System.out.println("Error in installing book data in database!");
+            System.out.println(ex.toString());
+            ex.printStackTrace();
+        }
+    }
+
     private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
     {
         System.out.println("Inside updateStateInDatabase");

@@ -228,7 +228,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("Login View", null);
+                myModel.stateChangeRequest("LoginView", null);
             }
         });
         doneCont.getChildren().add(doneButton);

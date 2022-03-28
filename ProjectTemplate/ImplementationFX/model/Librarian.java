@@ -71,6 +71,10 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
         dependencies.setProperty("Login", "LoginError");
+        dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
+        dependencies.setProperty("UpdateStatusMessage","");
+        //dependencies.setProperty("","");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -104,7 +108,7 @@ public class Librarian implements IView, IModel
     public void createNewBook(Properties props){
          Book book = new Book(props);
          book.save("add");
-        transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
+         transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
 
     }
     //----------------------------------------------------------------

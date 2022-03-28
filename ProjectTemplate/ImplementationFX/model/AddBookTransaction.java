@@ -41,6 +41,8 @@ public class AddBookTransaction extends Transaction
     {
         dependencies = new Properties();
         dependencies.setProperty("AddBook", "TransactionError");
+        dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -52,7 +54,7 @@ public class AddBookTransaction extends Transaction
     //----------------------------------------------------------
     public void processTransaction(Properties props)
     {
-        System.out.println("Inside Add Book");
+        //  DEBUG System.out.println("Inside Add Book");
         try
         {
             try {
@@ -60,8 +62,7 @@ public class AddBookTransaction extends Transaction
             }catch (Exception e){
                 myBook = new Book(props);
                 myBook.save("add");
-                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");
-            }
+                transactionErrorMessage = (String) myBook.getState("UpdateStatusMessage");            }
         } catch (Exception e) {
             transactionErrorMessage = "Error in saving book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
@@ -78,10 +79,15 @@ public class AddBookTransaction extends Transaction
             return transactionErrorMessage;
         }
         else
-        if (key.equals("UpdateStatusMessage") == true)
+        if (key.equals("AddBookErrorMessage") == true)
+        {
+            return transactionErrorMessage;
+        }else
+        if(key.equals("AddBookSuccessMessage")==true)
         {
             return transactionErrorMessage;
         }
+
         return null;
     }
 

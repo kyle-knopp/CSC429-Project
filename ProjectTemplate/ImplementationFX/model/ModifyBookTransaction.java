@@ -1,12 +1,10 @@
 package model;
 
 // system imports
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.util.Enumeration;
 import java.util.Properties;
-import java.util.Vector;
 
 // project imports
 import event.Event;
@@ -64,10 +62,10 @@ public class ModifyBookTransaction extends Transaction
             while (keyNames.hasMoreElements() == true) {
                 String nextKey = (String)keyNames.nextElement();
                 String nextVal = props.getProperty(nextKey);
-                myBook.stateChangeRequest(nextKey, nextVal);
+                selectedBook.stateChangeRequest(nextKey, nextVal);
             }
-            myBook.update();
-            transactionErrorMessage = (String)myBook.getState("UpdateStatusMessage");
+            selectedBook.update();
+            transactionErrorMessage = (String) selectedBook.getState("UpdateStatusMessage");
         } catch (Exception e) {
             transactionErrorMessage = "Error in saving book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
@@ -90,6 +88,7 @@ public class ModifyBookTransaction extends Transaction
     }
 
     private void createAndShowModifyBookView() {
+
         Scene currentScene = (Scene) myViews.get("ModifyBookView");
         if (currentScene == null) {
             View newView = ViewFactory.createView("ModifyBookView", this);
@@ -130,6 +129,7 @@ public class ModifyBookTransaction extends Transaction
         }
         else if ((key.equals("SubmitBarcode") == true))
         {
+            //DEBUG System.out.println("Submit Barcode"+(Properties)value);
             processBarcode((Properties) value);
         }
         else if(key.equals("ModifyBook")==true){
@@ -141,13 +141,15 @@ public class ModifyBookTransaction extends Transaction
     }
 
     protected void processBarcode(Properties props) {
+
         try {
             String bc = props.getProperty("barcode");
             selectedBook = new Book(bc);
-            System.out.println("Just Selected Book: "+selectedBook);
+            //System.out.println("Seeing if props prints:"+props.getProperty("barcode"));
+            //System.out.println("Just Selected Book: "+myBook);
             selectedBook.display();
             createAndShowModifyBookView();
-            System.out.println("Seeing if selected book prints after create and show:"+selectedBook);
+
         } catch (InvalidPrimaryKeyException e) {
             transactionErrorMessage = "Book Not Found." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",

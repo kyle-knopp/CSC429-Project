@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -185,6 +186,12 @@ public class AddBookView extends View{
 
         yearOfPublication = new TextField();
         yearOfPublication.setEditable(true);
+        yearOfPublication.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                yearOfPublication.clear();;
+            }
+        });
         grid.add(yearOfPublication, 1, 9);
 
         Text iS = new Text(" ISBN : ");
@@ -343,6 +350,7 @@ public class AddBookView extends View{
         balance.setText((String)myModel.getState("Balance"));
         serviceCharge.setText((String)myModel.getState("ServiceCharge"));
         */
+        yearOfPublication.setText("(Must be Four Digits)");
     }
 
     /**

@@ -64,7 +64,7 @@ public class ModifyBookView extends View{
 
         populateFields();
 
-
+        myModel.subscribe("TransactionError",this);
     }
 
 
@@ -105,15 +105,15 @@ public class ModifyBookView extends View{
 
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
-        /*Text bar= new Text("Barcode : ");
+        Text bar= new Text("Barcode : ");
         bar.setFont(myFont);
         bar.setWrappingWidth(150);
         bar.setTextAlignment(TextAlignment.RIGHT);
         grid.add(bar, 0, 1);
 
         barcode = new TextField();
-        title.setEditable(false);
-        grid.add(title, 1, 1);*/
+        barcode.setEditable(false);
+        grid.add(barcode, 1, 1);
 
         Text tit = new Text(" Title : ");
         tit.setFont(myFont);
@@ -261,6 +261,7 @@ public class ModifyBookView extends View{
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 
+
         return vbox;
     }
 
@@ -268,6 +269,7 @@ public class ModifyBookView extends View{
 
         clearErrorMessage();
 
+        String bar = barcode.getText();
         String titl = title.getText();
         String disi = " ";
         String au1 = author1.getText();
@@ -280,9 +282,11 @@ public class ModifyBookView extends View{
         String condi = (String) quality.getValue();
         String sugPric = suggestedPrice.getText();
         String no = notes.getText();
+        String stat= (String)myModel.getState("Status");
 
         Properties p2 = new Properties();
 
+        p2.setProperty("barcode",bar);
         p2.setProperty("title", titl);
         p2.setProperty("author1", au1);
         p2.setProperty("author2", au2);
@@ -295,6 +299,7 @@ public class ModifyBookView extends View{
         p2.setProperty("suggestedPrice", sugPric);
         p2.setProperty("notes", no);
         p2.setProperty("bookCondition", condi);
+        p2.setProperty("Status",stat);
 
 
         /*if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
@@ -334,11 +339,38 @@ public class ModifyBookView extends View{
     //-------------------------------------------------------------
     public void populateFields()
     {
-       /* accountNumber.setText((String)myModel.getState("AccountNumber"));
-        acctType.setText((String)myModel.getState("Type"));
-        balance.setText((String)myModel.getState("Balance"));
-        serviceCharge.setText((String)myModel.getState("ServiceCharge"));
-        */
+        /*allowedCondition = new String[2];
+        allowedCondition[0] = "Good";
+        allowedCondition[1] = "Damaged";
+        conditionMatt.getItems().add(allowedCondition[0]);
+        conditionMatt.getItems().add(allowedCondition[1]);*/
+
+        String barcodeText = (String) myModel.getState("barcode");
+        String titleText = (String) myModel.getState("title");
+        String a1Text = (String) myModel.getState("author1");
+        String a2Text = (String) myModel.getState("author2");
+        String a3Text = (String) myModel.getState("author3");
+        String a4Text = (String) myModel.getState("author4");
+        String pubText = (String) myModel.getState("publisher");
+        String pubYearText = (String) myModel.getState("yearOfPublication");
+        String isbnText = (String) myModel.getState("ISBN");
+        String conditionText = (String) myModel.getState("bookCondition");
+        String sugPriceText = (String) myModel.getState("suggestedPrice");
+        String notesText = (String) myModel.getState("notes");
+
+        barcode.setText(barcodeText);
+        barcode.setEditable(false);
+        title.setText(titleText);
+        author1.setText(a1Text);
+        author2.setText(a2Text);
+        author3.setText(a3Text);
+        author4.setText(a4Text);
+        publisher.setText(pubText);
+        yearOfPublication.setText(pubYearText);
+        ISBN.setText(isbnText);
+        //bookCondition.setValue(conditionText);
+        suggestedPrice.setText(sugPriceText);
+        notes.setText(notesText);
     }
 
     /**

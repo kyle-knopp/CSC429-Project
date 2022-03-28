@@ -95,3 +95,5 @@
 [3/27/22, 7:08 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '' , 'Good' , '0.00' , '' , '' , '' , '' , '' ,  , 'Active' , '' , 1234 )' at line 1>
 [3/27/22, 7:09 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
 [3/27/22, 7:09 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '' , 'Good' , '0.00' , '' , '' , '' , '' , '' ,  , 'Active' , '' , 1233 )' at line 1>
+[3/27/22, 8:43 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book java.lang.NullPointerException>
+[3/27/22, 8:54 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'ISBN' at row 1>

@@ -31,6 +31,19 @@ public class ViewFactory {
 		{
 			return new DeleteStudentBorrowerView(model);
 		}
+
+		else if(viewName.equals("SearchStudentBorrowerViewM") == true)
+		{
+			return new SearchStudentBorrowerViewM(model);
+		}
+		else if(viewName.equals("StudentBorrowerCollectionModifyView") == true)
+		{
+			return new StudentBorrowerCollectionModifyView(model);
+		}
+		else if(viewName.equals("ModifyStudentBorrowerView") == true)
+		{
+			return new ModifyStudentBorrowerView(model);
+		}
 		else if(viewName.equals("AddBookView") == true)
 		{
 			return new AddBookView(model);

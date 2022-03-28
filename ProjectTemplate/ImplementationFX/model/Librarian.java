@@ -144,7 +144,7 @@ public class Librarian implements IView, IModel
             System.out.println();
 
         }
-        else if (key.equals("SearchStudentBorrowerView") == true)
+        else if (key.equals("SearchStudentBorrowerView") == true) // begin student borrower delete sequence
         {
             createAndShowSearchStudentBorrowerView();
 
@@ -162,15 +162,27 @@ public class Librarian implements IView, IModel
         else if (key.equals("StudentBorrowerCollectionDeleteViewNo") == true) //goes back to old collection
         {
             createAndShowStudentBorrowerCollectionDeleteNoView();
-
         }
-        else if (key.equals("DeleteStudentBorrowerView") == true) //*****************************
+        else if (key.equals("DeleteStudentBorrowerView") == true) // end student borrower delete sequence
         {
             createAndShowDeleteStudentBorrowerView();
 
         }
-
-
+        else if (key.equals("SearchStudentBorrowerViewM") == true){ // start Student borrower modify sequence
+            createAndShowSearchStudentBorrowerViewM();
+        }
+        else if (key.equals("StudentBorrowerCollectionModifyView") == true) //creates collection
+        {
+            createAndShowStudentBorrowerCollectionModifyView();
+        }
+        else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence
+        {
+            createAndShowModifyStudentBorrowerView();
+        }
+        else if (key.equals("StudentBorrowerCollectionModifyViewNo") == true) //goes back to old collection
+        {
+            createAndShowStudentBorrowerCollectionModifyViewNo();
+        }
         myRegistry.updateSubscribers(key, this);
     }
 
@@ -358,6 +370,76 @@ public class Librarian implements IView, IModel
         swapToView(currentScene);
 
     }
+
+    //------------------------------------------------------------
+    private void createAndShowSearchStudentBorrowerViewM()
+    {
+        Scene currentScene = (Scene)myViews.get("SearchStudentBorrowerViewM");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("SearchStudentBorrowerViewM", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("SearchStudentBorrowerViewM", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowStudentBorrowerCollectionModifyView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionModifyView");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("StudentBorrowerCollectionModifyView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("StudentBorrowerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowModifyStudentBorrowerView()
+    {
+        Scene currentScene = (Scene)myViews.get("ModifyStudentBorrowerView");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("ModifyStudentBorrowerView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("ModifyStudentBorrowerView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowStudentBorrowerCollectionModifyViewNo()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionModifyViewNo");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("StudentBorrowerCollectionModifyViewNo", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("StudentBorrowerCollectionModifyViewNo", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+
     /** Register objects to receive state updates. */
     //----------------------------------------------------------
     public void subscribe(String key, IView subscriber)

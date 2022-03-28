@@ -197,7 +197,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("SearchStudentBorrowerView", null);
+                myModel.stateChangeRequest("SearchStudentBorrowerViewM", null);
             }
         });
         fCont.getChildren().add(deleteStudentBorrowerButton);

@@ -114,6 +114,12 @@ public class ModifyBookTransaction extends Transaction
         }
         else if(key.equals("TreeToDisplay")){
             return selectedBook;
+        }else {
+            if (selectedBook != null) {
+                Object val = selectedBook.getState(key);
+                if (val != null)
+                    return val;
+            }
         }
         return null;
     }

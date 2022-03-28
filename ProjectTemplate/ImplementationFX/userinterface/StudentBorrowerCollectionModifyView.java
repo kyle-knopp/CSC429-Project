@@ -135,7 +135,7 @@ public class StudentBorrowerCollectionModifyView extends View {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Student Borrowers");
+        Text prompt = new Text("List of Student Borrowers To Modify");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);

@@ -58,8 +58,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        createAndShowLoginView();
-        //createAndShowLibrarianView();
+        //createAndShowLoginView();
+        createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -165,18 +165,21 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("DeleteStudentBorrowerView") == true) // end student borrower delete sequence
         {
-            createAndShowDeleteStudentBorrowerView();
 
+            createAndShowDeleteStudentBorrowerView();
         }
         else if (key.equals("SearchStudentBorrowerViewM") == true){ // start Student borrower modify sequence
+
             createAndShowSearchStudentBorrowerViewM();
         }
         else if (key.equals("StudentBorrowerCollectionModifyView") == true) //creates collection
         {
+
             createAndShowStudentBorrowerCollectionModifyView();
         }
         else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence
         {
+            System.out.println("modify");
             createAndShowModifyStudentBorrowerView();
         }
         else if (key.equals("StudentBorrowerCollectionModifyViewNo") == true) //goes back to old collection
@@ -393,13 +396,12 @@ public class Librarian implements IView, IModel
     {
         Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionModifyView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("StudentBorrowerCollectionModifyView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("StudentBorrowerCollectionModifyView", currentScene);
-        }
+
+        // create our initial view
+        View newView = ViewFactory.createView("StudentBorrowerCollectionModifyView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("StudentBorrowerCollectionModifyView", currentScene);
+
 
         swapToView(currentScene);
 
@@ -425,14 +427,14 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowStudentBorrowerCollectionModifyViewNo()
     {
-        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionModifyViewNo");
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionModifyView");
 
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("StudentBorrowerCollectionModifyViewNo", this); // USE VIEW FACTORY
+            View newView = ViewFactory.createView("StudentBorrowerCollectionModifyView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
-            myViews.put("StudentBorrowerCollectionModifyViewNo", currentScene);
+            myViews.put("StudentBorrowerCollectionModifyView", currentScene);
         }
 
         swapToView(currentScene);

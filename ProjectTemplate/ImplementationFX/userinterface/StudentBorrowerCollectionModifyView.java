@@ -22,11 +22,14 @@ import javafx.scene.text.TextAlignment;
 import model.StudentBorrower;
 import model.StudentBorrowerCollection;
 import model.StudentBorrower;
+import userinterface.MessageView;
+import userinterface.StudentBorrowerTableModel;
+import userinterface.View;
 
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class StudentBorrowerCollectionDeleteView extends View{
+public class StudentBorrowerCollectionModifyView extends View {
     // GUI components
     protected TableView<StudentBorrowerTableModel> tableOfStudentBorrowers;
     protected Button doneButton;
@@ -36,9 +39,9 @@ public class StudentBorrowerCollectionDeleteView extends View{
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public StudentBorrowerCollectionDeleteView(IModel StudentBorrower)
+    public StudentBorrowerCollectionModifyView(IModel StudentBorrower)
     {
-        super(StudentBorrower, "StudentBorrowerCollectionDeleteView");
+        super(StudentBorrower, "StudentBorrowerCollectionModifyView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -132,7 +135,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Student Borrowers To Delete");
+        Text prompt = new Text("List of Student Borrowers To Modify");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -197,7 +200,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("DeleteStudentBorrowerView", null);
+                    myModel.stateChangeRequest("ModifyStudentBorrowerView", null);
                 }
             }
         });
@@ -221,8 +224,8 @@ public class StudentBorrowerCollectionDeleteView extends View{
                  */
                 //----------------------------------------------------------
                 clearErrorMessage();
-                myModel.stateChangeRequest("DeleteStudentBorrowerView", null);
-                //DeleteStudentBorrowerView CancelTransaction
+                myModel.stateChangeRequest("ModifyStudentBorrowerView", null);
+                //ModifyStudentBorrowerView CancelTransaction
             }
         });
 
@@ -286,4 +289,5 @@ public class StudentBorrowerCollectionDeleteView extends View{
 
 
 }
+
 

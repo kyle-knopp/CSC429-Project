@@ -294,7 +294,7 @@ public class AddStudentBorrowerView extends View
         p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
-        p.put("Status",statusBox.getValue());
+        p.put("status",statusBox.getValue());
 
         myModel.stateChangeRequest("AddStudentBorrower", p);
 

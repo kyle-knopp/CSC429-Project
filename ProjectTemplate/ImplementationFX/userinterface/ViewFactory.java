@@ -59,6 +59,9 @@ public class ViewFactory {
 		else if(viewName.equals("ModifyBookView") == true)
 		{
 			return new ModifyBookView(model);
+		}else if(viewName.equals("DeleteABookView") == true)
+		{
+			return new DeleteABookView(model);
 		}
 
 		System.out.println("no View created "+viewName );

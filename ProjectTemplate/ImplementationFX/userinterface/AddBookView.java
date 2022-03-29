@@ -319,6 +319,9 @@ public class AddBookView extends View{
         p2.setProperty("notes", no);
         p2.setProperty("bookCondition", condi);
         p2.setProperty("Status", sta);
+
+
+
         p2.setProperty("prefix",getBookPrefix(bar));
 
         if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){

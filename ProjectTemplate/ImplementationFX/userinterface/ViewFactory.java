@@ -35,6 +35,10 @@ public class ViewFactory {
 		{
 			return new AddBookView(model);
 		}
+		else if(viewName.equals("AddWorkerView") == true)
+		{
+			return new AddWorkerView(model);
+		}
 		else if(viewName.equals("EnterBookBarcodeView") == true)
 		{
 			return new EnterBookBarcodeView(model);

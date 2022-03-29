@@ -1,4 +1,8 @@
+
+
+
 // specify the package
+
 package userinterface;
 
 // system imports
@@ -25,7 +29,7 @@ import java.util.Properties;
 // project imports
 import impresario.IModel;
 
-/** The class containing the Account View  for the ATM application */
+// The class containing the Account View  for the ATM application
 //==============================================================
 public class AddStudentBorrowerView extends View
 {
@@ -120,7 +124,7 @@ public class AddStudentBorrowerView extends View
          */
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
-        /*
+/**
         Text Label = new Text(" BannerId : ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
@@ -130,7 +134,7 @@ public class AddStudentBorrowerView extends View
         BannerId = new TextField();
         BannerId.setEditable(true);
         grid.add(BannerId, 1, 1);
-         */
+*/
 
         Text Label = new Text(" First Name : ");
         Label.setFont(myFont);
@@ -203,14 +207,6 @@ public class AddStudentBorrowerView extends View
         Notes.setEditable(true);
         grid.add(Notes, 1, 7);
 
-        /*
-        statusBox = new ComboBox();
-        statusBox.getItems().addAll("Active", "Inactive");
-        statusBox.getSelectionModel().selectFirst();
-        grid.add(statusBox, 1, 4);
-        */
-
-
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
 
@@ -229,24 +225,9 @@ public class AddStudentBorrowerView extends View
         doneButton = new Button("Submit");
         doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent e) {
-                clearErrorMessage();
-
-                Properties p = new Properties();
-
-                //p.put("BannerId", BannerId.getText());
-                p.put("FirstName", FirstName.getText());
-                p.put("LastName", LastName.getText());
-                p.put("ContactPhone", ContactPhone.getText());
-                p.put("Email", Email.getText());
-                p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-                p.put("DateOfRegistration", DateOfRegistration.getText());
-                p.put("Notes", Notes.getText());
-
-                clearText();
-                myModel.stateChangeRequest("StudentBorrowerData", p);
+                processAction(e);
             }
         });
         doneCont.getChildren().add(doneButton);
@@ -294,6 +275,34 @@ public class AddStudentBorrowerView extends View
                 displayMessage(val);
         }
     }
+    private void processAction(ActionEvent e) {
+
+        clearErrorMessage();
+
+        Properties p = new Properties();
+
+      //  p.put("BannerId", BannerId.getText());
+        p.put("FirstName", FirstName.getText());
+        p.put("LastName", LastName.getText());
+        p.put("ContactPhone", ContactPhone.getText());
+        p.put("Email", Email.getText());
+        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+        p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("Notes", Notes.getText());
+
+        myModel.stateChangeRequest("AddStudentBorrower", p);
+
+        clearText();
+        //BannerId.clear();
+        FirstName.clear();
+        LastName.clear();
+        ContactPhone.clear();
+        ContactPhone.clear();
+        Email.clear();
+        DateOfLatestBorrowerStatus.clear();
+        Notes.clear();
+    }
+
 
     /**
      * Display error message
@@ -343,6 +352,5 @@ public class AddStudentBorrowerView extends View
 //---------------------------------------------------------------
 //	Revision History:
 //
-
 
 

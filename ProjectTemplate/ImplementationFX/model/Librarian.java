@@ -127,16 +127,9 @@ public class Librarian implements IView, IModel
         else if(key.equals("LoginView") == true){
             createAndShowLoginView();
         }
-        else
-        if (key.equals("CancelTransaction") == true)
+        else if (key.equals("CancelTransaction") == true)
         {
              createAndShowLibrarianView();
-        }
-
-
-        else if (key.equals("AddStudentBorrowerView") == true)
-        {
-            createAndShowAddStudentBorrowerView();
         }
         else if (key.equals("AddBook") == true)
         {
@@ -156,6 +149,18 @@ public class Librarian implements IView, IModel
             System.out.println(p);
             System.out.println();
 
+        }
+        else if (key.equals("AddStudentBorrower") == true)
+        {
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
+        }
+        else if (key.equals("AddWorker") == true)
+        {
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
         }
         else if (key.equals("SearchStudentBorrowerView") == true)
         {

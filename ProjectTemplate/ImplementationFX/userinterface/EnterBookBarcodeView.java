@@ -16,6 +16,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Properties;
+
 
 public class EnterBookBarcodeView extends View {
     // GUI components
@@ -28,7 +30,7 @@ public class EnterBookBarcodeView extends View {
     protected MessageView statusLog;
 
     public EnterBookBarcodeView(IModel model) {
-        super(model, "EnterTreeBarcodeView");
+        super(model, "EnterBookBarcodeView");
 
 
         // create a container for showing the contents
@@ -106,13 +108,16 @@ public class EnterBookBarcodeView extends View {
     }
 
     protected void processAction(Event event) {
+        Properties props = new Properties();
+        props.setProperty("barcode",barcode.getText());
+
         Object sender = event.getSource();
         if (sender == cancelButton) {
             myModel.stateChangeRequest("Cancel", "");
         }
         else if (sender == submitButton) {
             if (true) {
-                myModel.stateChangeRequest("SubmitBarcode", barcode.getText());
+                myModel.stateChangeRequest("SubmitBarcode", props);
                // myModel.stateChangeRequest("SubmitBarcode", null);
                 barcode.clear();
             }

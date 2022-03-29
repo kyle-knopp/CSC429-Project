@@ -53,6 +53,7 @@ public class AddStudentBorrowerTransaction extends Transaction
     public void processTransaction(Properties props)
     {
         System.out.println("Inside Add Student Borrower Transaction");
+        System.out.println(props.getProperty("FirstName")+props.getProperty("LastName"));
         try
         {
             try {

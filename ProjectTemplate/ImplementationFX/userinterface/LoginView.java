@@ -42,10 +42,10 @@ public class LoginView extends View
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public LoginView(IModel login)
+    public LoginView(IModel Librarian)
     {
 
-        super(login, "LoginView");
+        super(Librarian, "LoginView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -172,12 +172,11 @@ public class LoginView extends View
             displayErrorMessage("Please enter a user id!");
             bannerID.requestFocus();
         }
-        else
-        {
+        else{
             String passwordEntered = password.getText();
             processUserIDAndPassword(useridEntered, passwordEntered);
-            displayErrorMessage("Could not find user");
         }
+
 
     }
 
@@ -193,6 +192,8 @@ public class LoginView extends View
         props.setProperty("bannerID", useridString);
         props.setProperty("password", passwordString);
 
+
+
         // clear fields for next time around
         bannerID.setText("");
         password.setText("");
@@ -205,6 +206,8 @@ public class LoginView extends View
     {
         // STEP 6: Be sure to finish the end of the 'perturbation'
         // by indicating how the view state gets updated.
+        System.out.println("here");
+        System.out.println(key);
         if (key.equals("LoginError") == true)
         {
             // display the passed text

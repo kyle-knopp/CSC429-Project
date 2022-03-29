@@ -70,6 +70,11 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("PatronData", "TransactionError");
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
+        dependencies.setProperty("Login", "LoginError");
+        dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
+        dependencies.setProperty("UpdateStatusMessage","");
+        //dependencies.setProperty("","");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -90,14 +95,20 @@ public class Librarian implements IView, IModel
             return transactionErrorMessage;
         }
         else
+        if (key.equals("LoginError") == true)
+        {
+            System.out.println(loginErrorMessage);
+            return loginErrorMessage;
+        }
+        else
             return "";
     }
 
 
     public void createNewBook(Properties props){
          Book book = new Book(props);
-         book.save();
-        transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
+         book.save("add");
+         transactionErrorMessage = (String)book.getState("UpdateStatusMessage");
 
     }
     //----------------------------------------------------------------
@@ -117,7 +128,7 @@ public class Librarian implements IView, IModel
                 }
             }
         }
-        else if(key.equals("Login View") == true){
+        else if(key.equals("LoginView") == true){
             createAndShowLoginView();
         }
         else
@@ -132,6 +143,12 @@ public class Librarian implements IView, IModel
             createAndShowAddStudentBorrowerView();
         }
         else if (key.equals("AddBook") == true)
+        {
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
+        }
+        else if (key.equals("ModifyBook") == true)
         {
             String transType = key;
             transType =transType.trim();
@@ -208,17 +225,20 @@ public class Librarian implements IView, IModel
         try
         {
             systemUser = new SystemWorker(props);
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return true;
         }
         catch (InvalidPrimaryKeyException ex)
         {
-            loginErrorMessage = "ERROR: " + ex.getMessage();
+            loginErrorMessage = ex.getMessage();
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return false;
         }
         catch (PasswordMismatchException exec)
         {
 
-            loginErrorMessage = "ERROR: " + exec.getMessage();
+            loginErrorMessage = exec.getMessage();
+            //DEBUG System.out.println("Error Message: "+loginErrorMessage);
             return false;
         }
     }
@@ -243,25 +263,7 @@ public class Librarian implements IView, IModel
             new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
-/*
-    //----------------------------------------------------------
-    private void createAndShowTransactionChoiceView()
-    {
-        Scene currentScene = (Scene)myViews.get("TransactionChoiceView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("TransactionChoiceView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("TransactionChoiceView", currentScene);
-        }
-
-
-        // make the view visible by installing it into the frame
-        swapToView(currentScene);
-
-    }*/
     //------------------------------------------------------------
     private void createAndShowLoginView()
     {

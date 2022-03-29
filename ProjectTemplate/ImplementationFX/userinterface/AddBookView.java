@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -65,7 +66,8 @@ public class AddBookView extends View{
         populateFields();
 
         // myModel.subscribe("ServiceCharge", this);
-        //myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("AddBookErrorMessage", this);
+        myModel.subscribe("AddBookSuccessMessage",this);
     }
 
 
@@ -184,6 +186,12 @@ public class AddBookView extends View{
 
         yearOfPublication = new TextField();
         yearOfPublication.setEditable(true);
+        yearOfPublication.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                yearOfPublication.clear();;
+            }
+        });
         grid.add(yearOfPublication, 1, 9);
 
         Text iS = new Text(" ISBN : ");
@@ -300,7 +308,6 @@ public class AddBookView extends View{
 
         p2.setProperty("barcode", bar);
         p2.setProperty("title", titl);
-        p2.setProperty("discipline", disi);
         p2.setProperty("author1", au1);
         p2.setProperty("author2", au2);
         p2.setProperty("author3", au3);
@@ -308,33 +315,20 @@ public class AddBookView extends View{
         p2.setProperty("publisher", publi);
         p2.setProperty("yearOfPublication", yeaO);
         p2.setProperty("ISBN", isb);
-        p2.setProperty("quality", condi);
         p2.setProperty("suggestedPrice", sugPric);
         p2.setProperty("notes", no);
-        p2.setProperty("status", sta);
+        p2.setProperty("bookCondition", condi);
+        p2.setProperty("Status", sta);
 
-        if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ||
-                bar.length() != 6){
+        if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
             databaseErrorYear();
         }else {
-            myModel.stateChangeRequest("InsertBook", p2);
+            System.out.println(p2);
+            myModel.stateChangeRequest("AddBook", p2);
+
         }
 
-        barcode.clear();
-        title.clear();
-        author1.clear();
-        author2.clear();
-        author3.clear();
-        author4.clear();
-        publisher.clear();
-        yearOfPublication.clear();
-        ISBN.clear();
-        suggestedPrice.clear();
-        notes.clear();
 
-        quality.setValue("Good");
-        status.setValue("Active");
-        suggestedPrice.setText("0.00");
 
     }
 
@@ -356,6 +350,7 @@ public class AddBookView extends View{
         balance.setText((String)myModel.getState("Balance"));
         serviceCharge.setText((String)myModel.getState("ServiceCharge"));
         */
+        yearOfPublication.setText("(Must be Four Digits)");
     }
 
     /**
@@ -365,9 +360,14 @@ public class AddBookView extends View{
     public void updateState(String key, Object value)
     {
         clearErrorMessage();
+        //  DEBUG System.out.println(key);
 
-        if (key.equals("PopulateAddBookMessage") == true)
+        if (key.equals("AddBookErrorMessage") == true)
         {
+            displayErrorMessage((String)value);
+        }else if(key.equals("AddBookSuccessMessage")==true)
+        {
+            //  DEBUG System.out.println((String)value);
             displayMessage((String)value);
         }
     }
@@ -387,6 +387,24 @@ public class AddBookView extends View{
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
+        //  DEBUG System.out.println("Message: "+message);
+        if(message.equals("Book data for new book installed successfully in database!")){
+            barcode.clear();
+            title.clear();
+            author1.clear();
+            author2.clear();
+            author3.clear();
+            author4.clear();
+            publisher.clear();
+            yearOfPublication.clear();
+            ISBN.clear();
+            suggestedPrice.clear();
+            notes.clear();
+
+            quality.setValue("Good");
+            status.setValue("Active");
+            suggestedPrice.setText("0.00");
+        }
         statusLog.displayMessage(message);
     }
 

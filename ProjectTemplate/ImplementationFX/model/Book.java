@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class Book extends EntityBase{
 
-    private static final String myTableName = "Book";
+    private static final String myTableName = "book";
 
     protected Properties dependencies;
 
@@ -37,7 +37,7 @@ public class Book extends EntityBase{
             {
                 // copy all the retrieved data into persistent state
                 Properties retrievedAccountData = (Properties)allDataRetrieved.elementAt(0);
-                persistentState = new Properties();
+                this.persistentState = new Properties();
 
                 Enumeration allKeys = retrievedAccountData.propertyNames();
                 while (allKeys.hasMoreElements() == true)
@@ -47,8 +47,9 @@ public class Book extends EntityBase{
 
                     if (nextValue != null)
                     {
-                        persistentState.setProperty(nextKey, nextValue);
+                        this.persistentState.setProperty(nextKey, nextValue);
                     }
+                    System.out.println(nextKey+" : "+nextValue);
                 }
 
             }
@@ -78,34 +79,51 @@ public class Book extends EntityBase{
         }
     }
 
-    public void save()
+    public void save(String trans)
     {
-        updateStateInDatabase();
+        updateStateInDatabase(trans);
     }
 
-    private void updateStateInDatabase() // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
+    public void update() {
+        try {
+            Properties whereClause = new Properties();
+            whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
+            updatePersistentState(mySchema, persistentState, whereClause);
+            updateStatusMessage = "Book data updated successfully in database!";
+        }catch (SQLException ex){
+            System.out.println("Error in installing book data in database!");
+            System.out.println(ex.toString());
+            ex.printStackTrace();
+        }
+    }
+
+    private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
     {
+        System.out.println("Inside updateStateInDatabase");
+        System.out.println(persistentState.getProperty("barcode"));
         try
         {
-            if (persistentState.getProperty("barcode") != null)
+            if (trans=="modify")
             {
                 Properties whereClause = new Properties();
                 whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Book data updated successfully in database!";
             }
-            else
+            else if (trans=="add")
             {
-                Integer barcode = insertAutoIncrementalPersistentState(mySchema, persistentState);
+                System.out.println("Inside else in save book.");
+                Integer barcode = insertPersistentState(mySchema, persistentState);
                 persistentState.setProperty("barcode", "" + barcode.intValue());
                 updateStatusMessage = "Book data for new book installed successfully in database!";
             }
         }
         catch (SQLException ex)
         {
-            updateStatusMessage = "Error in installing account data in database!";
+            updateStatusMessage = "Error in adding book to database! Check format of inputs.";
             //System.out.println(ex.toString());
             ex.printStackTrace();
+            //  DEBUG System.out.println(updateStatusMessage);
         }
         catch (Exception excep) {
             System.out.println(excep);
@@ -116,17 +134,17 @@ public class Book extends EntityBase{
     private void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("Update", "UpdateStatusMessage");
-        dependencies.setProperty("ServiceCharge", "UpdateStatusMessage");
+        dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
 
         myRegistry.setDependencies(dependencies);
     }
 
     @Override
     public String toString() {
-        return "Title: " + persistentState.getProperty("bookTitle") + "; Author: " +
-                persistentState.getProperty("author")  + "; Year: " +
-                persistentState.getProperty("pubYear");
+        return "Title: " + persistentState.getProperty("title") + "; Author: " +
+                persistentState.getProperty("author1")  + "; Year: " +
+                persistentState.getProperty("yearOfPublication");
     }
 
     public void display() {
@@ -142,6 +160,10 @@ public class Book extends EntityBase{
     }
 
     public Object getState(String key) {
+        //  DEBUG System.out.println("In get State in book: "+key);
+        if(key.equals("UpdateStatusMessage")) {
+            return updateStatusMessage;
+        }else
         return persistentState.getProperty(key);
     }
 
@@ -164,7 +186,7 @@ public class Book extends EntityBase{
         v.addElement(persistentState.getProperty("ISBN")); //may need to check name
         v.addElement(persistentState.getProperty("suggestedPrice")); //need to enter
         v.addElement(persistentState.getProperty("notes")); //need to enter
-        v.addElement(persistentState.getProperty("Condition")); // gotta enter
+        v.addElement(persistentState.getProperty("bookCondition")); // gotta enter
         v.addElement(persistentState.getProperty("Status"));
 
 

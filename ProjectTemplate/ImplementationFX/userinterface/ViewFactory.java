@@ -17,7 +17,7 @@ public class ViewFactory {
 
 		else if(viewName.equals("AddStudentBorrowerView") == true)
 		{
-			return new addStudentBorrowerView(model);
+			return new AddStudentBorrowerView(model);
 		}
 		else if(viewName.equals("SearchStudentBorrowerView") == true)
 		{
@@ -48,8 +48,16 @@ public class ViewFactory {
 		{
 			return new AddBookView(model);
 		}
+		else if(viewName.equals("EnterBookBarcodeView") == true)
+		{
+			return new EnterBookBarcodeView(model);
+		}
+		else if(viewName.equals("ModifyBookView") == true)
+		{
+			return new ModifyBookView(model);
+		}
 
-		System.out.println("no View created");
+		System.out.println("no View created "+viewName );
 		return null;
 	}
 

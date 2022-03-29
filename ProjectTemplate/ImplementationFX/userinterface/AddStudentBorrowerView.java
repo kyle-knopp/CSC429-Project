@@ -207,6 +207,11 @@ public class AddStudentBorrowerView extends View
         Notes.setEditable(true);
         grid.add(Notes, 1, 7);
 
+        statusBox = new ComboBox();
+        statusBox.getItems().addAll("Active","Inactive");
+        statusBox.getSelectionModel().selectFirst();;
+        grid.add(statusBox,1,8);
+
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
 
@@ -289,6 +294,7 @@ public class AddStudentBorrowerView extends View
         p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
+        p.put("Status",statusBox.getValue());
 
         myModel.stateChangeRequest("AddStudentBorrower", p);
 

@@ -219,6 +219,35 @@ public class LibrarianView extends View
 
         container.getChildren().add(gCont);
 
+        HBox hCont = new HBox(10);
+        hCont.setAlignment(Pos.CENTER);
+        modifyWorkerButton = new Button("Modify a Worker");
+        modifyWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        modifyWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("", null);
+            }
+        });
+        hCont.getChildren().add(modifyWorkerButton);
+
+        container.getChildren().add(hCont);
+
+        HBox iCont = new HBox(10);
+        iCont.setAlignment(Pos.CENTER);
+        deleteWorkerButton = new Button("Delete a Worker");
+        deleteWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        deleteWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("SearchWorkerViewD", null);
+            }
+        });
+        hCont.getChildren().add(deleteWorkerButton);
+
+        container.getChildren().add(iCont);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);

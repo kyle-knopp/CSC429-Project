@@ -60,6 +60,18 @@ public class ViewFactory {
 		{
 			return new ModifyBookView(model);
 		}
+		else if(viewName.equals("SearchWorkerViewD") == true)
+		{
+			return new SearchWorkerViewD(model);
+		}
+		else if(viewName.equals("WorkerCollectionDeleteView") == true)
+		{
+		return new WorkerCollectionDeleteView(model);
+		}
+		else if(viewName.equals("DeleteWorkerView") == true)
+		{
+			return new DeleteWorkerView(model);
+		}
 
 		System.out.println("no View created "+viewName );
 		return null;

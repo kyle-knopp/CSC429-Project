@@ -210,6 +210,18 @@ public class Librarian implements IView, IModel
         {
             createAndShowStudentBorrowerCollectionModifyViewNo();
         }
+        else if (key.equals("SearchWorkerViewD") == true) //goes back to old collection
+        {
+            createAndShowSearchWorkerViewD();
+        }
+        else if (key.equals("WorkerCollectionDeleteView") == true) //goes back to old collection
+        {
+            createAndShowWorkerCollectionDeleteView();
+        }
+        else if (key.equals("DeleteWorkerView") == true) //goes back to delete screen
+    {
+        createAndShowDeleteWorkerView();
+    }
         myRegistry.updateSubscribers(key, this);
     }
 
@@ -444,6 +456,54 @@ public class Librarian implements IView, IModel
             View newView = ViewFactory.createView("StudentBorrowerCollectionModifyView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
             myViews.put("StudentBorrowerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowSearchWorkerViewD()
+    {
+        Scene currentScene = (Scene)myViews.get("SearchWorkerViewD");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("SearchWorkerViewD", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("SearchWorkerViewD", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowWorkerCollectionDeleteView()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionDeleteView");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("WorkerCollectionDeleteView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("WorkerCollectionDeleteView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowDeleteWorkerView()
+    {
+        Scene currentScene = (Scene)myViews.get("DeleteWorkerView");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("DeleteWorkerView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("DeleteWorkerView", currentScene);
         }
 
         swapToView(currentScene);

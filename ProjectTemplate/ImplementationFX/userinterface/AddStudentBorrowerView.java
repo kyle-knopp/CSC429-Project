@@ -124,7 +124,7 @@ public class AddStudentBorrowerView extends View
          */
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
-/**
+
         Text Label = new Text(" BannerId : ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
@@ -134,83 +134,83 @@ public class AddStudentBorrowerView extends View
         BannerId = new TextField();
         BannerId.setEditable(true);
         grid.add(BannerId, 1, 1);
-*/
 
-        Text Label = new Text(" First Name : ");
-        Label.setFont(myFont);
-        Label.setWrappingWidth(150);
-        Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 1);
+
+        Text Label1 = new Text(" First Name : ");
+        Label1.setFont(myFont);
+        Label1.setWrappingWidth(150);
+        Label1.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label1, 0, 2);
 
         FirstName = new TextField();
         FirstName.setEditable(true);
-        grid.add(FirstName, 1, 1);
+        grid.add(FirstName, 1, 2);
 
 
         Label = new Text(" Last Name : ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 2);
+        grid.add(Label, 0, 3);
 
         LastName = new TextField();
         LastName.setEditable(true);
-        grid.add(LastName, 1, 2);
+        grid.add(LastName, 1, 3);
 
         Label = new Text(" Contact Phone : ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 3);
+        grid.add(Label, 0, 4);
 
         ContactPhone = new TextField();
         ContactPhone.setEditable(true);
-        grid.add(ContactPhone, 1, 3);
+        grid.add(ContactPhone, 1, 4);
 
         Label = new Text(" Email : ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 4);
+        grid.add(Label, 0, 5);
 
         Email = new TextField();
         Email.setEditable(true);
-        grid.add(Email, 1, 4);
+        grid.add(Email, 1, 5);
 
         Label = new Text("  Date Of Latest Borrower Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 5);
+        grid.add(Label, 0, 6);
 
         DateOfLatestBorrowerStatus = new TextField();
         DateOfLatestBorrowerStatus.setEditable(true);
-        grid.add(DateOfLatestBorrowerStatus, 1, 5);
+        grid.add(DateOfLatestBorrowerStatus, 1, 6);
 
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 6);
+        grid.add(Label, 0, 7);
 
         DateOfRegistration = new TextField();
         DateOfRegistration.setEditable(true);
-        grid.add(DateOfRegistration, 1, 6);
+        grid.add(DateOfRegistration, 1, 7);
 
         Label = new Text("  Notes: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 7);
+        grid.add(Label, 0, 8);
 
         Notes = new TextField();
         Notes.setEditable(true);
-        grid.add(Notes, 1, 7);
+        grid.add(Notes, 1, 8);
 
         statusBox = new ComboBox();
         statusBox.getItems().addAll("Active","Inactive");
         statusBox.getSelectionModel().selectFirst();;
-        grid.add(statusBox,1,8);
+        grid.add(statusBox,1,9);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
@@ -286,7 +286,7 @@ public class AddStudentBorrowerView extends View
 
         Properties p = new Properties();
 
-      //  p.put("BannerId", BannerId.getText());
+        p.put("BannerId", BannerId.getText());
         p.put("FirstName", FirstName.getText());
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
@@ -299,13 +299,14 @@ public class AddStudentBorrowerView extends View
         myModel.stateChangeRequest("AddStudentBorrower", p);
 
         clearText();
-        //BannerId.clear();
+        BannerId.clear();
         FirstName.clear();
         LastName.clear();
         ContactPhone.clear();
         ContactPhone.clear();
         Email.clear();
         DateOfLatestBorrowerStatus.clear();
+        DateOfRegistration.clear();
         Notes.clear();
     }
 

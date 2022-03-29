@@ -99,7 +99,9 @@ public class Book extends EntityBase{
 
     private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
     {
-        System.out.println("Inside updateStateInDatabase");
+        //System.out.println("Inside updateStateInDatabase BOOK BOOK BOOK");
+       // System.out.println("Inside updateStateInDatabase");
+
         System.out.println(persistentState.getProperty("barcode"));
         try
         {

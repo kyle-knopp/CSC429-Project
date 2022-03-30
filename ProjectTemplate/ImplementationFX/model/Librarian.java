@@ -219,9 +219,35 @@ public class Librarian implements IView, IModel
             createAndShowWorkerCollectionDeleteView();
         }
         else if (key.equals("DeleteWorkerView") == true) //goes back to delete screen
-    {
-        createAndShowDeleteWorkerView();
-    }
+        {
+            createAndShowDeleteWorkerView();
+        }
+        else if (key.equals("WorkerCollectionDeleteViewNo") == true) //goes back to previous collection screen
+        {
+            createAndShowWorkerCollectionDeleteViewNo();
+        }
+        else if (key.equals("WorkerCollectionDeleteViewNo") == true) //goes back to previous collection screen
+        {
+            createAndShowWorkerCollectionDeleteViewNo();
+        }
+        else if (key.equals("SearchWorkerViewM") == true) //begin Modify Sequence
+        {
+            createAndShowSearchWorkerViewM();
+        }
+        else if (key.equals("WorkerCollectionModifyView") == true) //begin Modify Sequence
+        {
+            createAndShowWorkerCollectionModifyView();
+        }
+        else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
+        {
+            createAndShowModifyWorkerView();
+        }
+        else if (key.equals("WorkerCollectionModifyViewNo") == true) //begin Modify Sequence
+        {
+            createAndShowWorkerCollectionModifyViewNo();
+        }
+
+
         myRegistry.updateSubscribers(key, this);
     }
 
@@ -482,13 +508,11 @@ public class Librarian implements IView, IModel
     {
         Scene currentScene = (Scene)myViews.get("WorkerCollectionDeleteView");
 
-        if (currentScene == null)
-        {
-            // create our initial view
-            View newView = ViewFactory.createView("WorkerCollectionDeleteView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
-            myViews.put("WorkerCollectionDeleteView", currentScene);
-        }
+        // create our initial view
+        View newView = ViewFactory.createView("WorkerCollectionDeleteView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("WorkerCollectionDeleteView", currentScene);
+
 
         swapToView(currentScene);
 
@@ -510,6 +534,74 @@ public class Librarian implements IView, IModel
 
     }
 
+    private void createAndShowWorkerCollectionDeleteViewNo()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionDeleteView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("WorkerCollectionDeleteView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("WorkerCollectionDeleteView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowSearchWorkerViewM()
+    {
+        Scene currentScene = (Scene)myViews.get("SearchWorkerViewM");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("SearchWorkerViewM", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("SearchWorkerViewM", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowWorkerCollectionModifyView()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionModifyView");
+
+        // create our initial view
+        View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("WorkerCollectionModifyView", currentScene);
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowModifyWorkerView()
+    {
+        Scene currentScene = (Scene)myViews.get("ModifyWorkerView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("ModifyWorkerView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowWorkerCollectionModifyViewNo()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionModifyView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("WorkerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
 
     /** Register objects to receive state updates. */
     //----------------------------------------------------------
@@ -534,7 +626,6 @@ public class Librarian implements IView, IModel
     //-----------------------------------------------------------------------------
     public void swapToView(Scene newScene)
     {
-
 
         if (newScene == null)
         {

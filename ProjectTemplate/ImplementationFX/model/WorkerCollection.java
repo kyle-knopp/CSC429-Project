@@ -68,10 +68,10 @@ public class WorkerCollection  extends EntityBase
     //----------------------------------------------------------
     public Object getState(String key)
     {
-        if (key.equals("workers"))
+        if (key.equals("Workers"))
             return workerList;
         else
-        if (key.equals("workerList"))
+        if (key.equals("WorkerList"))
             return this;
         return null;
     }

@@ -72,6 +72,19 @@ public class ViewFactory {
 		{
 			return new DeleteWorkerView(model);
 		}
+		else if(viewName.equals("SearchWorkerViewM") == true)
+		{
+			return new SearchWorkerViewM(model);
+		}
+		else if(viewName.equals("WorkerCollectionModifyView") == true)
+		{
+			return new WorkerCollectionModifyView(model);
+		}
+		else if(viewName.equals("ModifyWorkerView") == true)
+		{
+			return new ModifyWorkerView(model);
+		}
+
 
 		System.out.println("no View created "+viewName );
 		return null;

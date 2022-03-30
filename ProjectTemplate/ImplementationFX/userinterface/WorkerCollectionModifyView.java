@@ -27,7 +27,7 @@ import model.Worker;
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class WorkerCollectionDeleteView extends View{
+public class WorkerCollectionModifyView extends View{
     // GUI components
     protected TableView<WorkerTableModel> tableOfWorkers;
     protected Button doneButton;
@@ -37,9 +37,9 @@ public class WorkerCollectionDeleteView extends View{
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public WorkerCollectionDeleteView(IModel worker)
+    public WorkerCollectionModifyView(IModel worker)
     {
-        super(worker, "WorkerCollectionDeleteView");
+        super(worker, "WorkerCollectionModifyView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -86,7 +86,7 @@ public class WorkerCollectionDeleteView extends View{
             {
                 System.out.println("loop");
                 Worker nextWorker = (Worker)entries.nextElement();
-                System.out.println("Next Student Borrower for table: " + nextWorker);
+                System.out.println("Next Worker for table: " + nextWorker);
                 Vector<String> view = nextWorker.getEntryListView();
 
                 // add this list entry to the list
@@ -133,7 +133,7 @@ public class WorkerCollectionDeleteView extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Workers To Delete");
+        Text prompt = new Text("List of Workers To Modify");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -218,8 +218,8 @@ public class WorkerCollectionDeleteView extends View{
                  */
                 //----------------------------------------------------------
                 clearErrorMessage();
-                myModel.stateChangeRequest("DeleteWorkerView", null);
-                //DeleteWorkerBorrowerView CancelTransaction
+                myModel.stateChangeRequest("ModifyWorkerView", null);
+                //ModifyWorkerView CancelTransaction
             }
         });
 
@@ -283,4 +283,5 @@ public class WorkerCollectionDeleteView extends View{
 
 
 }
+
 

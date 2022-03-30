@@ -80,7 +80,7 @@ public class LibrarianView extends View
     private VBox createTitle()
     {
         VBox container = new VBox(10);
-        Text titleText = new Text("       Library System          ");
+        Text titleText = new Text(" Library System ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -227,7 +227,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("", null);
+                myModel.stateChangeRequest("SearchWorkerViewM", null);
             }
         });
         hCont.getChildren().add(modifyWorkerButton);
@@ -245,7 +245,7 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("SearchWorkerViewD", null);
             }
         });
-        hCont.getChildren().add(deleteWorkerButton);
+        iCont.getChildren().add(deleteWorkerButton);
 
         container.getChildren().add(iCont);
 

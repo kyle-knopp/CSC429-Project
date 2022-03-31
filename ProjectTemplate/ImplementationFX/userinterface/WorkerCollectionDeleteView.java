@@ -19,10 +19,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.*;
 import model.StudentBorrower;
-import model.StudentBorrowerCollection;
-import model.StudentBorrower;
-import model.Worker;
 
 import java.util.Enumeration;
 import java.util.Vector;
@@ -74,9 +72,9 @@ public class WorkerCollectionDeleteView extends View{
         try
         {
             System.out.println("2");
-            StudentBorrowerCollection studentborrowerCollection = (StudentBorrowerCollection)myModel.getState("WorkerList");
+            WorkerCollection workerCollection = (WorkerCollection)myModel.getState("WorkerList");
             System.out.println("3");
-            Vector entryList = (Vector)studentborrowerCollection.getState("Workers");
+            Vector entryList = (Vector)workerCollection.getState("Workers");
             System.out.println("4");
             Enumeration entries = entryList.elements();
             System.out.println("5");
@@ -176,7 +174,7 @@ public class WorkerCollectionDeleteView extends View{
         TableColumn DateOfLatestCredentialsStatusColumn = new TableColumn("Date Of Latest Credentials Status") ;
         DateOfLatestCredentialsStatusColumn.setMinWidth(100);
         DateOfLatestCredentialsStatusColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("dateOfLatestCredentialsStatus"));
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("dateOfLatestCredentials"));
 
         TableColumn DateOfHireColumn = new TableColumn("Date Of Hire") ;
         DateOfHireColumn.setMinWidth(100);
@@ -218,7 +216,7 @@ public class WorkerCollectionDeleteView extends View{
                  */
                 //----------------------------------------------------------
                 clearErrorMessage();
-                myModel.stateChangeRequest("DeleteWorkerView", null);
+                myModel.stateChangeRequest("CancelTransaction", null);
                 //DeleteWorkerBorrowerView CancelTransaction
             }
         });

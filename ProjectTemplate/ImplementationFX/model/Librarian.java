@@ -213,7 +213,7 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence
         {
-            System.out.println("modify");
+
             createAndShowModifyStudentBorrowerView();
         }
         else if (key.equals("StudentBorrowerCollectionModifyViewNo") == true) //goes back to old collection
@@ -229,17 +229,13 @@ public class Librarian implements IView, IModel
             Properties p = (Properties)value;
             String fname = p.getProperty("FirstName");
             myWorkers = new WorkerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            myWorkers.findWorkersWithFirstNameLike(fname);
             //myStudentBorrowers.display();
             createAndShowWorkerCollectionDeleteView();
         }
-        else if (key.equals("DeleteWorkerView") == true) //goes back to delete screen
+        else if (key.equals("DeleteWorkerView") == true) //goes to delete screen
         {
             createAndShowDeleteWorkerView();
-        }
-        else if (key.equals("WorkerCollectionDeleteViewNo") == true) //goes back to previous collection screen
-        {
-            createAndShowWorkerCollectionDeleteViewNo();
         }
         else if (key.equals("WorkerCollectionDeleteViewNo") == true) //goes back to previous collection screen
         {
@@ -249,15 +245,20 @@ public class Librarian implements IView, IModel
         {
             createAndShowSearchWorkerViewM();
         }
-        else if (key.equals("WorkerCollectionModifyView") == true) //begin Modify Sequence
+        else if (key.equals("WorkerCollectionModifyView") == true) //creates worker collection
         {
+            Properties p = (Properties)value;
+            String fname = p.getProperty("FirstName");
+            myWorkers = new WorkerCollection();
+            myWorkers.findWorkersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
             createAndShowWorkerCollectionModifyView();
         }
         else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
         {
             createAndShowModifyWorkerView();
         }
-        else if (key.equals("WorkerCollectionModifyViewNo") == true) //begin Modify Sequence
+        else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
         {
             createAndShowWorkerCollectionModifyViewNo();
         }

@@ -72,8 +72,8 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
         dependencies.setProperty("Login", "LoginError");
-        dependencies.setProperty("AddBook", "AddBookErrorMessage");
-        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
+        //dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        //dependencies.setProperty("AddBook", "AddBookSuccessMessage");
         dependencies.setProperty("UpdateStatusMessage","");
         dependencies.setProperty("BookData", "TransactionError");
         //dependencies.setProperty("","");

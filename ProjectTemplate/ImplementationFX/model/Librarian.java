@@ -179,6 +179,9 @@ public class Librarian implements IView, IModel
             createAndShowSearchStudentBorrowerView();
 
         }
+        else if(key.equals("Delete a Book") ==true){
+            createAndShowDeleteABookView();
+        }
         else if (key.equals("StudentBorrowerCollectionDeleteView") == true) //Creates new collection
         {
 
@@ -437,6 +440,21 @@ public class Librarian implements IView, IModel
 
         swapToView(currentScene);
 
+    }
+
+    //------------------------------------------------------------
+    private void createAndShowDeleteABookView(){
+        Scene currentScene = (Scene)myViews.get("DeleteABookView");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("DeleteABookView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("DeleteABookView", currentScene);
+        }
+
+        swapToView(currentScene);
     }
 
     //------------------------------------------------------------

@@ -190,6 +190,7 @@ public class Book extends EntityBase{
         v.addElement(persistentState.getProperty("notes")); //need to enter
         v.addElement(persistentState.getProperty("bookCondition")); // gotta enter
         v.addElement(persistentState.getProperty("Status"));
+        v.addElement(persistentState.getProperty("prefix"));
 
 
         return v;

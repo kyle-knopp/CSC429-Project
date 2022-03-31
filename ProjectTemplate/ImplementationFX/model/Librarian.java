@@ -31,6 +31,7 @@ public class Librarian implements IView, IModel
     private SystemWorker systemUser;
 
     private StudentBorrowerCollection myStudentBorrowers;
+    private WorkerCollection myWorkers;
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -103,6 +104,10 @@ public class Librarian implements IView, IModel
         }
         if(key.equals("StudentBorrowerList") == true){
             return myStudentBorrowers;
+        }
+        else
+        if(key.equals("WorkerList") == true){
+            return myWorkers;
         }
         else
             return "";
@@ -221,6 +226,11 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("WorkerCollectionDeleteView") == true) //goes back to old collection
         {
+            Properties p = (Properties)value;
+            String fname = p.getProperty("FirstName");
+            myWorkers = new WorkerCollection();
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
             createAndShowWorkerCollectionDeleteView();
         }
         else if (key.equals("DeleteWorkerView") == true) //goes back to delete screen

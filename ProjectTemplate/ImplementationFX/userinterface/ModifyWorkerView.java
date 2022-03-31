@@ -95,7 +95,7 @@ public class ModifyWorkerView extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text searchLabel = new Text(" Do you want to Modify this Worker: ");
+        Text searchLabel = new Text(" Do you want to Modify: ");
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
         searchLabel.setFont(myFont);
         searchLabel.setWrappingWidth(150);

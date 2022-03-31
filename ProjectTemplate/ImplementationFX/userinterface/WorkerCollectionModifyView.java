@@ -192,7 +192,7 @@ public class WorkerCollectionModifyView extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("DeleteWorkerView", null);
+                    myModel.stateChangeRequest("ModifyWorkerView", null);
                 }
             }
         });

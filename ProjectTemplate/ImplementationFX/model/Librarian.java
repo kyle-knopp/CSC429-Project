@@ -208,7 +208,11 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("StudentBorrowerCollectionModifyView") == true) //creates collection
         {
-
+            Properties p = (Properties)value;
+            String fname = p.getProperty("FirstName");
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionModifyView();
         }
         else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence

@@ -99,6 +99,9 @@
 [3/27/22, 8:43 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book java.lang.NullPointerException>
 [3/27/22, 8:54 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'ISBN' at row 1>
 
-[3/30/22, 5:17 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
-[3/30/22, 5:17 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
-[3/31/22, 3:27 PM]|AddBookTransaction|processTransaction|Error|NOTAG|null<Error in saving book java.lang.NullPointerException>
+[3/29/22, 1:07 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[3/29/22, 1:07 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[3/29/22, 1:12 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[3/29/22, 1:12 PM]|DeleteBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[3/29/22, 1:12 PM]|DeleteBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 0000 found.>
+[3/29/22, 1:48 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' Status = 'Active' , title = '' , yearOfPublication =  WHERE barcode = 123456' at line 1>

@@ -14,7 +14,10 @@ public class ViewFactory {
 		{
 			return new LibrarianView(model);
 		}
-
+		else if(viewName.equals("DeleteBookView") == true)
+		{
+			return new DeleteBookView(model);
+		}
 		else if(viewName.equals("AddStudentBorrowerView") == true)
 		{
 			return new AddStudentBorrowerView(model);

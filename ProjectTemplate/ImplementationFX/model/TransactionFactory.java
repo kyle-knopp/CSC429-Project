@@ -36,6 +36,10 @@ public class TransactionFactory {
 		{
 			retValue = new ModifyBookTransaction();
 		}
+		else if(transType.equals("DeleteBook"))
+		{
+			retValue = new DeleteBookTransaction();
+		}
 		else if(transType.equals("AddStudentBorrower"))
 		{
 			retValue = new AddStudentBorrowerTransaction();

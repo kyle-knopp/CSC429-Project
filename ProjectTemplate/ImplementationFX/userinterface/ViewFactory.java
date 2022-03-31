@@ -66,6 +66,31 @@ public class ViewFactory {
 		{
 			return new DeleteABookView(model);
 		}
+		else if(viewName.equals("SearchWorkerViewD") == true)
+		{
+			return new SearchWorkerViewD(model);
+		}
+		else if(viewName.equals("WorkerCollectionDeleteView") == true)
+		{
+		return new WorkerCollectionDeleteView(model);
+		}
+		else if(viewName.equals("DeleteWorkerView") == true)
+		{
+			return new DeleteWorkerView(model);
+		}
+		else if(viewName.equals("SearchWorkerViewM") == true)
+		{
+			return new SearchWorkerViewM(model);
+		}
+		else if(viewName.equals("WorkerCollectionModifyView") == true)
+		{
+			return new WorkerCollectionModifyView(model);
+		}
+		else if(viewName.equals("ModifyWorkerView") == true)
+		{
+			return new ModifyWorkerView(model);
+		}
+
 
 		System.out.println("no View created "+viewName );
 		return null;

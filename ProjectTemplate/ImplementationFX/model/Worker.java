@@ -127,9 +127,15 @@ public class Worker extends EntityBase{
 
     @Override
     public String toString() { //dont use dont need to change
-        return "Title: " + persistentState.getProperty("bookTitle") + "; Author: " +
-                persistentState.getProperty("author")  + "; Year: " +
-                persistentState.getProperty("pubYear");
+        return "bannerID: " + persistentState.getProperty("bannerID") +
+                "; firstName: " + persistentState.getProperty("firstName")  +
+                "; lastName: " + persistentState.getProperty("lastName") +
+                "; phone: " + persistentState.getProperty("phone")  +
+                "; email: " + persistentState.getProperty("email") +
+                "; credentials: " + persistentState.getProperty("credentials")  +
+                "; dateOfLatestCredentials: " + persistentState.getProperty("dateOfLatestCredentials") +
+                "; dateOfHire: " + persistentState.getProperty("dateOfHire")  +
+                "; password: " + persistentState.getProperty("password");
     }
 
     public void display() {

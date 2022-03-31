@@ -80,7 +80,7 @@ public class LibrarianView extends View
     private VBox createTitle()
     {
         VBox container = new VBox(10);
-        Text titleText = new Text("       Library System          ");
+        Text titleText = new Text(" Library System ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -219,6 +219,35 @@ public class LibrarianView extends View
 
         container.getChildren().add(gCont);
 
+        HBox hCont = new HBox(10);
+        hCont.setAlignment(Pos.CENTER);
+        modifyWorkerButton = new Button("Modify a Worker");
+        modifyWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        modifyWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("SearchWorkerViewM", null);
+            }
+        });
+        hCont.getChildren().add(modifyWorkerButton);
+
+        container.getChildren().add(hCont);
+
+        HBox iCont = new HBox(10);
+        iCont.setAlignment(Pos.CENTER);
+        deleteWorkerButton = new Button("Delete a Worker");
+        deleteWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        deleteWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("SearchWorkerViewD", null);
+            }
+        });
+        iCont.getChildren().add(deleteWorkerButton);
+
+        container.getChildren().add(iCont);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);

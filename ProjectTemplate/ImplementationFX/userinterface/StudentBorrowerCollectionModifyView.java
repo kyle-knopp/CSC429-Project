@@ -224,7 +224,7 @@ public class StudentBorrowerCollectionModifyView extends View {
                  */
                 //----------------------------------------------------------
                 clearErrorMessage();
-                myModel.stateChangeRequest("ModifyStudentBorrowerView", null);
+                myModel.stateChangeRequest("CancelTransaction", null);
                 //ModifyStudentBorrowerView CancelTransaction
             }
         });

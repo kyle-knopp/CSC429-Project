@@ -73,6 +73,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
         try
         {
             System.out.println("2");
+            System.out.println(myModel.getState("StudentBorrowerList"));
             StudentBorrowerCollection studentborrowerCollection = (StudentBorrowerCollection)myModel.getState("StudentBorrowerList");
             System.out.println("3");
             Vector entryList = (Vector)studentborrowerCollection.getState("StudentBorrowers");

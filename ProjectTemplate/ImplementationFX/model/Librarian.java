@@ -74,6 +74,7 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("AddBook", "AddBookErrorMessage");
         dependencies.setProperty("AddBook", "AddBookSuccessMessage");
         dependencies.setProperty("UpdateStatusMessage","");
+        dependencies.setProperty("BookData", "TransactionError");
         //dependencies.setProperty("","");
 
         myRegistry.setDependencies(dependencies);
@@ -99,6 +100,9 @@ public class Librarian implements IView, IModel
         {
             System.out.println(loginErrorMessage);
             return loginErrorMessage;
+        }
+        if(key.equals("StudentBorrowerList") == true){
+            return myStudentBorrowers;
         }
         else
             return "";
@@ -177,9 +181,10 @@ public class Librarian implements IView, IModel
         {
 
             Properties p = (Properties)value;
-            String zipCode = p.getProperty("FirstName");
+            String fname = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(zipCode);
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionDeleteView();
 
         }

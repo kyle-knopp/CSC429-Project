@@ -127,9 +127,14 @@ public class StudentBorrower extends EntityBase{
 
     @Override
     public String toString() { //change this later - isn't used currently
-        return "Title: " + persistentState.getProperty("bookTitle") + "; Author: " +
-                persistentState.getProperty("author")  + "; Year: " +
-                persistentState.getProperty("pubYear");
+        return "BannerId: " + persistentState.getProperty("BannerId") + "; FirstName: " +
+                persistentState.getProperty("FirstName")  + "; LastName: " +
+                persistentState.getProperty("LastName") + "; ContactPhone " + persistentState.getProperty("ContactPhone") +
+                "; Email " + persistentState.getProperty("Email") +
+                "; DateOfLatestBorrowerStatus " + persistentState.getProperty("DateOfLatestBorrowerStatus") +
+                "; DateOfRegistration " + persistentState.getProperty("DateOfRegistration") +
+                "; Notes " + persistentState.getProperty("Notes") +
+                "; status " + persistentState.getProperty("status");
     }
 
     public void display() {
@@ -153,6 +158,7 @@ public class StudentBorrower extends EntityBase{
             persistentState.setProperty(key, (String)value);
         }
     }
+
     public Vector<String> getEntryListView() {
         Vector<String> v = new Vector<String>();
 

@@ -322,16 +322,7 @@ public class DeleteBookView extends View{
         String stat= (String)myModel.getState("Status");
          */
 
-        //String stat= (String)myModel.getState("Status");
-        //System.out.println("Stat: " + stat);
-
-
         Properties p2 = new Properties();
-
-        //String stat = p2.getProperty("Status");
-        //6System.out.println("Stat: " + stat);
-
-
 
         /**
         p2.setProperty("barcode",bar);
@@ -352,11 +343,6 @@ public class DeleteBookView extends View{
 
         p2.setProperty("Status","Inactive");
 
-
-
-        /*if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
-            databaseErrorYear();
-        }else {*/
         System.out.println(p2);
         myModel.stateChangeRequest("DeleteBook", p2);
         //}
@@ -378,6 +364,7 @@ public class DeleteBookView extends View{
         suggestedPrice.setText("0.00");
          */
 
+        displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
     }
 
 
@@ -400,7 +387,7 @@ public class DeleteBookView extends View{
         conditionMatt.getItems().add(allowedCondition[1]);*/
 
         String barcodeText = (String) myModel.getState("barcode");
-        String titleText = (String) myModel.getState("title");
+        titleText = (String) myModel.getState("title");
         String a1Text = (String) myModel.getState("author1");
         String a2Text = (String) myModel.getState("author2");
         String a3Text = (String) myModel.getState("author3");

@@ -19,16 +19,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import model.StudentBorrower;
-import model.StudentBorrowerCollection;
+import model.*;
 import model.StudentBorrower;
 
 import java.util.Enumeration;
 import java.util.Vector;
 
-public class StudentBorrowerCollectionDeleteView extends View{
+public class WorkerCollectionModifyView extends View{
     // GUI components
-    protected TableView<StudentBorrowerTableModel> tableOfStudentBorrowers;
+    protected TableView<WorkerTableModel> tableOfWorkers;
     protected Button doneButton;
 
     // For showing error message
@@ -36,9 +35,9 @@ public class StudentBorrowerCollectionDeleteView extends View{
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public StudentBorrowerCollectionDeleteView(IModel StudentBorrower)
+    public WorkerCollectionModifyView(IModel worker)
     {
-        super(StudentBorrower, "StudentBorrowerCollectionDeleteView");
+        super(worker, "WorkerCollectionModifyView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -68,14 +67,14 @@ public class StudentBorrowerCollectionDeleteView extends View{
     protected void getEntryTableModelValues()
     {
         System.out.println("Getting here 1");
-        ObservableList<StudentBorrowerTableModel> tableData = FXCollections.observableArrayList();
+        ObservableList<WorkerTableModel> tableData = FXCollections.observableArrayList();
         System.out.println("1");
         try
         {
             System.out.println("2");
-            StudentBorrowerCollection studentborrowerCollection = (StudentBorrowerCollection)myModel.getState("StudentBorrowerList");
+            WorkerCollection workerCollection = (WorkerCollection)myModel.getState("WorkerList");
             System.out.println("3");
-            Vector entryList = (Vector)studentborrowerCollection.getState("StudentBorrowers");
+            Vector entryList = (Vector)workerCollection.getState("Workers");
             System.out.println("4");
             Enumeration entries = entryList.elements();
             System.out.println("5");
@@ -84,17 +83,17 @@ public class StudentBorrowerCollectionDeleteView extends View{
             while (entries.hasMoreElements() == true)
             {
                 System.out.println("loop");
-                StudentBorrower nextStudentBorrower = (StudentBorrower)entries.nextElement();
-                System.out.println("Next Student Borrower for table: " + nextStudentBorrower);
-                Vector<String> view = nextStudentBorrower.getEntryListView();
+                Worker nextWorker = (Worker)entries.nextElement();
+                System.out.println("Next Worker for table: " + nextWorker);
+                Vector<String> view = nextWorker.getEntryListView();
 
                 // add this list entry to the list
-                StudentBorrowerTableModel nextTableRowData = new StudentBorrowerTableModel(view);
+                WorkerTableModel nextTableRowData = new WorkerTableModel(view);
                 tableData.add(nextTableRowData);
 
             }
 
-            tableOfStudentBorrowers.setItems(tableData);
+            tableOfWorkers.setItems(tableData);
         }
         catch (Exception e) {//SQLException e) {
             // Need to handle this exception
@@ -132,78 +131,74 @@ public class StudentBorrowerCollectionDeleteView extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Student Borrowers To Delete");
+        Text prompt = new Text("List of Workers To Modify");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-        tableOfStudentBorrowers = new TableView<StudentBorrowerTableModel>();
-        tableOfStudentBorrowers.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tableOfWorkers = new TableView<WorkerTableModel>();
+        tableOfWorkers.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 
-        TableColumn patronIdColumn = new TableColumn("Banner Id") ;
-        patronIdColumn.setMinWidth(100);
-        patronIdColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("BannerId"));
+        TableColumn BannerIdColumn = new TableColumn("Banner Id") ;
+        BannerIdColumn.setMinWidth(100);
+        BannerIdColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("bannerId"));
 
-        TableColumn patronNameColumn = new TableColumn("First Name") ;
-        patronNameColumn.setMinWidth(100);
-        patronNameColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("FirstName"));
+        TableColumn FirstNameColumn = new TableColumn("First Name") ;
+        FirstNameColumn.setMinWidth(100);
+        FirstNameColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("firstName"));
 
-        TableColumn patronAddressColumn = new TableColumn("Last Name") ;
-        patronAddressColumn.setMinWidth(100);
-        patronAddressColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("LastName"));
+        TableColumn LastNameColumn = new TableColumn("Last Name") ;
+        LastNameColumn.setMinWidth(100);
+        LastNameColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("lastName"));
 
-        TableColumn patronCityColumn = new TableColumn("Phone Number") ;
-        patronCityColumn.setMinWidth(100);
-        patronCityColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("ContactPhone"));
+        TableColumn PhoneColumn = new TableColumn("Phone Number") ;
+        PhoneColumn.setMinWidth(100);
+        PhoneColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("phone"));
 
-        TableColumn patronStateCodeColumn = new TableColumn("Email") ;
-        patronStateCodeColumn.setMinWidth(100);
-        patronStateCodeColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("Email"));
+        TableColumn EmailColumn = new TableColumn("Email") ;
+        EmailColumn.setMinWidth(100);
+        EmailColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("email"));
 
-        TableColumn patronZipcodeColumn = new TableColumn("Date Of Latest Borrower Status") ;
-        patronZipcodeColumn.setMinWidth(100);
-        patronZipcodeColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("DateOfLatestBorrowerStatus"));
+        TableColumn CredentialsColumn = new TableColumn("Credentials") ;
+        CredentialsColumn.setMinWidth(100);
+        CredentialsColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("credentials"));
 
-        TableColumn patronEmailColumn = new TableColumn("Date Of Registration") ;
-        patronEmailColumn.setMinWidth(100);
-        patronEmailColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("DateOfRegistration"));
+        TableColumn DateOfLatestCredentialsStatusColumn = new TableColumn("Date Of Latest Credentials Status") ;
+        DateOfLatestCredentialsStatusColumn.setMinWidth(100);
+        DateOfLatestCredentialsStatusColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("dateOfLatestCredentials"));
 
-        TableColumn patronDateOfBirthColumn = new TableColumn("Notes") ;
-        patronDateOfBirthColumn.setMinWidth(100);
-        patronDateOfBirthColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("Notes"));
+        TableColumn DateOfHireColumn = new TableColumn("Date Of Hire") ;
+        DateOfHireColumn.setMinWidth(100);
+        DateOfHireColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("DateOfHire"));
 
-        TableColumn patronStatusColumn = new TableColumn("status") ;
-        patronStatusColumn.setMinWidth(100);
-        patronStatusColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("status"));
 
-        tableOfStudentBorrowers.getColumns().addAll(patronIdColumn, patronNameColumn,
-                patronAddressColumn, patronCityColumn, patronStateCodeColumn,
-                patronZipcodeColumn, patronEmailColumn, patronDateOfBirthColumn, patronStatusColumn);
+        tableOfWorkers.getColumns().addAll(BannerIdColumn,
+                FirstNameColumn, LastNameColumn, PhoneColumn,
+                EmailColumn, CredentialsColumn, DateOfLatestCredentialsStatusColumn, DateOfHireColumn);
 
-        tableOfStudentBorrowers.setOnMousePressed(new EventHandler<MouseEvent>() {
+        tableOfWorkers.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event)
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("DeleteStudentBorrowerView", null);
+                    myModel.stateChangeRequest("ModifyWorkerView", null);
                 }
             }
         });
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPrefSize(115, 150);
-        scrollPane.setContent(tableOfStudentBorrowers);
+        scrollPane.setContent(tableOfWorkers);
 
 
         //TODO need to look into switching this
@@ -222,7 +217,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
                 //----------------------------------------------------------
                 clearErrorMessage();
                 myModel.stateChangeRequest("CancelTransaction", null);
-                //DeleteStudentBorrowerView CancelTransaction
+                //ModifyWorkerView CancelTransaction
             }
         });
 
@@ -286,4 +281,5 @@ public class StudentBorrowerCollectionDeleteView extends View{
 
 
 }
+
 

@@ -31,6 +31,7 @@ public class Librarian implements IView, IModel
     private SystemWorker systemUser;
 
     private StudentBorrowerCollection myStudentBorrowers;
+    private WorkerCollection myWorkers;
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -71,9 +72,10 @@ public class Librarian implements IView, IModel
         dependencies.setProperty("Search Books", "TransactionError");
         dependencies.setProperty("Search Patrons", "TransactionError");
         dependencies.setProperty("Login", "LoginError");
-        dependencies.setProperty("AddBook", "AddBookErrorMessage");
-        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
+        //dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        //dependencies.setProperty("AddBook", "AddBookSuccessMessage");
         dependencies.setProperty("UpdateStatusMessage","");
+        dependencies.setProperty("BookData", "TransactionError");
         //dependencies.setProperty("","");
 
         myRegistry.setDependencies(dependencies);
@@ -99,6 +101,13 @@ public class Librarian implements IView, IModel
         {
             System.out.println(loginErrorMessage);
             return loginErrorMessage;
+        }
+        if(key.equals("StudentBorrowerList") == true){
+            return myStudentBorrowers;
+        }
+        else
+        if(key.equals("WorkerList") == true){
+            return myWorkers;
         }
         else
             return "";
@@ -180,9 +189,10 @@ public class Librarian implements IView, IModel
         {
 
             Properties p = (Properties)value;
-            String zipCode = p.getProperty("FirstName");
+            String fname = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(zipCode);
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionDeleteView();
 
         }
@@ -201,18 +211,66 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("StudentBorrowerCollectionModifyView") == true) //creates collection
         {
-
+            Properties p = (Properties)value;
+            String fname = p.getProperty("FirstName");
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionModifyView();
         }
         else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence
         {
-            System.out.println("modify");
+
             createAndShowModifyStudentBorrowerView();
         }
         else if (key.equals("StudentBorrowerCollectionModifyViewNo") == true) //goes back to old collection
         {
             createAndShowStudentBorrowerCollectionModifyViewNo();
         }
+        else if (key.equals("SearchWorkerViewD") == true) //goes back to old collection
+        {
+            createAndShowSearchWorkerViewD();
+        }
+        else if (key.equals("WorkerCollectionDeleteView") == true) //goes back to old collection
+        {
+            Properties p = (Properties)value;
+            String fname = p.getProperty("FirstName");
+            myWorkers = new WorkerCollection();
+            myWorkers.findWorkersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
+            createAndShowWorkerCollectionDeleteView();
+        }
+        else if (key.equals("DeleteWorkerView") == true) //goes to delete screen
+        {
+            createAndShowDeleteWorkerView();
+        }
+        else if (key.equals("WorkerCollectionDeleteViewNo") == true) //goes back to previous collection screen
+        {
+            createAndShowWorkerCollectionDeleteViewNo();
+        }
+        else if (key.equals("SearchWorkerViewM") == true) //begin Modify Sequence
+        {
+            createAndShowSearchWorkerViewM();
+        }
+        else if (key.equals("WorkerCollectionModifyView") == true) //creates worker collection
+        {
+            Properties p = (Properties)value;
+            String fname = p.getProperty("FirstName");
+            myWorkers = new WorkerCollection();
+            myWorkers.findWorkersWithFirstNameLike(fname);
+            //myStudentBorrowers.display();
+            createAndShowWorkerCollectionModifyView();
+        }
+        else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
+        {
+            createAndShowModifyWorkerView();
+        }
+        else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
+        {
+            createAndShowWorkerCollectionModifyViewNo();
+        }
+
+
         myRegistry.updateSubscribers(key, this);
     }
 
@@ -468,6 +526,120 @@ public class Librarian implements IView, IModel
 
     }
 
+    private void createAndShowSearchWorkerViewD()
+    {
+        Scene currentScene = (Scene)myViews.get("SearchWorkerViewD");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("SearchWorkerViewD", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("SearchWorkerViewD", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowWorkerCollectionDeleteView()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionDeleteView");
+
+        // create our initial view
+        View newView = ViewFactory.createView("WorkerCollectionDeleteView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("WorkerCollectionDeleteView", currentScene);
+
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowDeleteWorkerView()
+    {
+        Scene currentScene = (Scene)myViews.get("DeleteWorkerView");
+
+        if (currentScene == null)
+        {
+            // create our initial view
+            View newView = ViewFactory.createView("DeleteWorkerView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("DeleteWorkerView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowWorkerCollectionDeleteViewNo()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionDeleteView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("WorkerCollectionDeleteView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("WorkerCollectionDeleteView", currentScene);
+        }
+
+        swapToView(currentScene);
+
+    }
+
+    private void createAndShowSearchWorkerViewM()
+    {
+        Scene currentScene = (Scene)myViews.get("SearchWorkerViewM");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("SearchWorkerViewM", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("SearchWorkerViewM", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowWorkerCollectionModifyView()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionModifyView");
+
+        // create our initial view
+        View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
+        currentScene = new Scene(newView);
+        myViews.put("WorkerCollectionModifyView", currentScene);
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowModifyWorkerView()
+    {
+        Scene currentScene = (Scene)myViews.get("ModifyWorkerView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("ModifyWorkerView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowWorkerCollectionModifyViewNo()
+    {
+        Scene currentScene = (Scene)myViews.get("WorkerCollectionModifyView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("WorkerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
 
     /** Register objects to receive state updates. */
     //----------------------------------------------------------
@@ -492,7 +664,6 @@ public class Librarian implements IView, IModel
     //-----------------------------------------------------------------------------
     public void swapToView(Scene newScene)
     {
-
 
         if (newScene == null)
         {

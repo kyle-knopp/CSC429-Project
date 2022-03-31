@@ -320,9 +320,12 @@ public class AddBookView extends View{
         p2.setProperty("bookCondition", condi);
         p2.setProperty("Status", sta);
 
-
-
-        p2.setProperty("prefix",getBookPrefix(bar));
+        if(bar.length() >= 3) {
+            p2.setProperty("prefix", getBookPrefix(bar));
+        }
+        else{
+            System.out.println("Barcode in incorrect format");
+        }
 
         if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
             databaseErrorYear();
@@ -337,8 +340,8 @@ public class AddBookView extends View{
     }
 
     public String getBookPrefix(String barccode){
-        String prefix=new String();
 
+        String prefix = barccode.substring(0, 2);
         return prefix;
     }
 

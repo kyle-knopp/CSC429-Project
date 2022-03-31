@@ -10,7 +10,7 @@ import java.util.Vector;
 
 
 
-public class StudentBorrowerTableModel {
+public class WorkerTableModel {
 
     private final SimpleStringProperty BannerId;
 
@@ -18,22 +18,20 @@ public class StudentBorrowerTableModel {
 
     private final SimpleStringProperty LastName;
 
-    private final SimpleStringProperty ContactPhone;
+    private final SimpleStringProperty Phone;
 
     private final SimpleStringProperty Email;
 
-    private final SimpleStringProperty DateOfLatestBorrowerStatus;
+    private final SimpleStringProperty Credentials;
 
-    private final SimpleStringProperty DateOfRegistration;
+    private final SimpleStringProperty dateOfLatestCredentials;
 
-    private final SimpleStringProperty Notes;
-
-    private final SimpleStringProperty Status;
+    private final SimpleStringProperty dateOfHire;
 
 
     //----------------------------------------------------------------------------
 
-    public StudentBorrowerTableModel(Vector<String> accountData) {
+    public WorkerTableModel(Vector<String> accountData) {
 
         BannerId = new SimpleStringProperty(accountData.elementAt(0));
 
@@ -41,17 +39,15 @@ public class StudentBorrowerTableModel {
 
         LastName = new SimpleStringProperty(accountData.elementAt(2));
 
-        ContactPhone = new SimpleStringProperty(accountData.elementAt(3));
+        Phone = new SimpleStringProperty(accountData.elementAt(3));
 
         Email = new SimpleStringProperty(accountData.elementAt(4));
 
-        DateOfLatestBorrowerStatus = new SimpleStringProperty(accountData.elementAt(5));
+        Credentials = new SimpleStringProperty(accountData.elementAt(5));
 
-        DateOfRegistration = new SimpleStringProperty(accountData.elementAt(6));
+        dateOfLatestCredentials = new SimpleStringProperty(accountData.elementAt(6));
 
-        Notes = new SimpleStringProperty(accountData.elementAt(7));
-
-        Status = new SimpleStringProperty(accountData.elementAt(8));
+        dateOfHire = new SimpleStringProperty(accountData.elementAt(7));
 
     }
 
@@ -107,16 +103,16 @@ public class StudentBorrowerTableModel {
 
     //----------------------------------------------------------------------------
 
-    public String getContactPhone() {
-        return ContactPhone.get();
+    public String getPhone() {
+        return Phone.get();
     }
 
 
     //----------------------------------------------------------------------------
 
-    public void setContactPhone(String pubyear) {
+    public void setPhone(String s) {
 
-        ContactPhone.set(pubyear);
+        Phone.set(s);
     }
 
     //----------------------------------------------------------------------------
@@ -134,61 +130,52 @@ public class StudentBorrowerTableModel {
 
     }
 
-
     //----------------------------------------------------------------------------
 
-    public String getDateOfLatestBorrowerStatus() {
-        return DateOfLatestBorrowerStatus.get();
-    }
-
-
-    //----------------------------------------------------------------------------
-
-    public void setDateOfLatestBorrowerStatus(String s) {
-
-        DateOfLatestBorrowerStatus.set(s);
+    public String getCredentials() {
+        return Credentials.get();
     }
 
 
     //----------------------------------------------------------------------------
 
-    public String getDateOfRegistration() {
-        return DateOfRegistration.get();
+    public void setCredentials(String s) {
+
+        Credentials.set(s);
+
     }
 
 
     //----------------------------------------------------------------------------
 
-    public void setDateOfRegistration(String stat) {
-
-        DateOfRegistration.set(stat);
-    }
-
-    //----------------------------------------------------------------------------
-
-    public String getNotes() {
-        return Notes.get();
+    public String getDateOfLatestCredentials() {
+        return dateOfLatestCredentials.get();
     }
 
 
     //----------------------------------------------------------------------------
 
-    public void setNotes(String stat) {
+    public void setDateOfLatestCredentials(String s) {
 
-        Notes.set(stat);
-    }
-
-    public String getStatus() {
-        return Status.get();
+        dateOfLatestCredentials.set(s);
     }
 
 
     //----------------------------------------------------------------------------
 
-    public void setStatus(String stat) {
-
-        Status.set(stat);
+    public String getDateOfHire() {
+        return dateOfHire.get();
     }
+
+
+    //----------------------------------------------------------------------------
+
+    public void setDateOfHire(String stat) {
+
+        dateOfHire.set(stat);
+    }
+
 }
+
 
 

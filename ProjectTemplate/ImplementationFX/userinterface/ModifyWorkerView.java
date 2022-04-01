@@ -26,38 +26,14 @@ import impresario.IModel;
 
 /** The class containing the Account View  for the ATM application */
 //==============================================================
-public class ModifyWorkerView extends View
+public class ModifyWorkerView extends AddWorkerView
 {
-
-    // GUI components
-    protected TextField SearchPatrons;
-
-    protected Button searchButton;
-
-    protected Button backButton;
-    protected Button submitButton;
-    // For showing error message
-    protected MessageView statusLog;
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
     public ModifyWorkerView(IModel worker)
     {
-        super(worker, "ModifyWorkerView");
-
-        // create a container for showing the contents
-        VBox container = new VBox(10);
-        container.setPadding(new Insets(15, 5, 5, 5));
-
-        // Add a title for this panel
-        container.getChildren().add(createTitle());
-
-        // create our GUI components, add them to this Container
-        container.getChildren().add(createFormContent());
-
-        container.getChildren().add(createStatusLog("             "));
-
-        getChildren().add(container);
+        super(worker);
 
         populateFields();
 
@@ -83,65 +59,6 @@ public class ModifyWorkerView extends View
         return container;
     }
 
-    // Create the main form content
-    //-------------------------------------------------------------
-    private VBox createFormContent()
-    {
-        VBox vbox = new VBox(10);
-
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-
-        Text searchLabel = new Text(" Do you want to Modify: ");
-        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        searchLabel.setFont(myFont);
-        searchLabel.setWrappingWidth(150);
-        searchLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(searchLabel, 0, 1);
-
-        SearchPatrons = new TextField();
-        SearchPatrons.setEditable(true);
-        //grid.add(SearchPatrons, 1, 1);
-
-        HBox doneCont = new HBox(10);
-        doneCont.setAlignment(Pos.CENTER);
-
-        backButton = new Button("No");
-        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-                myModel.stateChangeRequest("WorkerCollectionModifyViewNo", null);
-            }
-        });
-        doneCont.getChildren().add(backButton);
-
-        submitButton = new Button("Yes");
-        submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-
-                clearText();
-
-            }
-        });
-        doneCont.getChildren().add(submitButton);
-
-
-        vbox.getChildren().add(grid);
-        vbox.getChildren().add(doneCont);
-
-        return vbox;
-    }
-
 
 
     // Create the status log field
@@ -156,10 +73,30 @@ public class ModifyWorkerView extends View
     //-------------------------------------------------------------
     public void populateFields()
     {
-        //accountNumber.setText((String)myModel.getState("AccountNumber"));
-        //acctType.setText((String)myModel.getState("Type"));
-        //balance.setText((String)myModel.getState("Balance"));
-        //serviceCharge.setText((String)myModel.getState("ServiceCharge"));
+        String bannerID = (String) myModel.getState("bannerId");
+        System.out.println("My Model banner id: " +bannerID);
+        String firstName = (String) myModel.getState("firstName");
+        String lastName = (String) myModel.getState("lastName");
+        String contactPhone = (String) myModel.getState("phone");
+        String em = (String) myModel.getState("email");
+        String dolc = (String) myModel.getState("dateOfLatestCredentials");
+        //String stat= (String)myModel.getState("status");
+        String dOH = (String) myModel.getState("dateOfHire");
+        String credential = (String) myModel.getState("credentials");
+        String pass = (String) myModel.getState("password");
+
+
+        bannerId.setText(bannerID);
+        bannerId.setEditable(false);
+        password.setText(pass);
+        first.setText(firstName);
+        last.setText(lastName);
+        phone.setText(contactPhone);
+        email.setText(em);
+        dOLC.setText(dolc);
+        doh.setText(dOH);
+        //status.setValue(stat);
+        cred.setValue(credential);
     }
 
     /**
@@ -209,10 +146,10 @@ public class ModifyWorkerView extends View
      * Clear text
      */
     //----------------------------------------------------------
-    public void clearText()
+    /*public void clearText()
     {
         SearchPatrons.clear();
-    }
+    }*/
 }
 
 //---------------------------------------------------------------

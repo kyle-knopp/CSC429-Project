@@ -276,8 +276,9 @@ public class AddWorkerView extends View{
         p1.setProperty("credentials", credentials);
         p1.setProperty("dateOfLatestCredentials", latestCred);
         p1.setProperty("dateOfHire", dateHire);
+        p1.setProperty("status",stat);
 
-        if (ban.length() != 9) {
+        if (ban.length() < 3) {
             databaseErrorBarcode();
         }else {
             myModel.stateChangeRequest("AddWorker", p1);

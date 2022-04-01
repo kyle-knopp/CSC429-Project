@@ -3,6 +3,7 @@
 package model;
 
 // system imports
+import event.Event;
 import impresario.IView;
 
 import java.util.Properties;
@@ -18,6 +19,8 @@ public class StudentBorrowerCollection  extends EntityBase
     private static final String myTableName = "StudentBorrower";
 
     private Vector studentBorrowerList;
+
+    private StudentBorrower selectedStudentBorrower;
 
     // GUI Components
 
@@ -42,14 +45,13 @@ public class StudentBorrowerCollection  extends EntityBase
             {
                 Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
 
-                StudentBorrower patron = new StudentBorrower(nextAccountData);
+                StudentBorrower selectedStudentBorrower = new StudentBorrower(nextAccountData);
 
-                if (patron != null)
+                if (selectedStudentBorrower != null)
                 {
-                    studentBorrowerList.addElement(patron);
+                    studentBorrowerList.addElement(selectedStudentBorrower);
                 }
             }
-
         }
         else
         {
@@ -76,40 +78,37 @@ public class StudentBorrowerCollection  extends EntityBase
     }
 
     //----------------------------------------------------------
-    public Object getState(String key)
-    {
-        if (key.equals("StudentBorrowers"))
+    public Object getState(String key) {
+        if (key.equals("StudentBorrowers")) {
+            System.out.println("Student Borrower List" + studentBorrowerList);
             return studentBorrowerList;
-        else
-        if (key.equals("StudentBorrowerList"))
+        }
+        else if (key.equals("StudentBorrowerList")){
+            System.out.println("Student Borrower List"+studentBorrowerList);
             return this;
+        }
+        else if (selectedStudentBorrower != null) {
+            Object val = selectedStudentBorrower.getState(key);
+            if (val != null)
+                return val;
+        }
         return null;
     }
 
     //----------------------------------------------------------------
-    public void stateChangeRequest(String key, Object value)
-    {
-        // Class is invariant, so this method does not change any attributes
-        // It does handle the request to display its view (if Impose Service Charge -3 is opted for)
-        //if (key.equals("DisplayView") == true)
-        //{
-        //	createAndShowView();
-        //}
-        //else
-        //if (key.equals("AccountSelected") == true
-        //{
-        //	String accountNumber = (String)value;
-        //  Account acct = retrieve(accountNumber);
-        //  acct.subscribe("AccountCancelled", this);
-        //  acct.stateChangeRequest("DisplayView", this);
-        //}
-        //else
-        //if (key.equals("AccountCancelled") == true)
-        //{
-        //	createAndShowView();
-        //}
+    public void stateChangeRequest(String key, Object value) {
+        /*if (key.equals("StudentSelected") == true) {
 
-        myRegistry.updateSubscribers(key, this);
+            try {
+                selectedStudentBorrower = new StudentBorrower((String) value);
+                stateChangeRequest("ModifyStudentBorrowerView",selectedStudentBorrower);
+            } catch (Exception ex) {
+                new Event(Event.getLeafLevelClassName(this), "processTransaction",
+                        "Error in creating ModifyStudentView", Event.ERROR);
+            }
+        }*/
+            myRegistry.updateSubscribers(key, this);
+
     }
 
     //-----------------------------------------------------------------------------------
@@ -121,19 +120,6 @@ public class StudentBorrowerCollection  extends EntityBase
         }
     }
 
-    /*
-    public String toString(){
-
-        String s = ("The Patron Collection contains: ");
-
-        for (Object b : patronList) {
-            s.concat(b + " ");
-        }
-
-        return s;
-    }
-
-     */
 
     public void display() {
         for (Object b : studentBorrowerList) {

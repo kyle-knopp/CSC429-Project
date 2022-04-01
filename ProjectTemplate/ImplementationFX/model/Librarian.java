@@ -32,6 +32,9 @@ public class Librarian implements IView, IModel
 
     private StudentBorrowerCollection myStudentBorrowers;
     private WorkerCollection myWorkers;
+
+    private Worker selectedWorker;
+    private StudentBorrower selectedStudentBorrower;
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -108,6 +111,18 @@ public class Librarian implements IView, IModel
         else
         if(key.equals("WorkerList") == true){
             return myWorkers;
+        }else
+        if (selectedStudentBorrower!= null) {
+            Object val = selectedStudentBorrower.getState(key);
+            if (val != null)
+                return val;
+            return "";
+        }else
+        if (selectedWorker!= null) {
+            Object val = selectedWorker.getState(key);
+            if (val != null)
+                return val;
+            return "";
         }
         else
             return "";
@@ -226,7 +241,13 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence
         {
+            try{
+                getStudentBorrower((String)value);
 
+            }catch(InvalidPrimaryKeyException e){
+                e.printStackTrace();
+                transactionErrorMessage="Cannot Find Student Borrower";
+            }
             createAndShowModifyStudentBorrowerView();
         }
         else if (key.equals("StudentBorrowerCollectionModifyViewNo") == true) //goes back to old collection
@@ -269,11 +290,19 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
         {
+            try{
+                getWorker((String)value);
+            }catch(InvalidPrimaryKeyException e){
+            e.printStackTrace();
+            transactionErrorMessage="Cannot Find Worker";
+            }
             createAndShowModifyWorkerView();
         }
         else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
         {
             createAndShowWorkerCollectionModifyViewNo();
+        }else if(key.equals("StudentSelected")){
+
         }
 
 
@@ -317,6 +346,37 @@ public class Librarian implements IView, IModel
         }
     }
 
+
+    /**
+     * Tries to create old persistable student worker object.
+     * @param id
+     * @throws InvalidPrimaryKeyException
+     */
+
+    //-------------------------------------------------------------
+    private void getStudentBorrower(String id)throws InvalidPrimaryKeyException {
+        try {
+            //DEBUG System.out.println("Student Borrower id: "+ id);
+            selectedStudentBorrower = new StudentBorrower(id);
+            //DEBUG System.out.println(selectedStudentBorrower);
+        }
+        catch (Exception e){
+            transactionErrorMessage = "Cannot find Student Borrower";
+            new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+        }
+    }
+    //-------------------------------------------------------------
+    private void getWorker(String id)throws InvalidPrimaryKeyException {
+        try {
+            System.out.println("Worker id: "+ id);
+            selectedWorker = new Worker(id);
+            System.out.println(selectedWorker);
+        }
+        catch (Exception e){
+            transactionErrorMessage = "Cannot find Worker";
+            new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+        }
+    }
 
     /**
      * Create a Transaction depending on the Transaction type (deposit,

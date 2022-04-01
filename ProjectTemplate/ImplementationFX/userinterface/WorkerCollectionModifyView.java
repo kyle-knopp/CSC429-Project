@@ -192,7 +192,7 @@ public class WorkerCollectionModifyView extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("ModifyWorkerView", null);
+                    processWorkerSelected();
                 }
             }
         });
@@ -240,17 +240,18 @@ public class WorkerCollectionModifyView extends View{
     }
 
     //--------------------------------------------------------------------------
-    /*protected void processAccountSelected()
+    //--------------------------------------------------------------------------
+    protected void processWorkerSelected()
     {
-        PatronTableModel selectedItem = tableOfPatrons.getSelectionModel().getSelectedItem();
+        WorkerTableModel selectedItem = tableOfWorkers.getSelectionModel().getSelectedItem();
 
         if(selectedItem != null)
         {
-            String selectedAcctNumber = selectedItem.getAccountNumber();
+            String selectedAcctNumber = selectedItem.getBannerId();
 
-            myModel.stateChangeRequest("AccountSelected", selectedAcctNumber);
+            myModel.stateChangeRequest("ModifyWorkerView", selectedAcctNumber);
         }
-    }*/
+    }
 
     //--------------------------------------------------------------------------
     protected MessageView createStatusLog(String initialMessage)

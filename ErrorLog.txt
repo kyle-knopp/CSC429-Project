@@ -105,3 +105,6 @@
 [3/29/22, 1:12 PM]|DeleteBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
 [3/29/22, 1:12 PM]|DeleteBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 0000 found.>
 [3/29/22, 1:48 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' Status = 'Active' , title = '' , yearOfPublication =  WHERE barcode = 123456' at line 1>
+[3/31/22, 8:22 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[3/31/22, 8:29 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[3/31/22, 8:36 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>

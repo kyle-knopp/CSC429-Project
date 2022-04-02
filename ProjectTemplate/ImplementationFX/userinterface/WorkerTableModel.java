@@ -28,6 +28,8 @@ public class WorkerTableModel {
 
     private final SimpleStringProperty dateOfHire;
 
+    private final SimpleStringProperty status;
+
 
     //----------------------------------------------------------------------------
 
@@ -48,6 +50,8 @@ public class WorkerTableModel {
         dateOfLatestCredentials = new SimpleStringProperty(accountData.elementAt(6));
 
         dateOfHire = new SimpleStringProperty(accountData.elementAt(7));
+
+        status = new SimpleStringProperty(accountData.elementAt(8));
 
     }
 
@@ -173,6 +177,19 @@ public class WorkerTableModel {
     public void setDateOfHire(String stat) {
 
         dateOfHire.set(stat);
+    }
+    //----------------------------------------------------------------------------
+
+    public String status() {
+
+        return status.get();
+    }
+
+
+    //----------------------------------------------------------------------------
+
+    public void status(String stat) {
+        status.set(stat);
     }
 
 }

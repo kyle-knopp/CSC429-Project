@@ -341,7 +341,7 @@ public class AddBookView extends View{
 
     public String getBookPrefix(String barccode){
 
-        String prefix = barccode.substring(0, 2);
+        String prefix = barccode.substring(0, 3);
         return prefix;
     }
 

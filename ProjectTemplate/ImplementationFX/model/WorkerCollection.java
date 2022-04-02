@@ -18,6 +18,7 @@ public class WorkerCollection  extends EntityBase
 
     private Vector workerList;
 
+    private Worker selectedWorker;
     // GUI Components
 
     // Blank constructor for this class
@@ -73,6 +74,11 @@ public class WorkerCollection  extends EntityBase
         else
         if (key.equals("WorkerList"))
             return this;
+        /*if (selectedWorker != null) {
+            Object val = selectedWorker.getState(key);
+            if (val != null)
+                return val;
+        }*/
         return null;
     }
 

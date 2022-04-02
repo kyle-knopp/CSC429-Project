@@ -21,15 +21,7 @@ public class TransactionFactory {
 			throws Exception {
 		Transaction retValue = null;
 
-		/*if (transType.equals("InsertNewBook")) {
-			retValue = new InsertBookTransaction();
-		} else if (transType.equals("InsertNewPatron")) {
-			retValue = new InsertPatronTransaction();
-		} else if (transType.equals("SearchBooks")) {
-			retValue = new BookSearchTransaction();
-		} else if (transType.equals("SearchPatrons")) {
-			retValue = new PatronSearchTransaction();
-		} else */if (transType.equals("AddBook")) {
+		if (transType.equals("AddBook")) {
 			retValue = new AddBookTransaction();
 		}
 		else if(transType.equals("ModifyBook"))

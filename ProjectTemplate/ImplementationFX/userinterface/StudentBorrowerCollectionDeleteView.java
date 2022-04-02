@@ -197,7 +197,14 @@ public class StudentBorrowerCollectionDeleteView extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("DeleteStudentBorrowerView", null);
+                    StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
+                    if(selectedItem != null)
+                    {
+                        String selectedStudentBorrowerId = selectedItem.getBannerId();
+
+                        myModel.stateChangeRequest("DeleteStudentBorrowerView", selectedStudentBorrowerId);
+                    }
+
                 }
             }
         });

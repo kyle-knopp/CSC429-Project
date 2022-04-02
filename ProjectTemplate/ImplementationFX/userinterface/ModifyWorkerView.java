@@ -35,6 +35,13 @@ public class ModifyWorkerView extends AddWorkerView
     {
         super(worker);
 
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
+
         populateFields();
 
         myModel.subscribe("ServiceCharge", this);
@@ -73,14 +80,14 @@ public class ModifyWorkerView extends AddWorkerView
     //-------------------------------------------------------------
     public void populateFields()
     {
-        String bannerID = (String) myModel.getState("bannerId");
+        String bannerID = (String) myModel.getState("bannerID");
         System.out.println("My Model banner id: " +bannerID);
         String firstName = (String) myModel.getState("firstName");
         String lastName = (String) myModel.getState("lastName");
         String contactPhone = (String) myModel.getState("phone");
         String em = (String) myModel.getState("email");
         String dolc = (String) myModel.getState("dateOfLatestCredentials");
-        //String stat= (String)myModel.getState("status");
+        String stat= (String)myModel.getState("status");
         String dOH = (String) myModel.getState("dateOfHire");
         String credential = (String) myModel.getState("credentials");
         String pass = (String) myModel.getState("password");
@@ -95,8 +102,27 @@ public class ModifyWorkerView extends AddWorkerView
         email.setText(em);
         dOLC.setText(dolc);
         doh.setText(dOH);
-        //status.setValue(stat);
+        status.setValue(stat);
         cred.setValue(credential);
+    }
+
+    private void processAction(ActionEvent e) {
+        clearErrorMessage();
+
+        Properties p = new Properties();
+
+        p.put("bannerID", bannerId.getText());
+        p.put("firstName", first.getText());
+        p.put("lastName", last.getText());
+        p.put("phone", phone.getText());
+        p.put("email", email.getText());
+        p.put("dateOfLatestCredentials", dOLC.getText());
+        p.put("password", password.getText());
+        p.put("dateOfHire", doh.getText());
+        p.put("credentials",cred.getValue());
+        p.put("status", "Inactive");
+
+        myModel.stateChangeRequest("UpdateWorker", p);
     }
 
     /**

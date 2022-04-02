@@ -202,7 +202,7 @@ public class AddWorkerView extends View{
         grid.add(wDOH, 0, 9);
 
         doh = new TextField();
-        doh.setEditable(false);
+        doh.setEditable(true);
         doh.setText(dtf.format(now));
         grid.add(doh, 1, 9);
 
@@ -250,6 +250,21 @@ public class AddWorkerView extends View{
 
         return vbox;
     }
+
+    protected void setFieldsEditable(Boolean option){
+        bannerId.setEditable(option);
+        password.setEditable(option);
+        first.setEditable(option);
+        last.setEditable(option);
+        phone.setEditable(option);
+        email.setEditable(option);
+        cred.setEditable(option);
+        dOLC.setEditable(option);
+        doh.setEditable(option);
+        status.setEditable(option);
+    }
+
+
 
     private void processAction(ActionEvent e) {
 

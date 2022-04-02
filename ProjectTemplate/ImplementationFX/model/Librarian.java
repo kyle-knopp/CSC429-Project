@@ -34,7 +34,9 @@ public class Librarian implements IView, IModel
     private WorkerCollection myWorkers;
 
     private Worker selectedWorker;
+    private Worker modifyWorker;
     private StudentBorrower selectedStudentBorrower;
+    private StudentBorrower modifySB;
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -223,7 +225,13 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("DeleteStudentBorrowerView") == true) // end student borrower delete sequence
         {
+            try{
+                selectedStudentBorrower = new StudentBorrower((String)value);
 
+            }catch(InvalidPrimaryKeyException e){
+                e.printStackTrace();
+                transactionErrorMessage="Cannot Find Student Borrower";
+            }
             createAndShowDeleteStudentBorrowerView();
         }
         else if (key.equals("SearchStudentBorrowerViewM") == true){ // start Student borrower modify sequence
@@ -269,6 +277,12 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("DeleteWorkerView") == true) //goes to delete screen
         {
+            try{
+                selectedWorker = new Worker((String)value);
+            }catch(InvalidPrimaryKeyException e){
+                e.printStackTrace();
+                transactionErrorMessage="Cannot Find Worker";
+            }
             createAndShowDeleteWorkerView();
         }
         else if (key.equals("WorkerCollectionDeleteViewNo") == true) //goes back to previous collection screen
@@ -301,8 +315,22 @@ public class Librarian implements IView, IModel
         else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
         {
             createAndShowWorkerCollectionModifyViewNo();
-        }else if(key.equals("StudentSelected")){
-
+        }else if(key.equals("UpdateStudentBorrower")){
+            Properties p = (Properties) value;
+            modifySB= new StudentBorrower(p);
+            modifySB.save("update");
+        }else if(key.equals("UpdateWorker")){
+            Properties p = (Properties) value;
+            modifyWorker= new Worker(p);
+            modifyWorker.save("update");
+        }else if(key.equals("DeleteStudentBorrower")){
+            Properties p = (Properties) value;
+            modifySB= new StudentBorrower(p);
+            modifySB.save("update");
+        }else if(key.equals("DeleteWorker")){
+            Properties p = (Properties) value;
+            modifyWorker= new Worker(p);
+            modifyWorker.save("update");
         }
 
 

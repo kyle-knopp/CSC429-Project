@@ -26,16 +26,10 @@ import impresario.IModel;
 
 /** The class containing the Account View  for the ATM application */
 //==============================================================
-public class DeleteWorkerView extends View
+public class DeleteWorkerView extends AddWorkerView
 {
 
-    // GUI components
-    protected TextField SearchPatrons;
 
-    protected Button searchButton;
-
-    protected Button backButton;
-    protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
 
@@ -43,21 +37,14 @@ public class DeleteWorkerView extends View
     //----------------------------------------------------------
     public DeleteWorkerView(IModel worker)
     {
-        super(worker, "DeleteWorkerView");
+        super(worker);
 
-        // create a container for showing the contents
-        VBox container = new VBox(10);
-        container.setPadding(new Insets(15, 5, 5, 5));
-
-        // Add a title for this panel
-        container.getChildren().add(createTitle());
-
-        // create our GUI components, add them to this Container
-        container.getChildren().add(createFormContent());
-
-        container.getChildren().add(createStatusLog("             "));
-
-        getChildren().add(container);
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
 
         populateFields();
 
@@ -65,82 +52,6 @@ public class DeleteWorkerView extends View
         myModel.subscribe("UpdateStatusMessage", this);
     }
 
-
-    // Create the title container
-    //-------------------------------------------------------------
-    private Node createTitle()
-    {
-        HBox container = new HBox();
-        container.setAlignment(Pos.CENTER);
-
-        Text titleText = new Text(" Library System ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
-        titleText.setTextAlignment(TextAlignment.CENTER);
-        titleText.setFill(Color.DARKGREEN);
-        container.getChildren().add(titleText);
-
-        return container;
-    }
-
-    // Create the main form content
-    //-------------------------------------------------------------
-    private VBox createFormContent()
-    {
-        VBox vbox = new VBox(10);
-
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-
-        Text searchLabel = new Text(" Do you want to Delete: ");
-        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        searchLabel.setFont(myFont);
-        searchLabel.setWrappingWidth(150);
-        searchLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(searchLabel, 0, 1);
-
-        SearchPatrons = new TextField();
-        SearchPatrons.setEditable(true);
-        //grid.add(SearchPatrons, 1, 1);
-
-        HBox doneCont = new HBox(10);
-        doneCont.setAlignment(Pos.CENTER);
-
-        backButton = new Button("No");
-        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-                myModel.stateChangeRequest("WorkerCollectionDeleteViewNo", null);
-            }
-        });
-        doneCont.getChildren().add(backButton);
-
-        submitButton = new Button("Yes");
-        submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-
-                clearText();
-
-            }
-        });
-        doneCont.getChildren().add(submitButton);
-
-
-        vbox.getChildren().add(grid);
-        vbox.getChildren().add(doneCont);
-
-        return vbox;
-    }
 
 
 
@@ -156,10 +67,56 @@ public class DeleteWorkerView extends View
     //-------------------------------------------------------------
     public void populateFields()
     {
-        //accountNumber.setText((String)myModel.getState("AccountNumber"));
-        //acctType.setText((String)myModel.getState("Type"));
-        //balance.setText((String)myModel.getState("Balance"));
-        //serviceCharge.setText((String)myModel.getState("ServiceCharge"));
+        String bannerID = (String) myModel.getState("bannerID");
+        System.out.println("My Model banner id: " +bannerID);
+        String firstName = (String) myModel.getState("firstName");
+        String lastName = (String) myModel.getState("lastName");
+        String contactPhone = (String) myModel.getState("phone");
+        String em = (String) myModel.getState("email");
+        String dolc = (String) myModel.getState("dateOfLatestCredentials");
+        String stat= (String)myModel.getState("status");
+        String dOH = (String) myModel.getState("dateOfHire");
+        String credential = (String) myModel.getState("credentials");
+        String pass = (String) myModel.getState("password");
+
+
+        bannerId.setText(bannerID);
+        bannerId.setEditable(false);
+        password.setText(pass);
+        first.setText(firstName);
+        last.setText(lastName);
+        phone.setText(contactPhone);
+        email.setText(em);
+        dOLC.setText(dolc);
+        doh.setText(dOH);
+        status.setValue(stat);
+        cred.setValue(credential);
+    }
+    protected String setViewTitle(){
+        return "WOULD YOU LIKE TO DELETE THIS WORKER?";
+    }
+
+    protected String setSubmitButtonLabel(){
+        return "Delete";
+    }
+
+    private void processAction(ActionEvent e) {
+        clearErrorMessage();
+
+        Properties p = new Properties();
+
+        p.put("bannerID", bannerId.getText());
+        p.put("firstName", first.getText());
+        p.put("lastName", last.getText());
+        p.put("phone", phone.getText());
+        p.put("email", email.getText());
+        p.put("dateOfLatestCredentials", dOLC.getText());
+        p.put("password", password.getText());
+        p.put("dateOfHire", doh.getText());
+        p.put("credentials",cred.getValue());
+        p.put("status", "Inactive");
+
+        myModel.stateChangeRequest("DeleteWorker", p);
     }
 
     /**
@@ -205,14 +162,7 @@ public class DeleteWorkerView extends View
         statusLog.clearErrorMessage();
     }
 
-    /**
-     * Clear text
-     */
-    //----------------------------------------------------------
-    public void clearText()
-    {
-        SearchPatrons.clear();
-    }
+
 }
 
 //---------------------------------------------------------------

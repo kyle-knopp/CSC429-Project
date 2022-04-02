@@ -36,7 +36,15 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
     {
         super(StudentBorrower);
 
+        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
 
+        myModel.subscribe("ServiceCharge", this);
+        myModel.subscribe("UpdateStatusMessage", this);
         populateFields();
 
         myModel.subscribe("ServiceCharge", this);
@@ -60,7 +68,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
     public void populateFields()
     {
         String bannerID = (String) myModel.getState("BannerId");
-        System.out.println("My Model banner id: " +bannerID);
+        //DEBUG System.out.println("My Model banner id: " +bannerID);
         String firstName = (String) myModel.getState("FirstName");
         String lastName = (String) myModel.getState("LastName");
         String contactPhone = (String) myModel.getState("ContactPhone");
@@ -82,6 +90,35 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         Notes.setText(notes);
         statusBox.setValue(status);
 
+    }
+
+    private void processAction(ActionEvent e){
+        clearErrorMessage();
+
+        Properties p = new Properties();
+
+        p.put("BannerId", BannerId.getText());
+        p.put("FirstName", FirstName.getText());
+        p.put("LastName", LastName.getText());
+        p.put("ContactPhone", ContactPhone.getText());
+        p.put("Email", Email.getText());
+        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+        p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("Notes", Notes.getText());
+        p.put("status",statusBox.getValue());
+
+        myModel.stateChangeRequest("UpdateStudentBorrower", p);
+
+        /*clearText();
+        BannerId.clear();
+        FirstName.clear();
+        LastName.clear();
+        ContactPhone.clear();
+        ContactPhone.clear();
+        Email.clear();
+        DateOfLatestBorrowerStatus.clear();
+        DateOfRegistration.clear();
+        Notes.clear();*/
     }
 
     /**

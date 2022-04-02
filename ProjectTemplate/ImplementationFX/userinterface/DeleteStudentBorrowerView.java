@@ -29,7 +29,7 @@ import impresario.IModel;
 
 /** The class containing the Account View  for the ATM application */
 //==============================================================
-public class DeleteStudentBorrowerView extends View
+public class DeleteStudentBorrowerView extends AddStudentBorrowerView
 {
 
     // GUI components
@@ -46,105 +46,31 @@ public class DeleteStudentBorrowerView extends View
     //----------------------------------------------------------
     public DeleteStudentBorrowerView(IModel StudentBorrower)
     {
-        super(StudentBorrower, "DeleteStudentBorrowerView");
-
-        // create a container for showing the contents
-        VBox container = new VBox(10);
-        container.setPadding(new Insets(15, 5, 5, 5));
-
-        // Add a title for this panel
-        container.getChildren().add(createTitle());
-
-        // create our GUI components, add them to this Container
-        container.getChildren().add(createFormContent());
-
-        container.getChildren().add(createStatusLog("             "));
-
-        getChildren().add(container);
-
+        super(StudentBorrower);
         populateFields();
+        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
 
         myModel.subscribe("ServiceCharge", this);
         myModel.subscribe("UpdateStatusMessage", this);
     }
 
 
-    // Create the title container
-    //-------------------------------------------------------------
-    private Node createTitle()
-    {
-        HBox container = new HBox();
-        container.setAlignment(Pos.CENTER);
-
-        Text titleText = new Text(" Library System ");
-        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        titleText.setWrappingWidth(300);
-        titleText.setTextAlignment(TextAlignment.CENTER);
-        titleText.setFill(Color.DARKGREEN);
-        container.getChildren().add(titleText);
-
-        return container;
+    protected String setViewTitle(){
+        return "Delete a Student Borrower";
     }
 
-    // Create the main form content
-    //-------------------------------------------------------------
-    private VBox createFormContent()
-    {
-        VBox vbox = new VBox(10);
-
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-
-        Text searchLabel = new Text(" Do you want to Delete: ");
-        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        searchLabel.setFont(myFont);
-        searchLabel.setWrappingWidth(150);
-        searchLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(searchLabel, 0, 1);
-
-        SearchPatrons = new TextField();
-        SearchPatrons.setEditable(true);
-        //grid.add(SearchPatrons, 1, 1);
-
-        HBox doneCont = new HBox(10);
-        doneCont.setAlignment(Pos.CENTER);
-
-        backButton = new Button("No");
-        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-                myModel.stateChangeRequest("StudentBorrowerCollectionDeleteViewNo", null);
-            }
-        });
-        doneCont.getChildren().add(backButton);
-
-        submitButton = new Button("Yes");
-        submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                clearErrorMessage();
-
-                clearText();
-
-            }
-        });
-        doneCont.getChildren().add(submitButton);
-
-
-        vbox.getChildren().add(grid);
-        vbox.getChildren().add(doneCont);
-
-        return vbox;
+    protected String setPrompt(){
+        return "WOULD YOU LIKE TO DELETE THIS STUDENT BORROWER?";
     }
 
+    protected String setSubmitButtonLabel(){
+        return "Delete";
+    }
 
 
     // Create the status log field
@@ -159,10 +85,58 @@ public class DeleteStudentBorrowerView extends View
     //-------------------------------------------------------------
     public void populateFields()
     {
-        //accountNumber.setText((String)myModel.getState("AccountNumber"));
-        //acctType.setText((String)myModel.getState("Type"));
-        //balance.setText((String)myModel.getState("Balance"));
-        //serviceCharge.setText((String)myModel.getState("ServiceCharge"));
+        String bannerID = (String) myModel.getState("BannerId");
+        //DEBUG System.out.println("My Model banner id: " +bannerID);
+        String firstName = (String) myModel.getState("FirstName");
+        String lastName = (String) myModel.getState("LastName");
+        String contactPhone = (String) myModel.getState("ContactPhone");
+        String email = (String) myModel.getState("Email");
+        String dolbs = (String) myModel.getState("DateOfLatestBorrowerStatus");
+        String dor = (String) myModel.getState("DateOfRegistration");
+        String notes = (String) myModel.getState("Notes");
+        String status = (String) myModel.getState("status");
+
+
+        BannerId.setText(bannerID);
+        FirstName.setText(firstName);
+        LastName.setText(lastName);
+        ContactPhone.setText(contactPhone);
+        Email.setText(email);
+        DateOfLatestBorrowerStatus.setText(dolbs);
+        DateOfRegistration.setText(dor);
+        Notes.setText(notes);
+        statusBox.setValue(status);
+
+        setFieldsEditable(false);
+    }
+
+    private void processAction(ActionEvent e){
+        clearErrorMessage();
+
+        Properties p = new Properties();
+
+        p.put("BannerId", BannerId.getText());
+        p.put("FirstName", FirstName.getText());
+        p.put("LastName", LastName.getText());
+        p.put("ContactPhone", ContactPhone.getText());
+        p.put("Email", Email.getText());
+        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+        p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("Notes", Notes.getText());
+        p.put("status","Inactive");
+
+        myModel.stateChangeRequest("DeleteStudentBorrower", p);
+
+        /*clearText();
+        BannerId.clear();
+        FirstName.clear();
+        LastName.clear();
+        ContactPhone.clear();
+        ContactPhone.clear();
+        Email.clear();
+        DateOfLatestBorrowerStatus.clear();
+        DateOfRegistration.clear();
+        Notes.clear();*/
     }
 
     /**

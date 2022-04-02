@@ -120,7 +120,7 @@ public class SearchWorkerViewD extends View
         });
         doneCont.getChildren().add(doneButton);
 
-        submitButton = new Button("submit");
+        submitButton = new Button("Submit");
         submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
 

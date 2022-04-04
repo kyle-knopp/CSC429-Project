@@ -212,9 +212,9 @@ public class Librarian implements IView, IModel
         {
 
             Properties p = (Properties)value;
-            String fname = p.getProperty("FirstName");
+            String name = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            myStudentBorrowers.findStudentBorrowersWithNameLike(name);
             //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionDeleteView();
 
@@ -243,7 +243,7 @@ public class Librarian implements IView, IModel
             Properties p = (Properties)value;
             String fname = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            myStudentBorrowers.findStudentBorrowersWithNameLike(fname);
             //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionModifyView();
         }

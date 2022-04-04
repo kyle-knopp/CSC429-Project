@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="jdk" jdkName="10" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/ProjectTemplate/ImplementationFX/mysql-connector-java-5.1.7-bin.jar!/" />
@@ -17,6 +17,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-5.1.7-bin" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
 </module>

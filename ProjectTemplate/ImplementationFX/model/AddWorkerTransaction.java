@@ -17,7 +17,7 @@ import userinterface.ViewFactory;
 
 /** The class containing the DepositTransaction for the ATM application */
 //==============================================================
-public class AddWorkerTransaction extends Transaction
+public class  AddWorkerTransaction extends Transaction
 {
 
     private Worker myWorker;

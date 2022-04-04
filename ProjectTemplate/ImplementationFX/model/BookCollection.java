@@ -1,3 +1,4 @@
+//BookCollection
 // specify the package
 package model;
 
@@ -12,22 +13,21 @@ import java.util.Vector;
 
 /** The class containing the AccountCollection for the ATM application */
 //==============================================================
-public class WorkerCollection  extends EntityBase
+public class BookCollection  extends EntityBase
 {
-    private static final String myTableName = "worker";
+    private static final String myTableName = "book";
 
-    private Vector workerList;
+    private Vector bookList;
 
-    private Worker selectedWorker;
     // GUI Components
 
     // Blank constructor for this class
     //----------------------------------------------------------
-    public WorkerCollection()
+    public BookCollection()
     {
         super(myTableName);
 
-        workerList = new Vector<Worker>();
+        bookList = new Vector<Book>();
 
     }
 
@@ -42,11 +42,11 @@ public class WorkerCollection  extends EntityBase
             {
                 Properties nextAccountData = (Properties)allDataRetrieved.elementAt(cnt);
 
-                Worker patron = new Worker(nextAccountData);
+                Book patron = new Book(nextAccountData);
 
                 if (patron != null)
                 {
-                    workerList.addElement(patron);
+                    bookList.addElement(patron);
                 }
             }
 
@@ -57,28 +57,32 @@ public class WorkerCollection  extends EntityBase
         }
     }
 
-    public void findWorkersWithFirstNameLike(String firstName){
+    public void findBookWithBarcodeLike(String barcode){
 
         //query
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (firstName like '%" + firstName + "%')";
+        String query = "SELECT * FROM " + myTableName + " WHERE (barcode like '%" + barcode + "%')";
 
-        queryHelper(query, "There are no Patrons who have a name that contains " + firstName + ".");
+        queryHelper(query, "There are no Books that contains the Barcode: " + barcode + ".");
+    }
+
+    public void findBookWithAuthorLike(String author){
+
+        //query
+
+        String query = "SELECT * FROM " + myTableName + " WHERE (author like '%" + author + "%')";
+
+        queryHelper(query, "There are no Author who have a name that contains " + author + ".");
     }
 
     //----------------------------------------------------------
     public Object getState(String key)
     {
-        if (key.equals("Workers"))
-            return workerList;
+        if (key.equals("Book"))
+            return bookList;
         else
-        if (key.equals("WorkerList"))
+        if (key.equals("BookList"))
             return this;
-        /*if (selectedWorker != null) {
-            Object val = selectedWorker.getState(key);
-            if (val != null)
-                return val;
-        }*/
         return null;
     }
 
@@ -132,7 +136,7 @@ public class WorkerCollection  extends EntityBase
      */
 
     public void display() {
-        for (Object b : workerList) {
+        for (Object b : bookList) {
             System.out.println(b.toString() + "\n------------------\n");
         }
     }

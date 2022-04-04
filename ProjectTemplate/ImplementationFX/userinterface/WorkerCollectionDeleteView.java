@@ -192,7 +192,14 @@ public class WorkerCollectionDeleteView extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("DeleteWorkerView", null);
+                    WorkerTableModel selectedItem = tableOfWorkers.getSelectionModel().getSelectedItem();
+                    if(selectedItem != null)
+                    {
+                        String selectedWorkerId = selectedItem.getBannerId();
+
+                        myModel.stateChangeRequest("DeleteWorkerView", selectedWorkerId);
+                    }
+
                 }
             }
         });

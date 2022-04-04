@@ -14,7 +14,10 @@ public class ViewFactory {
 		{
 			return new LibrarianView(model);
 		}
-
+		else if(viewName.equals("DeleteBookView") == true)
+		{
+			return new DeleteBookView(model);
+		}
 		else if(viewName.equals("AddStudentBorrowerView") == true)
 		{
 			return new AddStudentBorrowerView(model);
@@ -59,6 +62,9 @@ public class ViewFactory {
 		else if(viewName.equals("ModifyBookView") == true)
 		{
 			return new ModifyBookView(model);
+		}else if(viewName.equals("DeleteABookView") == true)
+		{
+			return new DeleteABookView(model);
 		}
 		else if(viewName.equals("SearchWorkerViewD") == true)
 		{

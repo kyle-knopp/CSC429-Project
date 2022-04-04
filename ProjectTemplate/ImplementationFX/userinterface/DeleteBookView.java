@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,11 +14,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.DeleteBookTransaction;
 
 import java.util.EventObject;
 import java.util.Properties;
 
-public class AddBookView extends View{
+public class DeleteBookView extends View{
     // GUI components
     protected TextField barcode;
     protected TextField title;
@@ -31,10 +31,25 @@ public class AddBookView extends View{
     protected TextField yearOfPublication;
     protected TextField ISBN;
     protected TextField suggestedPrice;
+    protected TextField quality;
     protected TextField notes;
 
+    protected String barcodeText;
+    protected String titleText;
+    protected String a1Text;
+    protected String a2Text;
+    protected String a3Text;
+    protected String a4Text;
+    protected String pubText;
+    protected String pubYearText;
+    protected String isbnText;
+    protected String conditionText;
+    protected String sugPriceText;
+    protected String notesText;
+    protected String stat;
+
     protected ComboBox discipline;
-    protected ComboBox quality;
+    //protected ComboBox quality;
     protected ComboBox status;
 
     protected Button cancelButton;
@@ -45,9 +60,9 @@ public class AddBookView extends View{
 
     // constructor for this class -- takes a model object
     //----------------------------------------------------------
-    public AddBookView(IModel book)
+    public DeleteBookView(IModel book)
     {
-        super(book, "AddBookView");
+        super(book, "DeleteBookView");
 
         // create a container for showing the contents
         VBox container = new VBox(10);
@@ -65,9 +80,7 @@ public class AddBookView extends View{
 
         populateFields();
 
-        // myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("AddBookErrorMessage", this);
-        myModel.subscribe("AddBookSuccessMessage",this);
+        myModel.subscribe("TransactionError",this);
     }
 
 
@@ -78,7 +91,7 @@ public class AddBookView extends View{
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
 
-        Text titleText = new Text(" Add New Book ");
+        Text titleText = new Text(" Delete Book ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -92,6 +105,7 @@ public class AddBookView extends View{
     //-------------------------------------------------------------
     private VBox createFormContent()
     {
+
         VBox vbox = new VBox(10);
 
         GridPane grid = new GridPane();
@@ -100,21 +114,23 @@ public class AddBookView extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("BOOK INFORMATION");
+        Text prompt = new Text("Do you wish to DELETE the following book?");
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-        Text bcode = new Text(" Book's Barcode : ");
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        bcode.setFont(myFont);
-        bcode.setWrappingWidth(150);
-        bcode.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bcode, 0, 1);
+
+        Text bar= new Text("Barcode : ");
+        bar.setFont(myFont);
+        bar.setWrappingWidth(150);
+        bar.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(bar, 0, 1);
 
         barcode = new TextField();
-        barcode.setEditable(true);
+        barcode.setEditable(false);
+        barcode.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(barcode, 1, 1);
 
         Text tit = new Text(" Title : ");
@@ -124,7 +140,8 @@ public class AddBookView extends View{
         grid.add(tit, 0, 2);
 
         title = new TextField();
-        title.setEditable(true);
+        title.setEditable(false);
+        title.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(title, 1, 2);
 
 
@@ -135,7 +152,8 @@ public class AddBookView extends View{
         grid.add(auth1, 0, 4);
 
         author1 = new TextField();
-        author1.setEditable(true);
+        author1.setEditable(false);
+        author1.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(author1, 1, 4);
 
         Text auth2 = new Text(" Author 2 : ");
@@ -145,7 +163,8 @@ public class AddBookView extends View{
         grid.add(auth2, 0, 5);
 
         author2 = new TextField();
-        author2.setEditable(true);
+        author2.setEditable(false);
+        author2.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(author2, 1, 5);
 
         Text auth3 = new Text(" Author 3 : ");
@@ -155,7 +174,8 @@ public class AddBookView extends View{
         grid.add(auth3, 0, 6);
 
         author3 = new TextField();
-        author3.setEditable(true);
+        author3.setEditable(false);
+        author3.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(author3, 1, 6);
 
         Text auth4 = new Text(" Author 4 : ");
@@ -165,7 +185,8 @@ public class AddBookView extends View{
         grid.add(auth4, 0, 7);
 
         author4 = new TextField();
-        author4.setEditable(true);
+        author4.setEditable(false);
+        author4.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(author4, 1, 7);
 
         Text pub = new Text(" Publisher : ");
@@ -175,7 +196,8 @@ public class AddBookView extends View{
         grid.add(pub, 0, 8);
 
         publisher = new TextField();
-        publisher.setEditable(true);
+        publisher.setEditable(false);
+        publisher.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(publisher, 1, 8);
 
         Text yOf = new Text(" Year of Publication : ");
@@ -185,13 +207,8 @@ public class AddBookView extends View{
         grid.add(yOf, 0, 9);
 
         yearOfPublication = new TextField();
-        yearOfPublication.setEditable(true);
-        yearOfPublication.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                yearOfPublication.clear();;
-            }
-        });
+        yearOfPublication.setEditable(false);
+        yearOfPublication.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(yearOfPublication, 1, 9);
 
         Text iS = new Text(" ISBN : ");
@@ -201,15 +218,17 @@ public class AddBookView extends View{
         grid.add(iS, 0, 10);
 
         ISBN = new TextField();
-        ISBN.setEditable(true);
+        ISBN.setEditable(false);
+        ISBN.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(ISBN, 1, 10);
 
-        Text con = new Text(" Quality : ");
+        Text con = new Text(" Condition : ");
         con.setFont(myFont);
         con.setWrappingWidth(150);
         con.setTextAlignment(TextAlignment.RIGHT);
         grid.add(con, 0, 11);
 
+        /**
         quality = new ComboBox();
         quality.getItems().addAll(
                 "Good",
@@ -217,6 +236,13 @@ public class AddBookView extends View{
         );
 
         quality.setValue("Good");
+        quality.setEditable(false);
+        grid.add(quality, 1, 11);
+         */
+
+        quality = new TextField();
+        quality.setEditable(false);
+        quality.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(quality, 1, 11);
 
         Text sug = new Text(" Suggested Price : ");
@@ -227,7 +253,8 @@ public class AddBookView extends View{
 
         suggestedPrice = new TextField();
         suggestedPrice.setText("0.00");
-        suggestedPrice.setEditable(true);
+        suggestedPrice.setEditable(false);
+        suggestedPrice.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(suggestedPrice, 1, 12);
 
         Text not = new Text(" Notes : ");
@@ -237,23 +264,11 @@ public class AddBookView extends View{
         grid.add(not, 0, 13);
 
         notes = new TextField();
-        notes.setEditable(true);
+        notes.setEditable(false);
+        notes.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(notes, 1, 13);
 
-        Text bStatus = new Text(" Book's Status : ");
-        bStatus.setFont(myFont);
-        bStatus.setWrappingWidth(150);
-        bStatus.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bStatus, 0, 14);
 
-        status = new ComboBox();
-        status.getItems().addAll(
-                "Active",
-                "Inactive"
-        );
-
-        status.setValue("Active");
-        grid.add(status, 1, 14);
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -263,7 +278,7 @@ public class AddBookView extends View{
             }
         });
 
-        cancelButton = new Button("Back");
+        cancelButton = new Button("Cancel");
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -273,14 +288,15 @@ public class AddBookView extends View{
         // consider using GridPane.setHgap(10); instead of label space
         HBox buttonCont = new HBox(10);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(submitButton);
         Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
+        buttonCont.getChildren().add(cancelButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
+
 
         return vbox;
     }
@@ -289,6 +305,7 @@ public class AddBookView extends View{
 
         clearErrorMessage();
 
+        /**
         String bar = barcode.getText();
         String titl = title.getText();
         String disi = " ";
@@ -302,14 +319,17 @@ public class AddBookView extends View{
         String condi = (String) quality.getValue();
         String sugPric = suggestedPrice.getText();
         String no = notes.getText();
-        String sta = (String) status.getValue();
+        String stat= (String)myModel.getState("Status");
+         */
 
         Properties p2 = new Properties();
 
-        p2.setProperty("barcode", bar);
+        /**
+        p2.setProperty("barcode",bar);
         p2.setProperty("title", titl);
         p2.setProperty("author1", au1);
         p2.setProperty("author2", au2);
+        p2.setProperty("author3", au3);
         p2.setProperty("author3", au3);
         p2.setProperty("author4", au4);
         p2.setProperty("publisher", publi);
@@ -318,32 +338,35 @@ public class AddBookView extends View{
         p2.setProperty("suggestedPrice", sugPric);
         p2.setProperty("notes", no);
         p2.setProperty("bookCondition", condi);
-        p2.setProperty("Status", sta);
 
-        if(bar.length() >= 3) {
-            p2.setProperty("prefix", getBookPrefix(bar));
-        }
-        else{
-            System.out.println("Barcode in incorrect format");
-        }
+        */
 
-        if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
-            databaseErrorYear();
-        }else {
-            System.out.println(p2);
-            myModel.stateChangeRequest("AddBook", p2);
+        p2.setProperty("Status","Inactive");
 
-        }
+        System.out.println(p2);
+        myModel.stateChangeRequest("DeleteBook", p2);
+        //}
 
+        //barcode.clear();
+        /**
+        title.clear();
+        author1.clear();
+        author2.clear();
+        author3.clear();
+        author4.clear();
+        publisher.clear();
+        yearOfPublication.clear();
+        ISBN.clear();
+        suggestedPrice.clear();
+        notes.clear();
 
+        quality.setValue("Good");
+        suggestedPrice.setText("0.00");
+         */
 
+        displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
     }
 
-    public String getBookPrefix(String barccode){
-
-        String prefix = barccode.substring(0, 3);
-        return prefix;
-    }
 
     // Create the status log field
     //-------------------------------------------------------------
@@ -357,12 +380,52 @@ public class AddBookView extends View{
     //-------------------------------------------------------------
     public void populateFields()
     {
-       /* accountNumber.setText((String)myModel.getState("AccountNumber"));
-        acctType.setText((String)myModel.getState("Type"));
-        balance.setText((String)myModel.getState("Balance"));
-        serviceCharge.setText((String)myModel.getState("ServiceCharge"));
-        */
-        yearOfPublication.setText("(Must be Four Digits)");
+        /*allowedCondition = new String[2];
+        allowedCondition[0] = "Good";
+        allowedCondition[1] = "Damaged";
+        conditionMatt.getItems().add(allowedCondition[0]);
+        conditionMatt.getItems().add(allowedCondition[1]);*/
+
+        String barcodeText = (String) myModel.getState("barcode");
+        titleText = (String) myModel.getState("title");
+        String a1Text = (String) myModel.getState("author1");
+        String a2Text = (String) myModel.getState("author2");
+        String a3Text = (String) myModel.getState("author3");
+        String a4Text = (String) myModel.getState("author4");
+        String pubText = (String) myModel.getState("publisher");
+        String pubYearText = (String) myModel.getState("yearOfPublication");
+        String isbnText = (String) myModel.getState("ISBN");
+        String conditionText = (String) myModel.getState("bookCondition");
+        String sugPriceText = (String) myModel.getState("suggestedPrice");
+        String notesText = (String) myModel.getState("notes");
+        String stat= (String)myModel.getState("Status");
+
+
+        barcode.setText(barcodeText);
+        //barcode.setEditable(false);
+        title.setText(titleText);
+        author1.setText(a1Text);
+        author2.setText(a2Text);
+        author3.setText(a3Text);
+        author4.setText(a4Text);
+        publisher.setText(pubText);
+        yearOfPublication.setText(pubYearText);
+        ISBN.setText(isbnText);
+        quality.setText(conditionText);
+        suggestedPrice.setText(sugPriceText);
+        notes.setText(notesText);
+
+        if(stat.equals("Inactive"))
+        {
+            //Debug: System.out.println("Book is Inactive");
+            displayErrorMessage("NOTE: The following book is already INACTIVE: Try another book!");
+            submitButton.setDisable(true);
+        }
+        else
+        {
+            System.out.println("Book is Active");
+            submitButton.setDisable(false);
+        }
     }
 
     /**
@@ -372,14 +435,9 @@ public class AddBookView extends View{
     public void updateState(String key, Object value)
     {
         clearErrorMessage();
-        //  DEBUG System.out.println(key);
 
-        if (key.equals("AddBookErrorMessage") == true)
+        if (key.equals("PopulateDeleteBookMessage") == true)
         {
-            displayErrorMessage((String)value);
-        }else if(key.equals("AddBookSuccessMessage")==true)
-        {
-            //  DEBUG System.out.println((String)value);
             displayMessage((String)value);
         }
     }
@@ -399,24 +457,6 @@ public class AddBookView extends View{
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
-        //  DEBUG System.out.println("Message: "+message);
-        if(message.equals("Book data for new book installed successfully in database!")){
-            barcode.clear();
-            title.clear();
-            author1.clear();
-            author2.clear();
-            author3.clear();
-            author4.clear();
-            publisher.clear();
-            yearOfPublication.clear();
-            ISBN.clear();
-            suggestedPrice.clear();
-            notes.clear();
-
-            quality.setValue("Good");
-            status.setValue("Active");
-            suggestedPrice.setText("0.00");
-        }
         statusLog.displayMessage(message);
     }
 
@@ -434,7 +474,7 @@ public class AddBookView extends View{
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Database");
         alert.setHeaderText(null);
-        alert.setHeaderText("Book Added to Database");
+        alert.setHeaderText("Book Deleted");
 
         alert.showAndWait();
     }
@@ -443,8 +483,8 @@ public class AddBookView extends View{
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Database");
-        alert.setHeaderText("Ooops, there was an issue adding to the database!");
-        alert.setContentText("Cannot add to database. Check year/barcode.");
+        alert.setHeaderText("Ooops, there was an issue Deleting the book from the database!");
+        alert.setContentText("Cannot modify to database. Check year/barcode.");
 
         alert.showAndWait();
     }

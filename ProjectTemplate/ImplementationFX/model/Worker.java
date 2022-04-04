@@ -22,10 +22,20 @@ public class Worker extends EntityBase{
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
+        System.out.println(query);
+        System.out.println(bannerID);
+        System.out.println("All data retrieved: "+allDataRetrieved);
+
         // You must get one account at least
         if (allDataRetrieved != null)
         {
             int size = allDataRetrieved.size();
+
+            System.out.println(allDataRetrieved.size());
+
+            if(size==0){
+                throw new exception.InvalidPrimaryKeyException("No matching bannerID found");
+            }
 
             // There should be EXACTLY one account. More than that is an error
             if (size != 1)
@@ -171,6 +181,7 @@ public class Worker extends EntityBase{
         v.addElement(persistentState.getProperty("dateOfLatestCredentials")); //need to enter
         v.addElement(persistentState.getProperty("dateOfHire"));
         v.addElement(persistentState.getProperty("password")); //may need to check name
+        v.addElement(persistentState.getProperty("status"));
 
         return v;
     }

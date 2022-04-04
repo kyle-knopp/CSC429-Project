@@ -200,7 +200,7 @@ public class StudentBorrowerCollectionModifyView extends View {
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    myModel.stateChangeRequest("ModifyStudentBorrowerView", null);
+                    processStudentBorrowerSelected();
                 }
             }
         });
@@ -248,17 +248,17 @@ public class StudentBorrowerCollectionModifyView extends View {
     }
 
     //--------------------------------------------------------------------------
-    /*protected void processAccountSelected()
+    protected void processStudentBorrowerSelected()
     {
-        PatronTableModel selectedItem = tableOfPatrons.getSelectionModel().getSelectedItem();
+         StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
 
         if(selectedItem != null)
         {
-            String selectedAcctNumber = selectedItem.getAccountNumber();
+            String selectedAcctNumber = selectedItem.getBannerId();
 
-            myModel.stateChangeRequest("AccountSelected", selectedAcctNumber);
+            myModel.stateChangeRequest("ModifyStudentBorrowerView", selectedAcctNumber);
         }
-    }*/
+    }
 
     //--------------------------------------------------------------------------
     protected MessageView createStatusLog(String initialMessage)

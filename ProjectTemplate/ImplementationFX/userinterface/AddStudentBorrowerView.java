@@ -98,7 +98,7 @@ public class AddStudentBorrowerView extends View
 
     // Create the main form content
     //-------------------------------------------------------------
-    private VBox createFormContent()
+    protected VBox createFormContent()
     {
         VBox vbox = new VBox(10);
 
@@ -108,7 +108,7 @@ public class AddStudentBorrowerView extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("STUDENT BORROWER INFORMATION");
+        Text prompt = new Text(setPrompt());
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -207,6 +207,12 @@ public class AddStudentBorrowerView extends View
         Notes.setEditable(true);
         grid.add(Notes, 1, 8);
 
+        Label = new Text("  Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 9);
+
         statusBox = new ComboBox();
         statusBox.getItems().addAll("Active","Inactive");
         statusBox.getSelectionModel().selectFirst();;
@@ -227,7 +233,7 @@ public class AddStudentBorrowerView extends View
         });
         doneCont.getChildren().add(backButton);
 
-        doneButton = new Button("Submit");
+        doneButton = new Button(setSubmitButtonLabel());
         doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -241,6 +247,27 @@ public class AddStudentBorrowerView extends View
         vbox.getChildren().add(doneCont);
 
         return vbox;
+    }
+
+    protected void setFieldsEditable(Boolean option){
+        BannerId.setEditable(option);
+        FirstName.setEditable(option);
+        LastName.setEditable(option);
+        ContactPhone.setEditable(option);
+        Email.setEditable(option);
+        DateOfLatestBorrowerStatus.setEditable(option);
+        DateOfRegistration.setEditable(option);
+        Notes.setEditable(option);
+        statusBox.setEditable(option);
+
+    }
+
+    protected String setViewTitle(){return "Add A Student Borrower";}
+
+    protected String setPrompt(){return "STUDENT BORROWER INFORMATION";    }
+
+    protected String setSubmitButtonLabel(){
+        return "Submit";
     }
 
 

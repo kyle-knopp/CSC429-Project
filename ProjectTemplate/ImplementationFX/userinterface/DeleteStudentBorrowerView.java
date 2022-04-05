@@ -108,6 +108,18 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         statusBox.setValue(status);
 
         setFieldsEditable(false);
+
+        if(status.equals("Inactive"))
+        {
+            //Debug: System.out.println("Book is Inactive");
+            displayErrorMessage("NOTE: The following Student Borrower is already INACTIVE: Try another Student!");
+            submitButton.setDisable(true);
+        }
+        else
+        {
+            System.out.println("Book is Active");
+            submitButton.setDisable(false);
+        }
     }
 
     private void processAction(ActionEvent e){

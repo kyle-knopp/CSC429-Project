@@ -54,8 +54,8 @@ public class DeleteBookTransaction extends Transaction
     //----------------------------------------------------------
     public void processTransaction(Properties props)
     {
-        System.out.println("Inside Delete Book");
-        System.out.println(props.getProperty(("barcode")));
+        //System.out.println("Inside Delete Book");
+        //System.out.println(props.getProperty(("barcode")));
         try
         {
             Enumeration keyNames = props.propertyNames();
@@ -153,7 +153,12 @@ public class DeleteBookTransaction extends Transaction
         }
         else if(key.equals("DeleteBook")==true){
             processTransaction((Properties)value);
-
+        }
+        else if(key.equals("BarcodeView")==true){
+            createView();
+        }
+        else if(key.equals("ConfirmDeleteBook")==true){
+            createAndShowConfirmDeleteBookView();
         }
 
         myRegistry.updateSubscribers(key, this);

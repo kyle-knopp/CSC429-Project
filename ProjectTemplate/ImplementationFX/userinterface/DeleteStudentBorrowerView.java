@@ -109,6 +109,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
 
         setFieldsEditable(false);
 
+        /**
         if(status.equals("Inactive"))
         {
             //Debug: System.out.println("Book is Inactive");
@@ -120,6 +121,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
             System.out.println("Book is Active");
             submitButton.setDisable(false);
         }
+        */
     }
 
     private void processAction(ActionEvent e){

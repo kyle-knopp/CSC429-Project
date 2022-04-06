@@ -77,6 +77,16 @@ public class StudentBorrowerCollection  extends EntityBase
         queryHelper(query, "There are no Patrons who have a name that contains " + LastName + ".");
     }
 
+    public void findStudentBorrowersWithNameLike(String Name){
+
+        //query
+
+        String query = "SELECT * FROM " + myTableName + " WHERE FirstName like '%" + Name + "%'" +
+                " OR " + "LastName like '%" + Name + "%'";
+
+        queryHelper(query, "There are no Patrons who have a name that contains " + Name + ".");
+    }
+
     //----------------------------------------------------------
     public Object getState(String key) {
         if (key.equals("StudentBorrowers")) {

@@ -56,7 +56,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         });
 
         myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("TransactionError", this);
     }
 
 
@@ -168,6 +168,13 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }else if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

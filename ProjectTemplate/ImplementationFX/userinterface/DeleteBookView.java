@@ -395,6 +395,9 @@ public class DeleteBookView extends View{
         if (key.equals("PopulateDeleteBookMessage") == true)
         {
             displayMessage((String)value);
+        }else if (key.equals("TransactionError") == true)
+        {
+            displayMessage((String)value);
         }
     }
 

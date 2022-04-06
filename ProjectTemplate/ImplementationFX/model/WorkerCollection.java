@@ -53,17 +53,18 @@ public class WorkerCollection  extends EntityBase
         }
         else
         {
+            //throw new exception.InvalidPrimaryKeyException(message);
             System.out.println(message);
         }
     }
 
-    public void findWorkersWithFirstNameLike(String firstName){
+    public void findWorkersWithFirstNameLike(String name){
 
         //query
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (firstName like '%" + firstName + "%')";
+        String query = "SELECT * FROM " + myTableName + " WHERE (firstName like '%" + name + "%' OR lastName like '%" + name + "%')";
 
-        queryHelper(query, "There are no Patrons who have a name that contains " + firstName + ".");
+        queryHelper(query, "There are no Patrons who have a name that contains " + name + ".");
     }
 
     //----------------------------------------------------------

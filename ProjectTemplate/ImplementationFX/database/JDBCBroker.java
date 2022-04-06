@@ -84,7 +84,7 @@ public class JDBCBroker
 			username = "kknop1"; 
 			password = "PeanutButter";
 			//server = "csdb.brockport.edu"; // 127.0.0.1 at home or csdb.brockport.edu at brockport
-			server="csdb.brockport.edu";
+			server="127.0.0.1";
 
 
 		String driverClassName = "com.mysql.jdbc.Driver";

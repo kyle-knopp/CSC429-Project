@@ -116,11 +116,12 @@ public class Worker extends EntityBase{
         }
         catch (SQLException ex)
         {
-            updateStatusMessage = "Error in installing account data in database!";
+            updateStatusMessage = "Error in installing Worker data in database! Check input formats.";
             //System.out.println(ex.toString());
             ex.printStackTrace();
         }
         catch (Exception excep) {
+            updateStatusMessage = "Error in installing Worker data in database! Check input formats.";
             System.out.println(excep);
         }
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
@@ -129,7 +130,9 @@ public class Worker extends EntityBase{
     private void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("Update", "UpdateStatusMessage");
+        dependencies.setProperty("AddWorker", "TransactionError");
+        dependencies.setProperty("UpdateWorker", "TransactionError");
+        dependencies.setProperty("DeleteWorker", "TransactionError");
         dependencies.setProperty("ServiceCharge", "UpdateStatusMessage");
 
         myRegistry.setDependencies(dependencies);
@@ -161,6 +164,12 @@ public class Worker extends EntityBase{
     }
 
     public Object getState(String key) {
+        if(key.equals("TransactionError")){
+            return updateStatusMessage;
+        }else
+        if(key.equals("UpdateStatusMessage")) {
+            return updateStatusMessage;
+        }else
         return persistentState.getProperty(key);
     }
 

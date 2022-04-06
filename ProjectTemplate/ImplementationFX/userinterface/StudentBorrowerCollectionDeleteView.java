@@ -251,6 +251,10 @@ public class StudentBorrowerCollectionDeleteView extends View{
     //--------------------------------------------------------------------------
     public void updateState(String key, Object value)
     {
+        if (key.equals("TransactionError") == true)
+        {
+            displayMessage((String)value);
+        }
     }
 
     //--------------------------------------------------------------------------

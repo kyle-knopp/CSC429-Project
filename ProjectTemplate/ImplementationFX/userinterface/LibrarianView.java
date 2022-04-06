@@ -127,10 +127,8 @@ public class LibrarianView extends View
         });
         aCont.getChildren().add(addBookButton);
 
-        container.getChildren().add(aCont);
 
-        HBox bCont = new HBox(10);
-        bCont.setAlignment(Pos.CENTER);
+        aCont.setAlignment(Pos.CENTER);
         modifyBookButton = new Button("Modify a Book");
         modifyBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         modifyBookButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -140,12 +138,10 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("ModifyBook", null);
             }
         });
-        bCont.getChildren().add(modifyBookButton);
+        aCont.getChildren().add(modifyBookButton);
 
-        container.getChildren().add(bCont);
 
-        HBox cCont = new HBox(10);
-        cCont.setAlignment(Pos.CENTER);
+        aCont.setAlignment(Pos.CENTER);
         deleteBookButton = new Button("Delete a Book");
         deleteBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         deleteBookButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -155,12 +151,12 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("DeleteBook", null);
             }
         });
-        cCont.getChildren().add(deleteBookButton);
+        aCont.getChildren().add(deleteBookButton);
 
-        container.getChildren().add(cCont);
+        container.getChildren().add(aCont);
 
-        HBox dCont = new HBox(10);
-        dCont.setAlignment(Pos.CENTER);
+        HBox bCont = new HBox(10);
+        bCont.setAlignment(Pos.CENTER);
         addStudentBorrowerButton = new Button("Add a Student Borrower");
         addStudentBorrowerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         addStudentBorrowerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -170,12 +166,10 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("AddStudentBorrower", null);
             }
         });
-        dCont.getChildren().add(addStudentBorrowerButton);
+        bCont.getChildren().add(addStudentBorrowerButton);
 
-        container.getChildren().add(dCont);
 
-        HBox eCont = new HBox(10);
-        eCont.setAlignment(Pos.CENTER);
+        bCont.setAlignment(Pos.CENTER);
         modifyStudentBorrowerButton = new Button("Modify a Student Borrower");
         modifyStudentBorrowerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         modifyStudentBorrowerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -185,12 +179,10 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("SearchStudentBorrowerViewM", null);
             }
         });
-        eCont.getChildren().add(modifyStudentBorrowerButton);
+        bCont.getChildren().add(modifyStudentBorrowerButton);
 
-        container.getChildren().add(eCont);
 
-        HBox fCont = new HBox(10);
-        fCont.setAlignment(Pos.CENTER);
+        bCont.setAlignment(Pos.CENTER);
         deleteStudentBorrowerButton = new Button("Delete a Student Borrower");
         deleteStudentBorrowerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         deleteStudentBorrowerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -200,12 +192,12 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("SearchStudentBorrowerView", null);
             }
         });
-        fCont.getChildren().add(deleteStudentBorrowerButton);
+        bCont.getChildren().add(deleteStudentBorrowerButton);
 
-        container.getChildren().add(fCont);
+        container.getChildren().add(bCont);
 
-        HBox gCont = new HBox(10);
-        gCont.setAlignment(Pos.CENTER);
+        HBox cCont = new HBox(10);
+        cCont.setAlignment(Pos.CENTER);
         addWorkerButton = new Button("Add a Worker");
         addWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         addWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -215,12 +207,10 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("AddWorker", null);
             }
         });
-        gCont.getChildren().add(addWorkerButton);
+        cCont.getChildren().add(addWorkerButton);
 
-        container.getChildren().add(gCont);
 
-        HBox hCont = new HBox(10);
-        hCont.setAlignment(Pos.CENTER);
+        cCont.setAlignment(Pos.CENTER);
         modifyWorkerButton = new Button("Modify a Worker");
         modifyWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         modifyWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -230,12 +220,10 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("SearchWorkerViewM", null);
             }
         });
-        hCont.getChildren().add(modifyWorkerButton);
+        cCont.getChildren().add(modifyWorkerButton);
 
-        container.getChildren().add(hCont);
 
-        HBox iCont = new HBox(10);
-        iCont.setAlignment(Pos.CENTER);
+        cCont.setAlignment(Pos.CENTER);
         deleteWorkerButton = new Button("Delete a Worker");
         deleteWorkerButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         deleteWorkerButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -245,9 +233,9 @@ public class LibrarianView extends View
                 myModel.stateChangeRequest("SearchWorkerViewD", null);
             }
         });
-        iCont.getChildren().add(deleteWorkerButton);
+        cCont.getChildren().add(deleteWorkerButton);
 
-        container.getChildren().add(iCont);
+        container.getChildren().add(cCont);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);

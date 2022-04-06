@@ -45,7 +45,7 @@ public class ModifyWorkerView extends AddWorkerView
         populateFields();
 
         myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("TransactionError", this);
     }
 
 
@@ -66,7 +66,7 @@ public class ModifyWorkerView extends AddWorkerView
         return container;
     }
 
-
+    protected String setTitleText(){return "Modify Worker";}
 
     // Create the status log field
     //-------------------------------------------------------------
@@ -138,6 +138,13 @@ public class ModifyWorkerView extends AddWorkerView
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }else if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

@@ -47,7 +47,7 @@ public class EnterBookBarcodeView extends View {
 
 
 
-        myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("TransactionError", this);
     }
 
     private VBox createFormContent(){
@@ -152,6 +152,9 @@ public class EnterBookBarcodeView extends View {
         clearErrorMessage();
 
         if (key.equals("PopulateBarCodeMessage") == true)
+        {
+            displayMessage((String)value);
+        }else if (key.equals("TransactionError") == true)
         {
             displayMessage((String)value);
         }

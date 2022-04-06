@@ -381,7 +381,7 @@ public class ModifyBookView extends View{
     {
         clearErrorMessage();
 
-        if (key.equals("PopulateModifyBookMessage") == true)
+        if (key.equals("TransactionError") == true)
         {
             displayMessage((String)value);
         }

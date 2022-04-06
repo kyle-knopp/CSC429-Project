@@ -66,8 +66,8 @@ public class AddBookView extends View{
         populateFields();
 
         // myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("AddBookErrorMessage", this);
-        myModel.subscribe("AddBookSuccessMessage",this);
+        //myModel.subscribe("AddBookErrorMessage", this);
+        myModel.subscribe("TransactionError",this);
     }
 
 
@@ -374,13 +374,20 @@ public class AddBookView extends View{
         clearErrorMessage();
         //  DEBUG System.out.println(key);
 
+        System.out.println("Error Message key: "+ key);
+        System.out.println("Error Message: "+value);
+
         if (key.equals("AddBookErrorMessage") == true)
         {
             displayErrorMessage((String)value);
-        }else if(key.equals("AddBookSuccessMessage")==true)
+        }else if(key.equals("TransactionError")==true)
         {
             //  DEBUG System.out.println((String)value);
-            displayMessage((String)value);
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

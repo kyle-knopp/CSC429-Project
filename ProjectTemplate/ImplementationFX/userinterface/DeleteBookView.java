@@ -344,7 +344,7 @@ public class DeleteBookView extends View{
         p2.setProperty("Status","Inactive");
 
         System.out.println(p2);
-        myModel.stateChangeRequest("DeleteBook", p2);
+        //myModel.stateChangeRequest("DeleteBook", p2);
         //}
 
         //barcode.clear();
@@ -365,6 +365,8 @@ public class DeleteBookView extends View{
          */
 
         displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
+        //needs to be tested vvv
+        myModel.stateChangeRequest("ConfirmDeleteBook", p2);
     }
 
 

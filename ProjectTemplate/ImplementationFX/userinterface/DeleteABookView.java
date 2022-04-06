@@ -56,6 +56,9 @@ public class DeleteABookView extends EnterBookBarcodeView {
         if (key.equals("PopulateBarCodeMessage") == true)
         {
             displayMessage((String)value);
+        }else if (key.equals("TransactionError") == true)
+        {
+            displayMessage((String)value);
         }
     }
 }

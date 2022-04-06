@@ -75,7 +75,7 @@ public class AddStudentBorrowerView extends View
         populateFields();
 
 
-        myModel.subscribe("TransactionErrorMessage", this);
+        myModel.subscribe("TransactionError", this);
     }
 
 
@@ -224,7 +224,6 @@ public class AddStudentBorrowerView extends View
         backButton = new Button("Back");
         backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         backButton.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
@@ -297,12 +296,21 @@ public class AddStudentBorrowerView extends View
     {
         clearErrorMessage();
 
-        if (key.equals("TransactionErrorMessage") == true)
+        /*if (key.equals("TransactionErrorMessage") == true)
         {
             String val = (String)value;
             //serviceCharge.setText(val);
             if (val.startsWith("ERR"))
                 displayErrorMessage(val);
+            else
+                displayMessage(val);
+        }*/
+        System.out.println("Error Message: "+(String)value);
+        if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
             else
                 displayMessage(val);
         }
@@ -325,16 +333,7 @@ public class AddStudentBorrowerView extends View
 
         myModel.stateChangeRequest("AddStudentBorrower", p);
 
-        clearText();
-        BannerId.clear();
-        FirstName.clear();
-        LastName.clear();
-        ContactPhone.clear();
-        ContactPhone.clear();
-        Email.clear();
-        DateOfLatestBorrowerStatus.clear();
-        DateOfRegistration.clear();
-        Notes.clear();
+
     }
 
 
@@ -353,6 +352,18 @@ public class AddStudentBorrowerView extends View
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
+        if(message.equals("StudentBorrower data updated successfully in database!")){
+            clearText();
+            BannerId.clear();
+            FirstName.clear();
+            LastName.clear();
+            ContactPhone.clear();
+            ContactPhone.clear();
+            Email.clear();
+            DateOfLatestBorrowerStatus.clear();
+            DateOfRegistration.clear();
+            Notes.clear();
+        }
         statusLog.displayMessage(message);
     }
 

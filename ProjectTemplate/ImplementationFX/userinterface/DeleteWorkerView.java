@@ -53,6 +53,11 @@ public class DeleteWorkerView extends AddWorkerView
     }
 
 
+    protected String setTitleText(){return "Delete Worker";}
+
+    protected String setSubmitButtonLabel1(){
+        return "Delete";
+    }
 
 
     // Create the status log field
@@ -132,6 +137,10 @@ public class DeleteWorkerView extends AddWorkerView
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }
+        else if (key.equals("TransactionError") == true)
+        {
+            displayMessage((String)value);
         }
     }
 

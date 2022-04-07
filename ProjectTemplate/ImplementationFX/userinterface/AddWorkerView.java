@@ -218,8 +218,7 @@ public class AddWorkerView extends View{
 
         status = new ComboBox();
         status.getItems().addAll(
-                "Active",
-                "Inactive"
+                setStatusBoxFields()
         );
 
         status.setValue("Active");
@@ -267,6 +266,8 @@ public class AddWorkerView extends View{
     protected String setSubmitButtonLabel1(){
         return "Submit";
     }
+
+    protected String[] setStatusBoxFields(){return new String[]{"Active"};}
 
     protected void setFieldsEditable(Boolean option){
         bannerId.setEditable(option);

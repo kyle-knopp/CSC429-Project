@@ -77,6 +77,11 @@ public class ModifyWorkerView extends AddWorkerView
         return statusLog;
     }
 
+    @Override
+    protected String[] setStatusBoxFields() {
+        return new String[]{"Active","Inactive"};
+    }
+
     //-------------------------------------------------------------
     public void populateFields()
     {

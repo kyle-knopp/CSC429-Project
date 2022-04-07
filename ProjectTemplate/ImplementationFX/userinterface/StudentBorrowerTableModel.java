@@ -30,6 +30,8 @@ public class StudentBorrowerTableModel {
 
     private final SimpleStringProperty Status;
 
+    private final SimpleStringProperty BorrowerStatus;
+
 
     //----------------------------------------------------------------------------
 
@@ -52,6 +54,8 @@ public class StudentBorrowerTableModel {
         Notes = new SimpleStringProperty(accountData.elementAt(7));
 
         Status = new SimpleStringProperty(accountData.elementAt(8));
+
+        BorrowerStatus= new SimpleStringProperty((accountData.elementAt(9)));
 
     }
 
@@ -188,6 +192,20 @@ public class StudentBorrowerTableModel {
     public void setStatus(String stat) {
 
         Status.set(stat);
+    }
+
+    //----------------------------------------------------------------------------
+
+    public String getBorrowerStatus() {
+
+        return BorrowerStatus.get();
+    }
+
+
+    //----------------------------------------------------------------------------
+
+    public void setBorrowerStatus(String number) {
+        BorrowerStatus.set(number);
     }
 }
 

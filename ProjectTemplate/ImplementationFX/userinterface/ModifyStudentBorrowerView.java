@@ -58,9 +58,15 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
 
     }
 
+    @Override
+    protected String[] setStatusBoxFields() {
+        return new String[]{"Active","Inactive"};
+    }
 
-
-
+    @Override
+    protected String[] setBorrowerStatusBoxFields() {
+        return new String[]{"Good Standing","Delinquent"};
+    }
 
     // Create the status log field
     //-------------------------------------------------------------
@@ -84,6 +90,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         String dor = (String) myModel.getState("DateOfRegistration");
         String notes = (String) myModel.getState("Notes");
         String status = (String) myModel.getState("status");
+        String borrStat = (String) myModel.getState("BorrowerStatus");
 
 
         BannerId.setText(bannerID);
@@ -96,6 +103,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         DateOfRegistration.setText(dor);
         Notes.setText(notes);
         statusBox.setValue(status);
+        borrStatBox.setValue(borrStat);
 
     }
 
@@ -113,6 +121,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
+        p.put("BorrowerStatus",borrStatBox.getValue());
 
         myModel.stateChangeRequest("UpdateStudentBorrower", p);
 

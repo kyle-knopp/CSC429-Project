@@ -95,6 +95,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         String dor = (String) myModel.getState("DateOfRegistration");
         String notes = (String) myModel.getState("Notes");
         String status = (String) myModel.getState("status");
+        String borrStat = (String) myModel.getState("BorrowerStatus");
 
 
         BannerId.setText(bannerID);
@@ -106,6 +107,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         DateOfRegistration.setText(dor);
         Notes.setText(notes);
         statusBox.setValue(status);
+        borrStatBox.setValue(borrStat);
 
         setFieldsEditable(false);
 
@@ -140,6 +142,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
         p.put("status","Inactive");
+        p.put("BorrowerStatus",borrStatBox.getValue());
 
         myModel.stateChangeRequest("DeleteStudentBorrower", p);
 

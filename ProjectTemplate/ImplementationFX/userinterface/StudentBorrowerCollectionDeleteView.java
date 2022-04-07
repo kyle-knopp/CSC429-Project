@@ -30,6 +30,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
     // GUI components
     protected TableView<StudentBorrowerTableModel> tableOfStudentBorrowers;
     protected Button doneButton;
+    protected Button deleteButton;
 
     // For showing error message
     protected MessageView statusLog;
@@ -236,6 +237,7 @@ public class StudentBorrowerCollectionDeleteView extends View{
         HBox btnContainer = new HBox(100);
         btnContainer.setAlignment(Pos.CENTER);
         btnContainer.getChildren().add(doneButton);
+        //btnContainer.getChildren().add(deleteButton);
 
         vbox.getChildren().add(grid);
         vbox.getChildren().add(scrollPane);

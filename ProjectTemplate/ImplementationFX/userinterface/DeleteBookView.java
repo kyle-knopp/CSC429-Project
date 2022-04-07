@@ -33,6 +33,7 @@ public class DeleteBookView extends View{
     protected TextField suggestedPrice;
     protected TextField quality;
     protected TextField notes;
+    protected TextField prefix;
 
     protected String barcodeText;
     protected String titleText;
@@ -268,6 +269,22 @@ public class DeleteBookView extends View{
         notes.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(notes, 1, 13);
 
+        /**
+         * prefix row
+
+        Text prefixLabel = new Text(" Prefix : ");
+        prefixLabel.setFont(myFont);
+        prefixLabel.setWrappingWidth(150);
+        prefixLabel.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(prefixLabel, 0, 14);
+
+        prefix = new TextField();
+        prefix.setEditable(false);
+        prefix.setStyle("-fx-background-color: -fx-control-inner-background;");
+        grid.add(prefix, 1, 14);
+
+         */
+
 
 
         submitButton = new Button("Submit");
@@ -344,7 +361,7 @@ public class DeleteBookView extends View{
         p2.setProperty("Status","Inactive");
 
         System.out.println(p2);
-        //myModel.stateChangeRequest("DeleteBook", p2);
+        myModel.stateChangeRequest("DeleteBook", p2);
         //}
 
         //barcode.clear();
@@ -366,7 +383,7 @@ public class DeleteBookView extends View{
 
         displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
         //needs to be tested vvv
-        myModel.stateChangeRequest("ConfirmDeleteBook", p2);
+        //myModel.stateChangeRequest("DeleteBook", p2);
     }
 
 
@@ -401,6 +418,8 @@ public class DeleteBookView extends View{
         String sugPriceText = (String) myModel.getState("suggestedPrice");
         String notesText = (String) myModel.getState("notes");
         String stat= (String)myModel.getState("Status");
+        String pref= (String)myModel.getState("prefix");
+
 
 
         barcode.setText(barcodeText);
@@ -416,6 +435,7 @@ public class DeleteBookView extends View{
         quality.setText(conditionText);
         suggestedPrice.setText(sugPriceText);
         notes.setText(notesText);
+        //prefix.setText((pref));
 
         if(stat.equals("Inactive"))
         {

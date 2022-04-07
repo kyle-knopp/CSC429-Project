@@ -41,7 +41,8 @@ public class DeleteBookTransaction extends Transaction
     {
         dependencies = new Properties();
         dependencies.setProperty("SubmitBarCode", "TransactionError, UpdateStatusMessage, BookToDisplay");
-        dependencies.setProperty("DeleteBook", "TransactionError, UpdateStatusMessage");
+        dependencies.setProperty("DeleteBook","TransactionError, UpdateStatusMessage");
+        dependencies.setProperty("ConfirmDeleteBook","TransactionError, UpdateStatusMessage");
         dependencies.setProperty("Cancel", "CancelTransaction");
 
         myRegistry.setDependencies(dependencies);

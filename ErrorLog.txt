@@ -120,3 +120,5 @@
 [4/2/22, 12:00 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/2/22, 12:00 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/2/22, 12:01 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/7/22, 12:30 PM]|StudentBorrower|insertPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerStatus' doesn't have a default value>
+[4/7/22, 12:32 PM]|StudentBorrower|insertPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerStatus' doesn't have a default value>

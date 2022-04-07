@@ -104,6 +104,7 @@ public class ModifyWorkerView extends AddWorkerView
         doh.setText(dOH);
         status.setValue(stat);
         cred.setValue(credential);
+        alreadyDeleted.setText("");
     }
 
     private void processAction(ActionEvent e) {

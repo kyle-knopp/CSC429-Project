@@ -40,8 +40,8 @@ public class ModifyBookTransaction extends Transaction
     protected void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("SubmitBarCode", "TransactionError, UpdateStatusMessage, BookToDisplay");
-        dependencies.setProperty("ModifyBook", "TransactionError, UpdateStatusMessage");
+        dependencies.setProperty("SubmitBarcode", "TransactionError");//, UpdateStatusMessage, BookToDisplay");
+        dependencies.setProperty("ModifyBook", "TransactionError");//, UpdateStatusMessage");
         dependencies.setProperty("Cancel", "CancelTransaction");
 
         myRegistry.setDependencies(dependencies);
@@ -88,7 +88,7 @@ public class ModifyBookTransaction extends Transaction
     }
 
     private void createAndShowModifyBookView() {
-
+        transactionErrorMessage = "";
         Scene currentScene = (Scene) myViews.get("ModifyBookView");
         if (currentScene == null) {
             View newView = ViewFactory.createView("ModifyBookView", this);
@@ -157,8 +157,8 @@ public class ModifyBookTransaction extends Transaction
             createAndShowModifyBookView();
 
         } catch (InvalidPrimaryKeyException e) {
-            transactionErrorMessage = "Book Not Found." + e.toString();
-            new Event(Event.getLeafLevelClassName(this), "processTransaction",
+            transactionErrorMessage = "Error: Book Not Found.";
+            new Event(Event.getLeafLevelClassName(this), "processBarcode",
                     "Error in finding book " + e.toString(), Event.ERROR);
         }        }
 }

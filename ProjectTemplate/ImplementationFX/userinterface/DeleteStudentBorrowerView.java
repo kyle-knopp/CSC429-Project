@@ -38,7 +38,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
     protected Button searchButton;
 
     protected Button backButton;
-    protected Button submitButton;
+    //protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
 
@@ -109,19 +109,17 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
 
         setFieldsEditable(false);
 
-        /**
         if(status.equals("Inactive"))
         {
             //Debug: System.out.println("Book is Inactive");
-            displayErrorMessage("NOTE: The following Student Borrower is already INACTIVE: Try another Student!");
-            submitButton.setDisable(true);
+            alreadyDeleted.setText("NOTE: This Student Borrower is already INACTIVE!");
+            doneButton.setDisable(true);
         }
         else
         {
             System.out.println("Book is Active");
-            submitButton.setDisable(false);
+            doneButton.setDisable(false);
         }
-        */
     }
 
     private void processAction(ActionEvent e){

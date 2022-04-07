@@ -120,6 +120,11 @@
 [4/2/22, 12:00 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/2/22, 12:00 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/2/22, 12:01 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/6/22, 6:31 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 123412341234 found.>
+[4/6/22, 6:31 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'yearOfPublication' at row 1>
+[4/6/22, 6:33 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 123412341234 found.>
+[4/6/22, 6:34 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/6/22, 6:34 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '' , 'Good' , '0.00' , '' , '' , '' , '' , '' ,  , 'Active' , '' , 1324 )' at line 1>
 [4/5/22, 8:23 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
 [4/5/22, 8:23 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '' , 'Good' , '0.00' , '' , '' , '' , '' , '' ,  , 'Active' , '' , 1234 )' at line 1>
 [4/5/22, 8:28 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
@@ -199,3 +204,31 @@
 [4/5/22, 11:59 PM]|Worker|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Data too long for column 'phone' at row 1>
 [4/6/22, 12:00 AM]|Worker|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Data too long for column 'phone' at row 1>
 [4/6/22, 12:02 AM]|StudentBorrower|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'ContactPhone' at row 1>
+[4/6/22, 6:36 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/6/22, 6:36 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' '' , 'Good' , '0.00' , '' , '' , '' , '' , '' ,  , 'Active' , '' , 1234 )' at line 1>
+[4/6/22, 6:36 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 123412341234 found.>
+[4/6/22, 6:36 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'yearOfPublication' at row 1>
+[4/6/22, 6:37 PM]|Book|updatePersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'yearOfPublication' at row 1>
+[4/6/22, 6:40 PM]|ModifyBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234123412 found.>
+[4/6/22, 6:44 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234134 found.>
+[4/6/22, 6:44 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:44 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 123412341234 found.>
+[4/6/22, 6:45 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:46 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:47 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:47 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:48 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 1234134 found.>
+[4/6/22, 6:49 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 1341234 found.>
+[4/6/22, 6:49 PM]|DeleteBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:51 PM]|DeleteBookTransaction|processTransaction|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 6:51 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 7:00 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 7:00 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/6/22, 7:00 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[4/6/22, 7:00 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 123412341 found.>
+[4/6/22, 7:02 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 7:03 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 7:03 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 7:05 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 12341234 found.>
+[4/6/22, 7:17 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 23432 found.>
+[4/6/22, 7:17 PM]|DeleteBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: Multiple accounts matching barcodes : 1243 found.>

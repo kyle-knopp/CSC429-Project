@@ -45,6 +45,8 @@ public class AddStudentBorrowerView extends View
     protected TextField DateOfRegistration;
     protected TextField Notes;
 
+    protected Text alreadyDeleted;
+
     protected Button backButton;
     protected Button doneButton;
     protected ComboBox statusBox;
@@ -220,6 +222,11 @@ public class AddStudentBorrowerView extends View
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
+
+        alreadyDeleted=new Text();
+        alreadyDeleted.setText("");
+        alreadyDeleted.setFill(Color.RED);
+        grid.add(alreadyDeleted,0,10);
 
         backButton = new Button("Back");
         backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));

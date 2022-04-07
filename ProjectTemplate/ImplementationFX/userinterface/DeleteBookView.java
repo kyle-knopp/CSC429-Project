@@ -229,18 +229,6 @@ public class DeleteBookView extends View{
         con.setTextAlignment(TextAlignment.RIGHT);
         grid.add(con, 0, 11);
 
-        /**
-        quality = new ComboBox();
-        quality.getItems().addAll(
-                "Good",
-                "Damaged"
-        );
-
-        quality.setValue("Good");
-        quality.setEditable(false);
-        grid.add(quality, 1, 11);
-         */
-
         quality = new TextField();
         quality.setEditable(false);
         quality.setStyle("-fx-background-color: -fx-control-inner-background;");
@@ -287,7 +275,7 @@ public class DeleteBookView extends View{
 
 
 
-        submitButton = new Button("Submit");
+        submitButton = new Button("Delete");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

@@ -98,6 +98,7 @@ public class ModifyWorkerView extends AddWorkerView
         String pass = (String) myModel.getState("password");
 
 
+
         bannerId.setText(bannerID);
         bannerId.setEditable(false);
         password.setText(pass);

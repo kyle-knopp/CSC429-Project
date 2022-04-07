@@ -309,20 +309,7 @@ public class ModifyBookView extends View{
             myModel.stateChangeRequest("ModifyBook", p2);
         //}
 
-        //barcode.clear();
-        title.clear();
-        author1.clear();
-        author2.clear();
-        author3.clear();
-        author4.clear();
-        publisher.clear();
-        yearOfPublication.clear();
-        ISBN.clear();
-        suggestedPrice.clear();
-        notes.clear();
 
-        quality.setValue("Good");
-        suggestedPrice.setText("0.00");
 
     }
 
@@ -383,7 +370,11 @@ public class ModifyBookView extends View{
 
         if (key.equals("TransactionError") == true)
         {
-            displayMessage((String)value);
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 
@@ -402,6 +393,22 @@ public class ModifyBookView extends View{
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
+
+
+        /*//barcode.clear();
+        title.clear();
+        author1.clear();
+        author2.clear();
+        author3.clear();
+        author4.clear();
+        publisher.clear();
+        yearOfPublication.clear();
+        ISBN.clear();
+        suggestedPrice.clear();
+        notes.clear();
+
+        quality.setValue("Good");
+        suggestedPrice.setText("0.00");*/
         statusLog.displayMessage(message);
     }
 

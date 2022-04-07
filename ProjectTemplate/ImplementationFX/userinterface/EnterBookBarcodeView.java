@@ -41,7 +41,7 @@ public class EnterBookBarcodeView extends View {
 
         // create our GUI components, add them to this Container
         container.getChildren().add(createFormContent());
-
+        container.getChildren().add(createStatusLog("             "));
 
         getChildren().add(container);
 
@@ -116,12 +116,21 @@ public class EnterBookBarcodeView extends View {
             myModel.stateChangeRequest("Cancel", "");
         }
         else if (sender == submitButton) {
-            if (true) {
-                myModel.stateChangeRequest("SubmitBarcode", props);
-               // myModel.stateChangeRequest("SubmitBarcode", null);
-                barcode.clear();
-            }
+            clearErrorMessage();
+            myModel.stateChangeRequest("SubmitBarcode", props);
+            // myModel.stateChangeRequest("SubmitBarcode", null);
+            barcode.clear();
+
         }
+    }
+
+    // Create the status log field
+    //-------------------------------------------------------------
+    protected MessageView createStatusLog(String initialMessage)
+    {
+        statusLog = new MessageView(initialMessage);
+
+        return statusLog;
     }
     //----------------------------------------------------------
     public void displayErrorMessage(String message)
@@ -154,9 +163,12 @@ public class EnterBookBarcodeView extends View {
         if (key.equals("PopulateBarCodeMessage") == true)
         {
             displayMessage((String)value);
-        }else if (key.equals("TransactionError") == true)
-        {
-            displayMessage((String)value);
+        }else if (key.equals("TransactionError") == true) {
+            String val = (String) value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage(val);
+            else
+                clearErrorMessage();
         }
     }
 

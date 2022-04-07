@@ -36,6 +36,8 @@ public class AddWorkerView extends View{
     protected TextField doh;
     protected ComboBox status;
 
+    protected Text alreadyDeleted;
+
     protected Button cancelButton;
     protected Button submitButton;
 
@@ -223,15 +225,13 @@ public class AddWorkerView extends View{
         status.setValue("Active");
         grid.add(status, 1, 10);
 
-        submitButton = new Button(setSubmitButtonLabel1());
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                processAction(e);
-            }
-        });
+        alreadyDeleted=new Text();
+        alreadyDeleted.setText("");
+        alreadyDeleted.setFill(Color.RED);
+        grid.add(alreadyDeleted,0,11);
 
         cancelButton = new Button("Back");
+        cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -239,14 +239,23 @@ public class AddWorkerView extends View{
             }
         });
 
-        HBox buttonCont = new HBox(10);
+        submitButton = new Button(setSubmitButtonLabel1());
+        submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
+
+        HBox buttonCont = new HBox(5);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
-        Label space = new Label("               ");
+        buttonCont.getChildren().add(cancelButton);
+        Label space = new Label(" ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(submitButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 

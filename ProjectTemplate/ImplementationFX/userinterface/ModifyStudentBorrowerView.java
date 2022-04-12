@@ -43,17 +43,30 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
             }
         });
 
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                clearErrorMessage();
+                myModel.stateChangeRequest("CancelTransaction", null);
+            }
+        });
+
         myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("TransactionError", this);
         populateFields();
 
-        myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("UpdateStatusMessage", this);
     }
 
+    @Override
+    protected String[] setStatusBoxFields() {
+        return new String[]{"Active","Inactive"};
+    }
 
-
-
+    @Override
+    protected String[] setBorrowerStatusBoxFields() {
+        return new String[]{"Good Standing","Delinquent"};
+    }
 
     // Create the status log field
     //-------------------------------------------------------------
@@ -77,6 +90,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         String dor = (String) myModel.getState("DateOfRegistration");
         String notes = (String) myModel.getState("Notes");
         String status = (String) myModel.getState("status");
+        String borrStat = (String) myModel.getState("BorrowerStatus");
 
 
         BannerId.setText(bannerID);
@@ -89,6 +103,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         DateOfRegistration.setText(dor);
         Notes.setText(notes);
         statusBox.setValue(status);
+        borrStatBox.setValue(borrStat);
 
     }
 
@@ -106,6 +121,7 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
+        p.put("BorrowerStatus",borrStatBox.getValue());
 
         myModel.stateChangeRequest("UpdateStudentBorrower", p);
 
@@ -134,6 +150,13 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }else if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

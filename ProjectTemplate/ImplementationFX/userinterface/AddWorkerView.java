@@ -36,6 +36,8 @@ public class AddWorkerView extends View{
     protected TextField doh;
     protected ComboBox status;
 
+    protected Text alreadyDeleted;
+
     protected Button cancelButton;
     protected Button submitButton;
 
@@ -64,8 +66,8 @@ public class AddWorkerView extends View{
 
         populateFields();
 
-        // myModel.subscribe("ServiceCharge", this);
-        //myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("ServiceCharge", this);
+        myModel.subscribe("TransactionError", this);
     }
 
 
@@ -76,7 +78,7 @@ public class AddWorkerView extends View{
         HBox container = new HBox();
         container.setAlignment(Pos.CENTER);
 
-        Text titleText = new Text(" Add New Worker ");
+        Text titleText = new Text(setTitleText());
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
@@ -85,6 +87,8 @@ public class AddWorkerView extends View{
 
         return container;
     }
+
+    protected String setTitleText(){return "Add Worker";}
 
     // Create the main form content
     //-------------------------------------------------------------
@@ -98,13 +102,13 @@ public class AddWorkerView extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("WORKER INFORMATION");
+        Text prompt = new Text(setPrompt());
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
 
-        Text workerBannerId = new Text(" Worker's BannerId : ");
+        Text workerBannerId = new Text(" BannerId : ");
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
         workerBannerId.setFont(myFont);
         workerBannerId.setWrappingWidth(150);
@@ -115,7 +119,7 @@ public class AddWorkerView extends View{
         bannerId.setEditable(true);
         grid.add(bannerId, 1, 1);
 
-        Text workerPass = new Text(" Worker's Password : ");
+        Text workerPass = new Text(" Password : ");
         workerPass.setFont(myFont);
         workerPass.setWrappingWidth(150);
         workerPass.setTextAlignment(TextAlignment.RIGHT);
@@ -125,7 +129,7 @@ public class AddWorkerView extends View{
         password.setEditable(true);
         grid.add(password, 1, 2);
 
-        Text wFirst = new Text(" Worker's First Name : ");
+        Text wFirst = new Text("  First Name : ");
         wFirst.setFont(myFont);
         wFirst.setWrappingWidth(150);
         wFirst.setTextAlignment(TextAlignment.RIGHT);
@@ -136,7 +140,7 @@ public class AddWorkerView extends View{
         grid.add(first, 1, 3);
 
 
-        Text wLast = new Text(" Worker's Last Name : ");
+        Text wLast = new Text(" Last Name : ");
         wLast.setFont(myFont);
         wLast.setWrappingWidth(150);
         wLast.setTextAlignment(TextAlignment.RIGHT);
@@ -146,7 +150,7 @@ public class AddWorkerView extends View{
         last.setEditable(true);
         grid.add(last, 1, 4);
 
-        Text wPhone = new Text(" Worker's Phone Number : ");
+        Text wPhone = new Text(" Phone Number : ");
         wPhone.setFont(myFont);
         wPhone.setWrappingWidth(150);
         wPhone.setTextAlignment(TextAlignment.RIGHT);
@@ -156,7 +160,7 @@ public class AddWorkerView extends View{
         phone.setEditable(true);
         grid.add(phone, 1, 5);
 
-        Text wEmail = new Text(" Worker's Email : ");
+        Text wEmail = new Text(" Email : ");
         wEmail.setFont(myFont);
         wEmail.setWrappingWidth(150);
         wEmail.setTextAlignment(TextAlignment.RIGHT);
@@ -166,7 +170,7 @@ public class AddWorkerView extends View{
         email.setEditable(true);
         grid.add(email, 1, 6);
 
-        Text wCred = new Text(" Worker's Credentials : ");
+        Text wCred = new Text(" Credentials : ");
         wCred.setFont(myFont);
         wCred.setWrappingWidth(150);
         wCred.setTextAlignment(TextAlignment.RIGHT);
@@ -181,7 +185,7 @@ public class AddWorkerView extends View{
         cred.setValue("Ordinary");
         grid.add(cred, 1, 7);
 
-        Text wDOLC = new Text(" Worker's Date Of Latest Credentials : ");
+        Text wDOLC = new Text(" Date Of Latest Credentials : ");
         wDOLC.setFont(myFont);
         wCred.setWrappingWidth(150);
         wCred.setTextAlignment(TextAlignment.RIGHT);
@@ -195,7 +199,7 @@ public class AddWorkerView extends View{
         dOLC.setText(dtf.format(now));
         grid.add(dOLC, 1, 8);
 
-        Text wDOH = new Text(" Worker's Date of Hire : ");
+        Text wDOH = new Text(" Date of Hire : ");
         wDOH.setFont(myFont);
         wDOH.setWrappingWidth(150);
         wDOH.setTextAlignment(TextAlignment.RIGHT);
@@ -206,7 +210,7 @@ public class AddWorkerView extends View{
         doh.setText(dtf.format(now));
         grid.add(doh, 1, 9);
 
-        Text wStatus = new Text(" Worker's Status : ");
+        Text wStatus = new Text(" Status : ");
         wStatus.setFont(myFont);
         wStatus.setWrappingWidth(150);
         wStatus.setTextAlignment(TextAlignment.RIGHT);
@@ -214,22 +218,19 @@ public class AddWorkerView extends View{
 
         status = new ComboBox();
         status.getItems().addAll(
-                "Active",
-                "Inactive"
+                setStatusBoxFields()
         );
 
         status.setValue("Active");
         grid.add(status, 1, 10);
 
-        submitButton = new Button("Submit");
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                processAction(e);
-            }
-        });
+        alreadyDeleted=new Text();
+        alreadyDeleted.setText("");
+        alreadyDeleted.setFill(Color.RED);
+        grid.add(alreadyDeleted,0,11);
 
         cancelButton = new Button("Back");
+        cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -237,19 +238,36 @@ public class AddWorkerView extends View{
             }
         });
 
-        HBox buttonCont = new HBox(10);
+        submitButton = new Button(setSubmitButtonLabel1());
+        submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                processAction(e);
+            }
+        });
+
+        HBox buttonCont = new HBox(5);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
-        Label space = new Label("               ");
+        buttonCont.getChildren().add(cancelButton);
+        Label space = new Label(" ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(submitButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 
         return vbox;
     }
+
+    protected String setPrompt(){return "WORKER INFORMATION";    }
+
+    protected String setSubmitButtonLabel1(){
+        return "Submit";
+    }
+
+    protected String[] setStatusBoxFields(){return new String[]{"Active"};}
 
     protected void setFieldsEditable(Boolean option){
         bannerId.setEditable(option);
@@ -300,15 +318,9 @@ public class AddWorkerView extends View{
         }
 
 
-        bannerId.clear();
-        password.clear();
-        first.clear();
-        last.clear();
-        phone.clear();
-        email.clear();
-        cred.setValue("Ordinary");
-        status.setValue("Active");
+
     }
+
 
 
     // Create the status log field
@@ -337,10 +349,18 @@ public class AddWorkerView extends View{
     public void updateState(String key, Object value)
     {
         clearErrorMessage();
-
+        System.out.println("Error Message key: "+ key);
+        System.out.println("Error Message: "+value);
         if (key.equals("PopulatePatronMessage") == true)
         {
             displayMessage((String)value);
+        }else if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 
@@ -359,6 +379,17 @@ public class AddWorkerView extends View{
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
+
+        if(message.equals("Worker data updated successfully in database!")){
+            bannerId.clear();
+            password.clear();
+            first.clear();
+            last.clear();
+            phone.clear();
+            email.clear();
+            cred.setValue("Ordinary");
+            status.setValue("Active");
+        }
         statusLog.displayMessage(message);
     }
 

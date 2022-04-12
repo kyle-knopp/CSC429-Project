@@ -61,7 +61,7 @@ public class SearchStudentBorrowerViewM extends View
         populateFields();
 
         myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("UpdateStatusMessage", this);
+       // myModel.subscribe("TransactionError", this);
     }
 
 
@@ -178,6 +178,9 @@ public class SearchStudentBorrowerViewM extends View
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }else if (key.equals("TransactionError") == true)
+        {
+            displayMessage((String)value);
         }
     }
 

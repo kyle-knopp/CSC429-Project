@@ -90,9 +90,13 @@ public class StudentBorrower extends EntityBase{
             updatePersistentState(mySchema, persistentState, whereClause);
             updateStatusMessage = "Book data updated successfully in database!";
         }catch (SQLException ex){
-            System.out.println("Error in updating Student Borrower in database!");
-            System.out.println(ex.toString());
-            ex.printStackTrace();
+            updateStatusMessage ="Error in updating Student Borrower in database!";
+            //System.out.println("Error in updating Student Borrower in database!");
+            //System.out.println(ex.toString());
+            //ex.printStackTrace();
+        }catch (Exception excep) {
+            updateStatusMessage = "Error in updating Student Borrower data in database!";
+            System.out.println(excep);
         }
     }
 
@@ -119,7 +123,7 @@ public class StudentBorrower extends EntityBase{
         }
         catch (SQLException ex)
         {
-            updateStatusMessage = "Error in installing account data in database!";
+            updateStatusMessage = "Error in installing Student Borrower data in database! Check input formats.";
             //System.out.println(ex.toString());
             ex.printStackTrace();
         }
@@ -132,7 +136,9 @@ public class StudentBorrower extends EntityBase{
     private void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("Update", "UpdateStatusMessage");
+        dependencies.setProperty("AddStudentBorrower", "TransactionError");
+        dependencies.setProperty("UpdateStudentBorrower", "TransactionError");
+        dependencies.setProperty("DeleteStudentBorrower", "TransactionError");
         dependencies.setProperty("ServiceCharge", "UpdateStatusMessage");
 
         myRegistry.setDependencies(dependencies);
@@ -163,7 +169,15 @@ public class StudentBorrower extends EntityBase{
     }
 
     public Object getState(String key) {
-        return persistentState.getProperty(key);
+        System.out.println("Get State: "+key);
+        System.out.println("Status Message: "+updateStatusMessage);
+        if(key.equals("TransactionError")){
+            return updateStatusMessage;
+        }else
+        if(key.equals("UpdateStatusMessage")) {
+            return updateStatusMessage;
+        }else
+            return persistentState.getProperty(key);
     }
 
     public void stateChangeRequest(String key, Object value) {
@@ -184,6 +198,7 @@ public class StudentBorrower extends EntityBase{
         v.addElement(persistentState.getProperty("DateOfRegistration")); //need to enter
         v.addElement(persistentState.getProperty("Notes"));
         v.addElement(persistentState.getProperty("status")); //may need to check name
+        v.addElement(persistentState.getProperty("BorrowerStatus"));
 
         return v;
     }

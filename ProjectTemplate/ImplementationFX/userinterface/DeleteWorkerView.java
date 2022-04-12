@@ -29,7 +29,6 @@ import impresario.IModel;
 public class DeleteWorkerView extends AddWorkerView
 {
 
-
     // For showing error message
     protected MessageView statusLog;
 
@@ -53,6 +52,11 @@ public class DeleteWorkerView extends AddWorkerView
     }
 
 
+    protected String setTitleText(){return "Delete Worker";}
+
+    protected String setSubmitButtonLabel1(){
+        return "Delete";
+    }
 
 
     // Create the status log field
@@ -91,6 +95,19 @@ public class DeleteWorkerView extends AddWorkerView
         doh.setText(dOH);
         status.setValue(stat);
         cred.setValue(credential);
+        alreadyDeleted.setText("");
+
+        if(stat.equals("Inactive"))
+        {
+            //Debug: System.out.println("Book is Inactive");
+            alreadyDeleted.setText("NOTE: This Worker is already INACTIVE!");
+            submitButton.setDisable(true);
+        }
+        else
+        {
+            System.out.println("Worker is Active");
+            submitButton.setDisable(false);
+        }
     }
     protected String setViewTitle(){
         return "WOULD YOU LIKE TO DELETE THIS WORKER?";
@@ -132,6 +149,10 @@ public class DeleteWorkerView extends AddWorkerView
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }
+        else if (key.equals("TransactionError") == true)
+        {
+            displayMessage((String)value);
         }
     }
 

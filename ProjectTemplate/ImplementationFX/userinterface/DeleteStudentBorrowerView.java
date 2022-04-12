@@ -38,7 +38,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
     protected Button searchButton;
 
     protected Button backButton;
-    protected Button submitButton;
+    //protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
 
@@ -56,7 +56,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         });
 
         myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("UpdateStatusMessage", this);
+        myModel.subscribe("TransactionError", this);
     }
 
 
@@ -95,6 +95,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         String dor = (String) myModel.getState("DateOfRegistration");
         String notes = (String) myModel.getState("Notes");
         String status = (String) myModel.getState("status");
+        String borrStat = (String) myModel.getState("BorrowerStatus");
 
 
         BannerId.setText(bannerID);
@@ -106,8 +107,21 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         DateOfRegistration.setText(dor);
         Notes.setText(notes);
         statusBox.setValue(status);
+        borrStatBox.setValue(borrStat);
 
         setFieldsEditable(false);
+
+        if(status.equals("Inactive"))
+        {
+            //Debug: System.out.println("Book is Inactive");
+            alreadyDeleted.setText("NOTE: This Student Borrower is already INACTIVE!");
+            doneButton.setDisable(true);
+        }
+        else
+        {
+            System.out.println("Book is Active");
+            doneButton.setDisable(false);
+        }
     }
 
     private void processAction(ActionEvent e){
@@ -124,6 +138,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
         p.put("status","Inactive");
+        p.put("BorrowerStatus",borrStatBox.getValue());
 
         myModel.stateChangeRequest("DeleteStudentBorrower", p);
 
@@ -152,6 +167,13 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
             String val = (String)value;
             //serviceCharge.setText(val);
             displayMessage("Service Charge Imposed: $ " + val);
+        }else if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

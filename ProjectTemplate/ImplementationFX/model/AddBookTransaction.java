@@ -41,8 +41,8 @@ public class AddBookTransaction extends Transaction
     {
         dependencies = new Properties();
         dependencies.setProperty("AddBook", "TransactionError");
-        dependencies.setProperty("AddBook", "AddBookErrorMessage");
-        dependencies.setProperty("AddBook", "AddBookSuccessMessage");
+        //dependencies.setProperty("AddBook", "AddBookErrorMessage");
+        //dependencies.setProperty("AddBook", "AddBookSuccessMessage");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -74,6 +74,7 @@ public class AddBookTransaction extends Transaction
     //-----------------------------------------------------------
     public Object getState(String key)
     {
+        System.out.println(key);
         if (key.equals("TransactionError") == true)
         {
             return transactionErrorMessage;

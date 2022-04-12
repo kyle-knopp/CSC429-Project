@@ -33,6 +33,7 @@ public class DeleteBookView extends View{
     protected TextField suggestedPrice;
     protected TextField quality;
     protected TextField notes;
+    protected Text alreadyDeleted;
 
     protected String barcodeText;
     protected String titleText;
@@ -268,7 +269,10 @@ public class DeleteBookView extends View{
         notes.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(notes, 1, 13);
 
-
+        alreadyDeleted=new Text();
+        alreadyDeleted.setText("");
+        alreadyDeleted.setFill(Color.RED);
+        grid.add(alreadyDeleted,0,14);
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -365,6 +369,8 @@ public class DeleteBookView extends View{
          */
 
         displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
+        //needs to be tested vvv
+        //myModel.stateChangeRequest("ConfirmDeleteBook", p2);
     }
 
 
@@ -418,7 +424,7 @@ public class DeleteBookView extends View{
         if(stat.equals("Inactive"))
         {
             //Debug: System.out.println("Book is Inactive");
-            displayErrorMessage("NOTE: The following book is already INACTIVE: Try another book!");
+            alreadyDeleted.setText("NOTE: The following book is already INACTIVE: Try another book!");
             submitButton.setDisable(true);
         }
         else
@@ -427,6 +433,8 @@ public class DeleteBookView extends View{
             submitButton.setDisable(false);
         }
     }
+
+
 
     /**
      * Update method
@@ -439,6 +447,13 @@ public class DeleteBookView extends View{
         if (key.equals("PopulateDeleteBookMessage") == true)
         {
             displayMessage((String)value);
+        }else if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

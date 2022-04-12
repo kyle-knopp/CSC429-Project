@@ -64,24 +64,23 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
     private void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("BookData", "TransactionError");
-        dependencies.setProperty("PatronData", "TransactionError");
-        dependencies.setProperty("Search Books", "TransactionError");
-        dependencies.setProperty("Search Patrons", "TransactionError");
         dependencies.setProperty("Login", "LoginError");
-        //dependencies.setProperty("AddBook", "AddBookErrorMessage");
-        //dependencies.setProperty("AddBook", "AddBookSuccessMessage");
-        dependencies.setProperty("UpdateStatusMessage","");
-        dependencies.setProperty("BookData", "TransactionError");
-        //dependencies.setProperty("","");
+        dependencies.setProperty("ModifyWorker", "TransactionError");
+        dependencies.setProperty("UpdateWorker", "TransactionError");
+        dependencies.setProperty("DeleteWorker", "TransactionError");
+        dependencies.setProperty("UpdateStudentBorrower", "TransactionError");
+        dependencies.setProperty("ModifyStudentBorrower", "TransactionError");
+        dependencies.setProperty("DeleteStudentBorrower", "TransactionError");
+
+
 
         myRegistry.setDependencies(dependencies);
     }
@@ -99,6 +98,7 @@ public class Librarian implements IView, IModel
     {
         if (key.equals("TransactionError") == true)
         {
+            //DEBUG System.out.println("Librarian get state: "+transactionErrorMessage);
             return transactionErrorMessage;
         }
         else
@@ -140,7 +140,6 @@ public class Librarian implements IView, IModel
     //----------------------------------------------------------------
     public void stateChangeRequest(String key, Object value)
     {
-
         if (key.equals("Login") == true)
         {
             if (value != null)
@@ -212,9 +211,9 @@ public class Librarian implements IView, IModel
         {
 
             Properties p = (Properties)value;
-            String fname = p.getProperty("FirstName");
+            String name = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            myStudentBorrowers.findStudentBorrowersWithNameLike(name);
             //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionDeleteView();
 
@@ -243,13 +242,14 @@ public class Librarian implements IView, IModel
             Properties p = (Properties)value;
             String fname = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
-            myStudentBorrowers.findStudentBorrowersWithFirstNameLike(fname);
+            myStudentBorrowers.findStudentBorrowersWithNameLike(fname);
             //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionModifyView();
         }
         else if (key.equals("ModifyStudentBorrowerView") == true) // end student borrower modify sequence
         {
             try{
+                transactionErrorMessage="";
                 getStudentBorrower((String)value);
 
             }catch(InvalidPrimaryKeyException e){
@@ -305,6 +305,7 @@ public class Librarian implements IView, IModel
         else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
         {
             try{
+                //transactionErrorMessage="";
                 getWorker((String)value);
             }catch(InvalidPrimaryKeyException e){
             e.printStackTrace();
@@ -315,22 +316,31 @@ public class Librarian implements IView, IModel
         else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
         {
             createAndShowWorkerCollectionModifyViewNo();
-        }else if(key.equals("UpdateStudentBorrower")){
-            Properties p = (Properties) value;
-            modifySB= new StudentBorrower(p);
-            modifySB.save("update");
-        }else if(key.equals("UpdateWorker")){
-            Properties p = (Properties) value;
-            modifyWorker= new Worker(p);
-            modifyWorker.save("update");
-        }else if(key.equals("DeleteStudentBorrower")){
-            Properties p = (Properties) value;
-            modifySB= new StudentBorrower(p);
-            modifySB.save("update");
-        }else if(key.equals("DeleteWorker")){
+        }else if(key.equals("UpdateStudentBorrower"))
+        {
+                Properties p = (Properties) value;
+                modifySB = new StudentBorrower(p);
+                modifySB.save("update");
+                transactionErrorMessage=(String)modifySB.getState("UpdateStatusMessage");
+
+        }else if(key.equals("UpdateWorker"))
+        {
             Properties p = (Properties) value;
             modifyWorker= new Worker(p);
             modifyWorker.save("update");
+            transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
+        }else if(key.equals("DeleteStudentBorrower"))
+        {
+            Properties p = (Properties) value;
+            modifySB= new StudentBorrower(p);
+            modifySB.save("update");
+            transactionErrorMessage=(String)modifySB.getState("UpdateStatusMessage");
+        }else if(key.equals("DeleteWorker"))
+        {
+            Properties p = (Properties) value;
+            modifyWorker= new Worker(p);
+            modifyWorker.save("update");
+            transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
         }
 
 
@@ -445,15 +455,14 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowLibrarianView()
     {
-        Scene currentScene = (Scene)myViews.get("LibrarianView");
-
-        if (currentScene == null)
-        {
+        //Scene currentScene = (Scene)myViews.get("LibrarianView");
+        //if (currentScene == null)
+        //{
             // create our initial view
             View newView = ViewFactory.createView("LibrarianView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("LibrarianView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
     }
@@ -527,11 +536,11 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowDeleteStudentBorrowerView()
     {
-        Scene currentScene = (Scene)myViews.get("DeleteStudentBorrowerView");
+        //Scene currentScene = (Scene)myViews.get("DeleteStudentBorrowerView");
 
             // create our initial view
         View newView = ViewFactory.createView("DeleteStudentBorrowerView", this); // USE VIEW FACTORY
-        currentScene = new Scene(newView);
+        Scene currentScene = new Scene(newView);
         myViews.put("DeleteStudentBorrowerView", currentScene);
 
         swapToView(currentScene);
@@ -574,15 +583,15 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowModifyStudentBorrowerView()
     {
-        Scene currentScene = (Scene)myViews.get("ModifyStudentBorrowerView");
+        //Scene currentScene = (Scene)myViews.get("ModifyStudentBorrowerView");
 
-        if (currentScene == null)
-        {
+        //if (currentScene == null)
+        //{
             // create our initial view
             View newView = ViewFactory.createView("ModifyStudentBorrowerView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("ModifyStudentBorrowerView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
 
@@ -622,15 +631,15 @@ public class Librarian implements IView, IModel
 
     private void createAndShowSearchWorkerViewD()
     {
-        Scene currentScene = (Scene)myViews.get("SearchWorkerViewD");
+        //Scene currentScene = (Scene)myViews.get("SearchWorkerViewD");
 
-        if (currentScene == null)
-        {
+        //if (currentScene == null)
+        //{
             // create our initial view
             View newView = ViewFactory.createView("SearchWorkerViewD", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("SearchWorkerViewD", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
 
@@ -652,15 +661,15 @@ public class Librarian implements IView, IModel
 
     private void createAndShowDeleteWorkerView()
     {
-        Scene currentScene = (Scene)myViews.get("DeleteWorkerView");
+        // currentScene = (Scene)myViews.get("DeleteWorkerView");
 
-        if (currentScene == null)
-        {
+        //if (currentScene == null)
+       // {
             // create our initial view
             View newView = ViewFactory.createView("DeleteWorkerView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("DeleteWorkerView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
 
@@ -709,14 +718,14 @@ public class Librarian implements IView, IModel
 
     private void createAndShowModifyWorkerView()
     {
-        Scene currentScene = (Scene)myViews.get("ModifyWorkerView");
+        //Scene currentScene = (Scene)myViews.get("ModifyWorkerView");
 
-        if (currentScene == null) {
+        //if (currentScene == null) {
             // create our initial view
             View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("ModifyWorkerView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
     }

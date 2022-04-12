@@ -89,9 +89,10 @@ public class Book extends EntityBase{
             Properties whereClause = new Properties();
             whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
             updatePersistentState(mySchema, persistentState, whereClause);
-            updateStatusMessage = "Book data updated successfully in database!";
+            updateStatusMessage = "Book Successfully Updated in Database";
         }catch (SQLException ex){
-            System.out.println("Error in installing book data in database!");
+            updateStatusMessage ="Error in adding book to database! Check format of inputs.";
+            System.out.println("Error in adding book to database! Check format of inputs.");
             System.out.println(ex.toString());
             ex.printStackTrace();
         }
@@ -129,6 +130,7 @@ public class Book extends EntityBase{
         }
         catch (Exception excep) {
             System.out.println(excep);
+            updateStatusMessage = "Error in adding book to database! Check format of inputs.";
         }
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
     }
@@ -138,6 +140,10 @@ public class Book extends EntityBase{
         dependencies = new Properties();
         dependencies.setProperty("AddBook", "AddBookErrorMessage");
         dependencies.setProperty("AddBook", "AddBookSuccessMessage");
+        dependencies.setProperty("ModifyBook", "TransactionError");
+        dependencies.setProperty("DeleteBook", "TransactionError");
+        dependencies.setProperty("SubmitBarcode", "updateStatusMessage");
+        dependencies.setProperty("SubmitBarCode", "TransactionError");
 
         myRegistry.setDependencies(dependencies);
     }

@@ -66,8 +66,8 @@ public class AddBookView extends View{
         populateFields();
 
         // myModel.subscribe("ServiceCharge", this);
-        myModel.subscribe("AddBookErrorMessage", this);
-        myModel.subscribe("AddBookSuccessMessage",this);
+        //myModel.subscribe("AddBookErrorMessage", this);
+        myModel.subscribe("TransactionError",this);
     }
 
 
@@ -204,7 +204,7 @@ public class AddBookView extends View{
         ISBN.setEditable(true);
         grid.add(ISBN, 1, 10);
 
-        Text con = new Text(" Quality : ");
+        Text con = new Text(" Book Condition : ");
         con.setFont(myFont);
         con.setWrappingWidth(150);
         con.setTextAlignment(TextAlignment.RIGHT);
@@ -212,8 +212,7 @@ public class AddBookView extends View{
 
         quality = new ComboBox();
         quality.getItems().addAll(
-                "Good",
-                "Damaged"
+                "Good"
         );
 
         quality.setValue("Good");
@@ -248,8 +247,7 @@ public class AddBookView extends View{
 
         status = new ComboBox();
         status.getItems().addAll(
-                "Active",
-                "Inactive"
+                setStatusBoxFields()
         );
 
         status.setValue("Active");
@@ -284,6 +282,8 @@ public class AddBookView extends View{
 
         return vbox;
     }
+
+    protected String[] setStatusBoxFields(){return new String[]{"Active"};}
 
     private void processAction(ActionEvent e) {
 
@@ -374,13 +374,20 @@ public class AddBookView extends View{
         clearErrorMessage();
         //  DEBUG System.out.println(key);
 
+        System.out.println("Error Message key: "+ key);
+        System.out.println("Error Message: "+value);
+
         if (key.equals("AddBookErrorMessage") == true)
         {
             displayErrorMessage((String)value);
-        }else if(key.equals("AddBookSuccessMessage")==true)
+        }else if(key.equals("TransactionError")==true)
         {
             //  DEBUG System.out.println((String)value);
-            displayMessage((String)value);
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

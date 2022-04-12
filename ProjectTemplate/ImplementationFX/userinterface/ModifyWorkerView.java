@@ -77,6 +77,11 @@ public class ModifyWorkerView extends AddWorkerView
         return statusLog;
     }
 
+    @Override
+    protected String[] setStatusBoxFields() {
+        return new String[]{"Active","Inactive"};
+    }
+
     //-------------------------------------------------------------
     public void populateFields()
     {
@@ -91,6 +96,7 @@ public class ModifyWorkerView extends AddWorkerView
         String dOH = (String) myModel.getState("dateOfHire");
         String credential = (String) myModel.getState("credentials");
         String pass = (String) myModel.getState("password");
+
 
 
         bannerId.setText(bannerID);

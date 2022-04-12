@@ -89,7 +89,7 @@ public class Book extends EntityBase{
             Properties whereClause = new Properties();
             whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
             updatePersistentState(mySchema, persistentState, whereClause);
-            updateStatusMessage = "Error in adding book to database! Check format of inputs.";
+            updateStatusMessage = "Book Successfully Updated in Database";
         }catch (SQLException ex){
             updateStatusMessage ="Error in adding book to database! Check format of inputs.";
             System.out.println("Error in adding book to database! Check format of inputs.");

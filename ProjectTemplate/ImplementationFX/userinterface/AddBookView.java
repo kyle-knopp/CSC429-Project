@@ -204,7 +204,7 @@ public class AddBookView extends View{
         ISBN.setEditable(true);
         grid.add(ISBN, 1, 10);
 
-        Text con = new Text(" Quality : ");
+        Text con = new Text(" Book Condition : ");
         con.setFont(myFont);
         con.setWrappingWidth(150);
         con.setTextAlignment(TextAlignment.RIGHT);
@@ -212,8 +212,7 @@ public class AddBookView extends View{
 
         quality = new ComboBox();
         quality.getItems().addAll(
-                "Good",
-                "Damaged"
+                "Good"
         );
 
         quality.setValue("Good");
@@ -248,8 +247,7 @@ public class AddBookView extends View{
 
         status = new ComboBox();
         status.getItems().addAll(
-                "Active",
-                "Inactive"
+                setStatusBoxFields()
         );
 
         status.setValue("Active");
@@ -284,6 +282,8 @@ public class AddBookView extends View{
 
         return vbox;
     }
+
+    protected String[] setStatusBoxFields(){return new String[]{"Active"};}
 
     private void processAction(ActionEvent e) {
 

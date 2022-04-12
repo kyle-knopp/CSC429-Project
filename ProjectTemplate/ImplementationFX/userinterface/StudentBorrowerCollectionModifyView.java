@@ -190,9 +190,14 @@ public class StudentBorrowerCollectionModifyView extends View {
         patronStatusColumn.setCellValueFactory(
                 new PropertyValueFactory<StudentBorrowerTableModel, String>("status"));
 
+        TableColumn borrowerStatusColumn = new TableColumn("BorrowerStatus") ;
+        borrowerStatusColumn.setMinWidth(100);
+        borrowerStatusColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("BorrowerStatus"));
+
         tableOfStudentBorrowers.getColumns().addAll(patronIdColumn, patronNameColumn,
                 patronAddressColumn, patronCityColumn, patronStateCodeColumn,
-                patronZipcodeColumn, patronEmailColumn, patronDateOfBirthColumn, patronStatusColumn);
+                patronZipcodeColumn, patronEmailColumn, patronDateOfBirthColumn, patronStatusColumn, borrowerStatusColumn);
 
         tableOfStudentBorrowers.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

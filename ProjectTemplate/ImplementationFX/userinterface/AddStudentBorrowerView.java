@@ -50,6 +50,7 @@ public class AddStudentBorrowerView extends View
     protected Button backButton;
     protected Button doneButton;
     protected ComboBox statusBox;
+    protected ComboBox borrStatBox;
 
     // For showing error message
     protected MessageView statusLog;
@@ -216,17 +217,28 @@ public class AddStudentBorrowerView extends View
         grid.add(Label, 0, 9);
 
         statusBox = new ComboBox();
-        statusBox.getItems().addAll("Active","Inactive");
+        statusBox.getItems().addAll(setStatusBoxFields());
         statusBox.getSelectionModel().selectFirst();;
         grid.add(statusBox,1,9);
 
-        HBox doneCont = new HBox(10);
-        doneCont.setAlignment(Pos.CENTER);
+        Label = new Text("  Borrower Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 10);
+
+        borrStatBox= new ComboBox();
+        borrStatBox.getItems().addAll(setBorrowerStatusBoxFields());
+        borrStatBox.getSelectionModel().selectFirst();;
+        grid.add(borrStatBox,1,10);
 
         alreadyDeleted=new Text();
         alreadyDeleted.setText("");
         alreadyDeleted.setFill(Color.RED);
-        grid.add(alreadyDeleted,0,10);
+        grid.add(alreadyDeleted,0,11);
+
+        HBox doneCont = new HBox(10);
+        doneCont.setAlignment(Pos.CENTER);
 
         backButton = new Button("Back");
         backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
@@ -275,6 +287,10 @@ public class AddStudentBorrowerView extends View
     protected String setSubmitButtonLabel(){
         return "Submit";
     }
+
+    protected String[] setStatusBoxFields(){return new String[]{"Active"};}
+
+    protected String[] setBorrowerStatusBoxFields(){return new String[]{"Good Standing"};}
 
 
     // Create the status log field
@@ -337,6 +353,7 @@ public class AddStudentBorrowerView extends View
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
+        p.put("BorrowerStatus",borrStatBox.getValue());
 
         myModel.stateChangeRequest("AddStudentBorrower", p);
 

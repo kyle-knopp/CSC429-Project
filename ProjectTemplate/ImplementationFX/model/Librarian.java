@@ -442,14 +442,14 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowLoginView()
     {
-        Scene currentScene = (Scene)myViews.get("LibrarianView");
+        Scene currentScene = (Scene)myViews.get("LoginView");
 
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("LibrarianView", this); // USE VIEW FACTORY
+            View newView = ViewFactory.createView("LoginView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
-            myViews.put("LibrarianView", currentScene);
+            myViews.put("LoginView", currentScene);
         }
 
         swapToView(currentScene);

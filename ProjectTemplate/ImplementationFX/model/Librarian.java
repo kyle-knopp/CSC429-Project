@@ -342,6 +342,9 @@ public class Librarian implements IView, IModel
             modifyWorker.save("update");
             transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
         }
+        else if(key.equals("DelinquencyCheck")){
+            createAndShowDelinquencyCheckView();
+        }
 
 
         myRegistry.updateSubscribers(key, this);
@@ -439,14 +442,14 @@ public class Librarian implements IView, IModel
     //------------------------------------------------------------
     private void createAndShowLoginView()
     {
-        Scene currentScene = (Scene)myViews.get("LoginView");
+        Scene currentScene = (Scene)myViews.get("LibrarianView");
 
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("LoginView", this); // USE VIEW FACTORY
+            View newView = ViewFactory.createView("LibrarianView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
-            myViews.put("LoginView", currentScene);
+            myViews.put("LibrarianView", currentScene);
         }
 
         swapToView(currentScene);
@@ -739,6 +742,20 @@ public class Librarian implements IView, IModel
             View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
             myViews.put("WorkerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowDelinquencyCheckView()
+    {
+        Scene currentScene = (Scene)myViews.get("DelinquencyCheckView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("DelinquencyCheckView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("DelinquencyCheckView", currentScene);
         }
 
         swapToView(currentScene);

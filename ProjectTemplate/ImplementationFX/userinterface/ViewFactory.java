@@ -90,6 +90,10 @@ public class ViewFactory {
 		{
 			return new ModifyWorkerView(model);
 		}
+		else if(viewName.equals("DelinquencyCheckView") == true)
+		{
+			return new DelinquencyCheckView(model);
+		}
 
 
 		System.out.println("no View created "+viewName );

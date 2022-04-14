@@ -39,6 +39,7 @@ public class LibrarianView extends View
     private Button addWorkerButton;
     private Button deleteWorkerButton;
     private Button modifyWorkerButton;
+    private Button DelinquencyCheckButton;
 
     private Button checkInBookButton;
     private Button checkOutBookButton;
@@ -237,6 +238,20 @@ public class LibrarianView extends View
             }
         });
         cCont.getChildren().add(deleteWorkerButton);
+
+
+        cCont.setAlignment(Pos.CENTER);
+        DelinquencyCheckButton = new Button("Delinquency Check");
+        DelinquencyCheckButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        DelinquencyCheckButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("DelinquencyCheck", null);
+            }
+        });
+        cCont.getChildren().add(DelinquencyCheckButton);
+
 
         container.getChildren().add(cCont);
 

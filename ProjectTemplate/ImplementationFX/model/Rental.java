@@ -107,19 +107,16 @@ public class Rental extends EntityBase{
     {
         System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
         System.out.println(persistentState.getProperty("Id"));
-        try
-        {
-            if (trans=="update")
-            {
+        try {
+            if (trans == "checkIn") {
                 Properties whereClause = new Properties();
                 whereClause.setProperty("Id", persistentState.getProperty("Id"));
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Rental data updated successfully in database!";
-            }
-            else if (trans=="add")
-            {
+            } else if (trans == "checkOut") {
                 System.out.println("Inside else in save rental.");
                 Integer Id = insertPersistentState(mySchema, persistentState);
+                // GONNA HAVE TO LOOK AT THIS AT SOME POINT TO MAKE SURE BECAUSE OF AUTOINCREMENT ID
                 persistentState.setProperty("Id", "" + Id.intValue());
                 updateStatusMessage = "Rental data for new book installed successfully in database!";
             }

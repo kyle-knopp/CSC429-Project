@@ -273,8 +273,6 @@ public class DeleteBookView extends View{
 
          */
 
-
-
         submitButton = new Button("Delete");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -310,68 +308,16 @@ public class DeleteBookView extends View{
 
         clearErrorMessage();
 
-        /**
-        String bar = barcode.getText();
-        String titl = title.getText();
-        String disi = " ";
-        String au1 = author1.getText();
-        String au2 = author2.getText();
-        String au3 = author3.getText();
-        String au4 = author4.getText();
-        String publi = publisher.getText();
-        String yeaO = yearOfPublication.getText();
-        String isb = ISBN.getText();
-        String condi = (String) quality.getValue();
-        String sugPric = suggestedPrice.getText();
-        String no = notes.getText();
-        String stat= (String)myModel.getState("Status");
-         */
-
         Properties p2 = new Properties();
-
-        /**
-        p2.setProperty("barcode",bar);
-        p2.setProperty("title", titl);
-        p2.setProperty("author1", au1);
-        p2.setProperty("author2", au2);
-        p2.setProperty("author3", au3);
-        p2.setProperty("author3", au3);
-        p2.setProperty("author4", au4);
-        p2.setProperty("publisher", publi);
-        p2.setProperty("yearOfPublication", yeaO);
-        p2.setProperty("ISBN", isb);
-        p2.setProperty("suggestedPrice", sugPric);
-        p2.setProperty("notes", no);
-        p2.setProperty("bookCondition", condi);
-
-        */
 
         p2.setProperty("Status","Inactive");
 
         System.out.println(p2);
         myModel.stateChangeRequest("DeleteBook", p2);
-        //}
-
-        //barcode.clear();
-        /**
-        title.clear();
-        author1.clear();
-        author2.clear();
-        author3.clear();
-        author4.clear();
-        publisher.clear();
-        yearOfPublication.clear();
-        ISBN.clear();
-        suggestedPrice.clear();
-        notes.clear();
-
-        quality.setValue("Good");
-        suggestedPrice.setText("0.00");
-         */
 
         displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
         //needs to be tested vvv
-        //myModel.stateChangeRequest("DeleteBook", p2);
+        //myModel.stateChangeRequest("ConfirmDeleteBook", p2);
     }
 
 

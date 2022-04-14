@@ -113,8 +113,7 @@ public class Book extends EntityBase{
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Book data updated successfully in database!";
             }
-            else if (trans=="add")
-            {
+            else if (trans=="add") {
                 System.out.println("Inside else in save book.");
                 Integer barcode = insertPersistentState(mySchema, persistentState);
                 persistentState.setProperty("barcode", "" + barcode.intValue());

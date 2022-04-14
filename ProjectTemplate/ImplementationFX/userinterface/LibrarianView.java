@@ -40,6 +40,9 @@ public class LibrarianView extends View
     private Button deleteWorkerButton;
     private Button modifyWorkerButton;
 
+    private Button checkInBookButton;
+    private Button checkOutBookButton;
+    private Button delinquencyCheckButton;
 
     private Button doneButton;
 
@@ -236,6 +239,47 @@ public class LibrarianView extends View
         cCont.getChildren().add(deleteWorkerButton);
 
         container.getChildren().add(cCont);
+
+        HBox dCont = new HBox(10);
+        dCont.setAlignment(Pos.CENTER);
+        checkInBookButton = new Button("Check In a Book");
+        checkInBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        checkInBookButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) { //FIX LATER
+                myModel.stateChangeRequest("AddWorker", null);
+            }
+        });
+        dCont.getChildren().add(checkInBookButton);
+
+
+        dCont.setAlignment(Pos.CENTER);
+        checkOutBookButton = new Button("Check Out a Book");
+        checkOutBookButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        checkOutBookButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) { //FIX LATER
+                myModel.stateChangeRequest("SearchWorkerViewM", null);
+            }
+        });
+        dCont.getChildren().add(checkOutBookButton);
+
+
+        dCont.setAlignment(Pos.CENTER);
+        delinquencyCheckButton = new Button("Run Delinquency Check");
+        delinquencyCheckButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        delinquencyCheckButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) { //FIX LATER
+                myModel.stateChangeRequest("SearchWorkerViewD", null);
+            }
+        });
+        dCont.getChildren().add(delinquencyCheckButton);
+
+        container.getChildren().add(dCont);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);

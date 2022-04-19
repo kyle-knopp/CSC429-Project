@@ -24,6 +24,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 import java.util.Properties;
 
 // project imports
@@ -44,6 +47,12 @@ public class AddStudentBorrowerView extends View
     protected TextField DateOfLatestBorrowerStatus;
     protected TextField DateOfRegistration;
     protected TextField Notes;
+
+    protected DatePicker DoLBS;
+    protected DatePicker DoR;
+    protected String DoLBS_Selected;
+    protected String DoR_Selected;
+
 
     protected Text alreadyDeleted;
 
@@ -186,9 +195,29 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 6);
 
-        DateOfLatestBorrowerStatus = new TextField();
-        DateOfLatestBorrowerStatus.setEditable(true);
-        grid.add(DateOfLatestBorrowerStatus, 1, 6);
+
+
+        DoLBS = new DatePicker();
+        DoLBS.setEditable(true);
+        grid.add(DoLBS, 1, 6);
+        //DateOfLatestBorrowerStatus = new TextField();
+        //DateOfLatestBorrowerStatus.setEditable(true);
+        //grid.add(DateOfLatestBorrowerStatus, 1, 6);
+
+
+        EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e)
+            {
+                // get the date picker value
+                LocalDate i = DoLBS.getValue();
+
+                // get the selected date
+                DoLBS.setValue(i);
+                DoLBS_Selected = DoLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+        };
+        DoLBS.setOnAction(event1);
+
 
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
@@ -196,9 +225,27 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 7);
 
-        DateOfRegistration = new TextField();
-        DateOfRegistration.setEditable(true);
-        grid.add(DateOfRegistration, 1, 7);
+        DoR = new DatePicker();
+        DoR.setEditable(true);
+        grid.add(DoR, 1, 7);
+        //DateOfRegistration = new TextField();
+        //DateOfRegistration.setEditable(true);
+        //grid.add(DateOfRegistration, 1, 7);
+
+
+        EventHandler<ActionEvent> event2 = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e)
+            {
+                // get the date picker value
+                LocalDate i = DoR.getValue();
+
+                // get the selected date
+                DoR_Selected = DoR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                DoR.setValue(i);
+
+            }
+        };
+        DoR.setOnAction(event2);
 
         Label = new Text("  Notes: ");
         Label.setFont(myFont);
@@ -349,8 +396,10 @@ public class AddStudentBorrowerView extends View
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("DateOfLatestBorrowerStatus", DoLBS_Selected);
+        p.put("DateOfRegistration", DoR_Selected);
+        System.out.println(DoLBS_Selected);
+        System.out.println(DoR_Selected);
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
         p.put("BorrowerStatus",borrStatBox.getValue());

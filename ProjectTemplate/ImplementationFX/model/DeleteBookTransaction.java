@@ -179,5 +179,6 @@ public class DeleteBookTransaction extends Transaction
             transactionErrorMessage = "Error: Book Not Found." ;
             new Event(Event.getLeafLevelClassName(this), "processBarcode",
                     "Error in finding book " + e.toString(), Event.ERROR);
-        }        }
+        }
+    }
 }

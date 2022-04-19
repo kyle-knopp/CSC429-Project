@@ -289,3 +289,18 @@
 [4/19/22, 5:19 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>
 [4/19/22, 5:20 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>
 [4/19/22, 5:23 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:50 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 6:56 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 7:08 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book java.lang.NullPointerException>
+[4/19/22, 7:11 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/19/22, 7:11 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>

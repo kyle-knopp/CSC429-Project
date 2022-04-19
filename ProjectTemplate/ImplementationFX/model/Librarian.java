@@ -172,9 +172,19 @@ public class Librarian implements IView, IModel
             doTransaction(transType);
         }
         else if(key.equals("CheckOut") == true){
+            /*String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);*/
             String transType = key;
             transType = transType.trim();
-            doTransaction(transType);
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", systemUser);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }
         }
         else if (key.equals("ModifyBook") == true)
         {
@@ -400,6 +410,10 @@ public class Librarian implements IView, IModel
         }
     }
 
+    public SystemWorker getSystemUser() {
+        return systemUser;
+    }
+
 
     /**
      * Tries to create old persistable student worker object.
@@ -431,6 +445,8 @@ public class Librarian implements IView, IModel
             new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
+
+
 
     /**
      * Create a Transaction depending on the Transaction type (deposit,

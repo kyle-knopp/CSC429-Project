@@ -31,6 +31,7 @@ public class CheckOutBookTransaction extends Transaction
     private Book myBook;
     private SystemWorker systemWorker;
 
+
     private String transactionErrorMessage = "";
 
     /**
@@ -42,7 +43,6 @@ public class CheckOutBookTransaction extends Transaction
     public CheckOutBookTransaction() throws Exception
     {
         super();
-
     }
 
     //----------------------------------------------------------
@@ -71,6 +71,10 @@ public class CheckOutBookTransaction extends Transaction
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String todaysDate=(String)formatter.format(date);
             props.setProperty("CheckoutDate",todaysDate);
+
+            String checkoutWorkerId=(String)systemWorker.getState("bannerID");
+            System.out.println("Checkout Worker ID: "+checkoutWorkerId);
+            props.setProperty("CheckoutWorkerId",checkoutWorkerId);
             //props.setProperty("CheckoutDate",)
             //System.out.println("My Student:"+myStudent);
             System.out.println("Props: "+props);
@@ -139,8 +143,12 @@ public class CheckOutBookTransaction extends Transaction
     {
         // DEBUG System.out.println("DepositTransaction.sCR: key: " + key);
         System.out.println("Key: "+key);
+        System.out.println("Value: "+value);
         if (key.equals("DoYourJob") == true)
         {
+            systemWorker=(SystemWorker)value;
+            //System.out.println("System Worker: "+systemWorker);
+
             doYourJob();
         }
         else

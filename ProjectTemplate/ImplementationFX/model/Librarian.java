@@ -64,8 +64,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        createAndShowLoginView();
-        //createAndShowLibrarianView();
+        //createAndShowLoginView();
+        createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -164,6 +164,16 @@ public class Librarian implements IView, IModel
         {
             String transType = key;
             transType =transType.trim();
+            doTransaction(transType);
+        }
+        else if(key.equals("CheckIn") == true){
+            String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);
+        }
+        else if(key.equals("CheckOut") == true){
+            String transType = key;
+            transType = transType.trim();
             doTransaction(transType);
         }
         else if (key.equals("ModifyBook") == true)
@@ -341,6 +351,12 @@ public class Librarian implements IView, IModel
             modifyWorker= new Worker(p);
             modifyWorker.save("update");
             transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
+        }
+        else if(key.equals("DelinquencyCheck")){
+            //createAndShowDelinquencyCheckView();
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
         }
 
 
@@ -739,6 +755,20 @@ public class Librarian implements IView, IModel
             View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
             myViews.put("WorkerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowDelinquencyCheckView()
+    {
+        Scene currentScene = (Scene)myViews.get("DelinquencyCheckView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("DelinquencyCheckView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("DelinquencyCheckView", currentScene);
         }
 
         swapToView(currentScene);

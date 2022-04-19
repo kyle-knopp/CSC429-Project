@@ -4,6 +4,9 @@ package model;
 // system imports
 import impresario.IView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -14,7 +17,7 @@ import java.util.Vector;
 //==============================================================
 public class RentalCollection  extends EntityBase
 {
-    private static final String myTableName = "worker";
+    private static final String myTableName = "rental";
 
     private Vector rentalList;
 
@@ -31,7 +34,7 @@ public class RentalCollection  extends EntityBase
 
     }
 
-    private void queryHelper(String query, String message) {
+    private void queryHelper(String query, String message)throws Exception {
 
         Vector allDataRetrieved = getSelectQueryResult(query);
 
@@ -53,12 +56,12 @@ public class RentalCollection  extends EntityBase
         }
         else
         {
-            //throw new exception.InvalidPrimaryKeyException(message);
             System.out.println(message);
+            throw new exception.InvalidPrimaryKeyException(message);
         }
     }
 
-    public void findRentalsThatAreCurrentlyCheckedOut(){
+    public void findRentalsThatAreCurrentlyCheckedOut() throws Exception {
 
         //query
 
@@ -67,12 +70,17 @@ public class RentalCollection  extends EntityBase
         queryHelper(query, "There are no Rentals that are currently checked out");
     }
 
-    public void findOverDueRentals(){ //query might need work
+    public void findOverDueRentals() throws Exception { //query might need work
 
         //query
+        Calendar rightNow = Calendar.getInstance();
+        Date todaysDate = rightNow.getTime();
+        String todaysDateText = new SimpleDateFormat("yyyy-MM-dd").format(todaysDate);
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (CheckinDate IS NULL OR CheckinDate = "+ "" + ")" +
-                " AND DueDate < GETDATE()";
+        String query = "SELECT * FROM " + myTableName + " WHERE ((CheckinDate IS NULL) OR (CheckinDate = '')) AND" +
+                " DueDate < '" + todaysDateText + "'";
+
+        System.out.println(query);
 
         queryHelper(query, "There are no Rentals that are currently checked out");
     }
@@ -91,6 +99,62 @@ public class RentalCollection  extends EntityBase
                 return val;
         }*/
         return null;
+    }
+
+    public Rental retrieve(int rentalId) {
+        Rental retValue = null;
+        for (int cnt = 0; cnt < rentalList.size(); cnt++) {
+            Rental nextRental = (Rental) rentalList.elementAt(cnt);
+            String nextRentalId = (String)nextRental.getState("Id");
+            if (nextRentalId.equals(""+rentalId) == true) {
+                retValue = nextRental;
+                break;
+            }
+        }
+        return retValue;
+    }
+
+    public int getSize() {
+        if(rentalList != null) return rentalList.size();
+        return 0;
+    }
+
+    public Rental elementAt(int cnt) {
+        if (rentalList != null) {
+            if ((cnt >= 0) && (cnt < rentalList.size()))
+                return (Rental) rentalList.get(cnt);
+        }
+        return null;
+    }
+
+    private void addRental(Rental a) {
+        int index = findIndexToAdd(a);
+        rentalList.insertElementAt(a, index);
+    }
+
+    private int findIndexToAdd(Rental a) {
+        int low = 0;
+        int high = rentalList.size() - 1;
+        int middle;
+
+        while (low <= high) {
+            middle = (low + high) / 2;
+
+            Rental midSession = (Rental)rentalList.elementAt(middle);
+
+            int result = Rental.compare(a, midSession);
+
+            if (result == 0) {
+                return middle;
+            }
+            else if (result < 0) {
+                high = middle - 1;
+            }
+            else {
+                low = middle + 1;
+            }
+        }
+        return low;
     }
 
     //----------------------------------------------------------------
@@ -130,16 +194,12 @@ public class RentalCollection  extends EntityBase
 
     /*
     public String toString(){
-
         String s = ("The Patron Collection contains: ");
-
         for (Object b : patronList) {
             s.concat(b + " ");
         }
-
         return s;
     }
-
      */
 
     public void display() {

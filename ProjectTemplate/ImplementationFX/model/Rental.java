@@ -82,6 +82,12 @@ public class Rental extends EntityBase{
     {
         updateStateInDatabase(trans);
     }
+    public void checkIn(String trans){
+        updateStateInDatabase(trans);
+    }
+    public void checkOut(String trans){
+        updateStateInDatabase(trans);
+    }
 
     public void update() {
         try {
@@ -100,26 +106,39 @@ public class Rental extends EntityBase{
         }
     }
 
-    private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
-    {
-        System.out.println("Inside updateStateInDatabase STUDENT STUDENT STUDENT");
+    private void updateStateInDatabase(String trans) {
+        System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
         System.out.println(persistentState.getProperty("Id"));
-        try
-        {
-            if (trans=="update")
-            {
+        try {
+            if (trans == "checkIn") {
                 Properties whereClause = new Properties();
                 whereClause.setProperty("Id", persistentState.getProperty("Id"));
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Rental data updated successfully in database!";
-            }
-            else if (trans=="add")
-            {
-                System.out.println("Inside else in save studentborrower.");
-                Integer Id = insertPersistentState(mySchema, persistentState);
+
+            } else if (trans == "checkOut") {
+                System.out.println("Inside else in save rental.");
+                Integer Id = insertAutoIncrementalPersistentState(mySchema, persistentState);
+                // GONNA HAVE TO LOOK AT THIS AT SOME POINT TO MAKE SURE BECAUSE OF AUTOINCREMENT ID
                 persistentState.setProperty("Id", "" + Id.intValue());
                 updateStatusMessage = "Rental data for new book installed successfully in database!";
             }
+            /**if (persistentState.getProperty("bookId") != null)
+             {
+             Properties whereClause = new Properties();
+             whereClause.setProperty("bookId", persistentState.getProperty("bookId"));
+             updatePersistentState(mySchema, persistentState, whereClause);
+             updateStatusMessage = "Book data updated successfully in database!";
+             }
+             else
+             {
+             Integer bookID = insertAutoIncrementalPersistentState(mySchema, persistentState);
+             persistentState.setProperty("bookId", "" + bookID.intValue());
+             updateStatusMessage = "Book data for new book installed successfully in database!";
+             }
+             */
+
+
         }
         catch (SQLException ex)
         {
@@ -136,9 +155,8 @@ public class Rental extends EntityBase{
     private void setDependencies() // definitely needs to be updated
     {
         dependencies = new Properties();
-        dependencies.setProperty("AddStudentBorrower", "TransactionError");
-        dependencies.setProperty("UpdateStudentBorrower", "TransactionError");
-        dependencies.setProperty("DeleteStudentBorrower", "TransactionError");
+        dependencies.setProperty("CheckInBook", "TransactionError");
+        dependencies.setProperty("CheckOutBook", "TransactionError");
         dependencies.setProperty("ServiceCharge", "UpdateStatusMessage");
 
         myRegistry.setDependencies(dependencies);
@@ -160,7 +178,7 @@ public class Rental extends EntityBase{
         System.out.println(toString());
     }
 
-    public static int compare(StudentBorrower a, StudentBorrower b)
+    public static int compare(Rental a, Rental b)
     {
         String aNum = (String)a.getState("Id");
         String bNum = (String)b.getState("Id");

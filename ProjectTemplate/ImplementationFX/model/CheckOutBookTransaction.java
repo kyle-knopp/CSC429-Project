@@ -79,11 +79,11 @@ public class CheckOutBookTransaction extends Transaction
             return transactionErrorMessage;
         }
         else
-        if (key.equals("CheckInBookErrorMessage") == true)
+        if (key.equals("CheckOutBookErrorMessage") == true)
         {
             return transactionErrorMessage;
         }else
-        if(key.equals("CheckInBookSuccessMessage")==true)
+        if(key.equals("CheckOutBookSuccessMessage")==true)
         {
             return transactionErrorMessage;
         }

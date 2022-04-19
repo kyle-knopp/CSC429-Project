@@ -120,6 +120,17 @@ public class Rental extends EntityBase{
                 persistentState.setProperty("Id", "" + Id.intValue());
                 updateStatusMessage = "Rental data for new book installed successfully in database!";
             }
+            /**if (this.persistentState.getProperty("bookID") != null) {
+                Properties whereClause = new Properties();
+                whereClause.setProperty("bookID", this.persistentState.getProperty("bookID"));
+                this.updatePersistentState(this.mySchema, this.persistentState, whereClause);
+                this.updateStatusMessage = "Book data for bookID number : " + this.persistentState.getProperty("bookID") + " updated successfully in database!";
+            } else {
+                Integer bookID = this.insertAutoIncrementalPersistentState(this.mySchema, this.persistentState);
+                this.persistentState.setProperty("bookID", bookID.makeConcatWithConstants<invokedynamic>(bookID));
+                this.updateStatusMessage = "Book data for new book : " + this.persistentState.getProperty("bookID") + " installed successfully in database!";
+            }
+             */
         }
         catch (SQLException ex)
         {

@@ -46,32 +46,57 @@ public class DelinquencyCheckView extends View {
 
         myModel.subscribe("TransactionError", this);
     }
+    //-------------------------------------------------------------
+    private VBox createTitle()
+    {
+        VBox container = new VBox(10);
+        Text titleText = new Text(" Library System ");
+        titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        titleText.setWrappingWidth(300);
+        titleText.setTextAlignment(TextAlignment.CENTER);
+        titleText.setFill(Color.DARKGREEN);
+        container.getChildren().add(titleText);;
+
+        return container;
+    }
 
     private VBox createFormContent() {
 
         VBox vbox = new VBox(10);
 
+        Text blankText = new Text("  ");
+        blankText.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        blankText.setWrappingWidth(350);
+        blankText.setTextAlignment(TextAlignment.CENTER);
+        blankText.setFill(Color.WHITE);
+        vbox.getChildren().add(blankText);
+
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(100, 100, 100, 100));
+        grid.setPadding(new Insets(10, 100, 10, 100));
 
 
-        Text bcode = new Text(" Delinquency Check Successful : ");
-        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
-        bcode.setFont(myFont);
-        bcode.setWrappingWidth(150);
-        bcode.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bcode, 0, 1);
+        Text prompt = new Text(" Run Delinquency Check ");
+        Font myFont = Font.font("Arial", FontWeight.BOLD, 18);
+        prompt.setFont(myFont);
+        prompt.setWrappingWidth(350);
+        prompt.setTextAlignment(TextAlignment.CENTER);
+        //
+        vbox.getChildren().add(prompt);
+        vbox.setAlignment(Pos.CENTER);
 
 
 
-        submitButton = new Button("Done");
+        submitButton = new Button("Run Delinquency Check");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                processAction(e);
+                clearErrorMessage();
+                Properties props = new Properties();
+                myModel.stateChangeRequest("Delinquency",props);
+                //processAction(e);
             }
         });
 
@@ -84,9 +109,10 @@ public class DelinquencyCheckView extends View {
         });
         // consider using GridPane.setHgap(10); instead of label space
         HBox buttonCont = new HBox(10);
+        buttonCont.setPadding(new Insets(10, 100, 25, 100));
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(submitButton);
-        Label space = new Label("               ");
+        Label space = new Label(" ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
@@ -148,7 +174,7 @@ public class DelinquencyCheckView extends View {
             if (val.startsWith("Err") || (val.startsWith("ERR")))
                 displayErrorMessage(val);
             else
-                clearErrorMessage();
+                displayMessage(val);
         }
     }
 

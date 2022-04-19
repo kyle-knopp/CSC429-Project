@@ -159,7 +159,7 @@ public class Rental extends EntityBase{
         System.out.println(toString());
     }
 
-    public static int compare(StudentBorrower a, StudentBorrower b)
+    public static int compare(Rental a, Rental b)
     {
         String aNum = (String)a.getState("Id");
         String bNum = (String)b.getState("Id");

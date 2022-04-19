@@ -64,8 +64,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        createAndShowLoginView();
-        //createAndShowLibrarianView();
+        //createAndShowLoginView();
+        createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -343,7 +343,10 @@ public class Librarian implements IView, IModel
             transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
         }
         else if(key.equals("DelinquencyCheck")){
-            createAndShowDelinquencyCheckView();
+            //createAndShowDelinquencyCheckView();
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
         }
 
 

@@ -41,6 +41,8 @@ public class TransactionFactory {
 		{
 			retValue = new AddWorkerTransaction();
 
+		}else if(transType.equals("DelinquencyCheck")){
+			retValue=new DelinquencyCheckTransaction();
 		}
 		return retValue;
 	}

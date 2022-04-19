@@ -239,7 +239,7 @@ public class LibrarianView extends View
         });
         cCont.getChildren().add(deleteWorkerButton);
 
-        //container.getChildren().add(cCont);
+        container.getChildren().add(cCont);
 
         HBox dCont = new HBox(10);
         dCont.setAlignment(Pos.CENTER);

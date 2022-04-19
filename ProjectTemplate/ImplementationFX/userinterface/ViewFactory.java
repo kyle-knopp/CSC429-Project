@@ -93,6 +93,9 @@ public class ViewFactory {
 		else if(viewName.equals("DelinquencyCheckView") == true)
 		{
 			return new DelinquencyCheckView(model);
+		}else if(viewName.equals("CheckOutBookView") == true)
+		{
+			return new CheckOutBookView(model);
 		}
 
 

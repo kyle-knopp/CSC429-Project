@@ -419,8 +419,6 @@ public class AddStudentBorrowerView extends View
         p.put("Email", Email.getText());
         p.put("DateOfLatestBorrowerStatus", DoLBS_Selected);
         p.put("DateOfRegistration", DoR_Selected);
-        System.out.println(DoLBS_Selected);
-        System.out.println(DoR_Selected);
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
         p.put("BorrowerStatus",borrStatBox.getValue());

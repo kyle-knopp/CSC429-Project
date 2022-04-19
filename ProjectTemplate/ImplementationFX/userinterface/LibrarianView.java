@@ -45,6 +45,9 @@ public class LibrarianView extends View
     private Button checkOutBookButton;
     private Button delinquencyCheckButton;
 
+    private Button ListAllBooksCheckedOutButton;
+    private Button ListStudentBorrowersWithBooksCheckedOutButton;
+
     private Button doneButton;
 
 
@@ -281,6 +284,33 @@ public class LibrarianView extends View
         dCont.getChildren().add(delinquencyCheckButton);
 
         container.getChildren().add(dCont);
+
+        HBox eCont = new HBox(10);
+        eCont.setAlignment(Pos.CENTER);
+        ListAllBooksCheckedOutButton = new Button("List All Books Checked Out");
+        ListAllBooksCheckedOutButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        ListAllBooksCheckedOutButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("", null);
+            }
+        });
+        eCont.getChildren().add(ListAllBooksCheckedOutButton);
+
+        eCont.setAlignment(Pos.CENTER);
+        ListStudentBorrowersWithBooksCheckedOutButton = new Button("List Student Borrowers With Books Checked Out");
+        ListStudentBorrowersWithBooksCheckedOutButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        ListStudentBorrowersWithBooksCheckedOutButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                myModel.stateChangeRequest("", null);
+            }
+        });
+        eCont.getChildren().add(ListStudentBorrowersWithBooksCheckedOutButton);
+
+        container.getChildren().add(eCont);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);

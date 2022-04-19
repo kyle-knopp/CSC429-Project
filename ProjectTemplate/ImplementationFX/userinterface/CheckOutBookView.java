@@ -34,7 +34,7 @@ public class CheckOutBookView extends View {
     protected MessageView statusLog;
 
     public CheckOutBookView(IModel model) {
-        super(model, "EnterBookBarcodeView");
+        super(model, "CheckOutBookView");
 
 
         // create a container for showing the contents
@@ -123,7 +123,9 @@ public class CheckOutBookView extends View {
 
     protected void processAction(Event event) {
         Properties props = new Properties();
-        props.setProperty("barcode",barcode.getText());
+        props.setProperty("BookId",barcode.getText());
+        props.setProperty("DueDate",dueDate.getText());
+
 
         Object sender = event.getSource();
         if (sender == cancelButton) {
@@ -131,7 +133,7 @@ public class CheckOutBookView extends View {
         }
         else if (sender == submitButton) {
             clearErrorMessage();
-            myModel.stateChangeRequest("SubmitBarcode", props);
+            myModel.stateChangeRequest("CheckOutBook", props);
             // myModel.stateChangeRequest("SubmitBarcode", null);
             barcode.clear();
 

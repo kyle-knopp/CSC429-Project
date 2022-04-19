@@ -45,9 +45,12 @@ public class AddStudentBorrowerView extends View
     protected TextField DateOfRegistration;
     protected TextField Notes;
 
+    protected Text alreadyDeleted;
+
     protected Button backButton;
     protected Button doneButton;
     protected ComboBox statusBox;
+    protected ComboBox borrStatBox;
 
     // For showing error message
     protected MessageView statusLog;
@@ -75,7 +78,7 @@ public class AddStudentBorrowerView extends View
         populateFields();
 
 
-        myModel.subscribe("TransactionErrorMessage", this);
+        myModel.subscribe("TransactionError", this);
     }
 
 
@@ -214,9 +217,25 @@ public class AddStudentBorrowerView extends View
         grid.add(Label, 0, 9);
 
         statusBox = new ComboBox();
-        statusBox.getItems().addAll("Active","Inactive");
+        statusBox.getItems().addAll(setStatusBoxFields());
         statusBox.getSelectionModel().selectFirst();;
         grid.add(statusBox,1,9);
+
+        Label = new Text("  Borrower Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 10);
+
+        borrStatBox= new ComboBox();
+        borrStatBox.getItems().addAll(setBorrowerStatusBoxFields());
+        borrStatBox.getSelectionModel().selectFirst();;
+        grid.add(borrStatBox,1,10);
+
+        alreadyDeleted=new Text();
+        alreadyDeleted.setText("");
+        alreadyDeleted.setFill(Color.RED);
+        grid.add(alreadyDeleted,0,11);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
@@ -224,7 +243,6 @@ public class AddStudentBorrowerView extends View
         backButton = new Button("Back");
         backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         backButton.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent e) {
                 clearErrorMessage();
@@ -270,6 +288,10 @@ public class AddStudentBorrowerView extends View
         return "Submit";
     }
 
+    protected String[] setStatusBoxFields(){return new String[]{"Active"};}
+
+    protected String[] setBorrowerStatusBoxFields(){return new String[]{"Good Standing"};}
+
 
     // Create the status log field
     //-------------------------------------------------------------
@@ -297,12 +319,21 @@ public class AddStudentBorrowerView extends View
     {
         clearErrorMessage();
 
-        if (key.equals("TransactionErrorMessage") == true)
+        /*if (key.equals("TransactionErrorMessage") == true)
         {
             String val = (String)value;
             //serviceCharge.setText(val);
             if (val.startsWith("ERR"))
                 displayErrorMessage(val);
+            else
+                displayMessage(val);
+        }*/
+        System.out.println("Error Message: "+(String)value);
+        if (key.equals("TransactionError") == true)
+        {
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
             else
                 displayMessage(val);
         }
@@ -322,19 +353,11 @@ public class AddStudentBorrowerView extends View
         p.put("DateOfRegistration", DateOfRegistration.getText());
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
+        p.put("BorrowerStatus",borrStatBox.getValue());
 
         myModel.stateChangeRequest("AddStudentBorrower", p);
 
-        clearText();
-        BannerId.clear();
-        FirstName.clear();
-        LastName.clear();
-        ContactPhone.clear();
-        ContactPhone.clear();
-        Email.clear();
-        DateOfLatestBorrowerStatus.clear();
-        DateOfRegistration.clear();
-        Notes.clear();
+
     }
 
 
@@ -353,6 +376,18 @@ public class AddStudentBorrowerView extends View
     //----------------------------------------------------------
     public void displayMessage(String message)
     {
+        if(message.equals("StudentBorrower data updated successfully in database!")){
+            clearText();
+            BannerId.clear();
+            FirstName.clear();
+            LastName.clear();
+            ContactPhone.clear();
+            ContactPhone.clear();
+            Email.clear();
+            DateOfLatestBorrowerStatus.clear();
+            DateOfRegistration.clear();
+            Notes.clear();
+        }
         statusLog.displayMessage(message);
     }
 

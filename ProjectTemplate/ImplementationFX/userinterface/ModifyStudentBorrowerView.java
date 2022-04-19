@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.Properties;
 
 // project imports
@@ -78,6 +79,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         String notes = (String) myModel.getState("Notes");
         String status = (String) myModel.getState("status");
 
+        LocalDate dolbs_ld = LocalDate.parse(dolbs);
+        LocalDate dor_ld = LocalDate.parse(dor);
 
         BannerId.setText(bannerID);
         BannerId.setEditable(false);
@@ -85,8 +88,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         LastName.setText(lastName);
         ContactPhone.setText(contactPhone);
         Email.setText(email);
-        DateOfLatestBorrowerStatus.setText(dolbs);
-        DateOfRegistration.setText(dor);
+        DoLBS.setValue(dolbs_ld);
+        DoR.setValue(dor_ld);
         Notes.setText(notes);
         statusBox.setValue(status);
 

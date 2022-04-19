@@ -52,6 +52,8 @@ public class AddStudentBorrowerView extends View
     protected DatePicker DoR;
     protected String DoLBS_Selected;
     protected String DoR_Selected;
+    protected LocalDate DoLBS_LD;
+    protected LocalDate DoR_LD;
 
 
     protected Text alreadyDeleted;
@@ -207,10 +209,10 @@ public class AddStudentBorrowerView extends View
         DoLBS.setOnAction(new EventHandler<ActionEvent>() {
             //@Override
             public void handle(ActionEvent e) {
-                LocalDate i = DoLBS.getValue();
+                DoLBS_LD = DoLBS.getValue();
 
                 // get the selected date
-                DoLBS.setValue(i);
+                DoLBS.setValue(DoLBS_LD);
                 DoLBS_Selected = DoLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }
         });
@@ -246,9 +248,9 @@ public class AddStudentBorrowerView extends View
         DoR.setOnAction(new EventHandler<ActionEvent>() {
             //@Override
             public void handle(ActionEvent e) {
-                LocalDate i = DoR.getValue();
+                DoR_LD = DoR.getValue();
                 // get the selected date
-                DoR.setValue(i);
+                DoR.setValue(DoR_LD);
                 DoR_Selected = DoR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }
         });
@@ -452,8 +454,8 @@ public class AddStudentBorrowerView extends View
             ContactPhone.clear();
             ContactPhone.clear();
             Email.clear();
-            DateOfLatestBorrowerStatus.clear();
-            DateOfRegistration.clear();
+            //DateOfLatestBorrowerStatus.clear();
+            //DateOfRegistration.clear();
             Notes.clear();
         }
         statusLog.displayMessage(message);

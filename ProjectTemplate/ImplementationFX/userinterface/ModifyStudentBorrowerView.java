@@ -20,6 +20,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 // project imports
@@ -105,8 +106,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DoLBS_Selected);
-        p.put("DateOfRegistration", DoR_Selected);
+        p.put("DateOfLatestBorrowerStatus", DoLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("DateOfRegistration", DoR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
 

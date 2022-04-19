@@ -23,6 +23,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 // project imports
@@ -139,8 +140,8 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("DateOfLatestBorrowerStatus", DoLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("DateOfRegistration", DoR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("Notes", Notes.getText());
         p.put("status","Inactive");
 

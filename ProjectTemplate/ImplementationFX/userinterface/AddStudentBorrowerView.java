@@ -205,7 +205,7 @@ public class AddStudentBorrowerView extends View
         //grid.add(DateOfLatestBorrowerStatus, 1, 6);
 
         DoLBS.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
+            //@Override
             public void handle(ActionEvent e) {
                 LocalDate i = DoLBS.getValue();
 
@@ -244,10 +244,9 @@ public class AddStudentBorrowerView extends View
         //grid.add(DateOfRegistration, 1, 7);
 
         DoR.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
+            //@Override
             public void handle(ActionEvent e) {
                 LocalDate i = DoR.getValue();
-
                 // get the selected date
                 DoR.setValue(i);
                 DoR_Selected = DoR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

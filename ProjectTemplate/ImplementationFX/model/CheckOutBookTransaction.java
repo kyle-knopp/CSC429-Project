@@ -59,7 +59,7 @@ public class CheckOutBookTransaction extends Transaction
                 oldRental = new Rental((String) props.getProperty("barcode"));
             }catch (Exception e){
                 myRental = new Rental(props);
-                myRental.checkIn("checkOut");
+                myRental.checkOut("checkOut");
                 transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
             }
         } catch (Exception e) {
@@ -116,13 +116,13 @@ public class CheckOutBookTransaction extends Transaction
     //------------------------------------------------------
     protected Scene createView()
     {
-        Scene currentScene = myViews.get("EnterBarcodeView");
+        Scene currentScene = myViews.get("CheckOutBookView");
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("EnterBarcodeView", this);
+            View newView = ViewFactory.createView("CheckOutBookView", this);
             currentScene = new Scene(newView);
-            myViews.put("EnterBarcodeView", currentScene);
+            myViews.put("CheckOutBookView", currentScene);
 
             return currentScene;
         }

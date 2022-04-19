@@ -170,7 +170,6 @@ public class Librarian implements IView, IModel
             String transType = key;
             transType = transType.trim();
             doTransaction(transType);
-
         }
         else if(key.equals("CheckOut") == true){
             String transType = key;

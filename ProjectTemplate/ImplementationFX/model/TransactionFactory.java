@@ -44,6 +44,14 @@ public class TransactionFactory {
 		}else if(transType.equals("DelinquencyCheck")){
 			retValue=new DelinquencyCheckTransaction();
 		}
+		else if(transType.equals("CheckIn"))
+		{
+			retValue = new CheckInBookTransaction();
+
+		}else if(transType.equals("CheckOut")){
+			retValue=new CheckOutBookTransaction();
+		}
+
 		return retValue;
 	}
 }

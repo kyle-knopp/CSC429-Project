@@ -115,13 +115,13 @@ public class CheckInBookTransaction extends Transaction
     //------------------------------------------------------
     protected Scene createView()
     {
-        Scene currentScene = myViews.get("EnterBarcodeView");
+        Scene currentScene = myViews.get("EnterBookBarcodeView");
         if (currentScene == null)
         {
             // create our initial view
-            View newView = ViewFactory.createView("EnterBarcodeView", this);
+            View newView = ViewFactory.createView("EnterBookBarcodeView", this);
             currentScene = new Scene(newView);
-            myViews.put("EnterBarcodeView", currentScene);
+            myViews.put("EnterBookBarcodeView", currentScene);
 
             return currentScene;
         }

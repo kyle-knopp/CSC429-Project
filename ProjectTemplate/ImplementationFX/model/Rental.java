@@ -85,6 +85,9 @@ public class Rental extends EntityBase{
     public void checkIn(String trans){
         updateStateInDatabase(trans);
     }
+    public void checkOut(String trans){
+        updateStateInDatabase(trans);
+    }
 
     public void update() {
         try {
@@ -103,8 +106,7 @@ public class Rental extends EntityBase{
         }
     }
 
-    private void updateStateInDatabase(String trans) // should be private? Should this be invoked directly or via the 'sCR(...)' method always?
-    {
+    private void updateStateInDatabase(String trans) {
         System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
         System.out.println(persistentState.getProperty("Id"));
         try {
@@ -113,24 +115,30 @@ public class Rental extends EntityBase{
                 whereClause.setProperty("Id", persistentState.getProperty("Id"));
                 updatePersistentState(mySchema, persistentState, whereClause);
                 updateStatusMessage = "Rental data updated successfully in database!";
+
             } else if (trans == "checkOut") {
                 System.out.println("Inside else in save rental.");
-                Integer Id = insertPersistentState(mySchema, persistentState);
+                Integer Id = insertAutoIncrementalPersistentState(mySchema, persistentState);
                 // GONNA HAVE TO LOOK AT THIS AT SOME POINT TO MAKE SURE BECAUSE OF AUTOINCREMENT ID
                 persistentState.setProperty("Id", "" + Id.intValue());
                 updateStatusMessage = "Rental data for new book installed successfully in database!";
             }
-            /**if (this.persistentState.getProperty("bookID") != null) {
-                Properties whereClause = new Properties();
-                whereClause.setProperty("bookID", this.persistentState.getProperty("bookID"));
-                this.updatePersistentState(this.mySchema, this.persistentState, whereClause);
-                this.updateStatusMessage = "Book data for bookID number : " + this.persistentState.getProperty("bookID") + " updated successfully in database!";
-            } else {
-                Integer bookID = this.insertAutoIncrementalPersistentState(this.mySchema, this.persistentState);
-                this.persistentState.setProperty("bookID", bookID.makeConcatWithConstants<invokedynamic>(bookID));
-                this.updateStatusMessage = "Book data for new book : " + this.persistentState.getProperty("bookID") + " installed successfully in database!";
-            }
+            /**if (persistentState.getProperty("bookId") != null)
+             {
+             Properties whereClause = new Properties();
+             whereClause.setProperty("bookId", persistentState.getProperty("bookId"));
+             updatePersistentState(mySchema, persistentState, whereClause);
+             updateStatusMessage = "Book data updated successfully in database!";
+             }
+             else
+             {
+             Integer bookID = insertAutoIncrementalPersistentState(mySchema, persistentState);
+             persistentState.setProperty("bookId", "" + bookID.intValue());
+             updateStatusMessage = "Book data for new book installed successfully in database!";
+             }
              */
+
+
         }
         catch (SQLException ex)
         {

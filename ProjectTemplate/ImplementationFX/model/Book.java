@@ -200,6 +200,9 @@ public class Book extends EntityBase{
 
         return v;
     }
+    public String getId(){
+        return this.persistentState.getProperty("barcode");
+    }
 
     protected void initializeSchema(String tableName)
     {

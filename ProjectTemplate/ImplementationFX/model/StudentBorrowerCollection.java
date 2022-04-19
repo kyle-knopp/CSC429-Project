@@ -89,6 +89,7 @@ public class StudentBorrowerCollection  extends EntityBase
 
     //----------------------------------------------------------
     public Object getState(String key) {
+        //System.out.println("Selected Student Borrower: "+selectedStudentBorrower);
         if (key.equals("StudentBorrowers")) {
             System.out.println("Student Borrower List" + studentBorrowerList);
             return studentBorrowerList;

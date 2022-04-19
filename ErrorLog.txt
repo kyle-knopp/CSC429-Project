@@ -273,3 +273,19 @@
 [4/19/22, 9:55 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
 [4/19/22, 9:55 AM]|DelinquencyCheckTransaction|processTransaction|Error|NOTAG|null<Error in running delinquency check: exception.InvalidPrimaryKeyException: There are no Rentals that are currently checked out>
 [4/19/22, 9:57 AM]|DelinquencyCheckTransaction|processTransaction|Error|NOTAG|null<Error in running delinquency check: exception.InvalidPrimaryKeyException: Multiple student borrowers matching bannerIDs : null found.>
+[4/19/22, 3:16 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/19/22, 3:16 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/19/22, 3:23 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error in retrieving Student>
+[4/19/22, 3:40 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/19/22, 4:34 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerId' doesn't have a default value>
+[4/19/22, 4:38 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerId' doesn't have a default value>
+[4/19/22, 4:43 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerId' doesn't have a default value>
+[4/19/22, 4:44 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerId' doesn't have a default value>
+[4/19/22, 4:45 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerId' doesn't have a default value>
+[4/19/22, 4:52 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'BorrowerId' doesn't have a default value>
+[4/19/22, 5:02 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutDate' doesn't have a default value>
+[4/19/22, 5:04 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutDate' doesn't have a default value>
+[4/19/22, 5:05 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>
+[4/19/22, 5:19 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>
+[4/19/22, 5:20 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>
+[4/19/22, 5:23 PM]|Rental|insertAutoIncrementalPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'CheckoutWorkerId' doesn't have a default value>

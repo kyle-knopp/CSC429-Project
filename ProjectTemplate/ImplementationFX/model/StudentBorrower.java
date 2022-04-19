@@ -133,6 +133,10 @@ public class StudentBorrower extends EntityBase{
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
     }
 
+    public String getId(){
+        return this.persistentState.getProperty("BannerId");
+    }
+
     private void setDependencies()
     {
         dependencies = new Properties();

@@ -102,8 +102,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("DateOfLatestBorrowerStatus", DoLBS_Selected);
+        p.put("DateOfRegistration", DoR_Selected);
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
 

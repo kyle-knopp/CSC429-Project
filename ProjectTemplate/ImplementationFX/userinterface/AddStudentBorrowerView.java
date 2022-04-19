@@ -204,7 +204,18 @@ public class AddStudentBorrowerView extends View
         //DateOfLatestBorrowerStatus.setEditable(true);
         //grid.add(DateOfLatestBorrowerStatus, 1, 6);
 
+        DoLBS.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                LocalDate i = DoLBS.getValue();
 
+                // get the selected date
+                DoLBS.setValue(i);
+                DoLBS_Selected = DoLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+        });
+
+        /**
         EventHandler<ActionEvent> event1 = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
@@ -217,7 +228,7 @@ public class AddStudentBorrowerView extends View
             }
         };
         DoLBS.setOnAction(event1);
-
+**/
 
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
@@ -232,7 +243,17 @@ public class AddStudentBorrowerView extends View
         //DateOfRegistration.setEditable(true);
         //grid.add(DateOfRegistration, 1, 7);
 
+        DoR.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                LocalDate i = DoR.getValue();
 
+                // get the selected date
+                DoR.setValue(i);
+                DoR_Selected = DoR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+        });
+/**
         EventHandler<ActionEvent> event2 = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
@@ -246,6 +267,7 @@ public class AddStudentBorrowerView extends View
             }
         };
         DoR.setOnAction(event2);
+ **/
 
         Label = new Text("  Notes: ");
         Label.setFont(myFont);
@@ -320,8 +342,8 @@ public class AddStudentBorrowerView extends View
         LastName.setEditable(option);
         ContactPhone.setEditable(option);
         Email.setEditable(option);
-        DateOfLatestBorrowerStatus.setEditable(option);
-        DateOfRegistration.setEditable(option);
+        DoLBS.setEditable(option);
+        DoR.setEditable(option);
         Notes.setEditable(option);
         statusBox.setEditable(option);
 

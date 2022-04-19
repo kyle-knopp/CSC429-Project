@@ -130,3 +130,4 @@
 [4/7/22, 1:40 PM]|StudentBorrower|insertPersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'ContactPhone' at row 1>
 [4/7/22, 1:41 PM]|StudentBorrower|insertPersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'ContactPhone' at row 1>
 [4/7/22, 1:42 PM]|StudentBorrower|insertPersistentState|Error|NOTAG|null<SQL Exception: 0: Data truncation: Out of range value for column 'ContactPhone' at row 1>
+[4/19/22, 1:33 PM]|AddStudentBorrowerTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>

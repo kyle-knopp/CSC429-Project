@@ -293,6 +293,7 @@ public class AddStudentBorrowerView extends View
         DateOfRegistration.setEditable(option);
         Notes.setEditable(option);
         statusBox.setEditable(option);
+        borrStatBox.setEditable(option);
 
     }
 

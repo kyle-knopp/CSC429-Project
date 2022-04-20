@@ -259,9 +259,13 @@ public class StudentBorrowerCollectionView extends View {
 
         if(selectedItem != null)
         {
-            String selectedAcctNumber = selectedItem.getBannerId();
+            if(selectedItem.getBorrowerStatus().equals("Delinquent")){
+                statusLog.displayErrorMessage("Student Borrower Delinquent, Cannot Check out Book");
+            }else {
+                String selectedAcctNumber = selectedItem.getBannerId();
 
-            myModel.stateChangeRequest("CheckOutBookView", selectedAcctNumber);
+                myModel.stateChangeRequest("CheckOutBookView", selectedAcctNumber);
+            }
         }
     }
 

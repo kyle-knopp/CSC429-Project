@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Properties;
@@ -196,7 +197,12 @@ public class AddStudentBorrowerView extends View
         grid.add(DateOfLatestBorrowerStatus, 1, 6);
          **/
 
-        DOLBS = new DatePicker();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+
+        LocalDate curr = LocalDate.parse(dtf.format(now));
+
+        DOLBS = new DatePicker(curr);
         DOLBS.setEditable(true);
         grid.add(DOLBS, 1, 6);
 
@@ -212,7 +218,7 @@ public class AddStudentBorrowerView extends View
         grid.add(DateOfRegistration, 1, 7);
          **/
 
-        DOR = new DatePicker();
+        DOR = new DatePicker(curr);
         DOR.setEditable(true);
         grid.add(DOR, 1, 7);
 

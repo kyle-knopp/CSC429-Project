@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 // project imports
@@ -97,7 +99,8 @@ public class ModifyWorkerView extends AddWorkerView
         String credential = (String) myModel.getState("credentials");
         String pass = (String) myModel.getState("password");
 
-
+        LocalDate dolc_ld = LocalDate.parse(dolc);
+        LocalDate doh_ld = LocalDate.parse(dOH);
 
         bannerId.setText(bannerID);
         bannerId.setEditable(false);
@@ -106,8 +109,10 @@ public class ModifyWorkerView extends AddWorkerView
         last.setText(lastName);
         phone.setText(contactPhone);
         email.setText(em);
-        dOLC.setText(dolc);
-        doh.setText(dOH);
+        //dOLC.setText(dolc);
+        //doh.setText(dOH);
+        DOLC.setValue(dolc_ld);
+        DOH.setValue(doh_ld);
         status.setValue(stat);
         cred.setValue(credential);
         alreadyDeleted.setText("");
@@ -123,11 +128,13 @@ public class ModifyWorkerView extends AddWorkerView
         p.put("lastName", last.getText());
         p.put("phone", phone.getText());
         p.put("email", email.getText());
-        p.put("dateOfLatestCredentials", dOLC.getText());
+        //p.put("dateOfLatestCredentials", dOLC.getText());
+        p.put("dateOfLatestCredentials", DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("password", password.getText());
-        p.put("dateOfHire", doh.getText());
+        //p.put("dateOfHire", doh.getText());
+        p.put("dateOfHire", DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("credentials",cred.getValue());
-        p.put("status", "Inactive");
+        p.put("status", status.getValue());
 
         myModel.stateChangeRequest("UpdateWorker", p);
     }

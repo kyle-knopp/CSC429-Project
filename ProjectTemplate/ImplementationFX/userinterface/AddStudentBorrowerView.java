@@ -23,6 +23,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.util.Properties;
 
@@ -44,6 +46,8 @@ public class AddStudentBorrowerView extends View
     protected TextField DateOfLatestBorrowerStatus;
     protected TextField DateOfRegistration;
     protected TextField Notes;
+
+    protected DatePicker DOLBS, DOR;
 
     protected Text alreadyDeleted;
 
@@ -186,9 +190,15 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 6);
 
+        /**
         DateOfLatestBorrowerStatus = new TextField();
         DateOfLatestBorrowerStatus.setEditable(true);
         grid.add(DateOfLatestBorrowerStatus, 1, 6);
+         **/
+
+        DOLBS = new DatePicker();
+        DOLBS.setEditable(true);
+        grid.add(DOLBS, 1, 6);
 
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
@@ -196,9 +206,15 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 7);
 
+        /**
         DateOfRegistration = new TextField();
         DateOfRegistration.setEditable(true);
         grid.add(DateOfRegistration, 1, 7);
+         **/
+
+        DOR = new DatePicker();
+        DOR.setEditable(true);
+        grid.add(DOR, 1, 7);
 
         Label = new Text("  Notes: ");
         Label.setFont(myFont);
@@ -349,8 +365,10 @@ public class AddStudentBorrowerView extends View
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
+        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+        //p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
         p.put("BorrowerStatus",borrStatBox.getValue());

@@ -135,7 +135,7 @@ public class CheckOutBookView extends View {
             clearErrorMessage();
             myModel.stateChangeRequest("CheckOutBook", props);
             // myModel.stateChangeRequest("SubmitBarcode", null);
-            barcode.clear();
+            //barcode.clear();
 
         }
     }
@@ -183,8 +183,11 @@ public class CheckOutBookView extends View {
             String val = (String) value;
             if (val.startsWith("Err") || (val.startsWith("ERR")))
                 displayErrorMessage(val);
-            else
-                clearErrorMessage();
+            else {
+                barcode.clear();
+                displayMessage((String) value);
+            }
+
         }
     }
 

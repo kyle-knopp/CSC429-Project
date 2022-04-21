@@ -304,3 +304,27 @@
 [4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/21/22, 3:43 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 3:59 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:03 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:04 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:06 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:08 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:09 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:09 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:10 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:11 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:16 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:20 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:22 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:37 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:39 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:40 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:42 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:46 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : null with Null CheckinDate found.>
+[4/21/22, 4:47 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Multiple rentals matching Barcode : 1234 with Null CheckinDate found.>
+[4/21/22, 4:48 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/21/22, 4:51 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/21/22, 4:52 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/21/22, 4:57 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/21/22, 5:04 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>

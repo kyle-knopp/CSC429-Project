@@ -90,7 +90,11 @@ public class Rental extends EntityBase{
     public void findIfBookIsOut(String barcode) throws InvalidPrimaryKeyException {
         String query = "SELECT * FROM " + myTableName + " WHERE ((BookId = " + barcode + ") AND " +
                 "((CheckinDate IS NULL) OR (CheckinDate = '')))";
+
+
         Vector allDataRetrieved = getSelectQueryResult(query);
+
+        System.out.println(allDataRetrieved);
 
         // You must get one account at least
         if (allDataRetrieved != null)
@@ -98,36 +102,10 @@ public class Rental extends EntityBase{
             int size = allDataRetrieved.size();
 
             // There should be EXACTLY one account. More than that is an error
-            if (size != 1)
+            if (size >= 1)
             {
-                throw new exception.InvalidPrimaryKeyException("Multiple rentals matching Ids : "
-                        + barcode + " found.");
+                throw new exception.InvalidPrimaryKeyException("Error: Book "+barcode+" Already Checked Out.");
             }
-            else
-            {
-                // copy all the retrieved data into persistent state
-                Properties retrievedAccountData = (Properties)allDataRetrieved.elementAt(0);
-                persistentState = new Properties();
-
-                Enumeration allKeys = retrievedAccountData.propertyNames();
-                while (allKeys.hasMoreElements() == true)
-                {
-                    String nextKey = (String)allKeys.nextElement();
-                    String nextValue = retrievedAccountData.getProperty(nextKey);
-
-                    if (nextValue != null)
-                    {
-                        persistentState.setProperty(nextKey, nextValue);
-                    }
-                }
-
-            }
-        }
-        // If no book found for this id, throw an exception
-        else
-        {
-            throw new exception.InvalidPrimaryKeyException("No rental matching Id : "
-                    + barcode + " found.");
         }
     }
     public void save(String trans)
@@ -159,8 +137,8 @@ public class Rental extends EntityBase{
     }
 
     private void updateStateInDatabase(String trans) {
-        System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
-        System.out.println(persistentState.getProperty("Id"));
+       // System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
+       // System.out.println(persistentState.getProperty("Id"));
         try {
             if (trans == "checkIn") {
                 Properties whereClause = new Properties();
@@ -169,7 +147,7 @@ public class Rental extends EntityBase{
                 updateStatusMessage = "Rental data updated successfully in database!";
 
             } else if (trans == "checkOut") {
-                System.out.println("Inside else in save rental.");
+               // System.out.println("Inside else in save rental.");
                 Integer Id = insertAutoIncrementalPersistentState(mySchema, persistentState);
                 // GONNA HAVE TO LOOK AT THIS AT SOME POINT TO MAKE SURE BECAUSE OF AUTOINCREMENT ID
                 persistentState.setProperty("Id", "" + Id.intValue());

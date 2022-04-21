@@ -49,7 +49,7 @@ public class Book extends EntityBase{
                     {
                         this.persistentState.setProperty(nextKey, nextValue);
                     }
-                    System.out.println(nextKey+" : "+nextValue);
+                    //System.out.println(nextKey+" : "+nextValue);
                 }
 
             }

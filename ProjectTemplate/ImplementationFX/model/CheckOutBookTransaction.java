@@ -49,7 +49,7 @@ public class CheckOutBookTransaction extends Transaction
     protected void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("CheckInBook", "TransactionError");
+        dependencies.setProperty("CheckOutBook", "TransactionError");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -63,6 +63,8 @@ public class CheckOutBookTransaction extends Transaction
         //  DEBUG System.out.println("Inside Add Book");
         try {
             myBook = new Book(props.getProperty("BookId"));
+            String bookId = myBook.getId();
+            System.out.println(bookId);
             String borrowerId = myStudent.getId();
             props.setProperty("BorrowerId", borrowerId);
             Date date = new Date();
@@ -77,30 +79,23 @@ public class CheckOutBookTransaction extends Transaction
             //System.out.println("My Student:"+myStudent);
             System.out.println("Props: " + props);
             //System.out.println("borrowerId: "+borrowerId);
-            try {
-                oldRental = new Rental();
-                oldRental.findIfBookIsOut((String) props.getProperty("barcode"));
-                System.out.println("****Old Rental****: "+oldRental);
-            }catch(InvalidPrimaryKeyException e){
-                transactionErrorMessage="Error: Book Already Checked Out.";
-                new Event(Event.getLeafLevelClassName(this), "processTransaction",
-                        "Error: Book Already Checked Out." + e.toString(), Event.ERROR);
-            }
-
+            oldRental = new Rental();
+            oldRental.findIfBookIsOut(bookId);
+           // System.out.println("****Old Rental****: "+oldRental);
 
             myRental = new Rental(props);
             myRental.checkOut("checkOut");
-            transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
-
-            //transactionErrorMessage="Book Already Checked Out";
+            transactionErrorMessage = "Book Successfully Checked Out!";
+            //transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
         }catch(InvalidPrimaryKeyException e){
             transactionErrorMessage="Error: Book Already Checked Out.";
+            System.out.println(transactionErrorMessage);
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error: Book Already Checked Out." + e.toString(), Event.ERROR);
         }catch (Exception e) {
-            transactionErrorMessage = "Error in checking in book." + e.toString();
+            transactionErrorMessage = "Error in checking out book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
-                    "Error in checking in book " + e.toString(), Event.ERROR);
+                    "Error in checking out book " + e.toString(), Event.ERROR);
         }
 
     }
@@ -144,6 +139,8 @@ public class CheckOutBookTransaction extends Transaction
             return transactionErrorMessage;
         }else if (key.equals("StudentBorrowerList")==true){
             return myStudentBorrowers;
+        }else if (key.equals("UpdateStatusMessage")==true){
+            return transactionErrorMessage;
         }
 
         return null;

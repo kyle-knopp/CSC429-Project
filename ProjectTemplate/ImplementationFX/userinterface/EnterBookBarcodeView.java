@@ -119,7 +119,7 @@ public class EnterBookBarcodeView extends View {
             clearErrorMessage();
             myModel.stateChangeRequest("SubmitBarcode", props);
             // myModel.stateChangeRequest("SubmitBarcode", null);
-            barcode.clear();
+
 
         }
     }
@@ -167,8 +167,10 @@ public class EnterBookBarcodeView extends View {
             String val = (String) value;
             if (val.startsWith("Err") || (val.startsWith("ERR")))
                 displayErrorMessage(val);
-            else
-                clearErrorMessage();
+            else {
+                barcode.clear();
+                displayMessage((String)value);
+            }
         }
     }
 

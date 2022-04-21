@@ -32,11 +32,13 @@ public class Librarian implements IView, IModel
 
     private StudentBorrowerCollection myStudentBorrowers;
     private WorkerCollection myWorkers;
+    private BookCollection myBooks;
 
     private Worker selectedWorker;
     private Worker modifyWorker;
     private StudentBorrower selectedStudentBorrower;
     private StudentBorrower modifySB;
+
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -209,24 +211,20 @@ public class Librarian implements IView, IModel
             doTransaction(transType);
         }
         else if (key.equals("SearchStudentBorrowerView") == true) // begin student borrower delete sequence
-
         {
             createAndShowSearchStudentBorrowerView();
-
         }
         else if(key.equals("Delete a Book") ==true){
             createAndShowDeleteABookView();
         }
         else if (key.equals("StudentBorrowerCollectionDeleteView") == true) //Creates new collection
         {
-
             Properties p = (Properties)value;
             String name = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
             myStudentBorrowers.findStudentBorrowersWithNameLike(name);
             //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionDeleteView();
-
         }
         else if (key.equals("StudentBorrowerCollectionDeleteViewNo") == true) //goes back to old collection
         {

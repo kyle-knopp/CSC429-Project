@@ -1,5 +1,7 @@
 package model;
 
+import exception.InvalidPrimaryKeyException;
+
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -13,6 +15,13 @@ public class Rental extends EntityBase{
     protected Properties dependencies;
 
     private String updateStatusMessage = "";
+
+    public Rental() {
+        super(myTableName);
+        setDependencies();
+
+        persistentState = new Properties();
+    }
 
     public Rental(String Id) throws exception.InvalidPrimaryKeyException {
         super(myTableName);
@@ -78,6 +87,49 @@ public class Rental extends EntityBase{
         }
     }
 
+    public void findIfBookIsOut(String barcode) throws InvalidPrimaryKeyException {
+        String query = "SELECT * FROM " + myTableName + " WHERE ((BookId = " + barcode + ") AND " +
+                "((CheckinDate IS NULL) OR (CheckinDate = '')))";
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        // You must get one account at least
+        if (allDataRetrieved != null)
+        {
+            int size = allDataRetrieved.size();
+
+            // There should be EXACTLY one account. More than that is an error
+            if (size != 1)
+            {
+                throw new exception.InvalidPrimaryKeyException("Multiple rentals matching Ids : "
+                        + barcode + " found.");
+            }
+            else
+            {
+                // copy all the retrieved data into persistent state
+                Properties retrievedAccountData = (Properties)allDataRetrieved.elementAt(0);
+                persistentState = new Properties();
+
+                Enumeration allKeys = retrievedAccountData.propertyNames();
+                while (allKeys.hasMoreElements() == true)
+                {
+                    String nextKey = (String)allKeys.nextElement();
+                    String nextValue = retrievedAccountData.getProperty(nextKey);
+
+                    if (nextValue != null)
+                    {
+                        persistentState.setProperty(nextKey, nextValue);
+                    }
+                }
+
+            }
+        }
+        // If no book found for this id, throw an exception
+        else
+        {
+            throw new exception.InvalidPrimaryKeyException("No rental matching Id : "
+                    + barcode + " found.");
+        }
+    }
     public void save(String trans)
     {
         updateStateInDatabase(trans);

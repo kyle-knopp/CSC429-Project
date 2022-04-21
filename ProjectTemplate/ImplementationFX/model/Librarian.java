@@ -169,7 +169,14 @@ public class Librarian implements IView, IModel
         else if(key.equals("CheckIn") == true){
             String transType = key;
             transType = transType.trim();
-            doTransaction(transType);
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", systemUser);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }
         }
         else if(key.equals("CheckOut") == true){
             /*String transType = key;
@@ -324,9 +331,12 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
         {
+            System.out.println("Worker ID in Librarian: "+value);
             try{
                 //transactionErrorMessage="";
-                getWorker((String)value);
+                //getWorker((String)value);
+                selectedWorker = new Worker((String)value);
+                System.out.println("Selected worker in Librarian: "+selectedWorker);
             }catch(InvalidPrimaryKeyException e){
             e.printStackTrace();
             transactionErrorMessage="Cannot Find Worker";
@@ -345,8 +355,8 @@ public class Librarian implements IView, IModel
 
         }else if(key.equals("UpdateWorker"))
         {
-            Properties p = (Properties) value;
-            modifyWorker= new Worker(p);
+            Properties p2 = (Properties) value;
+            modifyWorker= new Worker(p2);
             modifyWorker.save("update");
             transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
         }else if(key.equals("DeleteStudentBorrower"))

@@ -59,34 +59,45 @@ public class CheckOutBookTransaction extends Transaction
      * verifying ownership, crediting, etc. etc.
      */
     //----------------------------------------------------------
-    public void processTransaction(Properties props)
-    {
+    public void processTransaction(Properties props) {
         //  DEBUG System.out.println("Inside Add Book");
-        try
-        {
+        try {
             myBook = new Book(props.getProperty("BookId"));
-            String borrowerId= myStudent.getId();
-            props.setProperty("BorrowerId",borrowerId);
+            String borrowerId = myStudent.getId();
+            props.setProperty("BorrowerId", borrowerId);
             Date date = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String todaysDate=(String)formatter.format(date);
-            props.setProperty("CheckoutDate",todaysDate);
+            String todaysDate = (String) formatter.format(date);
+            props.setProperty("CheckoutDate", todaysDate);
 
-            String checkoutWorkerId=(String)systemWorker.getState("bannerID");
-            System.out.println("Checkout Worker ID: "+checkoutWorkerId);
-            props.setProperty("CheckoutWorkerId",checkoutWorkerId);
+            String checkoutWorkerId = (String) systemWorker.getState("bannerID");
+            System.out.println("Checkout Worker ID: " + checkoutWorkerId);
+            props.setProperty("CheckoutWorkerId", checkoutWorkerId);
             //props.setProperty("CheckoutDate",)
             //System.out.println("My Student:"+myStudent);
-            System.out.println("Props: "+props);
+            System.out.println("Props: " + props);
             //System.out.println("borrowerId: "+borrowerId);
             try {
-                oldRental = new Rental((String) props.getProperty("barcode"));
-            }catch (Exception e){
-                myRental = new Rental(props);
-                myRental.checkOut("checkOut");
-                transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
+                oldRental = new Rental();
+                oldRental.findIfBookIsOut((String) props.getProperty("barcode"));
+                System.out.println("****Old Rental****: "+oldRental);
+            }catch(InvalidPrimaryKeyException e){
+                transactionErrorMessage="Error: Book Already Checked Out.";
+                new Event(Event.getLeafLevelClassName(this), "processTransaction",
+                        "Error: Book Already Checked Out." + e.toString(), Event.ERROR);
             }
-        } catch (Exception e) {
+
+
+            myRental = new Rental(props);
+            myRental.checkOut("checkOut");
+            transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
+
+            //transactionErrorMessage="Book Already Checked Out";
+        }catch(InvalidPrimaryKeyException e){
+            transactionErrorMessage="Error: Book Already Checked Out.";
+            new Event(Event.getLeafLevelClassName(this), "processTransaction",
+                    "Error: Book Already Checked Out." + e.toString(), Event.ERROR);
+        }catch (Exception e) {
             transactionErrorMessage = "Error in checking in book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error in checking in book " + e.toString(), Event.ERROR);

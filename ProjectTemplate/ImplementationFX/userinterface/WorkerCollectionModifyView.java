@@ -252,7 +252,7 @@ public class WorkerCollectionModifyView extends View{
         if(selectedItem != null)
         {
             String selectedAcctNumber = selectedItem.getBannerId();
-
+            System.out.println("Selected Worker ID: "+ selectedAcctNumber);
             myModel.stateChangeRequest("ModifyWorkerView", selectedAcctNumber);
         }
     }

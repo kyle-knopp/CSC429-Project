@@ -1,9 +1,8 @@
 package model;
 
 import java.sql.SQLException;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.Vector;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class StudentBorrower extends EntityBase{
@@ -86,9 +85,10 @@ public class StudentBorrower extends EntityBase{
     public void update() {
         try {
             Properties whereClause = new Properties();
-            whereClause.setProperty("barcode", persistentState.getProperty("barcode"));
+            whereClause.setProperty("BannerId", persistentState.getProperty("BannerId"));
             updatePersistentState(mySchema, persistentState, whereClause);
-            updateStatusMessage = "Book data updated successfully in database!";
+            updateStatusMessage = "StudentBorrower data updated successfully in database!";
+            updateStatusMessage = "StudentBorrower data updated successfully in database!";
         }catch (SQLException ex){
             updateStatusMessage ="Error in updating Student Borrower in database!";
             //System.out.println("Error in updating Student Borrower in database!");
@@ -131,6 +131,10 @@ public class StudentBorrower extends EntityBase{
             System.out.println(excep);
         }
         //DEBUG System.out.println("updateStateInDatabase " + updateStatusMessage);
+    }
+
+    public String getId(){
+        return this.persistentState.getProperty("BannerId");
     }
 
     private void setDependencies()
@@ -184,6 +188,15 @@ public class StudentBorrower extends EntityBase{
         if (value != null) {
             persistentState.setProperty(key, (String)value);
         }
+    }
+
+    protected void setDelinquent() {
+        Calendar rightNow = Calendar.getInstance();
+        Date todayDate = rightNow.getTime();
+        String todayDateText = new SimpleDateFormat("yyyy-MM-dd").format(todayDate);
+        persistentState.setProperty("DateOfLatestBorrowerStatus", todayDateText);
+        persistentState.setProperty("BorrowerStatus", "Delinquent");
+
     }
 
     public Vector<String> getEntryListView() {

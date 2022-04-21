@@ -40,9 +40,8 @@ public class DeleteBookTransaction extends Transaction
     protected void setDependencies()
     {
         dependencies = new Properties();
-        dependencies.setProperty("SubmitBarCode", "TransactionError, UpdateStatusMessage, BookToDisplay");
-        dependencies.setProperty("DeleteBook","TransactionError, UpdateStatusMessage");
-        dependencies.setProperty("ConfirmDeleteBook","TransactionError, UpdateStatusMessage");
+        dependencies.setProperty("SubmitBarcode", "TransactionError");//, UpdateStatusMessage, BookToDisplay");
+        dependencies.setProperty("DeleteBook", "TransactionError");//, UpdateStatusMessage");
         dependencies.setProperty("Cancel", "CancelTransaction");
 
         myRegistry.setDependencies(dependencies);
@@ -68,7 +67,7 @@ public class DeleteBookTransaction extends Transaction
             selectedBook.update();
             transactionErrorMessage = (String) selectedBook.getState("UpdateStatusMessage");
         } catch (Exception e) {
-            transactionErrorMessage = "Error in saving book." + e.toString();
+            transactionErrorMessage = "Error in saving book.";
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error in saving book " + e.toString(), Event.ERROR);
         }
@@ -89,7 +88,7 @@ public class DeleteBookTransaction extends Transaction
     }
 
     private void createAndShowDeleteBookView() {
-
+        //transactionErrorMessage = "";
         Scene currentScene = (Scene) myViews.get("DeleteBookView");
         if (currentScene == null) {
             View newView = ViewFactory.createView("DeleteBookView", this);
@@ -102,7 +101,7 @@ public class DeleteBookTransaction extends Transaction
         swapToView(currentScene);
     }
     private void createAndShowConfirmDeleteBookView() {
-
+        //transactionErrorMessage = "";
         Scene currentScene = (Scene) myViews.get("ConfirmDeleteBookView");
         if (currentScene == null) {
             View newView = ViewFactory.createView("ConfirmDeleteBookView", this);
@@ -173,11 +172,13 @@ public class DeleteBookTransaction extends Transaction
             //System.out.println("Seeing if props prints:"+props.getProperty("barcode"));
             //System.out.println("Just Selected Book: "+myBook);
             selectedBook.display();
+            transactionErrorMessage = "";
             createAndShowDeleteBookView();
 
         } catch (InvalidPrimaryKeyException e) {
-            transactionErrorMessage = "Book Not Found." + e.toString();
-            new Event(Event.getLeafLevelClassName(this), "processTransaction",
+            transactionErrorMessage = "Error: Book Not Found." ;
+            new Event(Event.getLeafLevelClassName(this), "processBarcode",
                     "Error in finding book " + e.toString(), Event.ERROR);
-        }        }
+        }
+    }
 }

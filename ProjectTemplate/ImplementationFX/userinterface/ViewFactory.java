@@ -90,6 +90,19 @@ public class ViewFactory {
 		{
 			return new ModifyWorkerView(model);
 		}
+		else if(viewName.equals("DelinquencyCheckView") == true)
+		{
+			return new DelinquencyCheckView(model);
+		}else if(viewName.equals("CheckOutBookView") == true)
+		{
+			return new CheckOutBookView(model);
+		}else if(viewName.equals("SearchSBView") == true)
+		{
+			return new SearchSBView(model);
+		}else if(viewName.equals("StudentBorrowerCollectionView") == true)
+		{
+			return new StudentBorrowerCollectionView(model);
+		}
 
 
 		System.out.println("no View created "+viewName );

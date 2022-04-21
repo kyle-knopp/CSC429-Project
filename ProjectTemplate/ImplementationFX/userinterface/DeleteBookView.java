@@ -33,7 +33,7 @@ public class DeleteBookView extends View{
     protected TextField suggestedPrice;
     protected TextField quality;
     protected TextField notes;
-    protected TextField prefix;
+    protected Text alreadyDeleted;
 
     protected String barcodeText;
     protected String titleText;
@@ -229,6 +229,18 @@ public class DeleteBookView extends View{
         con.setTextAlignment(TextAlignment.RIGHT);
         grid.add(con, 0, 11);
 
+        /**
+        quality = new ComboBox();
+        quality.getItems().addAll(
+                "Good",
+                "Damaged"
+        );
+
+        quality.setValue("Good");
+        quality.setEditable(false);
+        grid.add(quality, 1, 11);
+         */
+
         quality = new TextField();
         quality.setEditable(false);
         quality.setStyle("-fx-background-color: -fx-control-inner-background;");
@@ -257,23 +269,12 @@ public class DeleteBookView extends View{
         notes.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(notes, 1, 13);
 
-        /**
-         * prefix row
+        alreadyDeleted=new Text();
+        alreadyDeleted.setText("");
+        alreadyDeleted.setFill(Color.RED);
+        grid.add(alreadyDeleted,0,14);
 
-        Text prefixLabel = new Text(" Prefix : ");
-        prefixLabel.setFont(myFont);
-        prefixLabel.setWrappingWidth(150);
-        prefixLabel.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(prefixLabel, 0, 14);
-
-        prefix = new TextField();
-        prefix.setEditable(false);
-        prefix.setStyle("-fx-background-color: -fx-control-inner-background;");
-        grid.add(prefix, 1, 14);
-
-         */
-
-        submitButton = new Button("Delete");
+        submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -308,12 +309,64 @@ public class DeleteBookView extends View{
 
         clearErrorMessage();
 
+        /**
+        String bar = barcode.getText();
+        String titl = title.getText();
+        String disi = " ";
+        String au1 = author1.getText();
+        String au2 = author2.getText();
+        String au3 = author3.getText();
+        String au4 = author4.getText();
+        String publi = publisher.getText();
+        String yeaO = yearOfPublication.getText();
+        String isb = ISBN.getText();
+        String condi = (String) quality.getValue();
+        String sugPric = suggestedPrice.getText();
+        String no = notes.getText();
+        String stat= (String)myModel.getState("Status");
+         */
+
         Properties p2 = new Properties();
+
+        /**
+        p2.setProperty("barcode",bar);
+        p2.setProperty("title", titl);
+        p2.setProperty("author1", au1);
+        p2.setProperty("author2", au2);
+        p2.setProperty("author3", au3);
+        p2.setProperty("author3", au3);
+        p2.setProperty("author4", au4);
+        p2.setProperty("publisher", publi);
+        p2.setProperty("yearOfPublication", yeaO);
+        p2.setProperty("ISBN", isb);
+        p2.setProperty("suggestedPrice", sugPric);
+        p2.setProperty("notes", no);
+        p2.setProperty("bookCondition", condi);
+
+        */
 
         p2.setProperty("Status","Inactive");
 
         System.out.println(p2);
         myModel.stateChangeRequest("DeleteBook", p2);
+        //}
+
+        //barcode.clear();
+        /**
+        title.clear();
+        author1.clear();
+        author2.clear();
+        author3.clear();
+        author4.clear();
+        publisher.clear();
+        yearOfPublication.clear();
+        ISBN.clear();
+        suggestedPrice.clear();
+        notes.clear();
+
+        quality.setValue("Good");
+        suggestedPrice.setText("0.00");
+         */
 
         displayMessage("The following Book: " + titleText + " has been SUCCESSFULLY REMOVED");
         //needs to be tested vvv
@@ -352,8 +405,6 @@ public class DeleteBookView extends View{
         String sugPriceText = (String) myModel.getState("suggestedPrice");
         String notesText = (String) myModel.getState("notes");
         String stat= (String)myModel.getState("Status");
-        String pref= (String)myModel.getState("prefix");
-
 
 
         barcode.setText(barcodeText);
@@ -369,12 +420,11 @@ public class DeleteBookView extends View{
         quality.setText(conditionText);
         suggestedPrice.setText(sugPriceText);
         notes.setText(notesText);
-        //prefix.setText((pref));
 
         if(stat.equals("Inactive"))
         {
             //Debug: System.out.println("Book is Inactive");
-            displayErrorMessage("NOTE: The following book is already INACTIVE: Try another book!");
+            alreadyDeleted.setText("NOTE: The following book is already INACTIVE: Try another book!");
             submitButton.setDisable(true);
         }
         else
@@ -383,6 +433,8 @@ public class DeleteBookView extends View{
             submitButton.setDisable(false);
         }
     }
+
+
 
     /**
      * Update method
@@ -397,7 +449,11 @@ public class DeleteBookView extends View{
             displayMessage((String)value);
         }else if (key.equals("TransactionError") == true)
         {
-            displayMessage((String)value);
+            String val = (String)value;
+            if (val.startsWith("Err") || (val.startsWith("ERR")))
+                displayErrorMessage( val);
+            else
+                displayMessage(val);
         }
     }
 

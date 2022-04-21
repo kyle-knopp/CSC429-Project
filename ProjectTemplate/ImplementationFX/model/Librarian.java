@@ -166,6 +166,26 @@ public class Librarian implements IView, IModel
             transType =transType.trim();
             doTransaction(transType);
         }
+        else if(key.equals("CheckIn") == true){
+            String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);
+        }
+        else if(key.equals("CheckOut") == true){
+            /*String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);*/
+            String transType = key;
+            transType = transType.trim();
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", systemUser);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }
+        }
         else if (key.equals("ModifyBook") == true)
         {
             String transType = key;
@@ -342,6 +362,12 @@ public class Librarian implements IView, IModel
             modifyWorker.save("update");
             transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
         }
+        else if(key.equals("DelinquencyCheck")){
+            //createAndShowDelinquencyCheckView();
+            String transType = key;
+            transType =transType.trim();
+            doTransaction(transType);
+        }
 
 
         myRegistry.updateSubscribers(key, this);
@@ -384,6 +410,10 @@ public class Librarian implements IView, IModel
         }
     }
 
+    public SystemWorker getSystemUser() {
+        return systemUser;
+    }
+
 
     /**
      * Tries to create old persistable student worker object.
@@ -415,6 +445,8 @@ public class Librarian implements IView, IModel
             new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
+
+
 
     /**
      * Create a Transaction depending on the Transaction type (deposit,
@@ -739,6 +771,20 @@ public class Librarian implements IView, IModel
             View newView = ViewFactory.createView("WorkerCollectionModifyView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
             myViews.put("WorkerCollectionModifyView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowDelinquencyCheckView()
+    {
+        Scene currentScene = (Scene)myViews.get("DelinquencyCheckView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("DelinquencyCheckView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("DelinquencyCheckView", currentScene);
         }
 
         swapToView(currentScene);

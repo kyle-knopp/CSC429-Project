@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 // project imports
@@ -83,19 +85,41 @@ public class DeleteWorkerView extends AddWorkerView
         String credential = (String) myModel.getState("credentials");
         String pass = (String) myModel.getState("password");
 
+        LocalDate dolc_ld = LocalDate.parse(dolc);
+        LocalDate doh_ld = LocalDate.parse(dOH);
 
         bannerId.setText(bannerID);
-        bannerId.setEditable(false);
         password.setText(pass);
         first.setText(firstName);
         last.setText(lastName);
         phone.setText(contactPhone);
         email.setText(em);
-        dOLC.setText(dolc);
-        doh.setText(dOH);
+        //dOLC.setText(dolc);
+        //doh.setText(dOH);
+        DOLC.setValue(dolc_ld);
+        DOH.setValue(doh_ld);
         status.setValue(stat);
         cred.setValue(credential);
         alreadyDeleted.setText("");
+
+        bannerId.setEditable(false);
+        bannerId.setStyle("-fx-background-color: -fx-control-inner-background;");
+        password.setEditable(false);
+        password.setStyle("-fx-background-color: -fx-control-inner-background;");
+        first.setEditable(false);
+        first.setStyle("-fx-background-color: -fx-control-inner-background;");
+        last.setEditable(false);
+        last.setStyle("-fx-background-color: -fx-control-inner-background;");
+        phone.setDisable(true);
+        phone.setStyle("-fx-background-color: -fx-control-inner-background;");
+        email.setDisable(true);
+        email.setStyle("-fx-background-color: -fx-control-inner-background;");
+        DOLC.setDisable(true);
+        DOLC.setStyle("-fx-background-color: -fx-control-inner-background;");
+        DOH.setDisable(true);
+        DOH.setStyle("-fx-background-color: -fx-control-inner-background;");
+        status.setDisable(true);
+        cred.setDisable(true);
 
         if(stat.equals("Inactive"))
         {
@@ -127,9 +151,11 @@ public class DeleteWorkerView extends AddWorkerView
         p.put("lastName", last.getText());
         p.put("phone", phone.getText());
         p.put("email", email.getText());
-        p.put("dateOfLatestCredentials", dOLC.getText());
+        //p.put("dateOfLatestCredentials", dOLC.getText());
+        p.put("dateOfLatestCredentials", DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("password", password.getText());
-        p.put("dateOfHire", doh.getText());
+        //p.put("dateOfHire", doh.getText());
+        p.put("dateOfHire", DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("credentials",cred.getValue());
         p.put("status", "Inactive");
 

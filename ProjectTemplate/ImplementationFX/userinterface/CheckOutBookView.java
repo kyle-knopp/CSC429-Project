@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -20,12 +21,18 @@ import javafx.scene.text.TextAlignment;
 import userinterface.MessageView;
 import userinterface.View;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Properties;
 
 public class CheckOutBookView extends View {
     // GUI components
     protected TextField barcode;
     protected TextField dueDate;
+
+    protected DatePicker dateDue;
 
     protected Button cancelButton;
     protected Button submitButton;
@@ -87,9 +94,17 @@ public class CheckOutBookView extends View {
         duedate.setTextAlignment(TextAlignment.RIGHT);
         grid.add(duedate, 0, 2);
 
-        dueDate = new TextField();
-        dueDate.setEditable(true);
-        grid.add(dueDate, 1, 2);
+        //dueDate = new TextField();
+        //dueDate.setEditable(true);
+        //grid.add(dueDate, 1, 2);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now().plusDays(7);
+        LocalDate curr = LocalDate.parse(dtf.format(now));
+
+        dateDue = new DatePicker(curr);
+        dateDue.setEditable(true);
+        grid.add(dateDue, 1, 2);
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -124,7 +139,8 @@ public class CheckOutBookView extends View {
     protected void processAction(Event event) {
         Properties props = new Properties();
         props.setProperty("BookId",barcode.getText());
-        props.setProperty("DueDate",dueDate.getText());
+        //props.setProperty("DueDate",dueDate.getText());
+        props.setProperty("DueDate", dateDue.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 
         Object sender = event.getSource();

@@ -204,6 +204,11 @@ public class Book extends EntityBase{
         return this.persistentState.getProperty("barcode");
     }
 
+    public static void getBookPrefix()
+    {
+
+    }
+
     protected void initializeSchema(String tableName)
     {
         if (mySchema == null)

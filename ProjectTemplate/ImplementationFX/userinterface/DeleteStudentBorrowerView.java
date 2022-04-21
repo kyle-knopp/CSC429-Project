@@ -22,6 +22,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 // project imports
@@ -97,24 +99,47 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         String status = (String) myModel.getState("status");
         String borrStat = (String) myModel.getState("BorrowerStatus");
 
+        LocalDate dolbs_ld = LocalDate.parse(dolbs);
+        LocalDate dor_ld = LocalDate.parse(dor);
 
         BannerId.setText(bannerID);
         FirstName.setText(firstName);
         LastName.setText(lastName);
         ContactPhone.setText(contactPhone);
         Email.setText(email);
-        DateOfLatestBorrowerStatus.setText(dolbs);
-        DateOfRegistration.setText(dor);
+        //DateOfLatestBorrowerStatus.setText(dolbs);
+        //DateOfRegistration.setText(dor);
+        DOLBS.setValue(dolbs_ld);
+        DOR.setValue(dor_ld);
         Notes.setText(notes);
         statusBox.setValue(status);
         borrStatBox.setValue(borrStat);
 
-        setFieldsEditable(false);
+        BannerId.setEditable(false);
+        BannerId.setStyle("-fx-background-color: -fx-control-inner-background;");
+        FirstName.setEditable(false);
+        FirstName.setStyle("-fx-background-color: -fx-control-inner-background;");
+        LastName.setEditable(false);
+        LastName.setStyle("-fx-background-color: -fx-control-inner-background;");
+        ContactPhone.setDisable(true);
+        ContactPhone.setStyle("-fx-background-color: -fx-control-inner-background;");
+        Email.setDisable(true);
+        Email.setStyle("-fx-background-color: -fx-control-inner-background;");
+        //DateOfLatestBorrowerStatus.setText(dolbs);
+        //DateOfRegistration.setText(dor);
+        DOLBS.setDisable(true);
+        DOLBS.setStyle("-fx-background-color: -fx-control-inner-background;");
+        DOR.setDisable(true);
+        DOR.setStyle("-fx-background-color: -fx-control-inner-background;");
+        Notes.setDisable(true);
+        Notes.setStyle("-fx-background-color: -fx-control-inner-background;");
+        statusBox.setDisable(true);
+        borrStatBox.setDisable(true);
 
         if(status.equals("Inactive"))
         {
             //Debug: System.out.println("Book is Inactive");
-            alreadyDeleted.setText("NOTE: This Student Borrower is already INACTIVE!");
+            alreadyDeleted.setText("NOTE: " + firstName + " " + lastName + " is already INACTIVE!");
             doneButton.setDisable(true);
         }
         else
@@ -134,11 +159,14 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
+        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+        //p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("Notes", Notes.getText());
         p.put("status","Inactive");
         p.put("BorrowerStatus",borrStatBox.getValue());
+
 
         myModel.stateChangeRequest("DeleteStudentBorrower", p);
 

@@ -96,6 +96,9 @@ public class Librarian implements IView, IModel
     //----------------------------------------------------------
     public Object getState(String key)
     {
+
+        //DEBUG System.out.println("**********KEY***********  "+key);
+
         if (key.equals("TransactionError") == true)
         {
             //DEBUG System.out.println("Librarian get state: "+transactionErrorMessage);
@@ -304,8 +307,10 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("DeleteWorkerView") == true) //goes to delete screen
         {
+            selectedStudentBorrower=null;
             try{
-                selectedWorker = new Worker((String)value);
+                //selectedWorker = new Worker((String)value);
+                getWorker((String)value);
             }catch(InvalidPrimaryKeyException e){
                 e.printStackTrace();
                 transactionErrorMessage="Cannot Find Worker";
@@ -331,17 +336,30 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
         {
+            selectedStudentBorrower=null;
             System.out.println("Worker ID in Librarian: "+value);
             try{
-                //transactionErrorMessage="";
-                //getWorker((String)value);
-                selectedWorker = new Worker((String)value);
-                System.out.println("Selected worker in Librarian: "+selectedWorker);
+                transactionErrorMessage="";
+                getWorker((String)value);
+                createAndShowModifyWorkerView();
+                //selectedWorker = new Worker((String)value);
+                //System.out.println("Selected worker in Librarian: "+selectedWorker);
             }catch(InvalidPrimaryKeyException e){
             e.printStackTrace();
             transactionErrorMessage="Cannot Find Worker";
             }
-            createAndShowModifyWorkerView();
+            /*String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", selectedWorker);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }*/
+
         }
         else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
         {
@@ -434,9 +452,9 @@ public class Librarian implements IView, IModel
     //-------------------------------------------------------------
     private void getStudentBorrower(String id)throws InvalidPrimaryKeyException {
         try {
-            //DEBUG System.out.println("Student Borrower id: "+ id);
+            System.out.println("Student Borrower id: "+ id);
             selectedStudentBorrower = new StudentBorrower(id);
-            //DEBUG System.out.println(selectedStudentBorrower);
+            System.out.println(selectedStudentBorrower);
         }
         catch (Exception e){
             transactionErrorMessage = "Cannot find Student Borrower";
@@ -630,6 +648,8 @@ public class Librarian implements IView, IModel
         //if (currentScene == null)
         //{
             // create our initial view
+        //System.out.println("This in librarian: "+this.toString());
+
             View newView = ViewFactory.createView("ModifyStudentBorrowerView", this); // USE VIEW FACTORY
             Scene currentScene = new Scene(newView);
             myViews.put("ModifyStudentBorrowerView", currentScene);
@@ -764,7 +784,10 @@ public class Librarian implements IView, IModel
 
         //if (currentScene == null) {
             // create our initial view
-            View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
+
+        //System.out.println("This in librarian: "+this.toString());
+
+        View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
             Scene currentScene = new Scene(newView);
             myViews.put("ModifyWorkerView", currentScene);
         //}

@@ -44,10 +44,11 @@ public class ModifyWorkerView extends AddWorkerView
             }
         });
 
-        populateFields();
+
 
         myModel.subscribe("ServiceCharge", this);
         myModel.subscribe("TransactionError", this);
+        populateFields();
     }
 
 

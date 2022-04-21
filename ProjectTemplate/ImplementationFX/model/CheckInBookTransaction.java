@@ -4,6 +4,10 @@ package model;
 // system imports
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -22,6 +26,8 @@ public class CheckInBookTransaction extends Transaction
 
     private Rental myRental;
     private Rental oldRental;
+    private SystemWorker systemWorker;
+    private Book myBook;
 
     private String transactionErrorMessage = "";
 
@@ -41,6 +47,7 @@ public class CheckInBookTransaction extends Transaction
     {
         dependencies = new Properties();
         dependencies.setProperty("CheckInBook", "TransactionError");
+        dependencies.setProperty("SubmitBarcode","TransactionError");
 
         myRegistry.setDependencies(dependencies);
     }
@@ -52,29 +59,39 @@ public class CheckInBookTransaction extends Transaction
     //----------------------------------------------------------
     public void processTransaction(Properties props)
     {
-        //  DEBUG System.out.println("Inside Add Book");
-        try
-        {
+        System.out.println("Process Transaction");
+        try {
+            myBook = new Book(props.getProperty("barcode"));
+            String bookId = myBook.getId();
+            Calendar rightNow = Calendar.getInstance();
+            Date todayDate = rightNow.getTime();
+            String todayDateText = new SimpleDateFormat("yyyy-MM-dd").format(todayDate);
             try {
-                oldRental = new Rental((String) props.getProperty("barcode"));
-            }catch (Exception e){
-                myRental = new Rental(props);
-                myRental.checkIn("checkIn");
-                transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");            }
-        } catch (Exception e) {
+                transactionErrorMessage="Error: Book Not Checked Out.";
+                oldRental = new Rental();
+                oldRental.findIfBookIsOut(bookId);
+            } catch (Exception e) {
+                myRental=new Rental(bookId, true);
+                myRental.stateChangeRequest("CheckinDate",todayDateText);
+                myRental.stateChangeRequest("CheckinWorkerId",systemWorker.getState("bannerID"));
+                System.out.println("Rental: "+myRental);
+                myRental.update();
+                transactionErrorMessage = "Book Successfully Checked In!";
+            }
+        }catch (Exception e) {
             transactionErrorMessage = "Error in checking in book." + e.toString();
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error in checking in book " + e.toString(), Event.ERROR);
         }
-
     }
 
     //-----------------------------------------------------------
     public Object getState(String key)
     {
-        System.out.println(key);
+        System.out.println("Get State: "+key);
         if (key.equals("TransactionError") == true)
         {
+            System.out.println("Transaction Error: "+transactionErrorMessage);
             return transactionErrorMessage;
         }
         else
@@ -83,6 +100,10 @@ public class CheckInBookTransaction extends Transaction
             return transactionErrorMessage;
         }else
         if(key.equals("CheckInBookSuccessMessage")==true)
+        {
+            return transactionErrorMessage;
+        }else
+        if(key.equals("UpdateStatusMessage")==true)
         {
             return transactionErrorMessage;
         }
@@ -97,10 +118,15 @@ public class CheckInBookTransaction extends Transaction
 
         if (key.equals("DoYourJob") == true)
         {
+            systemWorker=(SystemWorker)value;
             doYourJob();
         }
         else
         if ((key.equals("CheckInBook") == true))
+        {
+            processTransaction((Properties)value);
+        }else
+        if ((key.equals("SubmitBarcode") == true))
         {
             processTransaction((Properties)value);
         }

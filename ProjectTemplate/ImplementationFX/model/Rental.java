@@ -87,6 +87,49 @@ public class Rental extends EntityBase{
         }
     }
 
+    public Rental(String barcode, boolean flag) throws InvalidPrimaryKeyException {
+        super(myTableName);
+        // construct a query that checks the BookId in Rental equals barcode AND CheckinDate IS NULL Or CheckinDate = ''
+
+        String query = "SELECT * FROM " + myTableName +
+                " WHERE (BookId = " + barcode + ") AND ((CheckinDate IS NULL ) OR (CheckinDate = ''))";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        // You must get one book at least
+        if (allDataRetrieved != null) {
+            int size = allDataRetrieved.size();
+
+            // There should be EXACTLY one book. More than that is an error
+            if (size > 1) {
+                throw new InvalidPrimaryKeyException("Multiple rental files matching Barcode : " + barcode +
+                        " with Null CheckInDate found.");
+            } else if (size == 1) {
+                // copy all the retrieved data into persistent state
+                Properties retrievedBookData = (Properties) allDataRetrieved.elementAt(0);
+                persistentState = new Properties();
+
+                Enumeration allKeys = retrievedBookData.propertyNames();
+                while (allKeys.hasMoreElements() == true) {
+                    String nextKey = (String) allKeys.nextElement();
+                    String nextValue = retrievedBookData.getProperty(nextKey);
+
+                    if (nextValue != null) {
+                        persistentState.setProperty(nextKey, nextValue);
+                    }
+                }
+
+            }
+            else {
+                throw new InvalidPrimaryKeyException("Error");
+            }
+        }
+        // If no book is found for this barcode, throw an exception
+        else {
+            throw new InvalidPrimaryKeyException("No rental file matching barcode : " + barcode + " found.");
+        }
+    }
+
     public void findIfBookIsOut(String barcode) throws InvalidPrimaryKeyException {
         String query = "SELECT * FROM " + myTableName + " WHERE ((BookId = " + barcode + ") AND " +
                 "((CheckinDate IS NULL) OR (CheckinDate = '')))";
@@ -217,8 +260,8 @@ public class Rental extends EntityBase{
     }
 
     public Object getState(String key) {
-        System.out.println("Get State: "+key);
-        System.out.println("Status Message: "+updateStatusMessage);
+        //System.out.println("Get State: "+key);
+        //System.out.println("Status Message: "+updateStatusMessage);
         if(key.equals("TransactionError")){
             return updateStatusMessage;
         }else

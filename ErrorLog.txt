@@ -304,3 +304,9 @@
 [4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
 [4/19/22, 7:12 PM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/21/22, 1:01 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/21/22, 1:01 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/21/22, 1:01 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/21/22, 1:03 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/21/22, 1:03 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/21/22, 1:04 PM]|AddBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>

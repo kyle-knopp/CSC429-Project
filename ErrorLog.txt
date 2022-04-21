@@ -328,3 +328,5 @@
 [4/21/22, 4:52 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
 [4/21/22, 4:57 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
 [4/21/22, 5:04 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/21/22, 5:24 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 4444 Already Checked Out.>
+[4/21/22, 5:24 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>

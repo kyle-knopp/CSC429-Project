@@ -99,8 +99,8 @@ public class ModifyWorkerView extends AddWorkerView
         String credential = (String) myModel.getState("credentials");
         String pass = (String) myModel.getState("password");
 
-        LocalDate dolc_ld = LocalDate.parse(dolc);
-        LocalDate doh_ld = LocalDate.parse(dOH);
+       // LocalDate dolc_ld = LocalDate.parse(dolc);
+        //LocalDate doh_ld = LocalDate.parse(dOH);
 
 
         bannerId.setText(bannerID);
@@ -112,8 +112,8 @@ public class ModifyWorkerView extends AddWorkerView
         email.setText(em);
         //dOLC.setText(dolc);
         //doh.setText(dOH);
-        DOLC.setValue(dolc_ld);
-        DOH.setValue(doh_ld);
+        DOLC.setValue(LocalDate.parse(dolc));
+        DOH.setValue(LocalDate.parse(dOH));
         status.setValue(stat);
         cred.setValue(credential);
         alreadyDeleted.setText("");

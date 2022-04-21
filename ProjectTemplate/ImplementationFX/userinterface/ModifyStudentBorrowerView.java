@@ -94,8 +94,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         String status = (String) myModel.getState("status");
         String borrStat = (String) myModel.getState("BorrowerStatus");
 
-        LocalDate dolbs_ld = LocalDate.parse(dolbs);
-        LocalDate dor_ld = LocalDate.parse(dor);
+        //LocalDate dolbs_ld = LocalDate.parse(dolbs);
+        //LocalDate dor_ld = LocalDate.parse(dor);
 
         BannerId.setText(bannerID);
         BannerId.setEditable(false);
@@ -105,8 +105,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         Email.setText(email);
         //DateOfLatestBorrowerStatus.setText(dolbs);
         //DateOfRegistration.setText(dor);
-        DOLBS.setValue(dolbs_ld);
-        DOR.setValue(dor_ld);
+        DOLBS.setValue(LocalDate.parse(dolbs));
+        DOR.setValue(LocalDate.parse(dor));
         Notes.setText(notes);
         statusBox.setValue(status);
         borrStatBox.setValue(borrStat);

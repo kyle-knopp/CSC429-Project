@@ -356,23 +356,44 @@ public class AddBookView extends View{
 
 
         Properties p2 = new Properties();
+        if(bar.length()>3 && bar.length()<10 && bar.matches("[0-9]+")) {
+            p2.setProperty("barcode", bar);
+            if(titl.length()!=0) {
+                p2.setProperty("title", titl);
+                if(au1.length()!=0) {
+                    p2.setProperty("author1", au1);
+                    if(yeaO.length()==4 && yeaO.matches("[0-9]+")) {
+                        p2.setProperty("yearOfPublication", yeaO);
+                        if(isb.length()==9) {
+                            p2.setProperty("author2", au2);
+                            p2.setProperty("author3", au3);
+                            p2.setProperty("author4", au4);
+                            p2.setProperty("publisher", publi);
 
-        p2.setProperty("barcode", bar);
-        p2.setProperty("title", titl);
-        p2.setProperty("author1", au1);
-        p2.setProperty("author2", au2);
-        p2.setProperty("author3", au3);
-        p2.setProperty("author4", au4);
-        p2.setProperty("publisher", publi);
-        p2.setProperty("yearOfPublication", yeaO);
-        p2.setProperty("ISBN", isb);
-        p2.setProperty("suggestedPrice", sugPric);
-        p2.setProperty("notes", no);
-        p2.setProperty("bookCondition", condi);
-        //p2.setProperty("bookDiscipline", disc);
-        p2.setProperty("Status", sta);
+                            p2.setProperty("ISBN", isb);
+                            p2.setProperty("suggestedPrice", sugPric);
+                            p2.setProperty("notes", no);
+                            p2.setProperty("bookCondition", condi);
+                            //p2.setProperty("bookDiscipline", disc);
+                            p2.setProperty("Status", sta);
+                            myModel.stateChangeRequest("AddBook", p2);
+                        }else{
+                            displayErrorMessage("Error: ISBN must be 9 digits");
+                        }
+                    }else{
+                        displayErrorMessage("Error: Publication year must be 4 digits");
+                    }
+                }else {
+                    displayErrorMessage("Error: Please enter at least 1st Author");
+                }
+            }else{
+                displayErrorMessage("Error: Please enter a title");
+            }
+        }else{
+            displayErrorMessage("Error: Barcode must be between 3 and 10 digits");
+        }
 
-        if(bar.length() >= 3) {
+        /*if(bar.length() >= 3) {
             p2.setProperty("prefix", getBookPrefix(bar));
         }
         else{
@@ -385,7 +406,7 @@ public class AddBookView extends View{
             System.out.println(p2);
             myModel.stateChangeRequest("AddBook", p2);
 
-        }
+        }*/
 
 
 

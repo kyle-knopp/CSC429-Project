@@ -293,7 +293,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("", null);
+                myModel.stateChangeRequest("BookCollectionView", null);
             }
         });
         eCont.getChildren().add(ListAllBooksCheckedOutButton);
@@ -305,7 +305,7 @@ public class LibrarianView extends View
 
             @Override
             public void handle(ActionEvent e) {
-                myModel.stateChangeRequest("", null);
+                myModel.stateChangeRequest("StudentBorrowerCollectionView", null);
             }
         });
         eCont.getChildren().add(ListStudentBorrowersWithBooksCheckedOutButton);

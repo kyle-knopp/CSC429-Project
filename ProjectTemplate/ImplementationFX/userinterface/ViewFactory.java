@@ -102,6 +102,10 @@ public class ViewFactory {
 		{
 			return new BookCollectionView(model);
 		}
+		else if(viewName.equals("StudentBorrowerCollectionView") == true)
+		{
+			return new StudentBorrowerCollectionView(model);
+		}
 
 
 		System.out.println("no View created "+viewName );

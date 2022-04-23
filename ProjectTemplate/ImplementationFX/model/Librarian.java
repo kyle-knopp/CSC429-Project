@@ -116,6 +116,9 @@ public class Librarian implements IView, IModel
         if(key.equals("WorkerList") == true){
             return myWorkers;
         }else
+        if(key.equals("BookList") == true){
+            return myBooks;
+        }else
         if (selectedStudentBorrower!= null) {
             Object val = selectedStudentBorrower.getState(key);
             if (val != null)
@@ -355,6 +358,18 @@ public class Librarian implements IView, IModel
             String transType = key;
             transType =transType.trim();
             doTransaction(transType);
+        }
+        else if(key.equals("BookCollectionView")){
+
+            myBooks = new BookCollection();
+            myBooks.findBooksCheckedOut();
+            createAndShowBookCollectionView();
+        }
+        else if(key.equals("StudentBorrowerCollectionView")){
+
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithBooksCheckedOut();
+            createAndShowStudentBorrowerCollectionView();
         }
 
 
@@ -767,6 +782,34 @@ public class Librarian implements IView, IModel
             View newView = ViewFactory.createView("DelinquencyCheckView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
             myViews.put("DelinquencyCheckView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowBookCollectionView()
+    {
+        Scene currentScene = (Scene)myViews.get("BookCollectionView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("BookCollectionView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("BookCollectionView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowStudentBorrowerCollectionView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("StudentBorrowerCollectionView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("StudentBorrowerCollectionView", currentScene);
         }
 
         swapToView(currentScene);

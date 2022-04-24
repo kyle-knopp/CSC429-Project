@@ -75,7 +75,6 @@ public class BookTableModel {
         return barcode.get();
     }
 
-
     public void setBarcode(String s) {
         this.barcode.set(s);
     }

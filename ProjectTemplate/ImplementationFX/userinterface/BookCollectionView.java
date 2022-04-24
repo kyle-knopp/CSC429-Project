@@ -72,9 +72,9 @@ public class BookCollectionView extends View {
         try
         {
             System.out.println("2");
-            StudentBorrowerCollection studentborrowerCollection = (StudentBorrowerCollection)myModel.getState("BookList");
+            BookCollection bookCollection = (BookCollection)myModel.getState("BookList");
             System.out.println("3");
-            Vector entryList = (Vector)studentborrowerCollection.getState("Book");
+            Vector entryList = (Vector)bookCollection.getState("Book");
             System.out.println("4");
             Enumeration entries = entryList.elements();
             System.out.println("5");
@@ -83,9 +83,9 @@ public class BookCollectionView extends View {
             while (entries.hasMoreElements() == true)
             {
                 System.out.println("loop");
-                StudentBorrower nextStudentBorrower = (StudentBorrower)entries.nextElement();
-                System.out.println("Next Student Borrower for table: " + nextStudentBorrower);
-                Vector<String> view = nextStudentBorrower.getEntryListView();
+                Book nextBook = (Book)entries.nextElement();
+                System.out.println("Next Book for table: " + nextBook);
+                Vector<String> view = nextBook.getEntryListView();
 
                 // add this list entry to the list
                 BookTableModel nextTableRowData = new BookTableModel(view);

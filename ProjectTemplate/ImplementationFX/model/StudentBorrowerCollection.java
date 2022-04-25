@@ -87,6 +87,19 @@ public class StudentBorrowerCollection  extends EntityBase
         queryHelper(query, "There are no Patrons who have a name that contains " + Name + ".");
     }
 
+    public void findStudentBorrowersWithBooksCheckedOut(){
+
+        //query
+
+        String query = "SELECT BannerId, FirstName, LastName, ContactPhone, Email, DateOfLatestBorrowerStatus,\n" +
+                "DateOfRegistration, Notes, status, BorrowerStatus\n" +
+                "FROM StudentBorrower\n" +
+                "LEFT JOIN rental ON StudentBorrower.BannerId = rental.BorrowerId\n" +
+                "WHERE rental.CheckoutDate IS NOT NULL AND rental.CheckinDate IS NULL;";
+
+        queryHelper(query, "There are no Student Borrowers who have books Checked Out.");
+    }
+
     //----------------------------------------------------------
     public Object getState(String key) {
         //System.out.println("Selected Student Borrower: "+selectedStudentBorrower);

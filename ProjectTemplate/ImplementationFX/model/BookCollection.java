@@ -75,6 +75,19 @@ public class BookCollection  extends EntityBase
         queryHelper(query, "There are no Author who have a name that contains " + author + ".");
     }
 
+    public void findBooksCheckedOut(){
+
+        //query
+
+        String query = "SELECT barcode, title, author1, author2, author3, author4, publisher, yearOfPublication,\n" +
+                "ISBN, suggestedPrice, notes, bookCondition, Status, prefix\n" +
+                "FROM " + myTableName + "\n" +
+                "LEFT JOIN rental ON book.barcode = rental.BookId\n" +
+                "WHERE rental.CheckoutDate IS NOT NULL AND rental.CheckinDate IS NULL;";
+
+        queryHelper(query, "There are no Books that are Checked Out,");
+    }
+
     //----------------------------------------------------------
     public Object getState(String key)
     {

@@ -32,11 +32,13 @@ public class Librarian implements IView, IModel
 
     private StudentBorrowerCollection myStudentBorrowers;
     private WorkerCollection myWorkers;
+    private BookCollection myBooks;
 
     private Worker selectedWorker;
     private Worker modifyWorker;
     private StudentBorrower selectedStudentBorrower;
     private StudentBorrower modifySB;
+
     // GUI Components
     private Hashtable<String, Scene> myViews;
     private Stage	  	myStage;
@@ -116,6 +118,9 @@ public class Librarian implements IView, IModel
         else
         if(key.equals("WorkerList") == true){
             return myWorkers;
+        }else
+        if(key.equals("BookList") == true){
+            return myBooks;
         }else
         if (selectedStudentBorrower!= null) {
             Object val = selectedStudentBorrower.getState(key);
@@ -229,24 +234,20 @@ public class Librarian implements IView, IModel
             doTransaction(transType);
         }
         else if (key.equals("SearchStudentBorrowerView") == true) // begin student borrower delete sequence
-
         {
             createAndShowSearchStudentBorrowerView();
-
         }
         else if(key.equals("Delete a Book") ==true){
             createAndShowDeleteABookView();
         }
         else if (key.equals("StudentBorrowerCollectionDeleteView") == true) //Creates new collection
         {
-
             Properties p = (Properties)value;
             String name = p.getProperty("FirstName");
             myStudentBorrowers = new StudentBorrowerCollection();
             myStudentBorrowers.findStudentBorrowersWithNameLike(name);
             //myStudentBorrowers.display();
             createAndShowStudentBorrowerCollectionDeleteView();
-
         }
         else if (key.equals("StudentBorrowerCollectionDeleteViewNo") == true) //goes back to old collection
         {
@@ -395,6 +396,18 @@ public class Librarian implements IView, IModel
             String transType = key;
             transType =transType.trim();
             doTransaction(transType);
+        }
+        else if(key.equals("BookCollectionView")){
+
+            //myBooks = new BookCollection();
+            //myBooks.findBooksCheckedOut();
+            createAndShowBookCollectionView();
+        }
+        else if(key.equals("StudentBorrowerCollectionView")){
+
+            //myStudentBorrowers = new StudentBorrowerCollection();
+            //myStudentBorrowers.findStudentBorrowersWithBooksCheckedOut();
+            createAndShowStudentBorrowerCollectionView();
         }
 
 
@@ -818,6 +831,34 @@ public class Librarian implements IView, IModel
             View newView = ViewFactory.createView("DelinquencyCheckView", this); // USE VIEW FACTORY
             currentScene = new Scene(newView);
             myViews.put("DelinquencyCheckView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowBookCollectionView()
+    {
+        Scene currentScene = (Scene)myViews.get("BookCollectionView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("BookCollectionView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("BookCollectionView", currentScene);
+        }
+
+        swapToView(currentScene);
+    }
+
+    private void createAndShowStudentBorrowerCollectionView()
+    {
+        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionView");
+
+        if (currentScene == null) {
+            // create our initial view
+            View newView = ViewFactory.createView("StudentBorrowerCollectionView", this); // USE VIEW FACTORY
+            currentScene = new Scene(newView);
+            myViews.put("StudentBorrowerCollectionView", currentScene);
         }
 
         swapToView(currentScene);

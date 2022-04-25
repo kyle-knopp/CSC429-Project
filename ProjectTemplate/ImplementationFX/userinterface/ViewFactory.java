@@ -93,13 +93,22 @@ public class ViewFactory {
 		else if(viewName.equals("DelinquencyCheckView") == true)
 		{
 			return new DelinquencyCheckView(model);
-		}else if(viewName.equals("CheckOutBookView") == true)
+		}
+		else if(viewName.equals("CheckOutBookView") == true)
 		{
 			return new CheckOutBookView(model);
 		}else if(viewName.equals("SearchSBView") == true)
 		{
 			return new SearchSBView(model);
 		}else if(viewName.equals("StudentBorrowerCollectionView") == true)
+		{
+			return new StudentBorrowerCollectionView(model);
+		}
+		else if(viewName.equals("BookCollectionView") == true)
+		{
+			return new BookCollectionView(model);
+		}
+		else if(viewName.equals("StudentBorrowerCollectionView") == true)
 		{
 			return new StudentBorrowerCollectionView(model);
 		}

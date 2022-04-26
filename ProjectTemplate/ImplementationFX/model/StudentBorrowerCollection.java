@@ -59,6 +59,12 @@ public class StudentBorrowerCollection  extends EntityBase
         }
     }
 
+    public void findStudentBorrowersWithBannerId(String BannerId){
+        String query ="SELECT * FROM " + myTableName + " WHERE (BannerId like '%" + BannerId + "%')";
+
+        queryHelper(query,"There are no Student with that Banner Id");
+    }
+
     public void findStudentBorrowersWithFirstNameLike(String FirstName){
 
         //query

@@ -121,6 +121,23 @@ public class CheckOutBookTransaction extends Transaction
         }
     }
 
+    public void processSearchStudentBannerId(Properties props){
+        try {
+            String bannerId = props.getProperty("BannerId");
+
+            System.out.println("Banner Id in process Student Banner Id: "+bannerId);
+
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithBannerId(bannerId);
+            createAndShowStudentCollectionView();
+
+        }catch (Exception e){
+            transactionErrorMessage="Error in retrieving Student";
+            new Event(Event.getLeafLevelClassName(this), "processTransaction",
+                    "Error in retrieving Student",Event.ERROR);
+        }
+    }
+
     //-----------------------------------------------------------
     public Object getState(String key)
     {
@@ -174,6 +191,9 @@ public class CheckOutBookTransaction extends Transaction
             processSearchStudent((Properties)value);
         }else if(key.equals("CheckOutBook")==true){
             processTransaction((Properties)value);
+        }else if(key.equals("StudentBorrowerCollectionBannerId")==true){
+            System.out.println("Value: "+value);
+            processSearchStudentBannerId((Properties)value);
         }
 
         myRegistry.updateSubscribers(key, this);

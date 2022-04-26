@@ -427,3 +427,7 @@
 [4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [4/26/22, 1:06 PM]|SystemWorker|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1054: Unknown column 'admin' in 'where clause'>
+[4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>

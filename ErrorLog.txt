@@ -353,3 +353,9 @@
 [4/21/22, 7:38 PM]|CheckInBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book exception.InvalidPrimaryKeyException: No rental matching Id : 4444 found.>
 [4/21/22, 7:39 PM]|Rental|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM rental WHERE ((BookId = 4444) AND ((CheckinDate IS NULL) OR (CheckinDate ' at line 1>
 [4/21/22, 7:41 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/25/22, 4:33 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/25/22, 4:33 PM]|CheckInBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[4/25/22, 4:34 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/25/22, 4:34 PM]|CheckInBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[4/25/22, 4:35 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/25/22, 4:35 PM]|CheckInBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>

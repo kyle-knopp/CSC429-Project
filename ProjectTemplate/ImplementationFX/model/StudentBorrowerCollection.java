@@ -91,7 +91,7 @@ public class StudentBorrowerCollection  extends EntityBase
 
         //query
 
-        String query = "SELECT BannerId, FirstName, LastName, ContactPhone, Email, DateOfLatestBorrowerStatus,\n" +
+        String query = "SELECT DISTINCT BannerId, FirstName, LastName, ContactPhone, Email, DateOfLatestBorrowerStatus,\n" +
                 "DateOfRegistration, Notes, status, BorrowerStatus\n" +
                 "FROM StudentBorrower\n" +
                 "LEFT JOIN rental ON StudentBorrower.BannerId = rental.BorrowerId\n" +

@@ -67,25 +67,25 @@ public class StudentBorrowerCollectionView  extends View{
 
     protected void getEntryTableModelValues()
     {
-        System.out.println("Getting here 1");
+        //System.out.println("Getting here 1");
         ObservableList<StudentBorrowerTableModel> tableData = FXCollections.observableArrayList();
-        System.out.println("1");
+        //System.out.println("1");
         try
         {
-            System.out.println("2");
+           // System.out.println("2");
             StudentBorrowerCollection studentborrowerCollection = (StudentBorrowerCollection)myModel.getState("StudentBorrowerList");
-            System.out.println("3");
+           // System.out.println("3");
             Vector entryList = (Vector)studentborrowerCollection.getState("StudentBorrowers");
-            System.out.println("4");
+           // System.out.println("4");
             Enumeration entries = entryList.elements();
-            System.out.println("5");
-            System.out.println(entryList.isEmpty());
+            //System.out.println("5");
+            //System.out.println(entryList.isEmpty());
 
             while (entries.hasMoreElements() == true)
             {
-                System.out.println("loop");
+              //  System.out.println("loop");
                 StudentBorrower nextStudentBorrower = (StudentBorrower)entries.nextElement();
-                System.out.println("Next Student Borrower for table: " + nextStudentBorrower);
+               // System.out.println("Next Student Borrower for table: " + nextStudentBorrower);
                 Vector<String> view = nextStudentBorrower.getEntryListView();
 
                 // add this list entry to the list
@@ -132,7 +132,7 @@ public class StudentBorrowerCollectionView  extends View{
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Student Borrowers To Delete");
+        Text prompt = new Text("List of Student Borrowers With Books Checked Out");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);

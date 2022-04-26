@@ -842,28 +842,28 @@ public class Librarian implements IView, IModel
 
     private void createAndShowBookCollectionView()
     {
-        Scene currentScene = (Scene)myViews.get("BookCollectionView");
+        //Scene currentScene = (Scene)myViews.get("BookCollectionView");
 
-        if (currentScene == null) {
+        //if (currentScene == null) {
             // create our initial view
             View newView = ViewFactory.createView("BookCollectionView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("BookCollectionView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
     }
 
     private void createAndShowStudentBorrowerCollectionView()
     {
-        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionView");
+        //Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionView");
 
-        if (currentScene == null) {
+        //if (currentScene == null) {
             // create our initial view
             View newView = ViewFactory.createView("StudentBorrowerCollectionView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("StudentBorrowerCollectionView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
     }

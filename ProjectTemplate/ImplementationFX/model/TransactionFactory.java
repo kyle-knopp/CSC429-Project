@@ -50,8 +50,8 @@ public class TransactionFactory {
 
 		}else if(transType.equals("CheckOut")){
 			retValue=new CheckOutBookTransaction();
-		}else if (transType.equals("BookCollectionView")){
-			retValue=new ListAllBooksCheckOutTransaction();
+		}else if (transType.equals("BookCollectionView")) {
+			retValue = new ListAllBooksCheckOutTransaction();
 		}
 
 		return retValue;

@@ -49,9 +49,9 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
      * verifying ownership, crediting, etc. etc.
      */
     //----------------------------------------------------------
-    public void processTransaction(Properties props) throws Exception {
+    public void processTransaction(){
         try{
-        myRentalCollection = new RentalCollection();
+        /*myRentalCollection = new RentalCollection();
         myBooks = new BookCollection();
         myRentalCollection.findRentalsThatAreCurrentlyCheckedOut();
         int rentalsSize = myRentalCollection.getSize();
@@ -59,7 +59,18 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
             myRental = new Rental((String) myRentalCollection.getState("Id"));
             myBook = new Book((String) myRental.getState("BookId"));
             myBooks.addBook(myBook);
-        }
+        }*/
+            myRentalCollection = new RentalCollection();
+            myBooks = new BookCollection();
+            myRentalCollection.findRentalsThatAreCurrentlyCheckedOut();
+            System.out.println("Rental Collection of books checked out: "+myRentalCollection);
+            myRentalCollection.display();
+            int rentalsSize = myRentalCollection.getSize();
+            for(int i = 0; i<rentalsSize; i++) {
+                myRental = new Rental((String) myRentalCollection.getState("Id"));
+                myBook = new Book((String) myRental.getState("BookId"));
+                myBooks.addBook(myBook);
+            }
 
     }
         catch (Exception excep) {
@@ -72,6 +83,7 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
                     "Error in listing books checked out: " + excep.toString(),
                     Event.ERROR);
         }
+
     }
 
     }
@@ -89,19 +101,6 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
         return currentScene;
     }
 
-    private void createAndShowView() {  // change to whatever view we will create
-        //transactionErrorMessage = "";
-        Scene currentScene = (Scene) myViews.get("");
-        if (currentScene == null) {
-            View newView = ViewFactory.createView("", this);
-            currentScene = new Scene(newView);
-
-
-            myViews.put("", currentScene);
-        }
-
-        swapToView(currentScene);
-    }
 
     //-----------------------------------------------------------
     public Object getState(String key)
@@ -120,11 +119,16 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
     //-----------------------------------------------------------
     public void stateChangeRequest(String key, Object value)
     {
-        // DEBUG System.out.println("DepositTransaction.sCR: key: " + key);
+        System.out.println("BooksCheckedOut.sCR: key: " + key);
+        System.out.println("BooksCheckedOut.sCR: value: " + value);
 
         if (key.equals("DoYourJob") == true)
         {
+            //processTransaction();
             doYourJob();
+        }else
+        if (key.equals("CheckedOut")) {
+            processTransaction();
         }
 
         myRegistry.updateSubscribers(key, this);

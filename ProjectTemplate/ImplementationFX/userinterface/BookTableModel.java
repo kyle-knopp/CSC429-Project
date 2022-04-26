@@ -11,128 +11,128 @@ import java.util.Vector;
 
 public class BookTableModel {
 
-    private final SimpleStringProperty barcode;
+    private final SimpleStringProperty Barcode;
 
-    private final SimpleStringProperty title;
+    private final SimpleStringProperty Title;
 
-    private final SimpleStringProperty author1;
+    private final SimpleStringProperty Author1;
 
-    private final SimpleStringProperty author2;
+    private final SimpleStringProperty Author2;
 
-    private final SimpleStringProperty author3;
+    private final SimpleStringProperty Author3;
 
-    private final SimpleStringProperty author4;
+    private final SimpleStringProperty Author4;
 
-    private final SimpleStringProperty publisher;
+    private final SimpleStringProperty Publisher;
 
-    private final SimpleStringProperty yearOfPublication;
+    private final SimpleStringProperty YearOfPublication;
 
     private final SimpleStringProperty ISBN;
 
-    private final SimpleStringProperty suggestedPrice;
+    private final SimpleStringProperty SuggestedPrice;
 
-    private final SimpleStringProperty notes;
+    private final SimpleStringProperty Notes;
 
-    private final SimpleStringProperty bookCondition;
+    private final SimpleStringProperty BookCondition;
 
     private final SimpleStringProperty Status;
 
-    private final SimpleStringProperty prefix;
+    private final SimpleStringProperty Prefix;
 
     public BookTableModel(Vector<String> accountData) {
 
-        barcode = new SimpleStringProperty(accountData.elementAt(0));
+        Barcode = new SimpleStringProperty(accountData.elementAt(0));
 
-        title = new SimpleStringProperty(accountData.elementAt(1));
+        Title = new SimpleStringProperty(accountData.elementAt(1));
 
-        author1 = new SimpleStringProperty(accountData.elementAt(2));
+        Author1 = new SimpleStringProperty(accountData.elementAt(2));
 
-        author2 = new SimpleStringProperty(accountData.elementAt(3));
+        Author2 = new SimpleStringProperty(accountData.elementAt(3));
 
-        author3 = new SimpleStringProperty(accountData.elementAt(4));
+        Author3 = new SimpleStringProperty(accountData.elementAt(4));
 
-        author4 = new SimpleStringProperty(accountData.elementAt(5));
+        Author4 = new SimpleStringProperty(accountData.elementAt(5));
 
-        publisher = new SimpleStringProperty(accountData.elementAt(6));
+        Publisher = new SimpleStringProperty(accountData.elementAt(6));
 
-        yearOfPublication = new SimpleStringProperty(accountData.elementAt(7));
+        YearOfPublication = new SimpleStringProperty(accountData.elementAt(7));
 
         ISBN = new SimpleStringProperty(accountData.elementAt(8));
 
-        suggestedPrice = new SimpleStringProperty(accountData.elementAt(9));
+        SuggestedPrice = new SimpleStringProperty(accountData.elementAt(9));
 
-        notes = new SimpleStringProperty(accountData.elementAt(10));
+        Notes = new SimpleStringProperty(accountData.elementAt(10));
 
-        bookCondition = new SimpleStringProperty(accountData.elementAt(11));
+        BookCondition = new SimpleStringProperty(accountData.elementAt(11));
 
         Status = new SimpleStringProperty(accountData.elementAt(12));
 
-        prefix = new SimpleStringProperty(accountData.elementAt(13));
+        Prefix = new SimpleStringProperty(accountData.elementAt(13));
 
     }
 
     public String getBarcode() {
-        return barcode.get();
+        return Barcode.get();
     }
 
     public void setBarcode(String s) {
-        this.barcode.set(s);
+        this.Barcode.set(s);
     }
 
     public String getTitle() {
-        return title.get();
+        return Title.get();
     }
 
     public void setTitle(String s) {
-        this.title.set(s);
+        this.Title.set(s);
     }
 
     public String getAuthor1() {
-        return author1.get();
+        return Author1.get();
     }
 
     public void setAuthor1(String s) {
-        this.author1.set(s);
+        this.Author1.set(s);
     }
 
     public String getAuthor2() {
-        return author2.get();
+        return Author2.get();
     }
 
     public void setAuthor2(String s) {
-        this.author2.set(s);
+        this.Author2.set(s);
     }
 
     public String getAuthor3() {
-        return author3.get();
+        return Author3.get();
     }
 
     public void setAuthor3(String s) {
-        this.author3.set(s);
+        this.Author3.set(s);
     }
 
     public String getAuthor4() {
-        return author4.get();
+        return Author4.get();
     }
 
     public void setAuthor4(String s) {
-        this.author4.set(s);
+        this.Author4.set(s);
     }
 
     public String getPublisher() {
-        return publisher.get();
+        return Publisher.get();
     }
 
     public void setPublisher(String s) {
-        this.publisher.set(s);
+        this.Publisher.set(s);
     }
 
     public String getYearOfPublication() {
-        return yearOfPublication.get();
+        return YearOfPublication.get();
     }
 
     public void setYearOfPublication(String s) {
-        this.yearOfPublication.set(s);
+        this.YearOfPublication.set(s);
     }
 
     public String getISBN() {
@@ -144,27 +144,27 @@ public class BookTableModel {
     }
 
     public String getSuggestedPrice() {
-        return suggestedPrice.get();
+        return SuggestedPrice.get();
     }
 
     public void setSuggestedPrice(String s) {
-        this.suggestedPrice.set(s);
+        this.SuggestedPrice.set(s);
     }
 
     public String getNotes() {
-        return notes.get();
+        return Notes.get();
     }
 
     public void setNotes(String s) {
-        this.notes.set(s);
+        this.Notes.set(s);
     }
 
     public String getBookCondition() {
-        return bookCondition.get();
+        return BookCondition.get();
     }
 
     public void setBookCondition(String s) {
-        this.bookCondition.set(s);
+        this.BookCondition.set(s);
     }
 
     public String getStatus() {
@@ -176,10 +176,10 @@ public class BookTableModel {
     }
 
     public String getPrefix() {
-        return prefix.get();
+        return Prefix.get();
     }
 
     public void setPrefix(String s) {
-        this.prefix.set(s);
+        this.Prefix.set(s);
     }
 }

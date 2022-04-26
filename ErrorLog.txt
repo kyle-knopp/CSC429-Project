@@ -353,3 +353,76 @@
 [4/21/22, 7:38 PM]|CheckInBookTransaction|processTransaction|Error|NOTAG|null<Error in checking in book exception.InvalidPrimaryKeyException: No rental matching Id : 4444 found.>
 [4/21/22, 7:39 PM]|Rental|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM rental WHERE ((BookId = 4444) AND ((CheckinDate IS NULL) OR (CheckinDate ' at line 1>
 [4/21/22, 7:41 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 1234 Already Checked Out.>
+[4/26/22, 8:39 AM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 4444 Already Checked Out.>
+[4/26/22, 8:56 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 8:57 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 8:57 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:01 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:03 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:05 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:08 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:11 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:12 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/26/22, 9:12 AM]|ListAllBooksCheckOutTransaction|processTransaction|Error|NOTAG|null<Error in listing books checked out: exception.InvalidPrimaryKeyException: There are no Rentals that are currently checked out>
+[4/26/22, 9:17 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/26/22, 9:17 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:19 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(CheckinDate IS NULL OR CheckinDate = )' at line 1>
+[4/26/22, 9:19 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:19 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:19 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:21 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:21 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:22 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:22 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:23 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:23 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:24 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:24 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:25 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:25 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:25 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:25 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:27 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:27 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:28 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:29 AM]|RentalCollection|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '((CheckinDate IS NULL) OR (CheckinDate = ''))' at line 1>
+[4/26/22, 9:30 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:35 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:36 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:39 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:42 AM]|Librarian|createTransaction|Error|NOTAG|null<Trans creation fail>
+[4/26/22, 9:45 AM]|ListAllBooksCheckOutTransaction|processTransaction|Error|NOTAG|null<Error in listing books checked out: exception.InvalidPrimaryKeyException: Multiple rentals matching Ids : null found.>
+[4/26/22, 9:47 AM]|ListAllBooksCheckOutTransaction|processTransaction|Error|NOTAG|null<Error in listing books checked out: exception.InvalidPrimaryKeyException: Multiple rentals matching Ids : null found.>
+[4/26/22, 9:48 AM]|ListAllBooksCheckOutTransaction|processTransaction|Error|NOTAG|null<Error in listing books checked out: exception.InvalidPrimaryKeyException: Multiple rentals matching Ids : null found.>
+[4/26/22, 9:54 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:55 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:55 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:55 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:55 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:55 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:56 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:56 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:56 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:56 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:56 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:56 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[4/26/22, 9:58 AM]|ListAllBooksCheckOutTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>

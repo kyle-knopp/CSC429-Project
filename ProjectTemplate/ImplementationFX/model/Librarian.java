@@ -34,6 +34,10 @@ public class Librarian implements IView, IModel
     private WorkerCollection myWorkers;
     private BookCollection myBooks;
 
+    private Rental myRental;
+    private RentalCollection myRentalCollection;
+    private Book myBook;
+
     private Worker selectedWorker;
     private Worker modifyWorker;
     private StudentBorrower selectedStudentBorrower;
@@ -398,12 +402,10 @@ public class Librarian implements IView, IModel
             doTransaction(transType);
         }
         else if(key.equals("BookCollectionView")){
-            String transType = key;
-            transType =transType.trim();
-            doTransaction(transType);
-//            myBooks = new BookCollection();
-//            myBooks.findBooksCheckedOut();
-//            createAndShowBookCollectionView();
+            myBooks = new BookCollection();
+            myBooks.findBooksCheckedOut();
+
+            createAndShowBookCollectionView();
         }
         else if(key.equals("StudentBorrowerCollectionView")){
 

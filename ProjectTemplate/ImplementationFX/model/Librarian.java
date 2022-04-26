@@ -361,14 +361,14 @@ public class Librarian implements IView, IModel
         }
         else if(key.equals("BookCollectionView")){
 
-            //myBooks = new BookCollection();
-            //myBooks.findBooksCheckedOut();
+            myBooks = new BookCollection();
+            myBooks.findBooksCheckedOut();
             createAndShowBookCollectionView();
         }
         else if(key.equals("StudentBorrowerCollectionView")){
 
-            //myStudentBorrowers = new StudentBorrowerCollection();
-            //myStudentBorrowers.findStudentBorrowersWithBooksCheckedOut();
+            myStudentBorrowers = new StudentBorrowerCollection();
+            myStudentBorrowers.findStudentBorrowersWithBooksCheckedOut();
             createAndShowStudentBorrowerCollectionView();
         }
 

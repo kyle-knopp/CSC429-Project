@@ -212,7 +212,7 @@ public class BookCollectionView extends View {
                 new PropertyValueFactory<StudentBorrowerTableModel, String>("prefix"));
 
         tableOfBooks.getColumns().addAll(barcodeColumn, titleColumn,
-                author1Column, author1Column, author2Column,
+                author1Column, author2Column,
                 author3Column, author4Column, publisherColumn,
                 yearOfPublicationColumn, ISBNColumn, suggestedPriceColumn,
                 notesColumn, bookConditionColumn, StatusColumn, prefixColumn);

@@ -202,13 +202,14 @@ public class StudentBorrowerCollectionView  extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
-                    if(selectedItem != null)
-                    {
-                        String selectedStudentBorrowerId = selectedItem.getBannerId();
-
-                        myModel.stateChangeRequest("DeleteStudentBorrowerView", selectedStudentBorrowerId);
-                    }
+                    processStudentBorrowerSelected();
+//                    StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
+//                    if(selectedItem != null)
+//                    {
+//                        String selectedStudentBorrowerId = selectedItem.getBannerId();
+//
+//                        myModel.stateChangeRequest("DeleteStudentBorrowerView", selectedStudentBorrowerId);
+//                    }
 
                 }
             }
@@ -257,6 +258,22 @@ public class StudentBorrowerCollectionView  extends View{
         if (key.equals("TransactionError") == true)
         {
             displayMessage((String)value);
+        }
+    }
+    //--------------------------------------------------------------------------
+    protected void processStudentBorrowerSelected()
+    {
+        StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
+
+        if(selectedItem != null)
+        {
+            if(selectedItem.getBorrowerStatus().equals("Delinquent")){
+                statusLog.displayErrorMessage("Student Borrower Delinquent, Cannot Check out Book");
+            }else {
+                String selectedAcctNumber = selectedItem.getBannerId();
+
+                myModel.stateChangeRequest("CheckOutBookView", selectedAcctNumber);
+            }
         }
     }
 

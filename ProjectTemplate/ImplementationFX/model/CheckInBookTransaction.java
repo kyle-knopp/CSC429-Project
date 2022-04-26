@@ -79,7 +79,7 @@ public class CheckInBookTransaction extends Transaction
                 transactionErrorMessage = "Book Successfully Checked In!";
             }
         }catch (Exception e) {
-            transactionErrorMessage = "Error in checking in book." + e.toString();
+            transactionErrorMessage = "Error in checking in book." ;
             new Event(Event.getLeafLevelClassName(this), "processTransaction",
                     "Error in checking in book " + e.toString(), Event.ERROR);
         }

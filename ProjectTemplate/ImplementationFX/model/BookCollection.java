@@ -99,30 +99,52 @@ public class BookCollection  extends EntityBase
         return null;
     }
 
+    public void addBook(Book a) {
+        int index = findIndexToAdd(a);
+        bookList.insertElementAt(a, index); // To build up a collection sorted on some key
+    }
+
     //----------------------------------------------------------------
     public void stateChangeRequest(String key, Object value)
     {
-        // Class is invariant, so this method does not change any attributes
-        // It does handle the request to display its view (if Impose Service Charge -3 is opted for)
-        //if (key.equals("DisplayView") == true)
-        //{
-        //	createAndShowView();
-        //}
-        //else
-        //if (key.equals("AccountSelected") == true
-        //{
-        //	String accountNumber = (String)value;
-        //  Account acct = retrieve(accountNumber);
-        //  acct.subscribe("AccountCancelled", this);
-        //  acct.stateChangeRequest("DisplayView", this);
-        //}
-        //else
-        //if (key.equals("AccountCancelled") == true)
-        //{
-        //	createAndShowView();
-        //}
+    }
 
-        myRegistry.updateSubscribers(key, this);
+    public Book retrieve(int bookBarcode) {
+        Book retValue = null;
+        for (int cnt = 0; cnt < bookList.size(); cnt++) {
+            Book nextBook = (Book) bookList.elementAt(cnt);
+            String nextBookBarcode = (String)nextBook.getState("Barcode");
+            if (nextBookBarcode.equals(""+bookBarcode) == true) {
+                retValue = nextBook;
+                break;
+            }
+        }
+        return retValue;
+    }
+
+    private int findIndexToAdd(Book a) {
+        int low = 0;
+        int high = bookList.size() - 1;
+        int middle;
+
+        while (low <= high) {
+            middle = (low + high) / 2;
+
+            Book midSession = (Book)bookList.elementAt(middle);
+
+            int result = Book.compare(a, midSession);
+
+            if (result == 0) {
+                return middle;
+            }
+            else if (result < 0) {
+                high = middle - 1;
+            }
+            else {
+                low = middle + 1;
+            }
+        }
+        return low;
     }
 
     //-----------------------------------------------------------------------------------

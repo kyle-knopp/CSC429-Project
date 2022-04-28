@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Book;
 import userinterface.MessageView;
 import userinterface.View;
 
@@ -86,6 +87,8 @@ public class CheckOutBookView extends View {
 
         barcode = new TextField();
         barcode.setEditable(true);
+        Book.setTextLimit(barcode, 9);
+        Book.numericOnly(barcode);
         grid.add(barcode, 1, 1);
 
         Text duedate = new Text(" Enter Due Date: ");

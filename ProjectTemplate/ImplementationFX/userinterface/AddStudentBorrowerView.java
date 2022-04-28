@@ -31,6 +31,7 @@ import java.util.Properties;
 
 // project imports
 import impresario.IModel;
+import model.StudentBorrower;
 
 // The class containing the Account View  for the ATM application
 //==============================================================
@@ -141,6 +142,8 @@ public class AddStudentBorrowerView extends View
 
         BannerId = new TextField();
         BannerId.setEditable(true);
+        StudentBorrower.setTextLimit(BannerId,9);
+        StudentBorrower.numericOnly(BannerId);
         grid.add(BannerId, 1, 1);
 
 
@@ -173,6 +176,8 @@ public class AddStudentBorrowerView extends View
 
         ContactPhone = new TextField();
         ContactPhone.setEditable(true);
+        StudentBorrower.setTextLimit(ContactPhone, 9);
+        StudentBorrower.numericOnly(ContactPhone);
         grid.add(ContactPhone, 1, 4);
 
         Label = new Text(" Email : ");
@@ -183,6 +188,7 @@ public class AddStudentBorrowerView extends View
 
         Email = new TextField();
         Email.setEditable(true);
+        StudentBorrower.setTextLimit(Email, 30);
         grid.add(Email, 1, 5);
 
         Label = new Text("  Date Of Latest Borrower Status: ");

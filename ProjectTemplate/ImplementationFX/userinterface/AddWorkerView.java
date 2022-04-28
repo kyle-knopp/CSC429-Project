@@ -17,6 +17,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Worker;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -119,6 +121,8 @@ public class AddWorkerView extends View{
 
         bannerId = new TextField();
         bannerId.setEditable(true);
+        Worker.setTextLimit(bannerId, 9);
+        Worker.numericOnly(bannerId);
         grid.add(bannerId, 1, 1);
 
         Text workerPass = new Text(" Password : ");
@@ -170,6 +174,7 @@ public class AddWorkerView extends View{
 
         email = new TextField();
         email.setEditable(true);
+        Worker.setTextLimit(email,30);
         grid.add(email, 1, 6);
 
         Text wCred = new Text(" Credentials : ");

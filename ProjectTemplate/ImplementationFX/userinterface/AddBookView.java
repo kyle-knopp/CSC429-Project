@@ -247,6 +247,7 @@ public class AddBookView extends View{
         prefix.setPromptText("ex: 123");
         prefix.setTranslateX(-55);
         numericOnly(prefix);
+        setTextLimit(prefix, 3);
         grid.add(prefix, 2, 12);
 
 
@@ -421,6 +422,16 @@ public class AddBookView extends View{
                 if (!newValue.matches("\\d*")) {
                     field.setText(newValue.replaceAll("[^\\d]", ""));
                 }
+            }
+        });
+    }
+    public static void setTextLimit(TextField textField, int length) {
+        textField.setOnKeyTyped(event -> {
+            String string = textField.getText();
+
+            if (string.length() > length) {
+                textField.setText(string.substring(0, length));
+                textField.positionCaret(string.length());
             }
         });
     }

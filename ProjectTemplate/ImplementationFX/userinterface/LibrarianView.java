@@ -87,11 +87,13 @@ public class LibrarianView extends View
     private VBox createTitle()
     {
         VBox container = new VBox(10);
-        Text titleText = new Text(" Library System ");
+        Text titleText = new Text("Library System");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
+
+        container.setAlignment(Pos.CENTER);
         container.getChildren().add(titleText);
 
         /*String accountHolderGreetingName = (String)myModel.getState("Name");
@@ -314,7 +316,7 @@ public class LibrarianView extends View
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
-        doneButton = new Button("Done");
+        doneButton = new Button("Log Out");
         doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
 

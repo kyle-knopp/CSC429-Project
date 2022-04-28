@@ -66,25 +66,16 @@ public class BookCollectionView extends View {
 
     protected void getEntryTableModelValues()
     {
-        System.out.println("Getting here 1");
         ObservableList<BookTableModel> tableData = FXCollections.observableArrayList();
-        System.out.println("1");
         try
         {
-            System.out.println("2");
             BookCollection bookCollection = (BookCollection)myModel.getState("BookList");
-            System.out.println("3");
             Vector entryList = (Vector)bookCollection.getState("Book");
-            System.out.println("4");
             Enumeration entries = entryList.elements();
-            System.out.println("5");
-            System.out.println(entryList.isEmpty());
 
             while (entries.hasMoreElements() == true)
             {
-                System.out.println("loop");
                 Book nextBook = (Book)entries.nextElement();
-                System.out.println("Next Book for table: " + nextBook);
                 Vector<String> view = nextBook.getEntryListView();
 
                 // add this list entry to the list
@@ -131,7 +122,7 @@ public class BookCollectionView extends View {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text prompt = new Text("List of Books");
+        Text prompt = new Text("List of Books That Are Checked Out");
         prompt.setWrappingWidth(350);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);

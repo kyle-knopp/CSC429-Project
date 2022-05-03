@@ -176,7 +176,7 @@ public class AddStudentBorrowerView extends View
 
         ContactPhone = new TextField();
         ContactPhone.setEditable(true);
-        StudentBorrower.setTextLimit(ContactPhone, 9);
+        StudentBorrower.setTextLimit(ContactPhone, 10);
         StudentBorrower.numericOnly(ContactPhone);
         grid.add(ContactPhone, 1, 4);
 
@@ -373,18 +373,18 @@ public class AddStudentBorrowerView extends View
 
         Properties p = new Properties();
 
-        if(((BannerId.getText()).toString().length() == 8)){
+        if(((BannerId.getText()).toString().length() == 9)){
             p.put("BannerId", BannerId.getText());
             if(((FirstName.getText()).toString()).length() != 0){
                 p.put("FirstName", FirstName.getText());
                 if(((LastName.getText()).toString()).length() != 0){
                     p.put("LastName", LastName.getText());
-                    if(((((ContactPhone.getText()).toString()).length()) != 9) && ((ContactPhone.getText()).matches("[0-9]+"))){
+                    if(((((ContactPhone.getText()).toString()).length()) == 10) && ((ContactPhone.getText()).matches("[0-9]+"))){
                         p.put("ContactPhone", ContactPhone.getText());
                         if(((Email.getText()).toString().length() != 0)){
                             p.put("Email", Email.getText());
-                            p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-                            p.put("DateOfRegistration", DateOfRegistration.getText());
+                            p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                            p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                             p.put("Notes", Notes.getText());
                             p.put("status",statusBox.getValue());
                             p.put("BorrowerStatus",borrStatBox.getValue());
@@ -407,7 +407,7 @@ public class AddStudentBorrowerView extends View
                 displayErrorMessage("Error: FirstName must have an entry");
             }
         }else{
-            displayErrorMessage("Error: BannerID must be exactly eight digits");
+            displayErrorMessage("Error: BannerID must be exactly ten digits");
         }
 
 

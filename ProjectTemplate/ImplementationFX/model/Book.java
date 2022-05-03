@@ -1,5 +1,9 @@
 package model;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TextField;
+
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -207,6 +211,29 @@ public class Book extends EntityBase{
     public static void getBookPrefix()
     {
 
+    }
+
+    public static void numericOnly(final TextField field) {
+        field.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    field.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+    }
+    public static void setTextLimit(TextField textField, int length) {
+        textField.setOnKeyTyped(event -> {
+            String string = textField.getText();
+
+            if (string.length() > length) {
+                textField.setText(string.substring(0, length));
+                textField.positionCaret(string.length());
+            }
+        });
     }
 
     protected void initializeSchema(String tableName)

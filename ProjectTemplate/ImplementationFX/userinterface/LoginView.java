@@ -26,6 +26,7 @@ import javafx.scene.text.TextAlignment;
 
 // project imports
 import impresario.IModel;
+import model.Worker;
 
 /** The class containing the Teller View  for the ATM application */
 //==============================================================
@@ -98,6 +99,8 @@ public class LoginView extends View
         grid.add(userName, 0, 0);
 
         bannerID = new TextField();
+        Worker.setTextLimit(bannerID, 9);
+        Worker.numericOnly(bannerID);
         bannerID.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

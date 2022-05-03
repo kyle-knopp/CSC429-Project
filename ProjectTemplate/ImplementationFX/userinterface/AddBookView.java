@@ -363,7 +363,7 @@ public class AddBookView extends View{
 
 
         Properties p2 = new Properties();
-        if(bar.length() == 9 && bar.matches("[0-9]+")) {
+        if((bar.length()>3 && bar.length() < 10) && bar.matches("[0-9]+")) {
             p2.setProperty("barcode", bar);
             if(titl.length()!=0) {
                 p2.setProperty("title", titl);

@@ -70,8 +70,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        createAndShowLoginView();
-        //createAndShowLibrarianView();
+        //createAndShowLoginView();
+        createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------

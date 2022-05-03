@@ -42,7 +42,7 @@ public class AddWorkerView extends View{
 
     protected Text alreadyDeleted;
 
-    protected Button cancelButton;
+    protected Button backButton;
     protected Button submitButton;
 
     // For showing error message
@@ -245,9 +245,9 @@ public class AddWorkerView extends View{
         alreadyDeleted.setFill(Color.RED);
         grid.add(alreadyDeleted,0,11);
 
-        cancelButton = new Button("Back");
-        cancelButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton = new Button("Back");
+        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 myModel.stateChangeRequest("CancelTransaction", null);
@@ -265,12 +265,14 @@ public class AddWorkerView extends View{
 
         HBox buttonCont = new HBox(5);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
-        Label space = new Label(" ");
+        buttonCont.getChildren().add(submitButton);
+
+        Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
+
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
+        buttonCont.getChildren().add(backButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 

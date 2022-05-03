@@ -431,3 +431,5 @@
 [4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
+[5/3/22, 6:04 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'prefix' doesn't have a default value>
+[5/3/22, 6:04 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'prefix' doesn't have a default value>

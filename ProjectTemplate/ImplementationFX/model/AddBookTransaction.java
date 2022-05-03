@@ -59,6 +59,7 @@ public class AddBookTransaction extends Transaction
         {
             try {
                 oldBook = new Book((String) props.getProperty("barcode"));
+                transactionErrorMessage="Error: Barcode already Taken";
             }catch (Exception e){
                 myBook = new Book(props);
                 myBook.save("add");

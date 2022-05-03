@@ -59,6 +59,12 @@ public class StudentBorrowerCollection  extends EntityBase
         }
     }
 
+    public void findStudentBorrowersWithBannerId(String BannerId){
+        String query ="SELECT * FROM " + myTableName + " WHERE (BannerId like '%" + BannerId + "%')";
+
+        queryHelper(query,"There are no Student with that Banner Id");
+    }
+
     public void findStudentBorrowersWithFirstNameLike(String FirstName){
 
         //query
@@ -102,6 +108,7 @@ public class StudentBorrowerCollection  extends EntityBase
 
     //----------------------------------------------------------
     public Object getState(String key) {
+        //System.out.println("Selected Student Borrower: "+selectedStudentBorrower);
         if (key.equals("StudentBorrowers")) {
             System.out.println("Student Borrower List" + studentBorrowerList);
             return studentBorrowerList;

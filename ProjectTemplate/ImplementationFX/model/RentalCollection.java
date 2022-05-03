@@ -61,12 +61,13 @@ public class RentalCollection  extends EntityBase
         }
     }
 
+
     public void findRentalsThatAreCurrentlyCheckedOut() throws Exception {
 
         //query
 
-        String query = "SELECT * FROM " + myTableName + " WHERE (CheckinDate IS NULL OR CheckinDate = "+ "" + ")";
-
+        //String query = "SELECT * FROM " + myTableName + "WHERE (CheckinDate IS NULL OR CheckinDate = "+ "" + ")";
+        String query = "SELECT * FROM " + myTableName +  " WHERE ((CheckinDate IS NULL) OR (CheckinDate = ''))";
         queryHelper(query, "There are no Rentals that are currently checked out");
     }
 

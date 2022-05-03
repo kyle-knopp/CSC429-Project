@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 // project imports
@@ -92,6 +94,8 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         String status = (String) myModel.getState("status");
         String borrStat = (String) myModel.getState("BorrowerStatus");
 
+        //LocalDate dolbs_ld = LocalDate.parse(dolbs);
+        //LocalDate dor_ld = LocalDate.parse(dor);
 
         BannerId.setText(bannerID);
         BannerId.setEditable(false);
@@ -99,8 +103,10 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         LastName.setText(lastName);
         ContactPhone.setText(contactPhone);
         Email.setText(email);
-        DateOfLatestBorrowerStatus.setText(dolbs);
-        DateOfRegistration.setText(dor);
+        //DateOfLatestBorrowerStatus.setText(dolbs);
+        //DateOfRegistration.setText(dor);
+        DOLBS.setValue(LocalDate.parse(dolbs));
+        DOR.setValue(LocalDate.parse(dor));
         Notes.setText(notes);
         statusBox.setValue(status);
         borrStatBox.setValue(borrStat);
@@ -117,8 +123,10 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         p.put("LastName", LastName.getText());
         p.put("ContactPhone", ContactPhone.getText());
         p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
+        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+        //p.put("DateOfRegistration", DateOfRegistration.getText());
+        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("Notes", Notes.getText());
         p.put("status",statusBox.getValue());
         p.put("BorrowerStatus",borrStatBox.getValue());

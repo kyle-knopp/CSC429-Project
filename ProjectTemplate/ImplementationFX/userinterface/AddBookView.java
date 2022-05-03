@@ -15,6 +15,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import model.Book;
 
 import java.util.EventObject;
 import java.util.Properties;
@@ -32,6 +35,7 @@ public class AddBookView extends View{
     protected TextField ISBN;
     protected TextField suggestedPrice;
     protected TextField notes;
+    protected TextField prefix;
 
     protected ComboBox discipline;
     protected ComboBox quality;
@@ -114,6 +118,8 @@ public class AddBookView extends View{
         grid.add(bcode, 0, 1);
 
         barcode = new TextField();
+        Book.numericOnly(barcode);
+        Book.setTextLimit(barcode, 9);
         barcode.setEditable(true);
         grid.add(barcode, 1, 1);
 
@@ -186,6 +192,8 @@ public class AddBookView extends View{
 
         yearOfPublication = new TextField();
         yearOfPublication.setEditable(true);
+        Book.setTextLimit(yearOfPublication, 4);
+        Book.numericOnly(yearOfPublication);
         yearOfPublication.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -202,6 +210,7 @@ public class AddBookView extends View{
 
         ISBN = new TextField();
         ISBN.setEditable(true);
+        Book.numericOnly(ISBN);
         grid.add(ISBN, 1, 10);
 
         Text con = new Text(" Book Condition : ");
@@ -218,32 +227,76 @@ public class AddBookView extends View{
         quality.setValue("Good");
         grid.add(quality, 1, 11);
 
+        Text disc = new Text(" Book Discipline : ");
+        disc.setFont(myFont);
+        disc.setWrappingWidth(150);
+        disc.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(disc, 0, 12);
+
+        discipline = new ComboBox();
+        discipline.getItems().addAll(
+                "NONE", "MATH", "PHYSICS", "CHEMISTRY", "COMPUTER SCIENCE", "SPANISH", "ENGLISH", "UNSURE"
+        );
+
+        discipline.setValue("NONE");
+        grid.add(discipline, 1, 12);
+
+        int maxChar = 3;
+        prefix = new TextField();
+        prefix.setEditable(true);
+        prefix.setDisable(false);
+        prefix.setVisible(true);
+        prefix.setMaxWidth(65.0);
+        prefix.setPromptText("ex: 123");
+        prefix.setTranslateX(-55);
+        Book.numericOnly(prefix);
+        Book.setTextLimit(prefix, 3);
+        grid.add(prefix, 2, 12);
+
+        /**
+        discipline.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+            public void handle(ActionEvent event) {
+                if(discipline.getValue().equals("ENTER PREFIX"))
+                {
+                    prefix.setDisable(false);
+                    prefix.setVisible(true);
+                }
+                else
+                {
+                    prefix.setDisable(true);
+                    prefix.setVisible(false);
+                }
+            }
+        });
+        **/
+
         Text sug = new Text(" Suggested Price : ");
         sug.setFont(myFont);
         sug.setWrappingWidth(150);
         sug.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(sug, 0, 12);
+        grid.add(sug, 0, 13);
 
         suggestedPrice = new TextField();
         suggestedPrice.setText("0.00");
         suggestedPrice.setEditable(true);
-        grid.add(suggestedPrice, 1, 12);
+        grid.add(suggestedPrice, 1, 13);
 
         Text not = new Text(" Notes : ");
         not.setFont(myFont);
         not.setWrappingWidth(150);
         not.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(not, 0, 13);
+        grid.add(not, 0, 14);
 
         notes = new TextField();
         notes.setEditable(true);
-        grid.add(notes, 1, 13);
+        grid.add(notes, 1, 14);
 
         Text bStatus = new Text(" Book's Status : ");
         bStatus.setFont(myFont);
         bStatus.setWrappingWidth(150);
         bStatus.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bStatus, 0, 14);
+        grid.add(bStatus, 0, 15);
 
         status = new ComboBox();
         status.getItems().addAll(
@@ -251,7 +304,7 @@ public class AddBookView extends View{
         );
 
         status.setValue("Active");
-        grid.add(status, 1, 14);
+        grid.add(status, 1, 15);
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -300,27 +353,52 @@ public class AddBookView extends View{
         String yeaO = yearOfPublication.getText();
         String isb = ISBN.getText();
         String condi = (String) quality.getValue();
+        String disc = (String) quality.getValue();
+        String pref = prefix.getText();
         String sugPric = suggestedPrice.getText();
         String no = notes.getText();
         String sta = (String) status.getValue();
 
+
         Properties p2 = new Properties();
+        if(bar.length()>3 && bar.length()<10 && bar.matches("[0-9]+")) {
+            p2.setProperty("barcode", bar);
+            if(titl.length()!=0) {
+                p2.setProperty("title", titl);
+                if(au1.length()!=0) {
+                    p2.setProperty("author1", au1);
+                    if(yeaO.length()==4 && yeaO.matches("[0-9]+")) {
+                        p2.setProperty("yearOfPublication", yeaO);
+                        if(isb.length()==9) {
+                            p2.setProperty("author2", au2);
+                            p2.setProperty("author3", au3);
+                            p2.setProperty("author4", au4);
+                            p2.setProperty("publisher", publi);
 
-        p2.setProperty("barcode", bar);
-        p2.setProperty("title", titl);
-        p2.setProperty("author1", au1);
-        p2.setProperty("author2", au2);
-        p2.setProperty("author3", au3);
-        p2.setProperty("author4", au4);
-        p2.setProperty("publisher", publi);
-        p2.setProperty("yearOfPublication", yeaO);
-        p2.setProperty("ISBN", isb);
-        p2.setProperty("suggestedPrice", sugPric);
-        p2.setProperty("notes", no);
-        p2.setProperty("bookCondition", condi);
-        p2.setProperty("Status", sta);
+                            p2.setProperty("ISBN", isb);
+                            p2.setProperty("suggestedPrice", sugPric);
+                            p2.setProperty("notes", no);
+                            p2.setProperty("bookCondition", condi);
+                            //p2.setProperty("bookDiscipline", disc);
+                            p2.setProperty("Status", sta);
+                            myModel.stateChangeRequest("AddBook", p2);
+                        }else{
+                            displayErrorMessage("Error: ISBN must be 9 digits");
+                        }
+                    }else{
+                        displayErrorMessage("Error: Publication year must be 4 digits");
+                    }
+                }else {
+                    displayErrorMessage("Error: Please enter at least 1st Author");
+                }
+            }else{
+                displayErrorMessage("Error: Please enter a title");
+            }
+        }else{
+            displayErrorMessage("Error: Barcode must be between 3 and 10 digits");
+        }
 
-        if(bar.length() >= 3) {
+        /*if(bar.length() >= 3) {
             p2.setProperty("prefix", getBookPrefix(bar));
         }
         else{
@@ -333,11 +411,13 @@ public class AddBookView extends View{
             System.out.println(p2);
             myModel.stateChangeRequest("AddBook", p2);
 
-        }
+        }*/
 
 
 
     }
+
+
 
     public String getBookPrefix(String barccode){
 

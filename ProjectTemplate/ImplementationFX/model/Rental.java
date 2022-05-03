@@ -1,5 +1,10 @@
 package model;
 
+import exception.InvalidPrimaryKeyException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TextField;
+
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -13,6 +18,13 @@ public class Rental extends EntityBase{
     protected Properties dependencies;
 
     private String updateStatusMessage = "";
+
+    public Rental() {
+        super(myTableName);
+        setDependencies();
+
+        persistentState = new Properties();
+    }
 
     public Rental(String Id) throws exception.InvalidPrimaryKeyException {
         super(myTableName);
@@ -78,6 +90,70 @@ public class Rental extends EntityBase{
         }
     }
 
+    public Rental(String barcode, boolean flag) throws InvalidPrimaryKeyException {
+        super(myTableName);
+        // construct a query that checks the BookId in Rental equals barcode AND CheckinDate IS NULL Or CheckinDate = ''
+
+        String query = "SELECT * FROM " + myTableName +
+                " WHERE (BookId = " + barcode + ") AND ((CheckinDate IS NULL ) OR (CheckinDate = ''))";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        // You must get one book at least
+        if (allDataRetrieved != null) {
+            int size = allDataRetrieved.size();
+
+            // There should be EXACTLY one book. More than that is an error
+            if (size > 1) {
+                throw new InvalidPrimaryKeyException("Multiple rental files matching Barcode : " + barcode +
+                        " with Null CheckInDate found.");
+            } else if (size == 1) {
+                // copy all the retrieved data into persistent state
+                Properties retrievedBookData = (Properties) allDataRetrieved.elementAt(0);
+                persistentState = new Properties();
+
+                Enumeration allKeys = retrievedBookData.propertyNames();
+                while (allKeys.hasMoreElements() == true) {
+                    String nextKey = (String) allKeys.nextElement();
+                    String nextValue = retrievedBookData.getProperty(nextKey);
+
+                    if (nextValue != null) {
+                        persistentState.setProperty(nextKey, nextValue);
+                    }
+                }
+
+            }
+            else {
+                throw new InvalidPrimaryKeyException("Error");
+            }
+        }
+        // If no book is found for this barcode, throw an exception
+        else {
+            throw new InvalidPrimaryKeyException("No rental file matching barcode : " + barcode + " found.");
+        }
+    }
+
+    public void findIfBookIsOut(String barcode) throws InvalidPrimaryKeyException {
+        String query = "SELECT * FROM " + myTableName + " WHERE ((BookId = " + barcode + ") AND " +
+                "((CheckinDate IS NULL) OR (CheckinDate = '')))";
+
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+
+        System.out.println(allDataRetrieved);
+
+        // You must get one account at least
+        if (allDataRetrieved != null)
+        {
+            int size = allDataRetrieved.size();
+
+            // There should be EXACTLY one account. More than that is an error
+            if (size >= 1)
+            {
+                throw new exception.InvalidPrimaryKeyException("Error: Book "+barcode+" Already Checked Out.");
+            }
+        }
+    }
     public void save(String trans)
     {
         updateStateInDatabase(trans);
@@ -107,8 +183,8 @@ public class Rental extends EntityBase{
     }
 
     private void updateStateInDatabase(String trans) {
-        System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
-        System.out.println(persistentState.getProperty("Id"));
+       // System.out.println("Inside updateStateInDatabase RENTAL RENTAL RENTAL");
+       // System.out.println(persistentState.getProperty("Id"));
         try {
             if (trans == "checkIn") {
                 Properties whereClause = new Properties();
@@ -117,7 +193,7 @@ public class Rental extends EntityBase{
                 updateStatusMessage = "Rental data updated successfully in database!";
 
             } else if (trans == "checkOut") {
-                System.out.println("Inside else in save rental.");
+               // System.out.println("Inside else in save rental.");
                 Integer Id = insertAutoIncrementalPersistentState(mySchema, persistentState);
                 // GONNA HAVE TO LOOK AT THIS AT SOME POINT TO MAKE SURE BECAUSE OF AUTOINCREMENT ID
                 persistentState.setProperty("Id", "" + Id.intValue());
@@ -187,8 +263,8 @@ public class Rental extends EntityBase{
     }
 
     public Object getState(String key) {
-        System.out.println("Get State: "+key);
-        System.out.println("Status Message: "+updateStatusMessage);
+        //System.out.println("Get State: "+key);
+        //System.out.println("Status Message: "+updateStatusMessage);
         if(key.equals("TransactionError")){
             return updateStatusMessage;
         }else
@@ -217,6 +293,29 @@ public class Rental extends EntityBase{
         v.addElement(persistentState.getProperty("CheckinWorkerId "));
 
         return v;
+    }
+
+    public static void numericOnly(final TextField field) {
+        field.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(
+                    ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    field.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+    }
+    public static void setTextLimit(TextField textField, int length) {
+        textField.setOnKeyTyped(event -> {
+            String string = textField.getText();
+
+            if (string.length() > length) {
+                textField.setText(string.substring(0, length));
+                textField.positionCaret(string.length());
+            }
+        });
     }
 
     protected void initializeSchema(String tableName)

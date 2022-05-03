@@ -94,7 +94,7 @@ public class SearchWorkerViewM extends View
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        Text searchLabel = new Text(" Search For Workers: ");
+        Text searchLabel = new Text(" Enter Workers First and/or Last Name: ");
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
         searchLabel.setFont(myFont);
         searchLabel.setWrappingWidth(150);

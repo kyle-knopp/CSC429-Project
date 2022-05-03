@@ -75,11 +75,11 @@ public class WorkerCollection  extends EntityBase
         else
         if (key.equals("WorkerList"))
             return this;
-        /*if (selectedWorker != null) {
+        else if (selectedWorker != null) {
             Object val = selectedWorker.getState(key);
             if (val != null)
                 return val;
-        }*/
+        }
         return null;
     }
 

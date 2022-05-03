@@ -67,16 +67,25 @@ public class StudentBorrowerCollectionView  extends View{
 
     protected void getEntryTableModelValues()
     {
+        //System.out.println("Getting here 1");
         ObservableList<StudentBorrowerTableModel> tableData = FXCollections.observableArrayList();
+        //System.out.println("1");
         try
         {
+           // System.out.println("2");
             StudentBorrowerCollection studentborrowerCollection = (StudentBorrowerCollection)myModel.getState("StudentBorrowerList");
+           // System.out.println("3");
             Vector entryList = (Vector)studentborrowerCollection.getState("StudentBorrowers");
+           // System.out.println("4");
             Enumeration entries = entryList.elements();
+            //System.out.println("5");
+            //System.out.println(entryList.isEmpty());
 
             while (entries.hasMoreElements() == true)
             {
+              //  System.out.println("loop");
                 StudentBorrower nextStudentBorrower = (StudentBorrower)entries.nextElement();
+               // System.out.println("Next Student Borrower for table: " + nextStudentBorrower);
                 Vector<String> view = nextStudentBorrower.getEntryListView();
 
                 // add this list entry to the list
@@ -193,13 +202,7 @@ public class StudentBorrowerCollectionView  extends View{
             {
                 if (event.isPrimaryButtonDown() && event.getClickCount() >=2 ){
                     clearErrorMessage();
-                    StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
-                    if(selectedItem != null)
-                    {
-                        String selectedStudentBorrowerId = selectedItem.getBannerId();
-
-                        myModel.stateChangeRequest("", null);
-                    }
+                    processStudentBorrowerSelected();
 
                 }
             }
@@ -248,6 +251,22 @@ public class StudentBorrowerCollectionView  extends View{
         if (key.equals("TransactionError") == true)
         {
             displayMessage((String)value);
+        }
+    }
+    //--------------------------------------------------------------------------
+    protected void processStudentBorrowerSelected()
+    {
+        StudentBorrowerTableModel selectedItem = tableOfStudentBorrowers.getSelectionModel().getSelectedItem();
+
+        if(selectedItem != null)
+        {
+            if(selectedItem.getBorrowerStatus().equals("Delinquent")){
+                statusLog.displayErrorMessage("Student Borrower Delinquent, Cannot Check out Book");
+            }else {
+                String selectedAcctNumber = selectedItem.getBannerId();
+
+                myModel.stateChangeRequest("CheckOutBookView", selectedAcctNumber);
+            }
         }
     }
 

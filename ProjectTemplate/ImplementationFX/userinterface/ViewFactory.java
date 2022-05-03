@@ -97,6 +97,12 @@ public class ViewFactory {
 		else if(viewName.equals("CheckOutBookView") == true)
 		{
 			return new CheckOutBookView(model);
+		}else if(viewName.equals("SearchSBView") == true)
+		{
+			return new SearchSBView(model);
+		}else if(viewName.equals("StudentBorrowerCollectionView") == true)
+		{
+			return new StudentBorrowerCollectionView(model);
 		}
 		else if(viewName.equals("BookCollectionView") == true)
 		{

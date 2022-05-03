@@ -20,7 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.*;
-import model.StudentBorrower;
+import model.Worker;
 
 import java.util.Enumeration;
 import java.util.Vector;
@@ -144,42 +144,42 @@ public class WorkerCollectionDeleteView extends View{
         TableColumn BannerIdColumn = new TableColumn("Banner Id") ;
         BannerIdColumn.setMinWidth(100);
         BannerIdColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("bannerId"));
+                new PropertyValueFactory<WorkerTableModel, String>("bannerId"));
 
         TableColumn FirstNameColumn = new TableColumn("First Name") ;
         FirstNameColumn.setMinWidth(100);
         FirstNameColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("firstName"));
+                new PropertyValueFactory<WorkerTableModel, String>("firstName"));
 
         TableColumn LastNameColumn = new TableColumn("Last Name") ;
         LastNameColumn.setMinWidth(100);
         LastNameColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("lastName"));
+                new PropertyValueFactory<WorkerTableModel, String>("lastName"));
 
         TableColumn PhoneColumn = new TableColumn("Phone Number") ;
         PhoneColumn.setMinWidth(100);
         PhoneColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("phone"));
+                new PropertyValueFactory<WorkerTableModel, String>("phone"));
 
         TableColumn EmailColumn = new TableColumn("Email") ;
         EmailColumn.setMinWidth(100);
         EmailColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("email"));
+                new PropertyValueFactory<WorkerTableModel, String>("email"));
 
         TableColumn CredentialsColumn = new TableColumn("Credentials") ;
         CredentialsColumn.setMinWidth(100);
         CredentialsColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("credentials"));
+                new PropertyValueFactory<WorkerTableModel, String>("credentials"));
 
         TableColumn DateOfLatestCredentialsStatusColumn = new TableColumn("Date Of Latest Credentials Status") ;
         DateOfLatestCredentialsStatusColumn.setMinWidth(100);
         DateOfLatestCredentialsStatusColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("dateOfLatestCredentials"));
+                new PropertyValueFactory<WorkerTableModel, String>("dateOfLatestCredentials"));
 
         TableColumn DateOfHireColumn = new TableColumn("Date Of Hire") ;
         DateOfHireColumn.setMinWidth(100);
         DateOfHireColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("DateOfHire"));
+                new PropertyValueFactory<WorkerTableModel, String>("DateOfHire"));
 
 
         tableOfWorkers.getColumns().addAll(BannerIdColumn,

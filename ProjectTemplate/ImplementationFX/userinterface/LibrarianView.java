@@ -87,14 +87,14 @@ public class LibrarianView extends View
     private VBox createTitle()
     {
         VBox container = new VBox(10);
-        Text titleText = new Text("Library System");
+        Text titleText = new Text(" Library System ");
         titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         titleText.setWrappingWidth(300);
         titleText.setTextAlignment(TextAlignment.CENTER);
         titleText.setFill(Color.DARKGREEN);
-
         container.setAlignment(Pos.CENTER);
         container.getChildren().add(titleText);
+
 
         /*String accountHolderGreetingName = (String)myModel.getState("Name");
         Text welcomeText = new Text("Welcome, " + accountHolderGreetingName + "!");

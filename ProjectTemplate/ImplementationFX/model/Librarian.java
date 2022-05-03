@@ -34,6 +34,10 @@ public class Librarian implements IView, IModel
     private WorkerCollection myWorkers;
     private BookCollection myBooks;
 
+    private Rental myRental;
+    private RentalCollection myRentalCollection;
+    private Book myBook;
+
     private Worker selectedWorker;
     private Worker modifyWorker;
     private StudentBorrower selectedStudentBorrower;
@@ -66,8 +70,8 @@ public class Librarian implements IView, IModel
         setDependencies();
 
         // Set up the initial view
-        //createAndShowLoginView();
-        createAndShowLibrarianView();
+        createAndShowLoginView();
+        //createAndShowLibrarianView();
     }
 
     //-----------------------------------------------------------------------------------
@@ -98,6 +102,9 @@ public class Librarian implements IView, IModel
     //----------------------------------------------------------
     public Object getState(String key)
     {
+
+        //DEBUG System.out.println("**********KEY***********  "+key);
+
         if (key.equals("TransactionError") == true)
         {
             //DEBUG System.out.println("Librarian get state: "+transactionErrorMessage);
@@ -174,12 +181,29 @@ public class Librarian implements IView, IModel
         else if(key.equals("CheckIn") == true){
             String transType = key;
             transType = transType.trim();
-            doTransaction(transType);
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", systemUser);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }
         }
         else if(key.equals("CheckOut") == true){
+            /*String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);*/
             String transType = key;
             transType = transType.trim();
-            doTransaction(transType);
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", systemUser);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }
         }
         else if (key.equals("ModifyBook") == true)
         {
@@ -288,8 +312,10 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("DeleteWorkerView") == true) //goes to delete screen
         {
+            selectedStudentBorrower=null;
             try{
-                selectedWorker = new Worker((String)value);
+                //selectedWorker = new Worker((String)value);
+                getWorker((String)value);
             }catch(InvalidPrimaryKeyException e){
                 e.printStackTrace();
                 transactionErrorMessage="Cannot Find Worker";
@@ -315,14 +341,30 @@ public class Librarian implements IView, IModel
         }
         else if (key.equals("ModifyWorkerView") == true) //begin Modify Sequence
         {
+            selectedStudentBorrower=null;
+            System.out.println("Worker ID in Librarian: "+value);
             try{
-                //transactionErrorMessage="";
+                transactionErrorMessage="";
                 getWorker((String)value);
+                createAndShowModifyWorkerView();
+                //selectedWorker = new Worker((String)value);
+                //System.out.println("Selected worker in Librarian: "+selectedWorker);
             }catch(InvalidPrimaryKeyException e){
             e.printStackTrace();
             transactionErrorMessage="Cannot Find Worker";
             }
-            createAndShowModifyWorkerView();
+            /*String transType = key;
+            transType = transType.trim();
+            doTransaction(transType);
+            try {
+                Transaction trans = TransactionFactory.createTransaction(transType);
+                trans.subscribe("CancelTransaction", this);
+                trans.stateChangeRequest("DoYourJob", selectedWorker);
+            }catch (Exception e){
+                transactionErrorMessage = "ERROR";
+                new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
+            }*/
+
         }
         else if (key.equals("WorkerCollectionModifyViewNo") == true) //goes back to old collection
         {
@@ -336,8 +378,8 @@ public class Librarian implements IView, IModel
 
         }else if(key.equals("UpdateWorker"))
         {
-            Properties p = (Properties) value;
-            modifyWorker= new Worker(p);
+            Properties p2 = (Properties) value;
+            modifyWorker= new Worker(p2);
             modifyWorker.save("update");
             transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
         }else if(key.equals("DeleteStudentBorrower"))
@@ -360,9 +402,9 @@ public class Librarian implements IView, IModel
             doTransaction(transType);
         }
         else if(key.equals("BookCollectionView")){
-
             myBooks = new BookCollection();
             myBooks.findBooksCheckedOut();
+
             createAndShowBookCollectionView();
         }
         else if(key.equals("StudentBorrowerCollectionView")){
@@ -413,6 +455,10 @@ public class Librarian implements IView, IModel
         }
     }
 
+    public SystemWorker getSystemUser() {
+        return systemUser;
+    }
+
 
     /**
      * Tries to create old persistable student worker object.
@@ -423,9 +469,9 @@ public class Librarian implements IView, IModel
     //-------------------------------------------------------------
     private void getStudentBorrower(String id)throws InvalidPrimaryKeyException {
         try {
-            //DEBUG System.out.println("Student Borrower id: "+ id);
+            System.out.println("Student Borrower id: "+ id);
             selectedStudentBorrower = new StudentBorrower(id);
-            //DEBUG System.out.println(selectedStudentBorrower);
+            System.out.println(selectedStudentBorrower);
         }
         catch (Exception e){
             transactionErrorMessage = "Cannot find Student Borrower";
@@ -444,6 +490,8 @@ public class Librarian implements IView, IModel
             new Event(Event.getLeafLevelClassName(this), "createTransaction", "Trans creation fail", Event.ERROR);
         }
     }
+
+
 
     /**
      * Create a Transaction depending on the Transaction type (deposit,
@@ -617,6 +665,8 @@ public class Librarian implements IView, IModel
         //if (currentScene == null)
         //{
             // create our initial view
+        //System.out.println("This in librarian: "+this.toString());
+
             View newView = ViewFactory.createView("ModifyStudentBorrowerView", this); // USE VIEW FACTORY
             Scene currentScene = new Scene(newView);
             myViews.put("ModifyStudentBorrowerView", currentScene);
@@ -751,7 +801,10 @@ public class Librarian implements IView, IModel
 
         //if (currentScene == null) {
             // create our initial view
-            View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
+
+        //System.out.println("This in librarian: "+this.toString());
+
+        View newView = ViewFactory.createView("ModifyWorkerView", this); // USE VIEW FACTORY
             Scene currentScene = new Scene(newView);
             myViews.put("ModifyWorkerView", currentScene);
         //}
@@ -789,28 +842,28 @@ public class Librarian implements IView, IModel
 
     private void createAndShowBookCollectionView()
     {
-        Scene currentScene = (Scene)myViews.get("BookCollectionView");
+        //Scene currentScene = (Scene)myViews.get("BookCollectionView");
 
-        if (currentScene == null) {
+        //if (currentScene == null) {
             // create our initial view
             View newView = ViewFactory.createView("BookCollectionView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("BookCollectionView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
     }
 
     private void createAndShowStudentBorrowerCollectionView()
     {
-        Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionView");
+        //Scene currentScene = (Scene)myViews.get("StudentBorrowerCollectionView");
 
-        if (currentScene == null) {
+        //if (currentScene == null) {
             // create our initial view
             View newView = ViewFactory.createView("StudentBorrowerCollectionView", this); // USE VIEW FACTORY
-            currentScene = new Scene(newView);
+            Scene currentScene = new Scene(newView);
             myViews.put("StudentBorrowerCollectionView", currentScene);
-        }
+        //}
 
         swapToView(currentScene);
     }

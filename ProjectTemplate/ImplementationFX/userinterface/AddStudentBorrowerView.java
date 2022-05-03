@@ -23,11 +23,15 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.util.Properties;
 
 // project imports
 import impresario.IModel;
+import model.StudentBorrower;
 
 // The class containing the Account View  for the ATM application
 //==============================================================
@@ -44,6 +48,8 @@ public class AddStudentBorrowerView extends View
     protected TextField DateOfLatestBorrowerStatus;
     protected TextField DateOfRegistration;
     protected TextField Notes;
+
+    protected DatePicker DOLBS, DOR;
 
     protected Text alreadyDeleted;
 
@@ -136,6 +142,8 @@ public class AddStudentBorrowerView extends View
 
         BannerId = new TextField();
         BannerId.setEditable(true);
+        StudentBorrower.setTextLimit(BannerId,9);
+        StudentBorrower.numericOnly(BannerId);
         grid.add(BannerId, 1, 1);
 
 
@@ -168,6 +176,8 @@ public class AddStudentBorrowerView extends View
 
         ContactPhone = new TextField();
         ContactPhone.setEditable(true);
+        StudentBorrower.setTextLimit(ContactPhone, 9);
+        StudentBorrower.numericOnly(ContactPhone);
         grid.add(ContactPhone, 1, 4);
 
         Label = new Text(" Email : ");
@@ -178,6 +188,7 @@ public class AddStudentBorrowerView extends View
 
         Email = new TextField();
         Email.setEditable(true);
+        StudentBorrower.setTextLimit(Email, 30);
         grid.add(Email, 1, 5);
 
         Label = new Text("  Date Of Latest Borrower Status: ");
@@ -186,9 +197,20 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 6);
 
+        /**
         DateOfLatestBorrowerStatus = new TextField();
         DateOfLatestBorrowerStatus.setEditable(true);
         grid.add(DateOfLatestBorrowerStatus, 1, 6);
+         **/
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+
+        LocalDate curr = LocalDate.parse(dtf.format(now));
+
+        DOLBS = new DatePicker(curr);
+        DOLBS.setEditable(true);
+        grid.add(DOLBS, 1, 6);
 
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
@@ -196,9 +218,15 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 7);
 
+        /**
         DateOfRegistration = new TextField();
         DateOfRegistration.setEditable(true);
         grid.add(DateOfRegistration, 1, 7);
+         **/
+
+        DOR = new DatePicker(curr);
+        DOR.setEditable(true);
+        grid.add(DOR, 1, 7);
 
         Label = new Text("  Notes: ");
         Label.setFont(myFont);
@@ -277,6 +305,7 @@ public class AddStudentBorrowerView extends View
         DateOfRegistration.setEditable(option);
         Notes.setEditable(option);
         statusBox.setEditable(option);
+        borrStatBox.setEditable(option);
 
     }
 
@@ -344,18 +373,58 @@ public class AddStudentBorrowerView extends View
 
         Properties p = new Properties();
 
-        p.put("BannerId", BannerId.getText());
-        p.put("FirstName", FirstName.getText());
-        p.put("LastName", LastName.getText());
-        p.put("ContactPhone", ContactPhone.getText());
-        p.put("Email", Email.getText());
-        p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        p.put("DateOfRegistration", DateOfRegistration.getText());
-        p.put("Notes", Notes.getText());
-        p.put("status",statusBox.getValue());
-        p.put("BorrowerStatus",borrStatBox.getValue());
+        if(((BannerId.getText()).toString().length() == 8)){
+            p.put("BannerId", BannerId.getText());
+            if(((FirstName.getText()).toString()).length() != 0){
+                p.put("FirstName", FirstName.getText());
+                if(((LastName.getText()).toString()).length() != 0){
+                    p.put("LastName", LastName.getText());
+                    if(((((ContactPhone.getText()).toString()).length()) != 9) && ((ContactPhone.getText()).matches("[0-9]+"))){
+                        p.put("ContactPhone", ContactPhone.getText());
+                        if(((Email.getText()).toString().length() != 0)){
+                            p.put("Email", Email.getText());
+                            p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+                            p.put("DateOfRegistration", DateOfRegistration.getText());
+                            p.put("Notes", Notes.getText());
+                            p.put("status",statusBox.getValue());
+                            p.put("BorrowerStatus",borrStatBox.getValue());
+                            myModel.stateChangeRequest("AddStudentBorrower", p);
 
-        myModel.stateChangeRequest("AddStudentBorrower", p);
+                        }
+                        else{
+                            displayErrorMessage("Error: Email must be have an entry");
+                        }
+                    }
+                    else{
+                        displayErrorMessage("Error: ContactNumber must be composed of only numbers, and 9 digits long");
+                    }
+                }
+                else{
+                    displayErrorMessage("Error: LastName must have an entry");
+                }
+            }
+            else{
+                displayErrorMessage("Error: FirstName must have an entry");
+            }
+        }else{
+            displayErrorMessage("Error: BannerID must be exactly eight digits");
+        }
+
+
+//        p.put("BannerId", BannerId.getText());
+//        p.put("FirstName", FirstName.getText());
+//        p.put("LastName", LastName.getText());
+//        p.put("ContactPhone", ContactPhone.getText());
+//        p.put("Email", Email.getText());
+//        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+//        //p.put("DateOfRegistration", DateOfRegistration.getText());
+//        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//        p.put("Notes", Notes.getText());
+//        p.put("status",statusBox.getValue());
+//        p.put("BorrowerStatus",borrStatBox.getValue());
+//
+//        myModel.stateChangeRequest("AddStudentBorrower", p);
 
 
     }

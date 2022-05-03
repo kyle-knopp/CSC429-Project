@@ -16,6 +16,10 @@ import userinterface.ViewFactory;
 public class ListAllBooksCheckOutTransaction extends Transaction{
 
     private BookCollection myBooks;
+    private Rental myRental;
+    private RentalCollection myRentalCollection;
+    private StudentBorrower myStudent;
+    private Book myBook;
 
     private String transactionErrorMessage = "";
 
@@ -34,7 +38,7 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
     protected void setDependencies()
     {
         dependencies = new Properties();
-
+        dependencies.setProperty("CheckedOut", "TransactionError");
         dependencies.setProperty("Cancel", "CancelTransaction");
 
         myRegistry.setDependencies(dependencies);
@@ -45,38 +49,58 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
      * verifying ownership, crediting, etc. etc.
      */
     //----------------------------------------------------------
-    public void processTransaction(Properties props)
-    {
+    public void processTransaction(){
+        try{
+        /*myRentalCollection = new RentalCollection();
+        myBooks = new BookCollection();
+        myRentalCollection.findRentalsThatAreCurrentlyCheckedOut();
+        int rentalsSize = myRentalCollection.getSize();
+        for(int i = 0; i<rentalsSize; i++) {
+            myRental = new Rental((String) myRentalCollection.getState("Id"));
+            myBook = new Book((String) myRental.getState("BookId"));
+            myBooks.addBook(myBook);
+        }*/
+            myRentalCollection = new RentalCollection();
+            myBooks = new BookCollection();
+            myRentalCollection.findRentalsThatAreCurrentlyCheckedOut();
+            System.out.println("Rental Collection of books checked out: "+myRentalCollection);
+            myRentalCollection.display();
+            int rentalsSize = myRentalCollection.getSize();
+            for(int i = 0; i<rentalsSize; i++) {
+                myRental = new Rental((String) myRentalCollection.getState("Id"));
+                myBook = new Book((String) myRental.getState("BookId"));
+                myBooks.addBook(myBook);
+            }
 
+    }
+        catch (Exception excep) {
+        if(excep.toString().equals("java.lang.Exception: No rental files found.")) {
+            transactionErrorMessage = "No Books Checked Out!";
+        }
+        else {
+            transactionErrorMessage = "Error in listing books checked out: " + excep.toString();
+            new Event(Event.getLeafLevelClassName(this), "processTransaction",
+                    "Error in listing books checked out: " + excep.toString(),
+                    Event.ERROR);
+        }
+
+    }
 
     }
 
     @Override
     protected Scene createView() {
-        Scene currentScene = myViews.get(""); // change to whatever view we will create
+        Scene currentScene = myViews.get("BookCollectionView"); // change to whatever view we will create
 
         if (currentScene == null) {
-            View newView = ViewFactory.createView("", this);
+            View newView = ViewFactory.createView("BookCollectionView", this);
             currentScene = new Scene(newView);
-            myViews.put("", currentScene);
+            myViews.put("BookCollectionView", currentScene);
         }
 
         return currentScene;
     }
 
-    private void createAndShowView() {  // change to whatever view we will create
-        //transactionErrorMessage = "";
-        Scene currentScene = (Scene) myViews.get("");
-        if (currentScene == null) {
-            View newView = ViewFactory.createView("", this);
-            currentScene = new Scene(newView);
-
-
-            myViews.put("", currentScene);
-        }
-
-        swapToView(currentScene);
-    }
 
     //-----------------------------------------------------------
     public Object getState(String key)
@@ -95,11 +119,16 @@ public class ListAllBooksCheckOutTransaction extends Transaction{
     //-----------------------------------------------------------
     public void stateChangeRequest(String key, Object value)
     {
-        // DEBUG System.out.println("DepositTransaction.sCR: key: " + key);
+        System.out.println("BooksCheckedOut.sCR: key: " + key);
+        System.out.println("BooksCheckedOut.sCR: value: " + value);
 
         if (key.equals("DoYourJob") == true)
         {
+            //processTransaction();
             doYourJob();
+        }else
+        if (key.equals("CheckedOut")) {
+            processTransaction();
         }
 
         myRegistry.updateSubscribers(key, this);

@@ -35,7 +35,7 @@ public class CheckOutBookView extends View {
 
     protected DatePicker dateDue;
 
-    protected Button cancelButton;
+    protected Button backButton;
     protected Button submitButton;
 
     // For showing error message
@@ -117,22 +117,25 @@ public class CheckOutBookView extends View {
             }
         });
 
-        cancelButton = new Button("Back");
-        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton = new Button("Back");
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 myModel.stateChangeRequest("CancelTransaction", null);
             }
         });
+
         // consider using GridPane.setHgap(10); instead of label space
         HBox buttonCont = new HBox(10);
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(submitButton);
+
         Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
+
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(backButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 
@@ -147,7 +150,7 @@ public class CheckOutBookView extends View {
 
 
         Object sender = event.getSource();
-        if (sender == cancelButton) {
+        if (sender == backButton) {
             myModel.stateChangeRequest("Cancel", "");
         }
         else if (sender == submitButton) {

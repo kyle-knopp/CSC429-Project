@@ -21,7 +21,7 @@ import java.util.Properties;
 public class DelinquencyCheckView extends View {
     // GUI components
 
-    protected Button cancelButton;
+    protected Button backButton;
     protected Button submitButton;
 
     // For showing error message
@@ -100,8 +100,8 @@ public class DelinquencyCheckView extends View {
             }
         });
 
-        cancelButton = new Button("Back");
-        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton = new Button("Back");
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 myModel.stateChangeRequest("CancelTransaction", null);
@@ -112,11 +112,13 @@ public class DelinquencyCheckView extends View {
         buttonCont.setPadding(new Insets(10, 100, 25, 100));
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(submitButton);
-        Label space = new Label(" ");
+
+        Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
+
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(backButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 
@@ -128,7 +130,7 @@ public class DelinquencyCheckView extends View {
         //props.setProperty("barcode", barcode.getText());
 
         Object sender = event.getSource();
-        if (sender == cancelButton) {
+        if (sender == backButton) {
             myModel.stateChangeRequest("Cancel", "");
         } else if (sender == submitButton) {
             clearErrorMessage();

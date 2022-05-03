@@ -259,9 +259,11 @@ public class ModifyBookView extends View{
         HBox buttonCont = new HBox(10);
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(submitButton);
+
         Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
+
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(cancelButton);
         vbox.getChildren().add(grid);

@@ -213,98 +213,27 @@ public class AddBookView extends View{
         Book.numericOnly(ISBN);
         grid.add(ISBN, 1, 10);
 
-        Text con = new Text(" Book Condition : ");
-        con.setFont(myFont);
-        con.setWrappingWidth(150);
-        con.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(con, 0, 11);
-
-        quality = new ComboBox();
-        quality.getItems().addAll(
-                "Good"
-        );
-
-        quality.setValue("Good");
-        grid.add(quality, 1, 11);
-
-        Text disc = new Text(" Book Discipline : ");
-        disc.setFont(myFont);
-        disc.setWrappingWidth(150);
-        disc.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(disc, 0, 12);
-
-        discipline = new ComboBox();
-        discipline.getItems().addAll(
-                "NONE", "MATH", "PHYSICS", "CHEMISTRY", "COMPUTER SCIENCE", "SPANISH", "ENGLISH", "UNSURE"
-        );
-
-        discipline.setValue("NONE");
-        grid.add(discipline, 1, 12);
-
-        int maxChar = 3;
-        prefix = new TextField();
-        prefix.setEditable(true);
-        prefix.setDisable(false);
-        prefix.setVisible(true);
-        prefix.setMaxWidth(65.0);
-        prefix.setPromptText("ex: 123");
-        prefix.setTranslateX(-55);
-        Book.numericOnly(prefix);
-        Book.setTextLimit(prefix, 3);
-        grid.add(prefix, 2, 12);
-
-        /**
-        discipline.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-            public void handle(ActionEvent event) {
-                if(discipline.getValue().equals("ENTER PREFIX"))
-                {
-                    prefix.setDisable(false);
-                    prefix.setVisible(true);
-                }
-                else
-                {
-                    prefix.setDisable(true);
-                    prefix.setVisible(false);
-                }
-            }
-        });
-        **/
-
         Text sug = new Text(" Suggested Price : ");
         sug.setFont(myFont);
         sug.setWrappingWidth(150);
         sug.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(sug, 0, 13);
+        grid.add(sug, 0, 11);
 
         suggestedPrice = new TextField();
         suggestedPrice.setText("0.00");
         suggestedPrice.setEditable(true);
-        grid.add(suggestedPrice, 1, 13);
+        grid.add(suggestedPrice, 1, 11);
 
         Text not = new Text(" Notes : ");
         not.setFont(myFont);
         not.setWrappingWidth(150);
         not.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(not, 0, 14);
+        grid.add(not, 0, 12);
 
         notes = new TextField();
         notes.setEditable(true);
-        grid.add(notes, 1, 14);
+        grid.add(notes, 1, 12);
 
-        Text bStatus = new Text(" Book's Status : ");
-        bStatus.setFont(myFont);
-        bStatus.setWrappingWidth(150);
-        bStatus.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(bStatus, 0, 15);
-
-        status = new ComboBox();
-        status.getItems().addAll(
-                setStatusBoxFields()
-        );
-
-        status.setValue("Active");
-        grid.add(status, 1, 15);
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -324,12 +253,14 @@ public class AddBookView extends View{
         // consider using GridPane.setHgap(10); instead of label space
         HBox buttonCont = new HBox(10);
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(cancelButton);
+        buttonCont.getChildren().add(submitButton);
+
         Label space = new Label("               ");
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(space);
+
         buttonCont.setAlignment(Pos.CENTER);
-        buttonCont.getChildren().add(submitButton);
+        buttonCont.getChildren().add(cancelButton);
         vbox.getChildren().add(grid);
         vbox.getChildren().add(buttonCont);
 

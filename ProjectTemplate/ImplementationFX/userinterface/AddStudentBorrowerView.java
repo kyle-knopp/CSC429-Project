@@ -277,7 +277,7 @@ public class AddStudentBorrowerView extends View
                 myModel.stateChangeRequest("CancelTransaction", null);
             }
         });
-        doneCont.getChildren().add(backButton);
+
 
         doneButton = new Button(setSubmitButtonLabel());
         doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
@@ -287,7 +287,14 @@ public class AddStudentBorrowerView extends View
                 processAction(e);
             }
         });
+
         doneCont.getChildren().add(doneButton);
+
+        Label space = new Label("               ");
+        doneCont.setAlignment(Pos.CENTER);
+        doneCont.getChildren().add(space);
+
+        doneCont.getChildren().add(backButton);
 
         vbox.getChildren().add(grid);
         vbox.getChildren().add(doneCont);

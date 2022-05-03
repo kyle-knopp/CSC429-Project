@@ -33,7 +33,7 @@ public class SearchWorkerViewD extends View
     // GUI components
     protected TextField SearchWorker;
 
-    protected Button doneButton;
+    protected Button backButton;
     protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
@@ -108,9 +108,9 @@ public class SearchWorkerViewD extends View
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
 
-        doneButton = new Button("Back");
-        doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton = new Button("Back");
+        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
@@ -118,7 +118,7 @@ public class SearchWorkerViewD extends View
                 myModel.stateChangeRequest("CancelTransaction", null);
             }
         });
-        doneCont.getChildren().add(doneButton);
+
 
         submitButton = new Button("Submit");
         submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
@@ -136,7 +136,14 @@ public class SearchWorkerViewD extends View
                 myModel.stateChangeRequest("WorkerCollectionDeleteView", p);
             }
         });
+
         doneCont.getChildren().add(submitButton);
+
+        Label space = new Label("               ");
+        doneCont.setAlignment(Pos.CENTER);
+        doneCont.getChildren().add(space);
+
+        doneCont.getChildren().add(backButton);
 
 
         vbox.getChildren().add(grid);

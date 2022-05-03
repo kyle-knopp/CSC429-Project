@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -27,7 +28,7 @@ public class SearchSBView extends View
     protected TextField SearchStudentBorrower;
     protected TextField SearchBannerId;
 
-    protected Button doneButton;
+    protected Button backButton;
     protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
@@ -140,9 +141,9 @@ public class SearchSBView extends View
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
 
-        doneButton = new Button("Back");
-        doneButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-        doneButton.setOnAction(new EventHandler<ActionEvent>() {
+        backButton = new Button("Back");
+        backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
@@ -150,7 +151,6 @@ public class SearchSBView extends View
                 myModel.stateChangeRequest("CancelTransaction", null);
             }
         });
-        doneCont.getChildren().add(doneButton);
 
         submitButton = new Button("Submit");
         submitButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
@@ -162,7 +162,14 @@ public class SearchSBView extends View
                 processSubmit();
             }
         });
+
         doneCont.getChildren().add(submitButton);
+
+        Label space = new Label("               ");
+        doneCont.setAlignment(Pos.CENTER);
+        doneCont.getChildren().add(space);
+
+        doneCont.getChildren().add(backButton);
 
 
         vbox.getChildren().add(grid1);

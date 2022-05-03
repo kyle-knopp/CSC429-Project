@@ -57,6 +57,7 @@ public class  AddWorkerTransaction extends Transaction
         {
             try {
                 oldWorker = new Worker((String) props.getProperty("bannerID"));
+                transactionErrorMessage="Error: Banner Id already Taken";
             }catch (Exception e){
                 myWorker = new Worker(props);
                 myWorker.save("add");

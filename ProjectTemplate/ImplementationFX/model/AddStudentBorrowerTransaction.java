@@ -58,6 +58,7 @@ public class AddStudentBorrowerTransaction extends Transaction
         {
             try {
                 oldStudentBorrower = new StudentBorrower((String) props.getProperty("BannerId"));
+                transactionErrorMessage="Error: Banner Id already Taken";
             }catch (Exception e){
                 myStudentBorrower = new StudentBorrower(props);
                 myStudentBorrower.save("add");

@@ -284,12 +284,12 @@ public class AddBookView extends View{
         String publi = publisher.getText();
         String yeaO = yearOfPublication.getText();
         String isb = ISBN.getText();
-        String condi = (String) quality.getValue();
-        String disc = (String) quality.getValue();
-        String pref = prefix.getText();
+        //String condi = (String) quality.getValue();
+        //String disc = (String) quality.getValue();
+        //String pref = prefix.getText();
         String sugPric = suggestedPrice.getText();
         String no = notes.getText();
-        String sta = (String) status.getValue();
+        //String sta = (String) status.getValue();
 
 
 
@@ -311,9 +311,9 @@ public class AddBookView extends View{
                             p2.setProperty("ISBN", isb);
                             p2.setProperty("suggestedPrice", sugPric);
                             p2.setProperty("notes", no);
-                            p2.setProperty("bookCondition", condi);
+                            p2.setProperty("bookCondition", "Good");
                             //p2.setProperty("bookDiscipline", disc);
-                            p2.setProperty("Status", sta);
+                            p2.setProperty("Status", "Active");
                             p2.setProperty("prefix", getBookPrefix(bar));
                             myModel.stateChangeRequest("AddBook", p2);
                         }else{
@@ -436,8 +436,8 @@ public class AddBookView extends View{
             suggestedPrice.clear();
             notes.clear();
 
-            quality.setValue("Good");
-            status.setValue("Active");
+            //quality.setValue("Good");
+            //status.setValue("Active");
             suggestedPrice.setText("0.00");
         }
         statusLog.displayMessage(message);

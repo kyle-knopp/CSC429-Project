@@ -39,6 +39,8 @@ public class BookTableModel {
 
     private final SimpleStringProperty Prefix;
 
+    private final SimpleStringProperty Discipline;
+
     public BookTableModel(Vector<String> accountData) {
 
         Barcode = new SimpleStringProperty(accountData.elementAt(0));
@@ -68,6 +70,8 @@ public class BookTableModel {
         Status = new SimpleStringProperty(accountData.elementAt(12));
 
         Prefix = new SimpleStringProperty(accountData.elementAt(13));
+
+        Discipline = new SimpleStringProperty(accountData.elementAt(14));
 
     }
 
@@ -181,5 +185,13 @@ public class BookTableModel {
 
     public void setPrefix(String s) {
         this.Prefix.set(s);
+    }
+
+    public String getDiscipline() {
+        return Discipline.get();
+    }
+
+    public void setDiscipline(String s) {
+        this.Discipline.set(s);
     }
 }

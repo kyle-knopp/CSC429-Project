@@ -24,6 +24,7 @@ import model.StudentBorrowerCollection;
 import model.StudentBorrower;
 
 import java.util.Enumeration;
+import java.util.Optional;
 import java.util.Vector;
 
 public class StudentBorrowerCollectionAdminView  extends View{
@@ -263,7 +264,19 @@ public class StudentBorrowerCollectionAdminView  extends View{
             if(selectedItem.getBorrowerStatus().equals("Delinquent")){
                // statusLog.displayErrorMessage("Student Borrower Delinquent, Cannot Check out Book");
                 //put an alert or screen
-                DelinquentAlert();
+                //DelinquentAlert();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("DelCheck");
+                alert.setHeaderText("StudentBorrower Delinquent");
+                alert.setContentText("Would you like to override?");
+
+
+                Optional<ButtonType> result =alert.showAndWait();
+                if(result.isPresent()&&result.get() == ButtonType.OK){
+                    String selectedAcctNumber = selectedItem.getBannerId();
+                    myModel.stateChangeRequest("CheckOutBookView", selectedAcctNumber);
+                }
+
             }else {
                 String selectedAcctNumber = selectedItem.getBannerId();
 
@@ -273,11 +286,16 @@ public class StudentBorrowerCollectionAdminView  extends View{
     }
 
     public void  DelinquentAlert(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("DelCheck");
         alert.setHeaderText("StudentBorrower Delinquent");
         alert.setContentText("Would you like to override?");
-        alert.showAndWait();
+
+
+        Optional<ButtonType> result =alert.showAndWait();
+        if(result.isPresent()&&result.get() == ButtonType.OK){
+
+        }
     }
 
     //--------------------------------------------------------------------------

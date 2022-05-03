@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Book;
 
 import java.util.EventObject;
 import java.util.Properties;
@@ -113,6 +114,8 @@ public class ModifyBookView extends View{
 
         barcode = new TextField();
         barcode.setEditable(false);
+        Book.setTextLimit(barcode, 9);
+        Book.numericOnly(barcode);
         grid.add(barcode, 1, 1);
 
         Text tit = new Text(" Title : ");
@@ -184,6 +187,8 @@ public class ModifyBookView extends View{
 
         yearOfPublication = new TextField();
         yearOfPublication.setEditable(true);
+        Book.setTextLimit(yearOfPublication, 4);
+        Book.numericOnly(yearOfPublication);
         grid.add(yearOfPublication, 1, 9);
 
         Text iS = new Text(" ISBN : ");
@@ -194,6 +199,7 @@ public class ModifyBookView extends View{
 
         ISBN = new TextField();
         ISBN.setEditable(true);
+        Book.numericOnly(ISBN);
         grid.add(ISBN, 1, 10);
 
         Text con = new Text(" Condition : ");

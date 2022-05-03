@@ -431,5 +431,8 @@
 [4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
 [4/26/22, 6:18 PM]|CheckOutBookTransaction|Transaction|Error|NOTAG|null<Error in creating Transaction view>
-[5/3/22, 6:04 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'prefix' doesn't have a default value>
-[5/3/22, 6:04 PM]|Book|insertPersistentState|Error|NOTAG|null<SQL Exception: 1364: Field 'prefix' doesn't have a default value>
+[4/28/22, 11:26 AM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 4444 Already Checked Out.>
+[4/28/22, 11:26 AM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 4444 Already Checked Out.>
+[4/28/22, 12:57 PM]|Book|getSelectQueryResult|Error|NOTAG|null<SQL Exception: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1>
+[4/28/22, 12:57 PM]|ModifyBookTransaction|processBarcode|Error|NOTAG|null<Error in finding book exception.InvalidPrimaryKeyException: No book matching barcode :  found.>
+[4/28/22, 12:59 PM]|CheckOutBookTransaction|processTransaction|Error|NOTAG|null<Error: Book Already Checked Out.exception.InvalidPrimaryKeyException: Error: Book 4444 Already Checked Out.>

@@ -123,22 +123,75 @@ public class ModifyWorkerView extends AddWorkerView
     private void processAction(ActionEvent e) {
         clearErrorMessage();
 
-        Properties p = new Properties();
+        String ban = bannerId.getText();
+        String pass = password.getText();
+        String fName = first.getText();
+        String lName = last.getText();
+        String pho = phone.getText();
+        String eml = email.getText(); //
+        String credentials = (String) cred.getValue();
+        String latestCred = dOLC.getText();
+        String dateHire = doh.getText();
+        String stat = (String) status.getValue();
+        String checkPrefix = "800";
+        Properties p1 = new Properties();
 
-        p.put("bannerID", bannerId.getText());
-        p.put("firstName", first.getText());
-        p.put("lastName", last.getText());
-        p.put("phone", phone.getText());
-        p.put("email", email.getText());
-        //p.put("dateOfLatestCredentials", dOLC.getText());
-        p.put("dateOfLatestCredentials", DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("password", password.getText());
-        //p.put("dateOfHire", doh.getText());
-        p.put("dateOfHire", DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("credentials",cred.getValue());
-        p.put("status", status.getValue());
 
-        myModel.stateChangeRequest("UpdateWorker", p);
+        if ((ban.length() == 8) && (ban.substring(0, 2)).equals(checkPrefix)) {
+            p1.setProperty("bannerID", ban);
+            if (pass.length() != 0) {
+                p1.setProperty("password", pass);
+                if (fName.length() != 0) {
+                    p1.setProperty("firstName", fName);
+                    if (lName.length() != 0) {
+                        p1.setProperty("lastName", lName);
+                        if (((pho.length()) != 9) && (pho.matches("[0-9]+"))) {
+                            p1.setProperty("phone", pho);
+                            if (eml.length() != 0) {
+                                p1.setProperty("email", eml);
+                                p1.setProperty("credentials", credentials);
+                                p1.setProperty("dateOfLatestCredentials", latestCred);
+                                p1.setProperty("dateOfHire", dateHire);
+                                p1.setProperty("status", stat);
+                                myModel.stateChangeRequest("UpdateWorker", p1);
+                            } else {
+                                displayErrorMessage("Error: Email must have an entry!");
+                            }
+                        } else {
+                            displayErrorMessage("Error: PhoneNumber must have nine digits and be composed of numbers!");
+                        }
+                    } else {
+                        displayErrorMessage("Error: LastName must have an entry!");
+                    }
+                } else {
+                    displayErrorMessage("Error: FirstName must have an entry!");
+                }
+            } else {
+                displayErrorMessage("Error: Password must have an entry!");
+            }
+        } else {
+            displayErrorMessage("Error: BannerID must be exactly eight digits");
+
+        }
+
+
+
+//        Properties p = new Properties();
+//
+//        p.put("bannerID", bannerId.getText());
+//        p.put("firstName", first.getText());
+//        p.put("lastName", last.getText());
+//        p.put("phone", phone.getText());
+//        p.put("email", email.getText());
+//        //p.put("dateOfLatestCredentials", dOLC.getText());
+//        p.put("dateOfLatestCredentials", DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//        p.put("password", password.getText());
+//        //p.put("dateOfHire", doh.getText());
+//        p.put("dateOfHire", DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//        p.put("credentials",cred.getValue());
+//        p.put("status", status.getValue());
+//
+//        myModel.stateChangeRequest("UpdateWorker", p);
     }
 
     /**

@@ -31,6 +31,7 @@ import java.util.Properties;
 
 // project imports
 import impresario.IModel;
+import model.StudentBorrower;
 
 // The class containing the Account View  for the ATM application
 //==============================================================
@@ -141,6 +142,8 @@ public class AddStudentBorrowerView extends View
 
         BannerId = new TextField();
         BannerId.setEditable(true);
+        StudentBorrower.setTextLimit(BannerId,9);
+        StudentBorrower.numericOnly(BannerId);
         grid.add(BannerId, 1, 1);
 
 
@@ -173,6 +176,8 @@ public class AddStudentBorrowerView extends View
 
         ContactPhone = new TextField();
         ContactPhone.setEditable(true);
+        StudentBorrower.setTextLimit(ContactPhone, 10);
+        StudentBorrower.numericOnly(ContactPhone);
         grid.add(ContactPhone, 1, 4);
 
         Label = new Text(" Email : ");
@@ -183,6 +188,7 @@ public class AddStudentBorrowerView extends View
 
         Email = new TextField();
         Email.setEditable(true);
+        StudentBorrower.setTextLimit(Email, 30);
         grid.add(Email, 1, 5);
 
         Label = new Text("  Date Of Latest Borrower Status: ");
@@ -367,20 +373,58 @@ public class AddStudentBorrowerView extends View
 
         Properties p = new Properties();
 
-        p.put("BannerId", BannerId.getText());
-        p.put("FirstName", FirstName.getText());
-        p.put("LastName", LastName.getText());
-        p.put("ContactPhone", ContactPhone.getText());
-        p.put("Email", Email.getText());
-        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        //p.put("DateOfRegistration", DateOfRegistration.getText());
-        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("Notes", Notes.getText());
-        p.put("status",statusBox.getValue());
-        p.put("BorrowerStatus",borrStatBox.getValue());
+        if(((BannerId.getText()).toString().length() == 9)){
+            p.put("BannerId", BannerId.getText());
+            if(((FirstName.getText()).toString()).length() != 0){
+                p.put("FirstName", FirstName.getText());
+                if(((LastName.getText()).toString()).length() != 0){
+                    p.put("LastName", LastName.getText());
+                    if(((((ContactPhone.getText()).toString()).length()) == 10) && ((ContactPhone.getText()).matches("[0-9]+"))){
+                        p.put("ContactPhone", ContactPhone.getText());
+                        if(((Email.getText()).toString().length() != 0)){
+                            p.put("Email", Email.getText());
+                            p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                            p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                            p.put("Notes", Notes.getText());
+                            p.put("status",statusBox.getValue());
+                            p.put("BorrowerStatus",borrStatBox.getValue());
+                            myModel.stateChangeRequest("AddStudentBorrower", p);
 
-        myModel.stateChangeRequest("AddStudentBorrower", p);
+                        }
+                        else{
+                            displayErrorMessage("Error: Email must be have an entry");
+                        }
+                    }
+                    else{
+                        displayErrorMessage("Error: ContactNumber must be composed of only numbers, and 9 digits long");
+                    }
+                }
+                else{
+                    displayErrorMessage("Error: LastName must have an entry");
+                }
+            }
+            else{
+                displayErrorMessage("Error: FirstName must have an entry");
+            }
+        }else{
+            displayErrorMessage("Error: BannerID must be exactly ten digits");
+        }
+
+
+//        p.put("BannerId", BannerId.getText());
+//        p.put("FirstName", FirstName.getText());
+//        p.put("LastName", LastName.getText());
+//        p.put("ContactPhone", ContactPhone.getText());
+//        p.put("Email", Email.getText());
+//        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+//        //p.put("DateOfRegistration", DateOfRegistration.getText());
+//        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//        p.put("Notes", Notes.getText());
+//        p.put("status",statusBox.getValue());
+//        p.put("BorrowerStatus",borrStatBox.getValue());
+//
+//        myModel.stateChangeRequest("AddStudentBorrower", p);
 
 
     }

@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import model.Book;
 
 import java.util.EventObject;
 import java.util.Properties;
@@ -117,7 +118,8 @@ public class AddBookView extends View{
         grid.add(bcode, 0, 1);
 
         barcode = new TextField();
-        numericOnly(barcode);
+        Book.numericOnly(barcode);
+        Book.setTextLimit(barcode, 9);
         barcode.setEditable(true);
         grid.add(barcode, 1, 1);
 
@@ -190,7 +192,8 @@ public class AddBookView extends View{
 
         yearOfPublication = new TextField();
         yearOfPublication.setEditable(true);
-        numericOnly(yearOfPublication);
+        Book.setTextLimit(yearOfPublication, 4);
+        Book.numericOnly(yearOfPublication);
         yearOfPublication.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -207,7 +210,8 @@ public class AddBookView extends View{
 
         ISBN = new TextField();
         ISBN.setEditable(true);
-        numericOnly(ISBN);
+        Book.setTextLimit(ISBN, 9);
+        Book.numericOnly(ISBN);
         grid.add(ISBN, 1, 10);
 
         Text con = new Text(" Book Condition : ");
@@ -232,7 +236,7 @@ public class AddBookView extends View{
 
         discipline = new ComboBox();
         discipline.getItems().addAll(
-                "NONE", "MATH", "PHYSICS", "CHEMISTRY", "COMPUTER SCIENCE", "SPANISH", "ENGLISH", "ENTER PREFIX"
+                "NONE", "MATH", "PHYSICS", "CHEMISTRY", "COMPUTER SCIENCE", "SPANISH", "ENGLISH", "UNSURE"
         );
 
         discipline.setValue("NONE");
@@ -241,15 +245,16 @@ public class AddBookView extends View{
         int maxChar = 3;
         prefix = new TextField();
         prefix.setEditable(true);
-        prefix.setDisable(true);
-        prefix.setVisible(false);
+        prefix.setDisable(false);
+        prefix.setVisible(true);
         prefix.setMaxWidth(65.0);
         prefix.setPromptText("ex: 123");
         prefix.setTranslateX(-55);
-        numericOnly(prefix);
+        Book.numericOnly(prefix);
+        Book.setTextLimit(prefix, 3);
         grid.add(prefix, 2, 12);
 
-
+        /**
         discipline.setOnAction(new EventHandler<ActionEvent>() {
         @Override
             public void handle(ActionEvent event) {
@@ -265,6 +270,7 @@ public class AddBookView extends View{
                 }
             }
         });
+        **/
 
         Text sug = new Text(" Suggested Price : ");
         sug.setFont(myFont);
@@ -355,14 +361,15 @@ public class AddBookView extends View{
         String sta = (String) status.getValue();
 
 
+
         Properties p2 = new Properties();
-        if(bar.length()>3 && bar.length()<10 && bar.matches("[0-9]+")) {
+        if(bar.length() == 9 && bar.matches("[0-9]+")) {
             p2.setProperty("barcode", bar);
             if(titl.length()!=0) {
                 p2.setProperty("title", titl);
                 if(au1.length()!=0) {
                     p2.setProperty("author1", au1);
-                    if(yeaO.length()==4 && yeaO.matches("[0-9]+")) {
+                    if(yeaO.length()==4 && yeaO.matches("[0-9]+"))  {
                         p2.setProperty("yearOfPublication", yeaO);
                         if(isb.length()==9) {
                             p2.setProperty("author2", au2);
@@ -376,11 +383,14 @@ public class AddBookView extends View{
                             p2.setProperty("bookCondition", condi);
                             //p2.setProperty("bookDiscipline", disc);
                             p2.setProperty("Status", sta);
+                            p2.setProperty("prefix", getBookPrefix(bar));
                             myModel.stateChangeRequest("AddBook", p2);
                         }else{
                             displayErrorMessage("Error: ISBN must be 9 digits");
                         }
                     }else{
+                       // System.out.println("VALUE OF YEAR " + Integer.valueOf(yeaO));
+
                         displayErrorMessage("Error: Publication year must be 4 digits");
                     }
                 }else {
@@ -412,18 +422,7 @@ public class AddBookView extends View{
 
     }
 
-    public static void numericOnly(final TextField field) {
-        field.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(
-                    ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    field.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-    }
+
 
     public String getBookPrefix(String barccode){
 

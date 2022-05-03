@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Book;
 
 import java.util.Properties;
 
@@ -75,6 +76,8 @@ public class EnterBookBarcodeView extends View {
 
         barcode = new TextField();
         barcode.setEditable(true);
+        Book.setTextLimit(barcode, 9);
+        Book.numericOnly(barcode);
         grid.add(barcode, 1, 1);;
 
         submitButton = new Button("Submit");

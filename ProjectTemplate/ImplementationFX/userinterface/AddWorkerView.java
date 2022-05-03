@@ -17,6 +17,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Worker;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -119,6 +121,8 @@ public class AddWorkerView extends View{
 
         bannerId = new TextField();
         bannerId.setEditable(true);
+        Worker.setTextLimit(bannerId, 9);
+        Worker.numericOnly(bannerId);
         grid.add(bannerId, 1, 1);
 
         Text workerPass = new Text(" Password : ");
@@ -170,6 +174,7 @@ public class AddWorkerView extends View{
 
         email = new TextField();
         email.setEditable(true);
+        Worker.setTextLimit(email,30);
         grid.add(email, 1, 6);
 
         Text wCred = new Text(" Credentials : ");
@@ -311,24 +316,68 @@ public class AddWorkerView extends View{
         String latestCred = DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String dateHire = DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String stat = (String)status.getValue();
-
+       // String checkPrefix = "800"; && (ban.substring(0,2)).equals("800")
         Properties p1 = new Properties();
-        p1.setProperty("bannerID", ban);
-        p1.setProperty("password", pass);
-        p1.setProperty("firstName", fName);
-        p1.setProperty("lastName", lName);
-        p1.setProperty("phone", pho);
-        p1.setProperty("email", eml);
-        p1.setProperty("credentials", credentials);
-        p1.setProperty("dateOfLatestCredentials", latestCred);
-        p1.setProperty("dateOfHire", dateHire);
-        p1.setProperty("status",stat);
 
-        if (ban.length() < 3) {
-            databaseErrorBarcode();
-        }else {
-            myModel.stateChangeRequest("AddWorker", p1);
+        if((ban.length() == 9)){
+            p1.setProperty("bannerID", ban);
+            if(pass.length() != 0){
+                p1.setProperty("password", pass);
+                if(fName.length() != 0){
+                    p1.setProperty("firstName", fName);
+                    if(lName.length() != 0) {
+                        p1.setProperty("lastName", lName);
+                        if (((pho.length()) != 9) && (pho.matches("[0-9]+"))) {
+                            p1.setProperty("phone", pho);
+                            if(eml.length() != 0){
+                                p1.setProperty("email", eml);
+                                p1.setProperty("credentials", credentials);
+                                p1.setProperty("dateOfLatestCredentials", latestCred);
+                                p1.setProperty("dateOfHire", dateHire);
+                                p1.setProperty("status",stat);
+                                myModel.stateChangeRequest("AddWorker", p1);
+
+                            }
+                            else{
+                                displayErrorMessage("Error: Email must have an entry!");
+                            }
+                        } else {
+                            displayErrorMessage("Error: PhoneNumber must have nine digits and be composed of numbers!");
+                        }
+                    }
+                    else{
+                        displayErrorMessage("Error: LastName must have an entry!");
+                    }
+                }
+                else{
+                    displayErrorMessage("Error: FirstName must have an entry!");
+                }
+            }
+            else{
+                displayErrorMessage("Error: Password must have an entry!");
+            }
         }
+        else{
+            displayErrorMessage("Error: BannerID must be exactly eight digits");
+        }
+
+//        Properties p1 = new Properties();
+//        p1.setProperty("bannerID", ban);
+//        p1.setProperty("password", pass);
+//        p1.setProperty("firstName", fName);
+//        p1.setProperty("lastName", lName);
+//        p1.setProperty("phone", pho);
+//        p1.setProperty("email", eml);
+//        p1.setProperty("credentials", credentials);
+//        p1.setProperty("dateOfLatestCredentials", latestCred);
+//        p1.setProperty("dateOfHire", dateHire);
+//        p1.setProperty("status",stat);
+//
+//        if (ban.length() < 3) {
+//            databaseErrorBarcode();
+//        }else {
+//            myModel.stateChangeRequest("AddWorker", p1);
+//        }
 
 
 

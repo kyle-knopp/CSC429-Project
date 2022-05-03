@@ -104,6 +104,10 @@ public class ViewFactory {
 		{
 			return new StudentBorrowerCollectionView(model);
 		}
+		else if(viewName.equals("StudentBorrowerCollectionAdminView") == true)
+		{
+			return new StudentBorrowerCollectionAdminView(model);
+		}
 		else if(viewName.equals("BookCollectionView") == true)
 		{
 			return new BookCollectionView(model);

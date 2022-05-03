@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import model.Book;
 import model.DeleteBookTransaction;
 
 import java.util.EventObject;
@@ -131,6 +132,8 @@ public class DeleteBookView extends View{
 
         barcode = new TextField();
         barcode.setEditable(false);
+        Book.setTextLimit(barcode,9);
+        Book.numericOnly(barcode);
         barcode.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(barcode, 1, 1);
 
@@ -209,6 +212,8 @@ public class DeleteBookView extends View{
 
         yearOfPublication = new TextField();
         yearOfPublication.setEditable(false);
+        Book.numericOnly(yearOfPublication);
+        Book.setTextLimit(yearOfPublication, 4);
         yearOfPublication.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(yearOfPublication, 1, 9);
 
@@ -220,6 +225,7 @@ public class DeleteBookView extends View{
 
         ISBN = new TextField();
         ISBN.setEditable(false);
+        Book.numericOnly(ISBN);
         ISBN.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(ISBN, 1, 10);
 

@@ -105,13 +105,23 @@ public class CheckOutBookTransaction extends Transaction
             String bannerId = props.getProperty("BannerId");
             String name = props.getProperty("FirstName");
 
-            System.out.println("Banner Id: "+bannerId);
-            System.out.println("Name: "+name);
+            String admin = (String)systemWorker.getState("credentials");
+
+            //System.out.println("Banner Id: "+bannerId);
+            //System.out.println("Name: "+name);
 
             if (bannerId == null || bannerId.length() == 0) {
                 myStudentBorrowers = new StudentBorrowerCollection();
                 myStudentBorrowers.findStudentBorrowersWithNameLike(name);
-                createAndShowStudentCollectionView();
+
+
+                if(admin.equals("Administrator")) {
+
+                    createAndShowStudentCollectionAdminView();
+                }else{
+
+                    createAndShowStudentCollectionView();
+                }
 
             }
         }catch (Exception e){
@@ -125,11 +135,21 @@ public class CheckOutBookTransaction extends Transaction
         try {
             String bannerId = props.getProperty("BannerId");
 
-            System.out.println("Banner Id in process Student Banner Id: "+bannerId);
+            String admin = (String)systemWorker.getState("credentials");
+
+
+            //System.out.println("Banner Id in process Student Banner Id: "+bannerId);
 
             myStudentBorrowers = new StudentBorrowerCollection();
             myStudentBorrowers.findStudentBorrowersWithBannerId(bannerId);
-            createAndShowStudentCollectionView();
+
+            if(admin.equals("Administrator")) {
+
+                createAndShowStudentCollectionAdminView();
+            }else{
+
+                createAndShowStudentCollectionView();
+            }
 
         }catch (Exception e){
             transactionErrorMessage="Error in retrieving Student";
@@ -245,5 +265,18 @@ public class CheckOutBookTransaction extends Transaction
             myViews.put("StudentBorrowerCollectionView", currentScene);
         }
         swapToView(currentScene);
-    }
+
+
+        }
+        private void createAndShowStudentCollectionAdminView() {
+            Scene currentScene = (Scene) myViews.get("StudentBorrowerCollectionAdminView");
+
+            if (currentScene == null) {
+                // create our initial view
+                View newView = ViewFactory.createView("StudentBorrowerCollectionAdminView", this); // USE VIEW FACTORY
+                currentScene = new Scene(newView);
+                myViews.put("StudentBorrowerCollectionAdminView", currentScene);
+            }
+            swapToView(currentScene);
+        }
 }

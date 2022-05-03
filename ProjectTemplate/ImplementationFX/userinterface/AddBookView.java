@@ -210,6 +210,7 @@ public class AddBookView extends View{
 
         ISBN = new TextField();
         ISBN.setEditable(true);
+        //Book.setTextLimit(ISBN, 9);
         Book.numericOnly(ISBN);
         grid.add(ISBN, 1, 10);
 
@@ -360,6 +361,7 @@ public class AddBookView extends View{
         String sta = (String) status.getValue();
 
 
+
         Properties p2 = new Properties();
         if(bar.length()>3 && bar.length()<10 && bar.matches("[0-9]+")) {
             p2.setProperty("barcode", bar);
@@ -367,7 +369,7 @@ public class AddBookView extends View{
                 p2.setProperty("title", titl);
                 if(au1.length()!=0) {
                     p2.setProperty("author1", au1);
-                    if(yeaO.length()==4 && yeaO.matches("[0-9]+")) {
+                    if(yeaO.length()==4 && yeaO.matches("[0-9]+"))  {
                         p2.setProperty("yearOfPublication", yeaO);
                         if(isb.length()==9) {
                             p2.setProperty("author2", au2);
@@ -381,11 +383,14 @@ public class AddBookView extends View{
                             p2.setProperty("bookCondition", condi);
                             //p2.setProperty("bookDiscipline", disc);
                             p2.setProperty("Status", sta);
+                            p2.setProperty("prefix", getBookPrefix(bar));
                             myModel.stateChangeRequest("AddBook", p2);
                         }else{
                             displayErrorMessage("Error: ISBN must be 9 digits");
                         }
                     }else{
+                       // System.out.println("VALUE OF YEAR " + Integer.valueOf(yeaO));
+
                         displayErrorMessage("Error: Publication year must be 4 digits");
                     }
                 }else {

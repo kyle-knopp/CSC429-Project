@@ -276,7 +276,7 @@ public class AddBookView extends View{
 
         String bar = barcode.getText();
         String titl = title.getText();
-        String disi = " ";
+        String disc = " ";
         String au1 = author1.getText();
         String au2 = author2.getText();
         String au3 = author3.getText();
@@ -315,6 +315,10 @@ public class AddBookView extends View{
                             //p2.setProperty("bookDiscipline", disc);
                             p2.setProperty("Status", "Active");
                             p2.setProperty("prefix", getBookPrefix(bar));
+
+                            disc=getDiscipline(getBookPrefix(bar));
+                            p2.setProperty("discipline",disc);
+
                             myModel.stateChangeRequest("AddBook", p2);
                         }else{
                             displayErrorMessage("Error: ISBN must be 9 digits");
@@ -354,6 +358,23 @@ public class AddBookView extends View{
     }
 
 
+    private String getDiscipline(String prefix){
+        String dis="None";
+        if(Integer.parseInt(prefix)>=100 && Integer.parseInt(prefix)<200){
+            dis="English";
+        }else if(Integer.parseInt(prefix)>=200 && Integer.parseInt(prefix)<300){
+            dis="Mathematics";
+        }else if(Integer.parseInt(prefix)>=300 && Integer.parseInt(prefix)<400){
+            dis="Physics";
+        }else if(Integer.parseInt(prefix)>=400 && Integer.parseInt(prefix)<500){
+            dis="Computer Science";
+        }else if(Integer.parseInt(prefix)>=500 && Integer.parseInt(prefix)<600){
+            dis="Spanish";
+        }else if(Integer.parseInt(prefix)>=600 && Integer.parseInt(prefix)<700){
+            dis="Chemistry";
+        }
+        return dis;
+    }
 
     public String getBookPrefix(String barccode){
 

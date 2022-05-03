@@ -316,10 +316,10 @@ public class AddWorkerView extends View{
         String latestCred = DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String dateHire = DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String stat = (String)status.getValue();
-        String checkPrefix = "800";
+       // String checkPrefix = "800"; && (ban.substring(0,2)).equals("800")
         Properties p1 = new Properties();
 
-        if((ban.length() == 8) && (ban.substring(0,2)).equals(checkPrefix)){
+        if((ban.length() == 9)){
             p1.setProperty("bannerID", ban);
             if(pass.length() != 0){
                 p1.setProperty("password", pass);

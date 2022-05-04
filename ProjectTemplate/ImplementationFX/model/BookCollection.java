@@ -80,7 +80,7 @@ public class BookCollection  extends EntityBase
         //query
 
         String query = "SELECT barcode, title, author1, author2, author3, author4, publisher, yearOfPublication,\n" +
-                "ISBN, suggestedPrice, notes, bookCondition, Status, prefix\n" +
+                "ISBN, suggestedPrice, notes, bookCondition, Status, prefix, discipline\n" +
                 "FROM " + myTableName + "\n" +
                 "LEFT JOIN rental ON book.barcode = rental.BookId\n" +
                 "WHERE rental.CheckoutDate IS NOT NULL AND rental.CheckinDate IS NULL;";

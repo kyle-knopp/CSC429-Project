@@ -238,6 +238,19 @@ public class ModifyBookView extends View{
         notes.setEditable(true);
         grid.add(notes, 1, 13);
 
+        Text stat = new Text(" Status : ");
+        stat.setFont(myFont);
+        stat.setWrappingWidth(150);
+        stat.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(stat, 0, 14);
+
+        status = new ComboBox();
+        status.getItems().addAll(
+                "Active",
+                "Inactive"
+        );
+
+        grid.add(status, 1, 14);
 
 
         submitButton = new Button("Submit");
@@ -290,7 +303,7 @@ public class ModifyBookView extends View{
         String condi = (String) quality.getValue();
         String sugPric = suggestedPrice.getText();
         String no = notes.getText();
-        String stat= (String)myModel.getState("Status");
+        String stat= (String)status.getValue(); //(String)myModel.getState("Status");
 
         Properties p2 = new Properties();
 
@@ -352,6 +365,7 @@ public class ModifyBookView extends View{
         String conditionText = (String) myModel.getState("bookCondition");
         String sugPriceText = (String) myModel.getState("suggestedPrice");
         String notesText = (String) myModel.getState("notes");
+        String stat = (String) myModel.getState("Status");
 
         barcode.setText(barcodeText);
         barcode.setEditable(false);
@@ -366,6 +380,7 @@ public class ModifyBookView extends View{
         //bookCondition.setValue(conditionText);
         suggestedPrice.setText(sugPriceText);
         notes.setText(notesText);
+        status.setValue(stat);
     }
 
     /**

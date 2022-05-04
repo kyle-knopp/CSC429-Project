@@ -82,11 +82,14 @@ public class CheckOutBookTransaction extends Transaction
             oldRental = new Rental();
             oldRental.findIfBookIsOut(bookId);
            // System.out.println("****Old Rental****: "+oldRental);
-
-            myRental = new Rental(props);
-            myRental.checkOut("checkOut");
-            transactionErrorMessage = "Book Successfully Checked Out!";
-            //transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
+            if(myBook.getState("Status").equals("Inactive")){
+                transactionErrorMessage="Error Book has been deleted";
+            }else {
+                myRental = new Rental(props);
+                myRental.checkOut("checkOut");
+                transactionErrorMessage = "Book Successfully Checked Out!";
+                //transactionErrorMessage = (String) myRental.getState("UpdateStatusMessage");
+            }
         }catch(InvalidPrimaryKeyException e){
             transactionErrorMessage="Error: Book Already Checked Out.";
             System.out.println(transactionErrorMessage);

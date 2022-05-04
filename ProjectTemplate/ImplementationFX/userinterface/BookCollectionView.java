@@ -206,16 +206,16 @@ public class BookCollectionView extends View {
         StatusColumn.setCellValueFactory(
                 new PropertyValueFactory<StudentBorrowerTableModel, String>("Status"));
 
-        TableColumn prefixColumn = new TableColumn("Prefix") ;
-        prefixColumn.setMinWidth(100);
-        prefixColumn.setCellValueFactory(
-                new PropertyValueFactory<StudentBorrowerTableModel, String>("prefix"));
+        TableColumn disciplineColumn = new TableColumn("Discipline") ;
+        disciplineColumn.setMinWidth(100);
+        disciplineColumn.setCellValueFactory(
+                new PropertyValueFactory<StudentBorrowerTableModel, String>("Discipline"));
 
         tableOfBooks.getColumns().addAll(barcodeColumn, titleColumn,
                 author1Column,  author2Column,
                 author3Column, author4Column, publisherColumn,
                 yearOfPublicationColumn, ISBNColumn, suggestedPriceColumn,
-                notesColumn, bookConditionColumn, StatusColumn, prefixColumn);
+                notesColumn, bookConditionColumn, StatusColumn, disciplineColumn);
 
         tableOfBooks.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

@@ -35,6 +35,7 @@ public class DeleteBookView extends View{
     protected TextField quality;
     protected TextArea notes;
     protected Text alreadyDeleted;
+    protected TextField discipline;
 
     protected String barcodeText;
     protected String titleText;
@@ -50,7 +51,7 @@ public class DeleteBookView extends View{
     protected String notesText;
     protected String stat;
 
-    protected ComboBox discipline;
+    //protected ComboBox discipline;
     //protected ComboBox quality;
     protected ComboBox status;
 
@@ -111,18 +112,20 @@ public class DeleteBookView extends View{
         VBox vbox = new VBox(10);
 
         GridPane grid = new GridPane();
+        //grid.setGridLinesVisible(true);
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
+        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
+
         Text prompt = new Text("Do you wish to DELETE the following book?");
+        prompt.setFont(Font.font("Helvetica",FontWeight.EXTRA_BOLD,14));
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
         grid.add(prompt, 0, 0, 2, 1);
-
-        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
         Text bar= new Text("Barcode : ");
         bar.setFont(myFont);
@@ -264,11 +267,22 @@ public class DeleteBookView extends View{
         suggestedPrice.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(suggestedPrice, 1, 12);
 
+        Text dis = new Text(" Discipline : ");
+        dis.setFont(myFont);
+        dis.setWrappingWidth(150);
+        dis.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(dis, 0, 13);
+
+        discipline = new TextField();
+        discipline.setEditable(false);;
+        discipline.setStyle("-fx-background-color: -fx-control-inner-background;");
+        grid.add(discipline, 1, 13);
+
         Text not = new Text(" Notes : ");
         not.setFont(myFont);
         not.setWrappingWidth(150);
         not.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(not, 0, 13);
+        grid.add(not, 0, 14);
 
         notes = new TextArea();
         notes.setEditable(false);
@@ -276,12 +290,12 @@ public class DeleteBookView extends View{
         notes.setMaxWidth(250);
         notes.setMaxHeight(50);
         notes.setStyle("-fx-background-color: -fx-control-inner-background;");
-        grid.add(notes, 1, 13);
+        grid.add(notes, 1, 14);
 
         alreadyDeleted=new Text();
         alreadyDeleted.setText("");
         alreadyDeleted.setFill(Color.RED);
-        grid.add(alreadyDeleted,0,14);
+        //grid.add(alreadyDeleted,0,15);
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -307,7 +321,9 @@ public class DeleteBookView extends View{
         buttonCont.getChildren().add(space);
         buttonCont.setAlignment(Pos.CENTER);
         buttonCont.getChildren().add(cancelButton);
+        //vbox.getChildren().add(prompt);
         vbox.getChildren().add(grid);
+        vbox.getChildren().add(alreadyDeleted);
         vbox.getChildren().add(buttonCont);
 
 
@@ -414,6 +430,7 @@ public class DeleteBookView extends View{
         String sugPriceText = (String) myModel.getState("suggestedPrice");
         String notesText = (String) myModel.getState("notes");
         String stat= (String)myModel.getState("Status");
+        String dis =(String) myModel.getState("discipline");
 
 
         barcode.setText(barcodeText);
@@ -429,6 +446,7 @@ public class DeleteBookView extends View{
         quality.setText(conditionText);
         suggestedPrice.setText(sugPriceText);
         notes.setText(notesText);
+        discipline.setText(dis);
 
         if(stat.equals("Inactive"))
         {

@@ -40,6 +40,19 @@ public class DeleteWorkerView extends AddWorkerView
     {
         super(worker);
 
+        Text wStatus = new Text(" Status : ");
+        wStatus.setFont(myFont);
+        wStatus.setWrappingWidth(150);
+        wStatus.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(wStatus, 0, 8);
+
+        status = new ComboBox();
+        status.getItems().addAll(
+                setStatusBoxFields()
+        );
+
+        grid.add(status, 1, 8);
+
         Text wDOLC = new Text(" Date Of Latest Credentials : ");
         wDOLC.setFont(myFont);
         wDOLC.setWrappingWidth(150);

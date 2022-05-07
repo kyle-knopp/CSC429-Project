@@ -54,19 +54,41 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
 
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
+        Label = new Text("  Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 7);
+
+        Text status = new Text();
+        status.setText((String) myModel.getState("status"));
+        status.setFill(Color.GRAY);
+        grid.add(status,1,7);
+
+        Label = new Text("  Borrower Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 8);
+
+        Text borrStat= new Text();
+        borrStat.setText((String) myModel.getState("BorrowerStatus"));
+        borrStat.setFill(Color.GRAY);
+        grid.add(borrStat,1,8);
+
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 10);
-        grid.add(DOR,1,10);
+        grid.add(Label, 0, 9);
+        grid.add(DOR,1,9);
 
         Label = new Text("  Date Of Latest Borrower Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 11);
-        grid.add(DOLBS,1,11);
+        grid.add(Label, 0, 10);
+        grid.add(DOLBS,1,10);
 
         grid.add(alreadyDeleted,0,12);
 
@@ -93,6 +115,7 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
     protected String setSubmitButtonLabel(){
         return "Delete";
     }
+
 
 
     // Create the status log field

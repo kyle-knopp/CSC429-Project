@@ -105,6 +105,7 @@ public class AddBookView extends View{
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         Text prompt = new Text("BOOK INFORMATION");
+        prompt.setFont(Font.font("Helvetica",FontWeight.EXTRA_BOLD,14));
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);

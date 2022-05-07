@@ -115,6 +115,7 @@ public class AddWorkerView extends View{
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         Text prompt = new Text(setPrompt());
+        prompt.setFont(Font.font("Helvetica",FontWeight.EXTRA_BOLD,14));
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -238,7 +239,7 @@ public class AddWorkerView extends View{
         wStatus.setFont(myFont);
         wStatus.setWrappingWidth(150);
         wStatus.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(wStatus, 0, 8);
+        //grid.add(wStatus, 0, 8);
 
         status = new ComboBox();
         status.getItems().addAll(
@@ -246,7 +247,7 @@ public class AddWorkerView extends View{
         );
 
         status.setValue("Active");
-        grid.add(status, 1, 8);
+        //grid.add(status, 1, 8);
 
         alreadyDeleted=new Text();
         alreadyDeleted.setText("");

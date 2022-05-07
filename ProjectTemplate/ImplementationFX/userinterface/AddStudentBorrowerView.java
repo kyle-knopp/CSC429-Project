@@ -47,7 +47,7 @@ public class AddStudentBorrowerView extends View
     protected TextField Email;
     protected TextField DateOfLatestBorrowerStatus;
     protected TextField DateOfRegistration;
-    protected TextField Notes;
+    protected TextArea Notes;
 
     protected DatePicker DOLBS, DOR;
 
@@ -124,6 +124,7 @@ public class AddStudentBorrowerView extends View
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         Text prompt = new Text(setPrompt());
+        prompt.setFont(Font.font("Helvetica",FontWeight.EXTRA_BOLD,14));
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -235,31 +236,35 @@ public class AddStudentBorrowerView extends View
         Label.setTextAlignment(TextAlignment.RIGHT);
         grid.add(Label, 0, 6);
 
-        Notes = new TextField();
-        Notes.setEditable(true);
+        Notes = new TextArea();
+        //notes.setEditable(false);
+        Notes.setWrapText(true);
+        Notes.setMaxWidth(250);
+        Notes.setMaxHeight(50);
+        Notes.setEditable(true);;
         grid.add(Notes, 1, 6);
 
         Label = new Text("  Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 7);
+        //grid.add(Label, 0, 7);
 
         statusBox = new ComboBox();
         statusBox.getItems().addAll(setStatusBoxFields());
         statusBox.getSelectionModel().selectFirst();;
-        grid.add(statusBox,1,7);
+        //grid.add(statusBox,1,7);
 
         Label = new Text("  Borrower Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 8);
+        //grid.add(Label, 0, 8);
 
         borrStatBox= new ComboBox();
         borrStatBox.getItems().addAll(setBorrowerStatusBoxFields());
         borrStatBox.getSelectionModel().selectFirst();;
-        grid.add(borrStatBox,1,8);
+        //grid.add(borrStatBox,1,8);
 
         alreadyDeleted=new Text();
         alreadyDeleted.setText("");

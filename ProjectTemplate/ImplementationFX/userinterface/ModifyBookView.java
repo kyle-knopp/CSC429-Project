@@ -99,6 +99,7 @@ public class ModifyBookView extends View{
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         Text prompt = new Text("BOOK INFORMATION");
+        prompt.setFont(Font.font("Helvetica",FontWeight.EXTRA_BOLD,14));
         prompt.setWrappingWidth(400);
         prompt.setTextAlignment(TextAlignment.CENTER);
         prompt.setFill(Color.BLACK);
@@ -257,6 +258,21 @@ public class ModifyBookView extends View{
 
         grid.add(status, 1, 14);
 
+        Text dis = new Text(" Discipline : ");
+        dis.setFont(myFont);
+        dis.setWrappingWidth(150);
+        dis.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(dis, 0, 15);
+
+        discipline = new ComboBox();
+        discipline.getItems().addAll(
+                "None", "English","Mathematics","Physics","Computer Science", "Spanish","Chemistry"
+        );
+
+        grid.add(discipline, 1, 15);
+
+
+
 
         submitButton = new Button("Submit");
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -297,7 +313,7 @@ public class ModifyBookView extends View{
 
         String bar = barcode.getText();
         String titl = title.getText();
-        String disi = " ";
+        String disi = (String)discipline.getValue();
         String au1 = author1.getText();
         String au2 = author2.getText();
         String au3 = author3.getText();
@@ -326,6 +342,7 @@ public class ModifyBookView extends View{
         p2.setProperty("notes", no);
         p2.setProperty("bookCondition", condi);
         p2.setProperty("Status",stat);
+        p2.setProperty("discipline",disi);
 
 
         /*if (yeaO == null || yeaO == "" || yeaO.length() == 0 || yeaO.length() > 4 ){
@@ -371,6 +388,7 @@ public class ModifyBookView extends View{
         String sugPriceText = (String) myModel.getState("suggestedPrice");
         String notesText = (String) myModel.getState("notes");
         String stat = (String) myModel.getState("Status");
+        String dis =(String) myModel.getState("discipline");
 
         barcode.setText(barcodeText);
         barcode.setEditable(false);
@@ -382,10 +400,11 @@ public class ModifyBookView extends View{
         publisher.setText(pubText);
         yearOfPublication.setText(pubYearText);
         ISBN.setText(isbnText);
-        //bookCondition.setValue(conditionText);
+        quality.setValue(conditionText);
         suggestedPrice.setText(sugPriceText);
         notes.setText(notesText);
         status.setValue(stat);
+        discipline.setValue(dis);
     }
 
     /**

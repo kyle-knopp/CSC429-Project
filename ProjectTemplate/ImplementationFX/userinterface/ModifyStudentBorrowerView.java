@@ -41,19 +41,41 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
 
         Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
+        Label = new Text("  Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 7);
+
+        statusBox = new ComboBox();
+        statusBox.getItems().addAll(setStatusBoxFields());
+        statusBox.getSelectionModel().selectFirst();;
+        grid.add(statusBox,1,7);
+
+        Label = new Text("  Borrower Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 8);
+
+        borrStatBox= new ComboBox();
+        borrStatBox.getItems().addAll(setBorrowerStatusBoxFields());
+        borrStatBox.getSelectionModel().selectFirst();;
+        grid.add(borrStatBox,1,8);
+
         Label = new Text("  Date Of Registration: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 10);
-        grid.add(DOR,1,10);
+        grid.add(Label, 0, 9);
+        grid.add(DOR,1,9);
 
         Label = new Text("  Date Of Latest Borrower Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 11);
-        grid.add(DOLBS,1,11);
+        grid.add(Label, 0, 10);
+        grid.add(DOLBS,1,10);
 
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

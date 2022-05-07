@@ -34,7 +34,7 @@ public class AddBookView extends View{
     protected TextField yearOfPublication;
     protected TextField ISBN;
     protected TextField suggestedPrice;
-    protected TextField notes;
+    protected TextArea notes;
     protected TextField prefix;
 
     protected ComboBox discipline;
@@ -231,8 +231,12 @@ public class AddBookView extends View{
         not.setTextAlignment(TextAlignment.RIGHT);
         grid.add(not, 0, 12);
 
-        notes = new TextField();
-        notes.setEditable(true);
+        notes = new TextArea();
+        //notes.setEditable(false);
+        notes.setWrapText(true);
+        notes.setMaxWidth(250);
+        notes.setMaxHeight(50);
+        notes.setEditable(true);;
         grid.add(notes, 1, 12);
 
 

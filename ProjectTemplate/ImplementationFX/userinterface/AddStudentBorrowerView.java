@@ -58,6 +58,12 @@ public class AddStudentBorrowerView extends View
     protected ComboBox statusBox;
     protected ComboBox borrStatBox;
 
+    protected GridPane grid = new GridPane();
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDateTime now = LocalDateTime.now();
+    LocalDate curr = LocalDate.parse(dtf.format(now));
+
     // For showing error message
     protected MessageView statusLog;
 
@@ -111,7 +117,7 @@ public class AddStudentBorrowerView extends View
     {
         VBox vbox = new VBox(10);
 
-        GridPane grid = new GridPane();
+
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
@@ -195,7 +201,7 @@ public class AddStudentBorrowerView extends View
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 6);
+//        grid.add(Label, 0, 6);
 
         /**
         DateOfLatestBorrowerStatus = new TextField();
@@ -206,64 +212,59 @@ public class AddStudentBorrowerView extends View
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
 
-        LocalDate curr = LocalDate.parse(dtf.format(now));
+       LocalDate curr = LocalDate.parse(dtf.format(now));
 
         DOLBS = new DatePicker(curr);
         DOLBS.setEditable(true);
-        grid.add(DOLBS, 1, 6);
-
-        Label = new Text("  Date Of Registration: ");
-        Label.setFont(myFont);
-        Label.setWrappingWidth(150);
-        Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 7);
+//        grid.add(DOLBS, 1, 6);
+//
 
         /**
         DateOfRegistration = new TextField();
         DateOfRegistration.setEditable(true);
         grid.add(DateOfRegistration, 1, 7);
          **/
-
+//
         DOR = new DatePicker(curr);
         DOR.setEditable(true);
-        grid.add(DOR, 1, 7);
+//        grid.add(DOR, 1, 7);
 
         Label = new Text("  Notes: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 8);
+        grid.add(Label, 0, 6);
 
         Notes = new TextField();
         Notes.setEditable(true);
-        grid.add(Notes, 1, 8);
+        grid.add(Notes, 1, 6);
 
         Label = new Text("  Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 9);
+        grid.add(Label, 0, 7);
 
         statusBox = new ComboBox();
         statusBox.getItems().addAll(setStatusBoxFields());
         statusBox.getSelectionModel().selectFirst();;
-        grid.add(statusBox,1,9);
+        grid.add(statusBox,1,7);
 
         Label = new Text("  Borrower Status: ");
         Label.setFont(myFont);
         Label.setWrappingWidth(150);
         Label.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(Label, 0, 10);
+        grid.add(Label, 0, 8);
 
         borrStatBox= new ComboBox();
         borrStatBox.getItems().addAll(setBorrowerStatusBoxFields());
         borrStatBox.getSelectionModel().selectFirst();;
-        grid.add(borrStatBox,1,10);
+        grid.add(borrStatBox,1,8);
 
         alreadyDeleted=new Text();
         alreadyDeleted.setText("");
         alreadyDeleted.setFill(Color.RED);
-        grid.add(alreadyDeleted,0,11);
+        //grid.add(alreadyDeleted,0,12);
 
         HBox doneCont = new HBox(10);
         doneCont.setAlignment(Pos.CENTER);
@@ -390,8 +391,8 @@ public class AddStudentBorrowerView extends View
                         p.put("ContactPhone", ContactPhone.getText());
                         if(((Email.getText()).toString().length() != 0)){
                             p.put("Email", Email.getText());
-                            p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-                            p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                            p.put("DateOfLatestBorrowerStatus", curr.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                            p.put("DateOfRegistration", curr.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                             p.put("Notes", Notes.getText());
                             p.put("status",statusBox.getValue());
                             p.put("BorrowerStatus",borrStatBox.getValue());

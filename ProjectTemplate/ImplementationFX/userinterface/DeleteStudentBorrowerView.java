@@ -38,8 +38,9 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
     protected TextField SearchPatrons;
 
     protected Button searchButton;
-
     protected Button backButton;
+
+    protected Text Label;
     //protected Button submitButton;
     // For showing error message
     protected MessageView statusLog;
@@ -50,6 +51,25 @@ public class DeleteStudentBorrowerView extends AddStudentBorrowerView
     {
         super(StudentBorrower);
         populateFields();
+
+        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
+
+        Label = new Text("  Date Of Registration: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 10);
+        grid.add(DOR,1,10);
+
+        Label = new Text("  Date Of Latest Borrower Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 11);
+        grid.add(DOLBS,1,11);
+
+        grid.add(alreadyDeleted,0,12);
+
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

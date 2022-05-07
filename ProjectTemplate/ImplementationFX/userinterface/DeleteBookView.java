@@ -33,7 +33,7 @@ public class DeleteBookView extends View{
     protected TextField ISBN;
     protected TextField suggestedPrice;
     protected TextField quality;
-    protected TextField notes;
+    protected TextArea notes;
     protected Text alreadyDeleted;
 
     protected String barcodeText;
@@ -270,8 +270,11 @@ public class DeleteBookView extends View{
         not.setTextAlignment(TextAlignment.RIGHT);
         grid.add(not, 0, 13);
 
-        notes = new TextField();
+        notes = new TextArea();
         notes.setEditable(false);
+        notes.setWrapText(true);
+        notes.setMaxWidth(250);
+        notes.setMaxHeight(50);
         notes.setStyle("-fx-background-color: -fx-control-inner-background;");
         grid.add(notes, 1, 13);
 

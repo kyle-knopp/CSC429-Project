@@ -40,6 +40,24 @@ public class DeleteWorkerView extends AddWorkerView
     {
         super(worker);
 
+        Text wDOLC = new Text(" Date Of Latest Credentials : ");
+        wDOLC.setFont(myFont);
+        wDOLC.setWrappingWidth(150);
+        wDOLC.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(wDOLC, 0, 9);
+
+        grid.add(DOLC, 1, 9);
+
+        Text wDOH = new Text(" Date of Hire : ");
+        wDOH.setFont(myFont);
+        wDOH.setWrappingWidth(150);
+        wDOH.setTextAlignment(TextAlignment.RIGHT);
+
+        grid.add(wDOH, 0, 10);
+        grid.add(DOH, 1, 10);
+
+        grid.add(alreadyDeleted,0,11);
+
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

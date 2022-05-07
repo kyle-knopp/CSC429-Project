@@ -27,6 +27,8 @@ import java.util.Properties;
 
 public class AddWorkerView extends View{
     // GUI components
+    protected GridPane grid = new GridPane();
+
     protected TextField bannerId;
     protected PasswordField password;
     protected TextField first;
@@ -44,6 +46,12 @@ public class AddWorkerView extends View{
 
     protected Button backButton;
     protected Button submitButton;
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDateTime now = LocalDateTime.now();
+    LocalDate curr = LocalDate.parse(dtf.format(now));
+
+    protected Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
 
     // For showing error message
     protected MessageView statusLog;
@@ -100,7 +108,7 @@ public class AddWorkerView extends View{
     {
         VBox vbox = new VBox(10);
 
-        GridPane grid = new GridPane();
+
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
@@ -196,7 +204,7 @@ public class AddWorkerView extends View{
         wDOLC.setFont(myFont);
         wCred.setWrappingWidth(150);
         wCred.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(wDOLC, 0, 8);
+        //grid.add(wDOLC, 0, 8);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -210,13 +218,13 @@ public class AddWorkerView extends View{
         //grid.add(dOLC, 1, 8);
 
         DOLC = new DatePicker(curr);
-        grid.add(DOLC, 1, 8);
+        //grid.add(DOLC, 1, 8);
 
         Text wDOH = new Text(" Date of Hire : ");
         wDOH.setFont(myFont);
         wDOH.setWrappingWidth(150);
         wDOH.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(wDOH, 0, 9);
+        //grid.add(wDOH, 0, 9);
 
         //doh = new TextField();
         //doh.setEditable(true);
@@ -224,13 +232,13 @@ public class AddWorkerView extends View{
         //grid.add(doh, 1, 9);
 
         DOH = new DatePicker(curr);
-        grid.add(DOH, 1, 9);
+        //grid.add(DOH, 1, 9);
 
         Text wStatus = new Text(" Status : ");
         wStatus.setFont(myFont);
         wStatus.setWrappingWidth(150);
         wStatus.setTextAlignment(TextAlignment.RIGHT);
-        grid.add(wStatus, 0, 10);
+        grid.add(wStatus, 0, 8);
 
         status = new ComboBox();
         status.getItems().addAll(
@@ -238,12 +246,12 @@ public class AddWorkerView extends View{
         );
 
         status.setValue("Active");
-        grid.add(status, 1, 10);
+        grid.add(status, 1, 8);
 
         alreadyDeleted=new Text();
         alreadyDeleted.setText("");
         alreadyDeleted.setFill(Color.RED);
-        grid.add(alreadyDeleted,0,11);
+        //grid.add(alreadyDeleted,0,9);
 
         backButton = new Button("Back");
         backButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
@@ -315,8 +323,8 @@ public class AddWorkerView extends View{
         String credentials = (String)cred.getValue();
         //String latestCred = dOLC.getText();
         //String dateHire = doh.getText();
-        String latestCred = DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String dateHire = DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String latestCred = curr.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String dateHire = curr.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String stat = (String)status.getValue();
        // String checkPrefix = "800"; && (ban.substring(0,2)).equals("800")
         Properties p1 = new Properties();

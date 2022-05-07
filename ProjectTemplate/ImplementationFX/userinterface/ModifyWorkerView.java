@@ -37,6 +37,23 @@ public class ModifyWorkerView extends AddWorkerView
     {
         super(worker);
 
+
+        Text wDOLC = new Text(" Date Of Latest Credentials : ");
+        wDOLC.setFont(myFont);
+        wDOLC.setWrappingWidth(150);
+        wDOLC.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(wDOLC, 0, 9);
+
+        grid.add(DOLC, 1, 9);
+
+        Text wDOH = new Text(" Date of Hire : ");
+        wDOH.setFont(myFont);
+        wDOH.setWrappingWidth(150);
+        wDOH.setTextAlignment(TextAlignment.RIGHT);
+
+        grid.add(wDOH, 0, 10);
+        grid.add(DOH, 1, 10);
+
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -130,14 +147,14 @@ public class ModifyWorkerView extends AddWorkerView
         String pho = phone.getText();
         String eml = email.getText(); //
         String credentials = (String) cred.getValue();
-        String latestCred = dOLC.getText();
-        String dateHire = doh.getText();
+        String latestCred = DOLC.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String dateHire = DOH.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String stat = (String) status.getValue();
         String checkPrefix = "800";
         Properties p1 = new Properties();
 
 
-        if ((ban.length() == 8) && (ban.substring(0, 2)).equals(checkPrefix)) {
+        if ((ban.length() == 9) ) {
             p1.setProperty("bannerID", ban);
             if (pass.length() != 0) {
                 p1.setProperty("password", pass);
@@ -170,7 +187,7 @@ public class ModifyWorkerView extends AddWorkerView
                 displayErrorMessage("Error: Password must have an entry!");
             }
         } else {
-            displayErrorMessage("Error: BannerID must be exactly eight digits");
+            displayErrorMessage("Error: BannerID must be exactly nine digits");
 
         }
 

@@ -30,6 +30,7 @@ import impresario.IModel;
 //==============================================================
 public class ModifyStudentBorrowerView extends AddStudentBorrowerView
 {
+    protected Text Label;
     protected ComboBox status;
 
     // constructor for this class -- takes a model object
@@ -37,6 +38,22 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
     public ModifyStudentBorrowerView(IModel StudentBorrower)
     {
         super(StudentBorrower);
+
+        Font myFont = Font.font("Helvetica", FontWeight.BOLD, 12);
+
+        Label = new Text("  Date Of Registration: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 10);
+        grid.add(DOR,1,10);
+
+        Label = new Text("  Date Of Latest Borrower Status: ");
+        Label.setFont(myFont);
+        Label.setWrappingWidth(150);
+        Label.setTextAlignment(TextAlignment.RIGHT);
+        grid.add(Label, 0, 11);
+        grid.add(DOLBS,1,11);
 
         doneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

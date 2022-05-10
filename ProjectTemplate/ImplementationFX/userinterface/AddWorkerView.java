@@ -338,7 +338,7 @@ public class AddWorkerView extends View{
                     p1.setProperty("firstName", fName);
                     if(lName.length() != 0) {
                         p1.setProperty("lastName", lName);
-                        if (((pho.length() != 10)||(pho.length() != 11)) && (pho.matches("[0-9]+"))) {
+                        if (((pho.length() == 10)||(pho.length() == 11)) && (pho.matches("[0-9]+"))) {
                             p1.setProperty("phone", pho);
                             if(eml.length() != 0){
                                 p1.setProperty("email", eml);

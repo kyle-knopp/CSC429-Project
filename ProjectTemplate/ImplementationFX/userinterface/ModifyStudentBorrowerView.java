@@ -158,19 +158,31 @@ public class ModifyStudentBorrowerView extends AddStudentBorrowerView
         Properties p = new Properties();
 
         p.put("BannerId", BannerId.getText());
-        p.put("FirstName", FirstName.getText());
-        p.put("LastName", LastName.getText());
-        p.put("ContactPhone", ContactPhone.getText());
-        p.put("Email", Email.getText());
-        //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
-        //p.put("DateOfRegistration", DateOfRegistration.getText());
-        p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("Notes", Notes.getText());
-        p.put("status",statusBox.getValue());
-        p.put("BorrowerStatus",borrStatBox.getValue());
+        if((FirstName.getText().length())!=0) {
+            p.put("FirstName", FirstName.getText());
+            if((LastName.getText().length())!=0) {
+                p.put("LastName", LastName.getText());
+                if (((ContactPhone.getText().length() == 10)||(ContactPhone.getText().length() == 11)) && (ContactPhone.getText().matches("[0-9]+"))) {
+                    p.put("ContactPhone", ContactPhone.getText());
+                    p.put("Email", Email.getText());
+                    //p.put("DateOfLatestBorrowerStatus", DateOfLatestBorrowerStatus.getText());
+                    //p.put("DateOfRegistration", DateOfRegistration.getText());
+                    p.put("DateOfLatestBorrowerStatus", DOLBS.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    p.put("DateOfRegistration", DOR.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    p.put("Notes", Notes.getText());
+                    p.put("status", statusBox.getValue());
+                    p.put("BorrowerStatus", borrStatBox.getValue());
 
-        myModel.stateChangeRequest("UpdateStudentBorrower", p);
+                    myModel.stateChangeRequest("UpdateStudentBorrower", p);
+                }else{
+                    displayErrorMessage("Error: Phone number must have 10 or 11 digits and only be numbers");
+                }
+            }else{
+                displayErrorMessage("Error: LastName must have an entry!");
+            }
+        }else{
+            displayErrorMessage("Error: FirstName must have an entry!");
+        }
 
         /*clearText();
         BannerId.clear();

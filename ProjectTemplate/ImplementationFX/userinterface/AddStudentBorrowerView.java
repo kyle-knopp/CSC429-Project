@@ -386,13 +386,14 @@ public class AddStudentBorrowerView extends View
 
         Properties p = new Properties();
 
-        if(((BannerId.getText()).toString().length() == 9)){
+
+        if(((BannerId.getText()).toString().length() == 9)&&BannerId.getText().startsWith("800")){
             p.put("BannerId", BannerId.getText());
             if(((FirstName.getText()).toString()).length() != 0){
                 p.put("FirstName", FirstName.getText());
                 if(((LastName.getText()).toString()).length() != 0){
                     p.put("LastName", LastName.getText());
-                    if(((((ContactPhone.getText()).toString()).length()) == 10) && ((ContactPhone.getText()).matches("[0-9]+"))){
+                    if((((((ContactPhone.getText()).toString()).length()) == 10)||(ContactPhone.getText().toString().length()) == 11) && ((ContactPhone.getText()).matches("[0-9]+"))){
                         p.put("ContactPhone", ContactPhone.getText());
                         if(((Email.getText()).toString().length() != 0)){
                             p.put("Email", Email.getText());
@@ -409,7 +410,7 @@ public class AddStudentBorrowerView extends View
                         }
                     }
                     else{
-                        displayErrorMessage("Error: ContactNumber must be composed of only numbers, and 9 digits long");
+                        displayErrorMessage("Error: ContactNumber must be composed of only numbers, and be 10 or 11 digits long");
                     }
                 }
                 else{
@@ -420,7 +421,7 @@ public class AddStudentBorrowerView extends View
                 displayErrorMessage("Error: FirstName must have an entry");
             }
         }else{
-            displayErrorMessage("Error: BannerID must be exactly ten digits");
+            displayErrorMessage("Error: BannerID must be exactly nine digits and start with 800");
         }
 
 

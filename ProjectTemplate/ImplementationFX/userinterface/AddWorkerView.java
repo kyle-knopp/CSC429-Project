@@ -330,7 +330,7 @@ public class AddWorkerView extends View{
        // String checkPrefix = "800"; && (ban.substring(0,2)).equals("800")
         Properties p1 = new Properties();
 
-        if((ban.length() == 9) && bannerId.getText().startsWith("800")){
+        if((ban.length() == 9 && ban.startsWith("800"))){
             p1.setProperty("bannerID", ban);
             if(pass.length() != 0){
                 p1.setProperty("password", pass);

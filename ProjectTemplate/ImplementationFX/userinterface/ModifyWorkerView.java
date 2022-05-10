@@ -167,7 +167,7 @@ public class ModifyWorkerView extends AddWorkerView
         Properties p1 = new Properties();
 
 
-        if ((ban.length() == 9) && bannerId.getText().startsWith("800")) {
+        if((ban.length() == 9 && ban.startsWith("800"))){
             p1.setProperty("bannerID", ban);
             if (pass.length() != 0) {
                 p1.setProperty("password", pass);
@@ -175,7 +175,7 @@ public class ModifyWorkerView extends AddWorkerView
                     p1.setProperty("firstName", fName);
                     if (lName.length() != 0) {
                         p1.setProperty("lastName", lName);
-                        if (((pho.length() != 10)||(pho.length() != 11)) && (pho.matches("[0-9]+"))) {
+                        if (((pho.length() == 10)||(pho.length() == 11)) && (pho.matches("[0-9]+"))) {
                             p1.setProperty("phone", pho);
                             if (eml.length() != 0) {
                                 p1.setProperty("email", eml);

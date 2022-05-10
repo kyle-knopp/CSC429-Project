@@ -409,7 +409,7 @@ public class AddStudentBorrowerView extends View
                         }
                     }
                     else{
-                        displayErrorMessage("Error: ContactNumber must be composed of only numbers, and 9 digits long");
+                        displayErrorMessage("Error: ContactNumber must be composed of only numbers, and 10 digits long");
                     }
                 }
                 else{
@@ -420,7 +420,7 @@ public class AddStudentBorrowerView extends View
                 displayErrorMessage("Error: FirstName must have an entry");
             }
         }else{
-            displayErrorMessage("Error: BannerID must be exactly ten digits");
+            displayErrorMessage("Error: BannerID must be exactly nine digits");
         }
 
 

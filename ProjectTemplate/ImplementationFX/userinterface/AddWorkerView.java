@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.util.converter.DefaultStringConverter;
 import model.Worker;
 
 import java.time.format.DateTimeFormatter;
@@ -173,6 +174,8 @@ public class AddWorkerView extends View{
 
         phone = new TextField();
         phone.setEditable(true);
+        TextFormatter<String> textFormatter=new TextFormatter<String>(new DefaultStringConverter(),"",new PhoneNumberFilter());
+        phone.setTextFormatter(textFormatter);
         grid.add(phone, 1, 5);
 
         Text wEmail = new Text(" Email : ");
@@ -330,7 +333,7 @@ public class AddWorkerView extends View{
        // String checkPrefix = "800"; && (ban.substring(0,2)).equals("800")
         Properties p1 = new Properties();
 
-        if((ban.length() == 9)){
+        if((ban.length() == 9 && ban.startsWith("800"))){
             p1.setProperty("bannerID", ban);
             if(pass.length() != 0){
                 p1.setProperty("password", pass);
@@ -338,7 +341,7 @@ public class AddWorkerView extends View{
                     p1.setProperty("firstName", fName);
                     if(lName.length() != 0) {
                         p1.setProperty("lastName", lName);
-                        if (((pho.length()) != 9) && (pho.matches("[0-9]+"))) {
+                        if ((((pho.length()) == 10)||(pho.length()==9)) && (pho.matches("[0-9]+"))) {
                             p1.setProperty("phone", pho);
                             if(eml.length() != 0){
                                 p1.setProperty("email", eml);
@@ -353,7 +356,7 @@ public class AddWorkerView extends View{
                                 displayErrorMessage("Error: Email must have an entry!");
                             }
                         } else {
-                            displayErrorMessage("Error: PhoneNumber must have nine digits and be composed of numbers!");
+                            displayErrorMessage("Error: PhoneNumber must have nine or ten digits and be composed of numbers!");
                         }
                     }
                     else{
@@ -369,7 +372,7 @@ public class AddWorkerView extends View{
             }
         }
         else{
-            displayErrorMessage("Error: BannerID must be exactly eight digits");
+            displayErrorMessage("Error: BannerID must be exactly nine digits and start with 800");
         }
 
 //        Properties p1 = new Properties();

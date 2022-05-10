@@ -167,7 +167,7 @@ public class ModifyWorkerView extends AddWorkerView
         Properties p1 = new Properties();
 
 
-        if ((ban.length() == 9) ) {
+        //if ((ban.length() == 9) ) {
             p1.setProperty("bannerID", ban);
             if (pass.length() != 0) {
                 p1.setProperty("password", pass);
@@ -175,7 +175,7 @@ public class ModifyWorkerView extends AddWorkerView
                     p1.setProperty("firstName", fName);
                     if (lName.length() != 0) {
                         p1.setProperty("lastName", lName);
-                        if (((pho.length()) != 9) && (pho.matches("[0-9]+"))) {
+                        if ((pho.matches("[0-9,(,),-]+"))) {
                             p1.setProperty("phone", pho);
                             if (eml.length() != 0) {
                                 p1.setProperty("email", eml);
@@ -199,10 +199,9 @@ public class ModifyWorkerView extends AddWorkerView
             } else {
                 displayErrorMessage("Error: Password must have an entry!");
             }
-        } else {
+        /*} else {
             displayErrorMessage("Error: BannerID must be exactly nine digits");
-
-        }
+        }*/
 
 
 

@@ -347,6 +347,7 @@ public class Librarian implements IView, IModel
                 transactionErrorMessage="";
                 getWorker((String)value);
                 createAndShowModifyWorkerView();
+
                 //selectedWorker = new Worker((String)value);
                 //System.out.println("Selected worker in Librarian: "+selectedWorker);
             }catch(InvalidPrimaryKeyException e){
@@ -378,10 +379,14 @@ public class Librarian implements IView, IModel
 
         }else if(key.equals("UpdateWorker"))
         {
-            Properties p2 = (Properties) value;
-            modifyWorker= new Worker(p2);
-            modifyWorker.save("update");
-            transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
+            if(!(systemUser.getState("credentials").equals("Administrator"))){
+                transactionErrorMessage="Error: You do not have administrative privleges";
+            }else {
+                Properties p2 = (Properties) value;
+                modifyWorker = new Worker(p2);
+                modifyWorker.save("update");
+                transactionErrorMessage = (String) modifyWorker.getState("UpdateStatusMessage");
+            }
         }else if(key.equals("DeleteStudentBorrower"))
         {
             Properties p = (Properties) value;

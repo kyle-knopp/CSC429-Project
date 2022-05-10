@@ -371,17 +371,25 @@ public class Librarian implements IView, IModel
             createAndShowWorkerCollectionModifyViewNo();
         }else if(key.equals("UpdateStudentBorrower"))
         {
+            if(!(systemUser.getState("credentials").equals("Administrator"))){
+                transactionErrorMessage="Error: You do not have administrative privileges";
+            }else {
                 Properties p = (Properties) value;
                 modifySB = new StudentBorrower(p);
                 modifySB.save("update");
-                transactionErrorMessage=(String)modifySB.getState("UpdateStatusMessage");
+                transactionErrorMessage = (String) modifySB.getState("UpdateStatusMessage");
+            }
 
         }else if(key.equals("UpdateWorker"))
         {
-            Properties p2 = (Properties) value;
-            modifyWorker= new Worker(p2);
-            modifyWorker.save("update");
-            transactionErrorMessage=(String)modifyWorker.getState("UpdateStatusMessage");
+            if(!(systemUser.getState("credentials").equals("Administrator"))){
+                transactionErrorMessage="Error: You do not have administrative privileges";
+            }else {
+                Properties p2 = (Properties) value;
+                modifyWorker = new Worker(p2);
+                modifyWorker.save("update");
+                transactionErrorMessage = (String) modifyWorker.getState("UpdateStatusMessage");
+            }
         }else if(key.equals("DeleteStudentBorrower"))
         {
             Properties p = (Properties) value;
